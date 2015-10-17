@@ -7,19 +7,17 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-public class CompareToRight extends AbstractHandler {
+public class Compare extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		BeyondCompare bc = new BeyondCompare();
-		bc.readRegistry();
-		String savedLeft = bc.getSavedLeft();
-
 		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-
-		IResource rightSide = (IResource) selection.getFirstElement();
-		BeyondCompare.Compare(savedLeft, rightSide.getLocation().toString());
+		Object[] paths = selection.toArray();
+		IResource leftSide = (IResource) paths[0];
+		IResource rightSide = (IResource) paths[1];
+		BeyondCompare.Compare(leftSide.getLocation().toString(), rightSide.getLocation().toString());
 
 		return null;
 	}
+
 }

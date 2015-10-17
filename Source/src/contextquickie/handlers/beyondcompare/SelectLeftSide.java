@@ -32,17 +32,24 @@ public class SelectLeftSide extends AbstractHandler {
 		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
 		
 		if (selection.size() == 1) {
+			BeyondCompare bc = new BeyondCompare();
 			if (selection.getFirstElement() instanceof IFile) {
 				IFile selectedItem = (IFile) selection.getFirstElement();
-				BaseBeyoncCompare.setSafedLeft(BeyondCompareSavedLeft.File, selectedItem.getLocation());
+				bc.setSavedLeft(selectedItem.getLocation().toString());
+				bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+				bc.writeRegistry();
 			}
 			else if (selection.getFirstElement() instanceof IFolder) {
 				IFolder selectedItem = (IFolder) selection.getFirstElement();
-				BaseBeyoncCompare.setSafedLeft(BeyondCompareSavedLeft.Directory, selectedItem.getLocation());
+				bc.setSavedLeft(selectedItem.getLocation().toString());
+				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+				bc.writeRegistry();
 			}
 			else if (selection.getFirstElement() instanceof IProject) {
 				IProject selectedItem = (IProject) selection.getFirstElement();
-				BaseBeyoncCompare.setSafedLeft(BeyondCompareSavedLeft.Directory, selectedItem.getLocation());
+				bc.setSavedLeft(selectedItem.getLocation().toString());
+				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+				bc.writeRegistry();
 			}
 		}
 		 	

@@ -6,10 +6,11 @@ import java.io.InputStreamReader;
 
 public class Registry {
 	public static String ReadKey(String location, String key) {
+
 		String value = null;
 		Process p = null;
 		try {
-			p = Runtime.getRuntime().exec("reg query " + '"'+ location + "\" /v " + key);
+			p = Runtime.getRuntime().exec("reg query " + '"' + location + "\" /v " + key);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -27,13 +28,12 @@ public class Registry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	  
-    	  return value;
+		return value;
 	}
-	
+
 	public static void WriteKey(String location, String key, String value) {
 		try {
-			Runtime.getRuntime().exec("reg add " + '"'+ location + "\" /v" + " " + key + " /d " + value + " /f");
+			Runtime.getRuntime().exec("reg add " + '"' + location + "\" /v" + " " + key + " /d " + value + " /f");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -19,6 +19,11 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
+            defaultHandler="contextquickie.handlers.beyondcompare.Compare"
+            id="ContextQuickie.commands.Compare"
+            name="Compare">
+      </command>
+      <command
             defaultHandler="contextquickie.handlers.beyondcompare.SelectLeftSide"
             id="ContextQuickie.commands.selectLeftSide"
             name="SelectLeftSide">
@@ -38,6 +43,26 @@
          point="org.eclipse.ui.menus">
          <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=group.open">
+            <command
+                  commandId="ContextQuickie.commands.Compare"
+                  icon="icons/Compare.png"
+                  label="Compare"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="activeMenuSelection">
+                     <and>
+                        <count
+                              value="2">
+                        </count>
+                        <test
+                              property="contextquickie.propertyHandlers.CompareAllowed">
+                        </test>
+                     </and>
+                  </with>
+               </visibleWhen>
+            </command>
             <command
                   commandId="ContextQuickie.commands.selectLeftSide"
                   icon="icons/SelectLeftFile.png"
@@ -89,11 +114,9 @@
                   </with>
                </visibleWhen>
             </command>
-            <command
-                  commandId="ContextQuickie.commands.compareToRight"
-                  icon="icons/Compare.png"
-                  label="Compare to Right"
-                  style="push">
+            <dynamic
+                  class="contextquickie.handlers.beyondcompare.CompareToRightDynamic"
+                  id="ContextQuickie.CompareToRightDynamic">
                <visibleWhen
                      checkEnabled="false">
                   <with
@@ -101,31 +124,26 @@
                      <iterate
                            ifEmpty="true"
                            operator="or">
-                        <and>
-                           <test
-                                 property="contextquickie.propertyHandlers.CompareToRightVisible">
-                           </test>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                           </or>
-                        </and>
+                        <or>
+                           <adapt
+                                 type="org.eclipse.core.resources.IFolder">
+                           </adapt>
+                           <adapt
+                                 type="org.eclipse.core.resources.IProject">
+                           </adapt>
+                           <adapt
+                                 type="org.eclipse.core.resources.IFile">
+                           </adapt>
+                        </or>
                      </iterate>
                      <count
                            value="1">
                      </count>
                   </with>
                </visibleWhen>
-            </command>
+            </dynamic>
             <separator
-                  name="ContextQuickie.separator1"
+                  name="Separator"
                   visible="true">
             </separator>
             <menu
@@ -141,10 +159,10 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="contextquickie.handlers.beyondcompare.CompareToRightVisible"
-            id="contextquickie.propertyHandlers.CompareToRightVisible"
+            class="contextquickie.handlers.beyondcompare.CompareAllowed"
+            id="contextquickie.propertyHandlers.CompareAllowed"
             namespace="contextquickie.propertyHandlers"
-            properties="CompareToRightVisible"
+            properties="CompareAllowed"
             type="java.lang.Object">
       </propertyTester>
    </extension>
