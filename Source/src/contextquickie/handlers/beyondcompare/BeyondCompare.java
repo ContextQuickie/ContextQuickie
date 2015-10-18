@@ -2,11 +2,13 @@ package contextquickie.handlers.beyondcompare;
 
 import java.io.IOException;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+
+import contextquickie.Activator;
+import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.Registry;
 
 public class BeyondCompare {
-	private static final String savedLeftKey = "SavedLeft";
-	private static final String savedLeftPath = "HKEY_CURRENT_USER\\SOFTWARE\\Scooter Software\\Beyond Compare 4\\BcShellEx";
 	private static final String savedLeftFile = "F";
 	private static final String savedLeftDirectory = "D";
 	
@@ -14,7 +16,10 @@ public class BeyondCompare {
 	private BeyondCompareSavedLeft _savedLeftType = BeyondCompareSavedLeft.None;
 	
 	public void readRegistry() {
-		String savedLeft = Registry.ReadKey(savedLeftPath, savedLeftKey);
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
+		String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
+		String savedLeft = Registry.ReadKey(registryPath, registryKey);
 		if (savedLeft != null) {
 			if (savedLeft.startsWith(savedLeftFile)) {
 				this._savedLeftType = BeyondCompareSavedLeft.File;
@@ -32,11 +37,14 @@ public class BeyondCompare {
 	}
 	
 	public void writeRegistry() { 
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
+		String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
 		if (this._savedLeftType == BeyondCompareSavedLeft.File) {
-			Registry.WriteKey(savedLeftPath, savedLeftKey, savedLeftFile + this._savedLeft);
+			Registry.WriteKey(registryPath, registryKey, savedLeftFile + this._savedLeft);
 		}
 		else if (this._savedLeftType == BeyondCompareSavedLeft.Directory) {
-			Registry.WriteKey(savedLeftPath, savedLeftKey, savedLeftDirectory + this._savedLeft);
+			Registry.WriteKey(registryPath, registryKey, savedLeftDirectory + this._savedLeft);
 		}
 	}
 
@@ -57,8 +65,9 @@ public class BeyondCompare {
 	}
 	
 	public static void Compare(String left, String right) {
+		String pathToBeyondCompare = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 		try {
-			Runtime.getRuntime().exec("\"C:\\Program Files (x86)\\Beyond Compare 4\\BCompare.exe\" " + left + " " + right);
+			Runtime.getRuntime().exec('"' + pathToBeyondCompare + '"' + " " + left + " " + right);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

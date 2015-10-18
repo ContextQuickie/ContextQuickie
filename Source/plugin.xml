@@ -57,6 +57,9 @@
                               value="2">
                         </count>
                         <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
+                        <test
                               property="contextquickie.propertyHandlers.CompareAllowed">
                         </test>
                      </and>
@@ -84,6 +87,11 @@
                      <count
                            value="1">
                      </count>
+                     <and>
+                        <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
+                     </and>
                   </with>
                </visibleWhen>
             </command>
@@ -111,6 +119,11 @@
                      <count
                            value="1">
                      </count>
+                     <and>
+                        <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
+                     </and>
                   </with>
                </visibleWhen>
             </command>
@@ -139,12 +152,16 @@
                      <count
                            value="1">
                      </count>
+                     <and>
+                        <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
+                     </and>
                   </with>
                </visibleWhen>
             </dynamic>
             <separator
-                  name="Separator"
-                  visible="true">
+                  name="Separator">
             </separator>
             <menu
                   label="Tortoise SVN">
@@ -163,6 +180,13 @@
             id="contextquickie.propertyHandlers.CompareAllowed"
             namespace="contextquickie.propertyHandlers"
             properties="CompareAllowed"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.BeyondCompareEnabled"
+            id="contextquickie.propertyHandlers.BeyondCompareEnabled"
+            namespace="contextquickie.propertyHandlers"
+            properties="BeyondCompareEnabled"
             type="java.lang.Object">
       </propertyTester>
    </extension>

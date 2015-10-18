@@ -5,12 +5,11 @@ package contextquickie.preferences;
  */
 public class PreferenceConstants {
 
-	public static final String P_PATH = "pathPreference";
-
-	public static final String P_BOOLEAN = "booleanPreference";
-
-	public static final String P_CHOICE = "choicePreference";
-
-	public static final String P_MAIN_ENTRY_NAME = "Explorer";
+	public static final String P_BEYOND_COMPARE_ENABLED = "BeyondCompareEnabled";
 	
+	public static final String P_BEYOND_COMPARE_PATH = "BeyondComparePath";
+
+	public static final String P_BEYOND_COMPARE_SHELL_REG_PATH = "BeyondCompareShellRegistryPath";
+	
+	public static final String P_BEYOND_COMPARE_SHELL_REG_KEY = "BeyondCompareShellRegistryKey";	
 }
