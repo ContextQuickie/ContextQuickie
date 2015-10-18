@@ -57,7 +57,7 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 								"ContextQuickie.commands.compareToRight", 0);
 						String filename = new File(savedLeft).getName();
 						parameter.label = "Compare to " + filename;
-						parameter.icon = contextquickie.Activator.getImageDescriptor("icons/Compare.png");
+						parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
 						items = new IContributionItem[] { new CommandContributionItem(parameter) };
 						items[0].update();
 					}
