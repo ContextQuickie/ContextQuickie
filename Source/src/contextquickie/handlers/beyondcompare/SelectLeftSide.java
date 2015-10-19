@@ -5,7 +5,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import org.eclipse.jface.viewers.TreeSelection;
@@ -33,23 +34,26 @@ public class SelectLeftSide extends AbstractHandler {
 		
 		if (selection.size() == 1) {
 			BeyondCompare bc = new BeyondCompare();
-			if (selection.getFirstElement() instanceof IFile) {
-				IFile selectedItem = (IFile) selection.getFirstElement();
-				bc.setSavedLeft(selectedItem.getLocation().toString());
-				bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-				bc.writeRegistry();
-			}
-			else if (selection.getFirstElement() instanceof IFolder) {
-				IFolder selectedItem = (IFolder) selection.getFirstElement();
-				bc.setSavedLeft(selectedItem.getLocation().toString());
-				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-				bc.writeRegistry();
-			}
-			else if (selection.getFirstElement() instanceof IProject) {
-				IProject selectedItem = (IProject) selection.getFirstElement();
-				bc.setSavedLeft(selectedItem.getLocation().toString());
-				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-				bc.writeRegistry();
+			if (selection.getFirstElement() instanceof IAdaptable) {
+				IAdaptable selectedItem = (IAdaptable) selection.getFirstElement();
+				IFile file = selectedItem.getAdapter(IFile.class);
+				IFolder folder = selectedItem.getAdapter(IFolder.class);
+				IResource resource = selectedItem.getAdapter(IResource.class);
+				if (folder != null) {
+					bc.setSavedLeft(folder.getLocation().toString());
+					bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+					bc.writeRegistry();
+				}
+				else if (file != null) {
+					bc.setSavedLeft(file.getLocation().toString());
+					bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+					bc.writeRegistry();
+				}
+				else if (resource != null) {
+					bc.setSavedLeft(resource.getLocation().toString());
+					bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+					bc.writeRegistry();
+				}
 			}
 		}
 		 	

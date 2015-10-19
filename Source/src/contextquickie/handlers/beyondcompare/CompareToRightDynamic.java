@@ -5,6 +5,7 @@ import java.io.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -36,30 +37,39 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 		if (window != null) {
 			ISelection selection = window.getSelectionService().getSelection();
 			if (selection instanceof IStructuredSelection) {
-				IStructuredSelection structuredSelection = (IStructuredSelection) window.getSelectionService().getSelection();
+				IStructuredSelection structuredSelection = (IStructuredSelection) window.getSelectionService()
+						.getSelection();
 				Object receiver = structuredSelection.getFirstElement();
 
 				BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
-				if (((receiver instanceof IProject) || (receiver instanceof IFolder))
-						&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
-					showEntry = true;
-				} else if ((receiver instanceof IFile) && (savedLeftType == BeyondCompareSavedLeft.File)) {
-					showEntry = true;
-				} else {
-					showEntry = false;
-				}
 
-				if (showEntry) {
-					String savedLeft = bc.getSavedLeft();
-					if (savedLeft != null) {
-						CommandContributionItemParameter parameter = new CommandContributionItemParameter(
-								this.serviceLocator, "my.project.myCommandContributionItem",
-								"ContextQuickie.commands.compareToRight", 0);
-						String filename = new File(savedLeft).getName();
-						parameter.label = "Compare to " + filename;
-						parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
-						items = new IContributionItem[] { new CommandContributionItem(parameter) };
-						items[0].update();
+				IAdaptable selectedItem = (IAdaptable) receiver;
+				if (selectedItem != null) {
+					IFile selectedFile = selectedItem.getAdapter(IFile.class);
+					IFolder selectedFolder = selectedItem.getAdapter(IFolder.class);
+					IProject selectedProject = selectedItem.getAdapter(IProject.class);
+					if (((selectedProject != null) || (selectedFolder != null))
+							&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
+						showEntry = true;
+					} else if ((selectedFile != null) && (savedLeftType == BeyondCompareSavedLeft.File)) {
+						showEntry = true;
+					} else {
+						showEntry = false;
+					}
+
+					if (showEntry) {
+						String savedLeft = bc.getSavedLeft();
+						if (savedLeft != null) {
+							CommandContributionItemParameter parameter = new CommandContributionItemParameter(
+									this.serviceLocator, "my.project.myCommandContributionItem",
+									"ContextQuickie.commands.compareToRight", 0);
+							String filename = new File(savedLeft).getName();
+							parameter.label = "Compare to " + filename;
+							parameter.icon = contextquickie.Activator
+									.getImageDescriptor("icons/BeyondCompare/Compare.png");
+							items = new IContributionItem[] { new CommandContributionItem(parameter) };
+							items[0].update();
+						}
 					}
 				}
 			}

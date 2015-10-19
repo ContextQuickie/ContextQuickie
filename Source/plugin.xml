@@ -47,6 +47,11 @@
                name="RequiresPath"
                optional="false">
          </commandParameter>
+         <commandParameter
+               id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1"
+               name="Parameter1"
+               optional="true">
+         </commandParameter>
       </command>
    </extension>
    <extension
@@ -114,25 +119,25 @@
                      checkEnabled="false">
                   <with
                         variable="activeMenuSelection">
-                     <iterate
-                           ifEmpty="true"
-                           operator="or">
-                        <or>
-                           <adapt
-                                 type="org.eclipse.core.resources.IFolder">
-                           </adapt>
-                           <adapt
-                                 type="org.eclipse.core.resources.IProject">
-                           </adapt>
-                        </or>
-                     </iterate>
-                     <count
-                           value="1">
-                     </count>
                      <and>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
+                        <count
+                              value="1">
+                        </count>
+                        <iterate
+                              ifEmpty="true"
+                              operator="or">
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or>
+                        </iterate>
                      </and>
                   </with>
                </visibleWhen>
@@ -144,28 +149,28 @@
                      checkEnabled="false">
                   <with
                         variable="activeMenuSelection">
-                     <iterate
-                           ifEmpty="true"
-                           operator="or">
-                        <or>
-                           <adapt
-                                 type="org.eclipse.core.resources.IFolder">
-                           </adapt>
-                           <adapt
-                                 type="org.eclipse.core.resources.IProject">
-                           </adapt>
-                           <adapt
-                                 type="org.eclipse.core.resources.IFile">
-                           </adapt>
-                        </or>
-                     </iterate>
-                     <count
-                           value="1">
-                     </count>
                      <and>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
+                        <count
+                              value="1">
+                        </count>
+                        <iterate
+                              ifEmpty="true"
+                              operator="or">
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                           </or>
+                        </iterate>
                      </and>
                   </with>
                </visibleWhen>
@@ -301,6 +306,10 @@
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1"
+                        value="/rev">
                   </parameter>
                </command>
                <command

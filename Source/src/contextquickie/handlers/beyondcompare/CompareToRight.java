@@ -4,6 +4,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -17,8 +18,9 @@ public class CompareToRight extends AbstractHandler {
 
 		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
 
-		IResource rightSide = (IResource) selection.getFirstElement();
-		BeyondCompare.Compare(savedLeft, rightSide.getLocation().toString());
+		IAdaptable rightSide = (IAdaptable) selection.getFirstElement();
+		IResource rigthResource = rightSide.getAdapter(IResource.class);
+		BeyondCompare.Compare(savedLeft, rigthResource.getLocation().toString());
 
 		return null;
 	}
