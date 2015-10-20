@@ -15,8 +15,23 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 
+/**
+ * @author ContextQuickie
+ * 
+ *         Class which executes all Tortoise SVN commands based on the passed
+ *         parameters.
+ * @see org.eclipse.core.commands.IHandler
+ * @see org.eclipse.core.commands.AbstractHandler
+ */
 public class TortoiseSVNCommand extends AbstractHandler {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
+	 * ExecutionEvent)
+	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		List<String> command = new ArrayList<String>();
@@ -32,7 +47,7 @@ public class TortoiseSVNCommand extends AbstractHandler {
 				TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
 				Object selectedItem = selection.getFirstElement();
 				if (selectedItem instanceof IAdaptable) {
-					IAdaptable adaptable = (IAdaptable)selectedItem;
+					IAdaptable adaptable = (IAdaptable) selectedItem;
 					IResource resource = adaptable.getAdapter(IResource.class);
 					command.add("/path:" + '"' + resource.getLocation() + '"');
 				}
@@ -53,5 +68,4 @@ public class TortoiseSVNCommand extends AbstractHandler {
 		}
 		return null;
 	}
-
 }

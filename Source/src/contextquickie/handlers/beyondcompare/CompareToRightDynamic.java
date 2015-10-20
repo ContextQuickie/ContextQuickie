@@ -5,7 +5,8 @@ import java.io.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IAdapterManager;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -17,22 +18,52 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.menus.IWorkbenchContribution;
 import org.eclipse.ui.services.IServiceLocator;
 
+/**
+ * @author ContextQuickie
+ * 
+ *         Class for creating the "compare to right" context menu entry
+ *         dynamically.
+ *
+ */
 public class CompareToRightDynamic extends CompoundContributionItem implements IWorkbenchContribution {
 
+	/**
+	 * The service locator used to create the
+	 * {@link CommandContributionItemParameter} for the menu entry.
+	 */
 	private IServiceLocator serviceLocator;
+
+	/**
+	 * The {@link BeyondCompare} instance used for accessing the registry. The
+	 * instance is queried once because {@link getContributionItems} is called
+	 * multiple times and registry shall be queried only once due to performance
+	 * reasons.
+	 */
 	private BeyondCompare bc;
 
+	/**
+	 * Constructor, initializes the used {@link BeyondCompare} instance and
+	 * queries the registry entries.
+	 */
 	public CompareToRightDynamic() {
 		bc = new BeyondCompare();
 		bc.readRegistry();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.actions.CompoundContributionItem#getContributionItems()
+	 */
 	@Override
 	protected IContributionItem[] getContributionItems() {
 
+		// By default, return an empty list (if context menu entry must not be
+		// shown)
+		Boolean showEntry = false;
 		IContributionItem[] items = new IContributionItem[] {};
 
-		Boolean showEntry = false;
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
 			ISelection selection = window.getSelectionService().getSelection();
@@ -43,33 +74,30 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 
 				BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
 
-				IAdaptable selectedItem = (IAdaptable) receiver;
-				if (selectedItem != null) {
-					IFile selectedFile = selectedItem.getAdapter(IFile.class);
-					IFolder selectedFolder = selectedItem.getAdapter(IFolder.class);
-					IProject selectedProject = selectedItem.getAdapter(IProject.class);
-					if (((selectedProject != null) || (selectedFolder != null))
-							&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
-						showEntry = true;
-					} else if ((selectedFile != null) && (savedLeftType == BeyondCompareSavedLeft.File)) {
-						showEntry = true;
-					} else {
-						showEntry = false;
-					}
+				// get all
+				IAdapterManager adapterManager = Platform.getAdapterManager();
+				IFile selectedFile = adapterManager.getAdapter(receiver, IFile.class);
+				IFolder selectedFolder = adapterManager.getAdapter(receiver, IFolder.class);
+				IProject selectedProject = adapterManager.getAdapter(receiver, IProject.class);
 
-					if (showEntry) {
-						String savedLeft = bc.getSavedLeft();
-						if (savedLeft != null) {
-							CommandContributionItemParameter parameter = new CommandContributionItemParameter(
-									this.serviceLocator, "my.project.myCommandContributionItem",
-									"ContextQuickie.commands.compareToRight", 0);
-							String filename = new File(savedLeft).getName();
-							parameter.label = "Compare to " + filename;
-							parameter.icon = contextquickie.Activator
-									.getImageDescriptor("icons/BeyondCompare/Compare.png");
-							items = new IContributionItem[] { new CommandContributionItem(parameter) };
-							items[0].update();
-						}
+				if (((selectedProject != null) || (selectedFolder != null))
+						&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
+					showEntry = true;
+				} else if ((selectedFile != null) && (savedLeftType == BeyondCompareSavedLeft.File)) {
+					showEntry = true;
+				} else {
+					showEntry = false;
+				}
+
+				if (showEntry) {
+					String savedLeft = bc.getSavedLeft();
+					if (savedLeft != null) {
+						CommandContributionItemParameter parameter = new CommandContributionItemParameter(
+								this.serviceLocator, null, "ContextQuickie.commands.compareToRight", 0);
+						String filename = new File(savedLeft).getName();
+						parameter.label = "Compare to " + filename;
+						parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
+						items = new IContributionItem[] { new CommandContributionItem(parameter) };
 					}
 				}
 			}
@@ -78,6 +106,13 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 		return items;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.menus.IWorkbenchContribution#initialize(org.eclipse.ui.
+	 * services.IServiceLocator)
+	 */
 	@Override
 	public void initialize(IServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;

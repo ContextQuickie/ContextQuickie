@@ -301,7 +301,7 @@
                      label="Update to revision...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
-                        value="commit">
+                        value="update">
                   </parameter>
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"

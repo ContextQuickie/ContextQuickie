@@ -3,45 +3,53 @@ package contextquickie.handlers.beyondcompare;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IAdapterManager;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.TreeSelection;
 
+/**
+ * @author ContextQuickie
+ * 
+ *         Class which checks if the current selection can be compared using
+ *         Beyond Compare.
+ *
+ */
 public class CompareAllowed extends PropertyTester {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
+	 * java.lang.String, java.lang.Object[], java.lang.Object)
+	 */
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		TreeSelection selection = (TreeSelection) receiver;
 		Object[] paths = selection.toArray();
+		IAdapterManager adapterManager = Platform.getAdapterManager();
 
-		if ((paths[0] instanceof IAdaptable) && (paths[1] instanceof IAdaptable)) {
-			IAdaptable leftItem = (IAdaptable) paths[0];
-			IAdaptable rightItem = (IAdaptable) paths[1];
+		IFile leftFile = adapterManager.getAdapter(paths[0], IFile.class);
+		IFile rightFile = adapterManager.getAdapter(paths[1], IFile.class);
 
-			IFile leftFile = leftItem.getAdapter(IFile.class);
-			IFile rightFile = rightItem.getAdapter(IFile.class);
+		IFolder leftFolder = adapterManager.getAdapter(paths[0], IFolder.class);
+		IFolder rightFolder = adapterManager.getAdapter(paths[1], IFolder.class);
 
-			IFolder leftFolder = leftItem.getAdapter(IFolder.class);
-			IFolder rightFolder = rightItem.getAdapter(IFolder.class);
+		IResource leftProject = adapterManager.getAdapter(paths[0], IResource.class);
+		IResource rightProject = adapterManager.getAdapter(paths[1], IResource.class);
 
-			IResource leftProject = leftItem.getAdapter(IProject.class);
-			IResource rightProject = rightItem.getAdapter(IProject.class);
-
-			if ((leftFile != null) && (rightFile != null)) {
-				return true;
-			}
-			else if ((leftFolder != null) && (rightFolder != null)) {
-				return true;
-			} else if ((leftFolder != null) && (rightProject != null)) {
-				return true;
-			} else if ((leftProject != null) && (rightFolder != null)) {
-				return true;
-			} else if ((leftProject != null) && (rightProject != null)) {
-				return true;
-			}
+		if ((leftFile != null) && (rightFile != null)) {
+			return true;
+		} else if ((leftFolder != null) && (rightFolder != null)) {
+			return true;
+		} else if ((leftFolder != null) && (rightProject != null)) {
+			return true;
+		} else if ((leftProject != null) && (rightFolder != null)) {
+			return true;
+		} else if ((leftProject != null) && (rightProject != null)) {
+			return true;
 		}
-		
+
 		return false;
 	}
 
