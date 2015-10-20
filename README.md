@@ -10,6 +10,8 @@ Supported Tools:
 * Beyond Compare
 * Tortoise SVN
 
+Update Site: http://contextquickie.github.io/ContextQuickie/
+
 Screenshot:
 
 ![Screenshot](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/Screenshot.png)
