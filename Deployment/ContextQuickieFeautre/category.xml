@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/ContextQuickie_0.0.7.qualifier.jar" id="ContextQuickie" version="0.0.7.qualifier" os="win32" ws="win32">
+      <category name="ContextQuickie"/>
+   </feature>
+   <bundle id="ContextQuickie" version="0.0.7.qualifier">
+      <category name="ContextQuickie"/>
+   </bundle>
+   <category-def name="ContextQuickie" label="ContextQuickie"/>
+</site>
