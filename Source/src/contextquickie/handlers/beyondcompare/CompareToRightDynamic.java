@@ -2,9 +2,7 @@ package contextquickie.handlers.beyondcompare;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IContributionItem;
@@ -76,14 +74,12 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 
 				// get all
 				IAdapterManager adapterManager = Platform.getAdapterManager();
-				IFile selectedFile = adapterManager.getAdapter(receiver, IFile.class);
-				IFolder selectedFolder = adapterManager.getAdapter(receiver, IFolder.class);
-				IProject selectedProject = adapterManager.getAdapter(receiver, IProject.class);
+				int resourceType = adapterManager.getAdapter(receiver, IResource.class).getType();
 
-				if (((selectedProject != null) || (selectedFolder != null))
+				if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER))
 						&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
 					showEntry = true;
-				} else if ((selectedFile != null) && (savedLeftType == BeyondCompareSavedLeft.File)) {
+				} else if ((resourceType == IResource.FILE) && (savedLeftType == BeyondCompareSavedLeft.File)) {
 					showEntry = true;
 				} else {
 					showEntry = false;

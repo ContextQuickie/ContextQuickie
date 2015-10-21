@@ -71,6 +71,10 @@
                         <count
                               value="2">
                         </count>
+                        <iterate>
+                           <adapt
+                                 type="org.eclipse.core.resources.IResource">
+                           </adapt></iterate>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
@@ -159,17 +163,9 @@
                         <iterate
                               ifEmpty="true"
                               operator="or">
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                           </or>
+                           <adapt
+                                 type="org.eclipse.core.resources.IResource">
+                           </adapt>
                         </iterate>
                      </and>
                   </with>
@@ -190,6 +186,11 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
                      </test>
+                     <iterate>
+                        <adapt
+                              type="org.eclipse.core.resources.IResource">
+                        </adapt>
+                     </iterate>
                   </and>
                </visibleWhen>
                <parameter
@@ -212,6 +213,11 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
                      </test>
+                     <iterate>
+                        <adapt
+                              type="org.eclipse.core.resources.IResource">
+                        </adapt>
+                     </iterate>
                   </and>
                </visibleWhen>
                <parameter

@@ -3,8 +3,6 @@ package contextquickie.handlers.beyondcompare;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
@@ -32,21 +30,15 @@ public class SelectLeftSide extends AbstractHandler {
 
 		BeyondCompare bc = new BeyondCompare();
 		IAdapterManager adapterManager = Platform.getAdapterManager();
-
-		IFile file = adapterManager.getAdapter(selection.getFirstElement(), IFile.class);
-		IFolder folder = adapterManager.getAdapter(selection.getFirstElement(), IFolder.class);
 		IResource resource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
-		if (folder != null) {
-			bc.setSavedLeft(folder.getLocation().toString());
-			bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-			bc.writeRegistry();
-		} else if (file != null) {
-			bc.setSavedLeft(file.getLocation().toString());
-			bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-			bc.writeRegistry();
-		} else if (resource != null) {
+		int resourceType = resource.getType();
+		if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
 			bc.setSavedLeft(resource.getLocation().toString());
 			bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+			bc.writeRegistry();
+		} else if (resourceType == IResource.FILE) {
+			bc.setSavedLeft(resource.getLocation().toString());
+			bc.setSavedLeftType(BeyondCompareSavedLeft.File);
 			bc.writeRegistry();
 		}
 
