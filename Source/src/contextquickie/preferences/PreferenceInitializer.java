@@ -50,7 +50,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (tortoiseGitPath == null) {
 			tortoiseGitPath = "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe";
 		}
-		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_PATH, tortoiseGitPath);
+		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_PATH, tortoiseGitPath);
 	}
 
 }

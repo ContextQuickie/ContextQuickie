@@ -1,6 +1,7 @@
 package contextquickie.handlers.tortoisesvn;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -14,6 +15,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
+import contextquickie.tools.StringUtil;
 
 /**
  * @author ContextQuickie
@@ -36,7 +38,7 @@ public class TortoiseSVNCommand extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		List<String> arguments = new ArrayList<String>();
 		String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_TORTOISE_SVN_PATH);
-		
+
 		arguments.add(
 				"/command:" + event.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"));
 
@@ -46,11 +48,22 @@ public class TortoiseSVNCommand extends AbstractHandler {
 			Boolean requiresPath = Boolean.parseBoolean(requiresPathString);
 			if (requiresPath == true) {
 				TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-				Object selectedItem = selection.getFirstElement();
-				if (selectedItem instanceof IAdaptable) {
-					IAdaptable adaptable = (IAdaptable) selectedItem;
-					IResource resource = adaptable.getAdapter(IResource.class);
-					arguments.add("/path:" + '"' + resource.getLocation() + '"');
+				if (selection.isEmpty() == false) {
+					@SuppressWarnings("rawtypes")
+					Iterator iterator = selection.iterator();
+					String pathArgument = "";
+					while (iterator.hasNext()) {
+						Object selectedItem = iterator.next();
+						if (selectedItem instanceof IAdaptable) {
+							IAdaptable adaptable = (IAdaptable) selectedItem;
+							IResource resource = adaptable.getAdapter(IResource.class);
+							pathArgument += resource.getLocation();
+							if (iterator.hasNext()) {
+								pathArgument += "*";
+							}
+						}
+					}
+					arguments.add("/path:" + StringUtil.QuoteString(pathArgument));
 				}
 			}
 		}
@@ -59,9 +72,9 @@ public class TortoiseSVNCommand extends AbstractHandler {
 		if (parameter1 != null) {
 			arguments.add(parameter1);
 		}
-		
+
 		ProcessWrapper.executeCommand(command, arguments);
-		
+
 		return null;
 	}
 }
