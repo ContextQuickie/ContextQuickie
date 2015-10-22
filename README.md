@@ -1,5 +1,5 @@
 # ContextQuickie
-An eclipse add-on which extens the context menu for accessing various windows tools
+An eclipse add-on which extens the context menu for accessing various windows tools like Beynod Compare, Tortoise SVN or Tortoise Git.
 
 Current status: 
 * Under development
