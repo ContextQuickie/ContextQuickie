@@ -65,14 +65,13 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window != null) {
 			ISelection selection = window.getSelectionService().getSelection();
-			if (selection instanceof IStructuredSelection) {
+			if ((selection instanceof IStructuredSelection) && (selection.isEmpty() == false)) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) window.getSelectionService()
 						.getSelection();
 				Object receiver = structuredSelection.getFirstElement();
 
 				BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
 
-				// get all
 				IAdapterManager adapterManager = Platform.getAdapterManager();
 				int resourceType = adapterManager.getAdapter(receiver, IResource.class).getType();
 

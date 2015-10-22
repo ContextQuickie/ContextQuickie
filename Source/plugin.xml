@@ -72,9 +72,17 @@
                               value="2">
                         </count>
                         <iterate>
-                           <adapt
-                                 type="org.eclipse.core.resources.IResource">
-                           </adapt></iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or></iterate>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
@@ -94,22 +102,20 @@
                      checkEnabled="false">
                   <with
                         variable="activeMenuSelection">
-                     <iterate
-                           ifEmpty="true"
-                           operator="or">
-                        <or>
-                           <adapt
-                                 type="org.eclipse.core.resources.IFile">
-                           </adapt>
-                        </or>
-                     </iterate>
-                     <count
-                           value="1">
-                     </count>
                      <and>
+                        <count
+                              value="1">
+                        </count>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
+                        <iterate
+                              ifEmpty="true"
+                              operator="or">
+                           <adapt
+                                 type="org.eclipse.core.resources.IFile">
+                           </adapt>
+                        </iterate>
                      </and>
                   </with>
                </visibleWhen>
@@ -124,12 +130,12 @@
                   <with
                         variable="activeMenuSelection">
                      <and>
-                        <test
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
                         <count
                               value="1">
                         </count>
+                        <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
                         <iterate
                               ifEmpty="true"
                               operator="or">
@@ -154,19 +160,27 @@
                   <with
                         variable="activeMenuSelection">
                      <and>
-                        <test
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
                         <count
                               value="1">
                         </count>
                         <iterate
                               ifEmpty="true"
                               operator="or">
-                           <adapt
-                                 type="org.eclipse.core.resources.IResource">
-                           </adapt>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or>
                         </iterate>
+                        <test
+                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                        </test>
                      </and>
                   </with>
                </visibleWhen>
@@ -186,11 +200,27 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
                      </test>
-                     <iterate>
-                        <adapt
-                              type="org.eclipse.core.resources.IResource">
-                        </adapt>
-                     </iterate>
+                     <with
+                           variable="activeMenuSelection">
+                        <iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or>
+                        </iterate>
+                        <not>
+                           <count
+                                 value="0">
+                           </count>
+                        </not>
+                     </with>
                   </and>
                </visibleWhen>
                <parameter
@@ -213,11 +243,27 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
                      </test>
-                     <iterate>
-                        <adapt
-                              type="org.eclipse.core.resources.IResource">
-                        </adapt>
-                     </iterate>
+                     <with
+                           variable="activeMenuSelection">
+                        <iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or>
+                        </iterate>
+                        <not>
+                           <count
+                                 value="0">
+                           </count>
+                        </not>
+                     </with>
                   </and>
                </visibleWhen>
                <parameter
@@ -532,6 +578,27 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
                      </test>
+                     <with
+                           variable="activeMenuSelection">
+                        <iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IProject">
+                              </adapt>
+                           </or>
+                        </iterate>
+                        <not>
+                           <count
+                                 value="0">
+                           </count>
+                        </not>
+                     </with>
                   </and>
                </visibleWhen>
             </menu>
