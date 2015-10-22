@@ -1,11 +1,10 @@
 package contextquickie.handlers.beyondcompare;
 
-import java.io.IOException;
-
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
+import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.Registry;
 
 /**
@@ -117,13 +116,9 @@ public class BeyondCompare {
 	 *            The path of the right side for comparison.
 	 */
 	public static void Compare(String left, String right) {
-		String pathToBeyondCompare = Activator.getDefault().getPreferenceStore()
+		String command = Activator.getDefault().getPreferenceStore()
 				.getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
-		try {
-			Runtime.getRuntime().exec('"' + pathToBeyondCompare + '"' + " " + left + " " + right);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		ProcessWrapper.executeCommand(command, left, right);		
 	}
 }

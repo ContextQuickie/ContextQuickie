@@ -1,6 +1,5 @@
 package contextquickie.handlers.tortoisesvn;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
+import contextquickie.tools.ProcessWrapper;
 
 /**
  * @author ContextQuickie
@@ -34,9 +34,10 @@ public class TortoiseSVNCommand extends AbstractHandler {
 	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		List<String> command = new ArrayList<String>();
-		command.add(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_TORTOISE_SVN_PATH));
-		command.add(
+		List<String> arguments = new ArrayList<String>();
+		String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_TORTOISE_SVN_PATH);
+		
+		arguments.add(
 				"/command:" + event.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"));
 
 		String requiresPathString = event
@@ -49,23 +50,18 @@ public class TortoiseSVNCommand extends AbstractHandler {
 				if (selectedItem instanceof IAdaptable) {
 					IAdaptable adaptable = (IAdaptable) selectedItem;
 					IResource resource = adaptable.getAdapter(IResource.class);
-					command.add("/path:" + '"' + resource.getLocation() + '"');
+					arguments.add("/path:" + '"' + resource.getLocation() + '"');
 				}
 			}
 		}
 
 		String parameter1 = event.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1");
 		if (parameter1 != null) {
-			command.add(parameter1);
+			arguments.add(parameter1);
 		}
-
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		try {
-			processBuilder.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		ProcessWrapper.executeCommand(command, arguments);
+		
 		return null;
 	}
 }

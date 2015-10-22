@@ -3,5 +3,8 @@
    <description name="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/">
       ContextQuickie Update Site
    </description>
-   <feature url="features/ContextQuickie_0.0.7.qualifier.jar" id="ContextQuickie" version="0.0.7.qualifier" os="win32" ws="win32"/>
+   <feature url="features/ContextQuickie_0.0.9.201510221740.jar" id="ContextQuickie" version="0.0.9.201510221740" os="win32" ws="win32">
+      <category name="ContextQuickie"/>
+   </feature>
+   <category-def name="ContextQuickie" label="Context Quickie"/>
 </site>

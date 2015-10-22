@@ -36,4 +36,14 @@ public class PreferenceConstants {
 	 * Configuration item for the path to the Tortoise SVN executable.
 	 */
 	public static final String P_TORTOISE_SVN_PATH = "TortoiseSVNPath";
+
+	/**
+	 * Configuration item for enabling/disabling Tortoise Git.
+	 */
+	public static final String P_TORTOISE_GIT_ENABLED = "TortoiseGitEnabled";
+	
+	/**
+	 * Configuration item for the path to the Tortoise Git executable.
+	 */
+	public static final String P_TORTOISE_GIT_PATH = "TortoiseGitPath";
 }

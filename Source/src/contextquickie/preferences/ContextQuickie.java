@@ -56,6 +56,14 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
 				getFieldEditorParent());
 		fileFiledEditor.setFileExtensions(new String[] { "TortoiseProc.exe" });
 		addField(fileFiledEditor);
+		
+		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_GIT_ENABLED, "Enable Tortoise Git",
+				getFieldEditorParent()));
+
+		fileFiledEditor = new FileFieldEditor(PreferenceConstants.P_TORTOISE_SVN_PATH, "Path to TortoiseGitProc.exe",
+				getFieldEditorParent());
+		fileFiledEditor.setFileExtensions(new String[] { "TortoiseGitProc.exe" });
+		addField(fileFiledEditor);
 	}
 
 	/*

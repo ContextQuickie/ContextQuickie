@@ -177,7 +177,7 @@
             </separator>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuupdate.ico"
+                  icon="icons/TortoiseSVN/menuupdate.png"
                   label="SVN Update"
                   style="push">
                <visibleWhen
@@ -204,7 +204,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucommit.ico"
+                  icon="icons/TortoiseSVN/menucommit.png"
                   label="SVN Commit..."
                   style="push">
                <visibleWhen
@@ -230,11 +230,11 @@
                </parameter>
             </command>
             <menu
-                  icon="icons/TortoiseSVN/tsvnmenumultiple.ico"
+                  icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menulog.ico"
+                     icon="icons/TortoiseSVN/menulog.png"
                      label="Show Log">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -247,7 +247,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurepobrowse.ico"
+                     icon="icons/TortoiseSVN/menurepobrowse.png"
                      label="Repo-browser">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -260,7 +260,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menushowchanged.ico"
+                     icon="icons/TortoiseSVN/menushowchanged.png"
                      label="Check for modifications">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -273,7 +273,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurevisiongraph.ico"
+                     icon="icons/TortoiseSVN/menurevisiongraph.png"
                      label="Revision graph">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -290,7 +290,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuresolve.ico"
+                     icon="icons/TortoiseSVN/menuresolve.png"
                      label="Resolve...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -303,7 +303,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuupdate.ico"
+                     icon="icons/TortoiseSVN/menuupdate.png"
                      label="Update to revision...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -320,7 +320,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurevert.ico"
+                     icon="icons/TortoiseSVN/menurevert.png"
                      label="Revert...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -333,7 +333,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucleanup.ico"
+                     icon="icons/TortoiseSVN/menucleanup.png"
                      label="Clean up...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -346,7 +346,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menulock.ico"
+                     icon="icons/TortoiseSVN/menulock.png"
                      label="Get lock...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -359,7 +359,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuunlock.ico"
+                     icon="icons/TortoiseSVN/menuunlock.png"
                      label="Release lock...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -376,7 +376,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucopy.ico"
+                     icon="icons/TortoiseSVN/menucopy.png"
                      label="Branch/tag...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -389,7 +389,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuswitch.ico"
+                     icon="icons/TortoiseSVN/menuswitch.png"
                      label="Switch...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -402,7 +402,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menumerge.ico"
+                     icon="icons/TortoiseSVN/menumerge.png"
                      label="Merge...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -415,7 +415,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuexport.ico"
+                     icon="icons/TortoiseSVN/menuexport.png"
                      label="Export...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -432,7 +432,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuadd.ico"
+                     icon="icons/TortoiseSVN/menuadd.png"
                      label="Add...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -445,7 +445,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/copy.ico"
+                     icon="icons/TortoiseSVN/copy.png"
                      label="Copy URL to clipboard">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -462,7 +462,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menudiff.ico"
+                     icon="icons/TortoiseSVN/menudiff.png"
                      label="Create patch...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -475,7 +475,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menupatch.ico"
+                     icon="icons/TortoiseSVN/menupatch.png"
                      label="Apply patch...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
@@ -484,7 +484,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuproperties.ico"
+                     icon="icons/TortoiseSVN/menuproperties.png"
                      label="Properties">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -501,7 +501,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menusettings.ico"
+                     icon="icons/TortoiseSVN/menusettings.png"
                      label="Settings">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -510,7 +510,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuhelp.ico"
+                     icon="icons/TortoiseSVN/menuhelp.png"
                      label="Help">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -519,7 +519,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuabout.ico"
+                     icon="icons/TortoiseSVN/menuabout.png"
                      label="About">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"

@@ -42,6 +42,15 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			tortoiseSVNPath = "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe";
 		}
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_PATH, tortoiseSVNPath);
+		
+		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_ENABLED, false);
+		
+		// Try to retrieve the path to the Tortoise SVN executable.
+		String tortoiseGitPath = Registry.ReadKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit", "ProcPath");
+		if (tortoiseGitPath == null) {
+			tortoiseGitPath = "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe";
+		}
+		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_PATH, tortoiseGitPath);
 	}
 
 }
