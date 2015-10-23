@@ -1,4 +1,4 @@
-package contextquickie.handlers.tortoisesvn;
+package contextquickie.handlers.tortoise;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,26 +6,44 @@ import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import contextquickie.Activator;
-import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
 
 /**
  * @author ContextQuickie
  * 
- *         Class which executes all Tortoise SVN commands based on the passed
+ *         Class which executes all Tortoise commands based on the passed
  *         parameters.
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class TortoiseSVNCommand extends AbstractHandler {
+public abstract class TortoiseCommand extends AbstractHandler {
+
+	/**
+	 * @return The preference name of the command path.
+	 */
+	protected abstract String getCommandPathName();
+
+	/**
+	 * @return The name of the "command Id" parameter.
+	 */
+	protected abstract String getCommandIdName();
+
+	/**
+	 * @return The name of the "requires path name" parameter.
+	 */
+	protected abstract String getRequiresPathName();
+
+	/**
+	 * @return The name of the "Parameter1" parameter.
+	 */
+	protected abstract String getParameter1Name();
 
 	/*
 	 * (non-Javadoc)
@@ -35,15 +53,13 @@ public class TortoiseSVNCommand extends AbstractHandler {
 	 * ExecutionEvent)
 	 */
 	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public Object execute(ExecutionEvent event) {
 		List<String> arguments = new ArrayList<String>();
-		String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_TORTOISE_SVN_PATH);
+		String command = Activator.getDefault().getPreferenceStore().getString(this.getCommandPathName());
 
-		arguments.add(
-				"/command:" + event.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"));
+		arguments.add("/command:" + event.getParameter(this.getCommandIdName()));
 
-		String requiresPathString = event
-				.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath");
+		String requiresPathString = event.getParameter(this.getRequiresPathName());
 		if (requiresPathString != null) {
 			Boolean requiresPath = Boolean.parseBoolean(requiresPathString);
 			if (requiresPath == true) {
@@ -68,7 +84,7 @@ public class TortoiseSVNCommand extends AbstractHandler {
 			}
 		}
 
-		String parameter1 = event.getParameter("ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1");
+		String parameter1 = event.getParameter(this.getCommandIdName());
 		if (parameter1 != null) {
 			arguments.add(parameter1);
 		}

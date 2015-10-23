@@ -1,4 +1,4 @@
-package contextquickie.handlers.tortoisesvn;
+package contextquickie.handlers.tortoise.svn;
 
 import org.eclipse.core.expressions.PropertyTester;
 

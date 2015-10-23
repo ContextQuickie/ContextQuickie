@@ -2,7 +2,7 @@
 <feature
       id="ContextQuickie"
       label="ContextQuickie"
-      version="0.1.0.qualifier"
+      version="0.2.0.qualifier"
       provider-name="ContextQuickie"
       plugin="ContextQuickie"
       os="win32"

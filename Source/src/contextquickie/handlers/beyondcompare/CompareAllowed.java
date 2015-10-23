@@ -27,9 +27,19 @@ public class CompareAllowed extends PropertyTester {
 		Object[] paths = selection.toArray();
 		IAdapterManager adapterManager = Platform.getAdapterManager();
 		if (adapterManager != null) {
-			int leftType = adapterManager.getAdapter(paths[0], IResource.class).getType();
-			int rightType = adapterManager.getAdapter(paths[1], IResource.class).getType();
-
+			int leftType = IResource.NONE;
+			
+			IResource left = adapterManager.getAdapter(paths[0], IResource.class);
+			if (left != null) {
+				leftType = left.getType();
+			}
+			
+			int rightType = IResource.NONE;
+			IResource right = adapterManager.getAdapter(paths[1], IResource.class);
+			if (right != null) {
+				rightType = right.getType();
+			}
+			
 			if ((leftType == IResource.FILE) && (rightType == IResource.FILE)) {
 				return true;
 			} else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER)) {

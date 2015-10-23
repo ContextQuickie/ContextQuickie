@@ -74,7 +74,11 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 
 				IAdapterManager adapterManager = Platform.getAdapterManager();
 				if (adapterManager != null) {
-					int resourceType = adapterManager.getAdapter(receiver, IResource.class).getType();
+					int resourceType = IResource.NONE;
+					IResource resource = adapterManager.getAdapter(receiver, IResource.class);
+					if (resource != null) {
+						resourceType = resource.getType();
+					}
 
 					if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER))
 							&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
