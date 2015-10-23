@@ -26,22 +26,22 @@ public class CompareAllowed extends PropertyTester {
 		TreeSelection selection = (TreeSelection) receiver;
 		Object[] paths = selection.toArray();
 		IAdapterManager adapterManager = Platform.getAdapterManager();
+		if (adapterManager != null) {
+			int leftType = adapterManager.getAdapter(paths[0], IResource.class).getType();
+			int rightType = adapterManager.getAdapter(paths[1], IResource.class).getType();
 
-		int leftType = adapterManager.getAdapter(paths[0], IResource.class).getType();
-		int rightType = adapterManager.getAdapter(paths[1], IResource.class).getType();
-
-		if ((leftType == IResource.FILE) && (rightType == IResource.FILE)) {
-			return true;
-		} else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER)) {
-			return true;
-		} else if ((leftType == IResource.FOLDER) && (rightType == IResource.PROJECT)) {
-			return true;
-		} else if ((leftType == IResource.PROJECT) && (rightType == IResource.FOLDER)) {
-			return true;
-		} else if ((leftType == IResource.PROJECT) && (rightType == IResource.PROJECT)) {
-			return true;
+			if ((leftType == IResource.FILE) && (rightType == IResource.FILE)) {
+				return true;
+			} else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER)) {
+				return true;
+			} else if ((leftType == IResource.FOLDER) && (rightType == IResource.PROJECT)) {
+				return true;
+			} else if ((leftType == IResource.PROJECT) && (rightType == IResource.FOLDER)) {
+				return true;
+			} else if ((leftType == IResource.PROJECT) && (rightType == IResource.PROJECT)) {
+				return true;
+			}
 		}
-
 		return false;
 	}
 

@@ -73,26 +73,29 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 				BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
 
 				IAdapterManager adapterManager = Platform.getAdapterManager();
-				int resourceType = adapterManager.getAdapter(receiver, IResource.class).getType();
+				if (adapterManager != null) {
+					int resourceType = adapterManager.getAdapter(receiver, IResource.class).getType();
 
-				if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER))
-						&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
-					showEntry = true;
-				} else if ((resourceType == IResource.FILE) && (savedLeftType == BeyondCompareSavedLeft.File)) {
-					showEntry = true;
-				} else {
-					showEntry = false;
-				}
+					if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER))
+							&& (savedLeftType == BeyondCompareSavedLeft.Directory)) {
+						showEntry = true;
+					} else if ((resourceType == IResource.FILE) && (savedLeftType == BeyondCompareSavedLeft.File)) {
+						showEntry = true;
+					} else {
+						showEntry = false;
+					}
 
-				if (showEntry) {
-					String savedLeft = bc.getSavedLeft();
-					if (savedLeft != null) {
-						CommandContributionItemParameter parameter = new CommandContributionItemParameter(
-								this.serviceLocator, null, "ContextQuickie.commands.compareToRight", 0);
-						String filename = new File(savedLeft).getName();
-						parameter.label = "Compare to " + filename;
-						parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
-						items = new IContributionItem[] { new CommandContributionItem(parameter) };
+					if (showEntry) {
+						String savedLeft = bc.getSavedLeft();
+						if (savedLeft != null) {
+							CommandContributionItemParameter parameter = new CommandContributionItemParameter(
+									this.serviceLocator, null, "ContextQuickie.commands.compareToRight", 0);
+							String filename = new File(savedLeft).getName();
+							parameter.label = "Compare to " + filename;
+							parameter.icon = contextquickie.Activator
+									.getImageDescriptor("icons/BeyondCompare/Compare.png");
+							items = new IContributionItem[] { new CommandContributionItem(parameter) };
+						}
 					}
 				}
 			}

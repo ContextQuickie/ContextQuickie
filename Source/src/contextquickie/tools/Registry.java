@@ -33,24 +33,28 @@ public class Registry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		String line;
-		/**
-		 * Regular expression for parsing the output of the query " +": One or
-		 * more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
-		 * REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)": The queried value
-		 */
-		Pattern queryPattern = Pattern.compile(" +" + key + " +" + "[A-Z_]+" + " +" + "(.*)" + "$");
-		try {
-			while ((line = reader.readLine()) != null) {
-				Matcher matcher = queryPattern.matcher(line);
-				if (matcher.matches()) {
-					value = matcher.group(1);
+
+		if (p != null) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			String line;
+			/**
+			 * Regular expression for parsing the output of the query " +": One
+			 * or more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ,
+			 * REG_EXPAND_SZ, REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)":
+			 * The queried value
+			 */
+			Pattern queryPattern = Pattern.compile(" +" + key + " +" + "[A-Z_]+" + " +" + "(.*)" + "$");
+			try {
+				while ((line = reader.readLine()) != null) {
+					Matcher matcher = queryPattern.matcher(line);
+					if (matcher.matches()) {
+						value = matcher.group(1);
+					}
 				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return value;
 	}

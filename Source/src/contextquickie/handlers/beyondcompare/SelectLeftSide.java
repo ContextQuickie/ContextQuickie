@@ -31,17 +31,18 @@ public class SelectLeftSide extends AbstractHandler {
 		BeyondCompare bc = new BeyondCompare();
 		IAdapterManager adapterManager = Platform.getAdapterManager();
 		IResource resource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
-		int resourceType = resource.getType();
-		if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
-			bc.setSavedLeft(resource.getLocation().toString());
-			bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-			bc.writeRegistry();
-		} else if (resourceType == IResource.FILE) {
-			bc.setSavedLeft(resource.getLocation().toString());
-			bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-			bc.writeRegistry();
+		if (resource != null) {
+			int resourceType = resource.getType();
+			if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
+				bc.setSavedLeft(resource.getLocation().toString());
+				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+				bc.writeRegistry();
+			} else if (resourceType == IResource.FILE) {
+				bc.setSavedLeft(resource.getLocation().toString());
+				bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+				bc.writeRegistry();
+			}
 		}
-
 		return null;
 	}
 }
