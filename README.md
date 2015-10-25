@@ -13,6 +13,7 @@ Supported Tools:
 
 [[Installation|Installation]]
 [Usage] (Usage)
+[About](/about/)
 
 Update Site: http://contextquickie.github.io/ContextQuickie/
 
