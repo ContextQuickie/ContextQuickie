@@ -11,8 +11,8 @@ Supported Tools:
 * Tortoise SVN
 * Tortoise Git
 
-[Installation]
-[Usage]
+[Installation] (Installation)
+[Usage] (Usage)
 
 Update Site: http://contextquickie.github.io/ContextQuickie/
 
