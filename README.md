@@ -12,6 +12,7 @@ Supported Tools:
 * Tortoise Git
 
 [Installation](https://github.com/ContextQuickie/ContextQuickie/wiki/Installation)
+
 [Usage] (https://github.com/ContextQuickie/ContextQuickie/wiki/Usage)
 
 Screenshot:
