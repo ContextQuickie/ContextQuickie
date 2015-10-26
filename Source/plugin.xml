@@ -386,6 +386,51 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menurename.png"
+                     label="Rename...">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="rename">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <with
+                           variable="activeMenuSelection">
+                        <count
+                              value="1">
+                        </count>
+                        <iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFolder">
+                              </adapt>
+                           </or>
+                        </iterate>
+                     </with>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menudelete.png"
+                     label="Delete...">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="remove">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menurevert.png"
                      label="Revert...">
                   <parameter
@@ -496,6 +541,35 @@
                      name="SeparatorTortoiseSVN3"
                      visible="true">
                </separator>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menublame.png"
+                     label="Blame...">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="blame">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <with
+                           variable="activeMenuSelection">
+                        <iterate>
+                           <or>
+                              <adapt
+                                    type="org.eclipse.core.resources.IFile">
+                              </adapt>
+                           </or>
+                        </iterate>
+                        <count
+                              value="1">
+                        </count>
+                     </with>
+                  </visibleWhen>
+               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menuadd.png"
