@@ -1,0 +1,4 @@
+[submodule "UpdateSite"]
+	path = UpdateSite
+	url = https://github.com/ContextQuickie/ContextQuickie.git
+	branch = gh-pages
