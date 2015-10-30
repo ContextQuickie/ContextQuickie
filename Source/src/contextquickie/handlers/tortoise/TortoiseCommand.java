@@ -84,7 +84,7 @@ public abstract class TortoiseCommand extends AbstractHandler {
 			}
 		}
 
-		String parameter1 = event.getParameter(this.getCommandIdName());
+		String parameter1 = event.getParameter(this.getParameter1Name());
 		if (parameter1 != null) {
 			arguments.add(parameter1);
 		}

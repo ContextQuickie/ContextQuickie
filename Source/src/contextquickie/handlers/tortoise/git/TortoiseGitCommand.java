@@ -27,6 +27,6 @@ public class TortoiseGitCommand extends TortoiseCommand {
 
 	@Override
 	protected String getParameter1Name() {
-		return "ContextQuickie.commands.TortoiseSVN.TortoiseGitCommand.Parameter1";
+		return "ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1";
 	}
 }
