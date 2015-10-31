@@ -36,6 +36,11 @@ public class PreferenceConstants {
 	 * Configuration item for the path to the Tortoise SVN executable.
 	 */
 	public static final String P_TORTOISE_SVN_PATH = "TortoiseSVNPath";
+	
+	/**
+	 * Configuration item which indicates if a working copy detection is performed or not.
+	 */
+	public static final String P_TORTOISE_SVN_WORKING_COPY_DETECTION = "TortoiseSVNWorkingCopyDetection";
 
 	/**
 	 * Configuration item for enabling/disabling Tortoise Git.
@@ -46,4 +51,9 @@ public class PreferenceConstants {
 	 * Configuration item for the path to the Tortoise Git executable.
 	 */
 	public static final String P_TORTOISE_GIT_PATH = "TortoiseGitPath";
+	
+	/**
+	 * Configuration item which indicates if a working copy detection is performed or not.
+	 */
+	public static final String P_TORTOISE_GIT_WORKING_COPY_DETECTION = "TortoiseGitWorkingCopyDetection";
 }

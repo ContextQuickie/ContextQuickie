@@ -1,8 +1,6 @@
 package contextquickie.handlers.tortoise.svn;
 
-import org.eclipse.core.expressions.PropertyTester;
-
-import contextquickie.Activator;
+import contextquickie.handlers.tortoise.TortoiseEnabled;
 import contextquickie.preferences.PreferenceConstants;
 
 /**
@@ -12,17 +10,20 @@ import contextquickie.preferences.PreferenceConstants;
  *         settings. It is used to show/hide the Tortoise SVN context menu
  *         entries.
  */
-public class TortoiseSVNEnabled extends PropertyTester {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
-	 * java.lang.String, java.lang.Object[], java.lang.Object)
-	 */
+public class TortoiseSVNEnabled extends TortoiseEnabled {
 	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		return Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_TORTOISE_SVN_ENABLED);
+	protected String getPluginEnabledPreferenceName() {
+		return PreferenceConstants.P_TORTOISE_SVN_ENABLED;
+	}
+
+	@Override
+	protected String getPluginWorkingCopyDetectionPreferenceName() {
+		return PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION;
+	}
+
+	@Override
+	protected String getWokringCopyFolderName() {
+		return ".svn";
 	}
 
 }

@@ -35,6 +35,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "SavedLeft");
 
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_ENABLED, false);
+		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION, false);
 
 		// Try to retrieve the path to the Tortoise SVN executable.
 		String tortoiseSVNPath = Registry.ReadKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN", "ProcPath");
@@ -44,6 +45,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_PATH, tortoiseSVNPath);
 		
 		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_ENABLED, false);
+		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION, false);
 		
 		// Try to retrieve the path to the Tortoise SVN executable.
 		String tortoiseGitPath = Registry.ReadKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit", "ProcPath");

@@ -57,6 +57,9 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
 		fileFiledEditor.setFileExtensions(new String[] { "TortoiseProc.exe" });
 		addField(fileFiledEditor);
 		
+		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION, "Show Tortoise SVN only if a working copy has been found",
+				getFieldEditorParent()));
+		
 		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_GIT_ENABLED, "Enable Tortoise Git",
 				getFieldEditorParent()));
 
@@ -64,6 +67,9 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
 				getFieldEditorParent());
 		fileFiledEditor.setFileExtensions(new String[] { "TortoiseGitProc.exe" });
 		addField(fileFiledEditor);
+		
+		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION, "Show Tortoise Git only if a working copy has been found",
+				getFieldEditorParent()));
 	}
 
 	/*
