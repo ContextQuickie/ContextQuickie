@@ -300,6 +300,32 @@
                   label="Tortoise SVN">
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menucompare.png"
+                     label="Diff">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="diff">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menucompare.png"
+                     label="Diff with previous version">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="prevdiff">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menulog.png"
                      label="Show Log">
                   <parameter
