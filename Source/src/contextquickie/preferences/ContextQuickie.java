@@ -1,6 +1,13 @@
 package contextquickie.preferences;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jface.preference.*;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import contextquickie.Activator;
@@ -18,7 +25,16 @@ import org.eclipse.ui.IWorkbench;
  * preferences can be accessed directly via the preference store.
  */
 
-public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+public class ContextQuickie extends FieldEditorPreferencePage
+		implements IWorkbenchPreferencePage, IPropertyChangeListener {
+
+	/**
+	 * Map which stores the relation between a field editor for
+	 * enabling/disabling a feature and the child controls for setting up the
+	 * feature. The key is the field editor for enabling/disabling the feature.
+	 * The value is a list of filed editors for setting up the feature.
+	 */
+	private Map<BooleanFieldEditor, List<FieldEditor>> controlMapping = new HashMap<BooleanFieldEditor, List<FieldEditor>>();
 
 	/**
 	 * Constructor
@@ -34,42 +50,21 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		FileFieldEditor fileFiledEditor;
-		addField(new BooleanFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_ENABLED, "Enable Beyond Compare",
-				getFieldEditorParent()));
+		this.createBeyondCompareFieldEditors();
+		this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", PreferenceConstants.P_TORTOISE_SVN_ENABLED,
+				PreferenceConstants.P_TORTOISE_SVN_PATH, PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION);
 
-		fileFiledEditor = new FileFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_PATH, "Path to BCompare.exe",
-				getFieldEditorParent());
-		fileFiledEditor.setFileExtensions(new String[] { "BCompare.exe" });
-		addField(fileFiledEditor);
+		this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", PreferenceConstants.P_TORTOISE_GIT_ENABLED,
+				PreferenceConstants.P_TORTOISE_GIT_PATH, PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION);
 
-		addField(new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH, "Left Side Registy Path",
-				getFieldEditorParent()));
-
-		addField(new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "Left Side Registy Key",
-				getFieldEditorParent()));
-
-		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_SVN_ENABLED, "Enable Tortoise SVN",
-				getFieldEditorParent()));
-
-		fileFiledEditor = new FileFieldEditor(PreferenceConstants.P_TORTOISE_SVN_PATH, "Path to TortoiseProc.exe",
-				getFieldEditorParent());
-		fileFiledEditor.setFileExtensions(new String[] { "TortoiseProc.exe" });
-		addField(fileFiledEditor);
-		
-		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION, "Show Tortoise SVN only if a working copy has been found",
-				getFieldEditorParent()));
-		
-		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_GIT_ENABLED, "Enable Tortoise Git",
-				getFieldEditorParent()));
-
-		fileFiledEditor = new FileFieldEditor(PreferenceConstants.P_TORTOISE_GIT_PATH, "Path to TortoiseGitProc.exe",
-				getFieldEditorParent());
-		fileFiledEditor.setFileExtensions(new String[] { "TortoiseGitProc.exe" });
-		addField(fileFiledEditor);
-		
-		addField(new BooleanFieldEditor(PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION, "Show Tortoise Git only if a working copy has been found",
-				getFieldEditorParent()));
+		for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet()) {
+			featureEnabledEditor.setPropertyChangeListener(this);
+			boolean featureEnabled = this.getPreferenceStore().getBoolean(featureEnabledEditor.getPreferenceName());
+			for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
+				fieldEditor.setPropertyChangeListener(this);
+				fieldEditor.setEnabled(featureEnabled, getFieldEditorParent());
+			}
+		}
 	}
 
 	/*
@@ -81,4 +76,112 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
 	public void init(IWorkbench workbench) {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.preference.FieldEditorPreferencePage#propertyChange(org
+	 * .eclipse.jface.util.PropertyChangeEvent)
+	 */
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		Object eventSource = event.getSource();
+		if (eventSource instanceof BooleanFieldEditor) {
+			final BooleanFieldEditor featureEnabledEditor = (BooleanFieldEditor) eventSource;
+			if (this.controlMapping.keySet().contains(featureEnabledEditor)) {
+				boolean featureEnabled = featureEnabledEditor.getBooleanValue();
+				for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
+					fieldEditor.setEnabled(featureEnabled, getFieldEditorParent());
+				}
+			}
+		}
+
+		// Updated the apply button in every case because the property change
+		// can be caused by a changed string or path value
+		this.updateApplyButton();
+	}
+
+	@Override
+	public boolean isValid() {
+		// Search for enabled features wit invalid configuration options
+		for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet()) {
+			if (featureEnabledEditor.getBooleanValue() == true) {
+				for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
+					if (fieldEditor.isValid() == false) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Creates the field editors for Beyond Compare.
+	 */
+	private void createBeyondCompareFieldEditors() {
+		ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
+
+		BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_ENABLED,
+				"Enable Beyond Compare", getFieldEditorParent());
+		addField(featureEnabledEditor);
+
+		this.controlMapping.put(featureEnabledEditor, dependentFields);
+
+		FileFieldEditor fileFieldEditor = new FileFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_PATH,
+				"Path to BCompare.exe", getFieldEditorParent());
+		fileFieldEditor.setFileExtensions(new String[] { "BCompare.exe" });
+		addField(fileFieldEditor);
+		dependentFields.add(fileFieldEditor);
+
+		StringFieldEditor shellRegPathEditor = new StringFieldEditor(
+				PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH, "Left Side Registy Path", getFieldEditorParent());
+		addField(shellRegPathEditor);
+		dependentFields.add(shellRegPathEditor);
+
+		StringFieldEditor shellRegKeyEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY,
+				"Left Side Registy Key", getFieldEditorParent());
+		addField(shellRegKeyEditor);
+		dependentFields.add(shellRegKeyEditor);
+	}
+
+	/**
+	 * Creates the settings interface for a Tortoise feature
+	 * 
+	 * @param name
+	 *            The name of the feature (e.g. SVN, Git)
+	 * @param execName
+	 *            The name of the executable of the feature.
+	 * @param enabledString
+	 *            The preference constant describing the setting for
+	 *            enabling/disabling the feature.
+	 * @param execPathString
+	 *            The preference constant describing the setting for the
+	 *            executable path.
+	 * @param wokringCopyDetectionString
+	 *            The preference constant describing the setting for
+	 *            enabling/disabling the working copy detection.
+	 */
+	private void createTortoiseFieldEditors(final String name, final String execName, final String enabledString,
+			final String execPathString, final String wokringCopyDetectionString) {
+		FieldEditor dependentFieldEditor;
+		ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
+		BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(enabledString, "Enable Tortoise " + name,
+				getFieldEditorParent());
+		addField(featureEnabledEditor);
+
+		this.controlMapping.put(featureEnabledEditor, dependentFields);
+
+		FileFieldEditor fileFieldEditor = new FileFieldEditor(execPathString, "Path to " + execName,
+				getFieldEditorParent());
+		fileFieldEditor.setFileExtensions(new String[] { execName });
+		addField(fileFieldEditor);
+		dependentFields.add(fileFieldEditor);
+
+		dependentFieldEditor = new BooleanFieldEditor(wokringCopyDetectionString,
+				"Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
+		addField(dependentFieldEditor);
+		dependentFields.add(dependentFieldEditor);
+	}
 }

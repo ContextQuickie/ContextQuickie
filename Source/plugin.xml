@@ -2168,6 +2168,15 @@
                </command>
             </menu>
          </menuContribution>
+         <menuContribution
+               allPopups="false"
+               locationURI="popup:org.eclipse.ui.popup.any?after=group.close">
+            <command
+                  commandId="ContextQuickie.commands.Compare"
+                  label="test"
+                  style="push">
+            </command>
+         </menuContribution>
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
