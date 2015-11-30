@@ -9,7 +9,7 @@
       ws="win32">
 
    <description url="https://github.com/ContextQuickie/ContextQuickie/">
-      An eclipse add-on which extens the context menu for accessing various windows tools
+      An eclipse add-on that extends the context menu for accessing various Windows tools
    </description>
 
    <copyright url="https://github.com/ContextQuickie/ContextQuickie/">
