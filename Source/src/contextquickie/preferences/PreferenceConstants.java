@@ -38,6 +38,11 @@ public class PreferenceConstants {
 	public static final String P_TORTOISE_SVN_PATH = "TortoiseSVNPath";
 	
 	/**
+	 * Configuration item for the path to the Tortoise SVN merge executable.
+	 */
+	public static final String P_TORTOISE_SVN_MERGE_PATH = "TortoiseSVNMergePath";
+	
+	/**
 	 * Configuration item which indicates if a working copy detection is performed or not.
 	 */
 	public static final String P_TORTOISE_SVN_WORKING_COPY_DETECTION = "TortoiseSVNWorkingCopyDetection";
@@ -51,6 +56,11 @@ public class PreferenceConstants {
 	 * Configuration item for the path to the Tortoise Git executable.
 	 */
 	public static final String P_TORTOISE_GIT_PATH = "TortoiseGitPath";
+	
+	/**
+	 * Configuration item for the path to the Tortoise Git merge executable.
+	 */
+	public static final String P_TORTOISE_GIT_MERGE_PATH = "TortoiseGitMergePath";
 	
 	/**
 	 * Configuration item which indicates if a working copy detection is performed or not.

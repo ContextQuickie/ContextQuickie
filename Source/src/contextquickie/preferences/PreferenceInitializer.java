@@ -38,21 +38,49 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION, false);
 
 		// Try to retrieve the path to the Tortoise SVN executable.
-		String tortoiseSVNPath = Registry.ReadKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN", "ProcPath");
-		if (tortoiseSVNPath == null) {
-			tortoiseSVNPath = "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe";
-		}
-		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_PATH, tortoiseSVNPath);
+		this.getStoreConfigurationItemFromRegistry(
+				store,
+				"HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN", 
+				"ProcPath",
+				"C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
+				PreferenceConstants.P_TORTOISE_SVN_PATH);
+		
+		// Try to retrieve the path to the Tortoise SVN merge executable.
+		this.getStoreConfigurationItemFromRegistry(
+				store,
+				"HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN", 
+				"TMergePath",
+				"C:\\Program Files\\TortoiseSVN\\bin\\TortoiseMerge.exe",
+				PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH);
 		
 		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_ENABLED, false);
 		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION, false);
 		
+		// Try to retrieve the path to the Tortoise GIT executable.
+		this.getStoreConfigurationItemFromRegistry(
+				store,
+				"HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit", 
+				"ProcPath",
+				"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe",
+				PreferenceConstants.P_TORTOISE_GIT_PATH);
+		
+		// Try to retrieve the path to the Tortoise GIT merge executable.
+		this.getStoreConfigurationItemFromRegistry(
+				store,
+				"HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit", 
+				"TMergePath",
+				"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe",
+				PreferenceConstants.P_TORTOISE_GIT_MERGE_PATH);
+
+	}
+	
+	private void getStoreConfigurationItemFromRegistry(final IPreferenceStore store, final String registryLocation, final String registryKey, final String defaultValue, final String configurationItem) {
 		// Try to retrieve the path to the Tortoise SVN executable.
-		String tortoiseGitPath = Registry.ReadKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit", "ProcPath");
-		if (tortoiseGitPath == null) {
-			tortoiseGitPath = "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe";
+		String registryValue = Registry.ReadKey(registryLocation, registryKey);
+		if (registryValue == null) {
+			registryValue = defaultValue;
 		}
-		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_PATH, tortoiseGitPath);
+		store.setDefault(configurationItem, registryValue);
 	}
 
 }
