@@ -37,7 +37,7 @@ public class CompareToRight extends AbstractHandler {
 
 		IResource rightResource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
 		if (rightResource != null) {
-			BeyondCompare.Compare(savedLeft, rightResource.getLocation().toString());
+			BeyondCompare.compare(savedLeft, rightResource.getLocation().toString());
 		}
 		return null;
 	}

@@ -91,18 +91,6 @@
                         <count
                               value="2">
                         </count>
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or></iterate>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
@@ -120,24 +108,20 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <with
-                        variable="activeMenuSelection">
-                     <and>
+                  <and>
+                     <with
+                           variable="activeMenuSelection">
                         <count
                               value="1">
                         </count>
-                        <test
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
-                        <iterate
-                              ifEmpty="true"
-                              operator="or">
-                           <adapt
-                                 type="org.eclipse.core.resources.IFile">
-                           </adapt>
-                        </iterate>
-                     </and>
-                  </with>
+                     </with>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFilePossible">
+                     </test>
+                  </and>
                </visibleWhen>
             </command>
             <command
@@ -147,29 +131,20 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <with
-                        variable="activeMenuSelection">
-                     <and>
+                  <and>
+                     <with
+                           variable="activeMenuSelection">
                         <count
                               value="1">
                         </count>
-                        <test
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
-                        <iterate
-                              ifEmpty="true"
-                              operator="or">
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
-                     </and>
-                  </with>
+                     </with>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFolderPossible">
+                     </test>
+                  </and>
                </visibleWhen>
             </command>
             <dynamic
@@ -177,32 +152,20 @@
                   id="ContextQuickie.CompareToRightDynamic">
                <visibleWhen
                      checkEnabled="false">
-                  <with
-                        variable="activeMenuSelection">
-                     <and>
+                  <and>
+                     <with
+                           variable="activeMenuSelection">
                         <count
                               value="1">
                         </count>
-                        <iterate
-                              ifEmpty="true"
-                              operator="or">
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
-                        <test
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
-                     </and>
-                  </with>
+                     </with>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible">
+                     </test>
+                  </and>
                </visibleWhen>
             </dynamic>
             <separator
@@ -217,30 +180,20 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
                      <with
                            variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
                         <not>
                            <count
                                  value="0">
                            </count>
                         </not>
                      </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
                   </and>
                </visibleWhen>
                <parameter
@@ -260,30 +213,20 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
                      <with
                            variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
                         <not>
                            <count
                                  value="0">
                            </count>
                         </not>
                      </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
                   </and>
                </visibleWhen>
                <parameter
@@ -298,6 +241,25 @@
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <with
+                           variable="activeMenuSelection">
+                        <not>
+                           <count
+                                 value="0">
+                           </count>
+                        </not>
+                     </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
+                  </and>
+               </visibleWhen>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menucompare.png"
@@ -692,35 +654,6 @@
                         value="about">
                   </parameter>
                </command>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
-                     <with
-                           variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                  </and>
-               </visibleWhen>
             </menu>
             <separator
                   name="SeparatorTortoiseSVNTortoiseGit"
@@ -734,30 +667,20 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
                      <with
                            variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
                         <not>
                            <count
                                  value="0">
                            </count>
                         </not>
                      </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
                   </and>
                </visibleWhen>
                <parameter
@@ -777,30 +700,20 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
                      <with
                            variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
                         <not>
                            <count
                                  value="0">
                            </count>
                         </not>
                      </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
                   </and>
                </visibleWhen>
                <parameter
@@ -815,6 +728,25 @@
             <menu
                   icon="icons/TortoiseGit/tsvnmenufolder.png"
                   label="TortoiseGit">
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <with
+                           variable="activeMenuSelection">
+                        <not>
+                           <count
+                                 value="0">
+                           </count>
+                        </not>
+                     </with>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
+                     </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoisePossible">
+                     </test>
+                  </and>
+               </visibleWhen>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
                      icon="icons/TortoiseGit/pull1.png"
@@ -944,35 +876,6 @@
                         value="true">
                   </parameter>
                </command>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
-                     <with
-                           variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IProject">
-                              </adapt>
-                           </or>
-                        </iterate>
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                  </and>
-               </visibleWhen>
                <separator
                      name="SeparatorTortoiseGit1"
                      visible="true">
@@ -2168,15 +2071,6 @@
                </command>
             </menu>
          </menuContribution>
-         <menuContribution
-               allPopups="false"
-               locationURI="popup:org.eclipse.ui.popup.any?after=group.close">
-            <command
-                  commandId="ContextQuickie.commands.Compare"
-                  label="test"
-                  style="push">
-            </command>
-         </menuContribution>
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
@@ -2206,6 +2100,34 @@
             id="contextquickie.propertyHandlers.TortoiseGitEnabled"
             namespace="contextquickie.propertyHandlers"
             properties="TortoiseGitEnabled"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.tortoise.TortoisePossible"
+            id="contextquickie.propertyHandlers.TortoisePossible"
+            namespace="contextquickie.propertyHandlers"
+            properties="TortoisePossible"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.SelectLeftFilePossible"
+            id="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFilePossible"
+            namespace="contextquickie.propertyHandlers.BeyondCompare"
+            properties="SelectLeftFilePossible"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.SelectLeftFolderPossible"
+            id="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFolderPossible"
+            namespace="contextquickie.propertyHandlers.BeyondCompare"
+            properties="SelectLeftFolderPossible"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.CompareToRightPossible"
+            id="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+            namespace="contextquickie.propertyHandlers.BeyondCompare"
+            properties="CompareToRightPossible"
             type="java.lang.Object">
       </propertyTester>
    </extension>

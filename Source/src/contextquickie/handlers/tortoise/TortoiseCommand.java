@@ -65,20 +65,31 @@ public abstract class TortoiseCommand extends AbstractHandler {
 			if (requiresPath == true) {
 				TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
 				if (selection.isEmpty() == false) {
-					@SuppressWarnings("rawtypes")
-					Iterator iterator = selection.iterator();
-					String pathArgument = "";
+					Iterator<?> iterator = selection.iterator();
+					List<String> currentResources = new ArrayList<String>();
 					while (iterator.hasNext()) {
 						Object selectedItem = iterator.next();
 						if (selectedItem instanceof IAdaptable) {
 							IAdaptable adaptable = (IAdaptable) selectedItem;
 							IResource resource = adaptable.getAdapter(IResource.class);
-							pathArgument += resource.getLocation();
-							if (iterator.hasNext()) {
-								pathArgument += "*";
+							if (resource != null) {
+								String resoureString = resource.getLocation().toString();
+								if (currentResources.contains(resoureString) == false) { // Avoids duplicate entries
+									currentResources.add(resoureString);	
+								}
 							}
 						}
 					}
+					
+					String pathArgument = "";
+					Iterator<String> resourcesIterator = currentResources.iterator();
+					while (resourcesIterator.hasNext()) {
+						pathArgument += resourcesIterator.next();
+						if (resourcesIterator.hasNext()) {
+							pathArgument += "*";
+						}
+					}
+					
 					arguments.add("/path:" + StringUtil.QuoteString(pathArgument));
 				}
 			}

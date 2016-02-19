@@ -115,7 +115,7 @@ public class BeyondCompare {
 	 * @param right
 	 *            The path of the right side for comparison.
 	 */
-	public static void Compare(String left, String right) {
+	public static void compare(String left, String right) {
 		String command = Activator.getDefault().getPreferenceStore()
 				.getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 		

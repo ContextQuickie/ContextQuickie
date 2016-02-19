@@ -32,7 +32,7 @@ public class Compare extends AbstractHandler {
 		IResource leftResource = adapterManager.getAdapter(paths[0], IResource.class);
 		IResource rightResource = adapterManager.getAdapter(paths[1], IResource.class);
 		if ((leftResource != null) && (rightResource != null)) {
-			BeyondCompare.Compare(leftResource.getLocation().toString(), rightResource.getLocation().toString());
+			BeyondCompare.compare(leftResource.getLocation().toString(), rightResource.getLocation().toString());
 		}
 
 		return null;
