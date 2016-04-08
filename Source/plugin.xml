@@ -73,6 +73,16 @@
                optional="true">
          </commandParameter>
       </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSVNMergeCommand"
+            id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
+            name="TortoiseSVNMergeCommand">
+      </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
+            id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
+            name="TortoiseGitMergeCommand">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -602,13 +612,9 @@
                   </parameter>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
                      icon="icons/TortoiseSVN/menupatch.png"
                      label="Apply patch...">
-                  <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
-                        value="true">
-                  </parameter>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
@@ -1906,7 +1912,7 @@
                   </parameter>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
                      icon="icons/TortoiseGit/menupatch.png"
                      label="Apply Patch Serial..."
                      style="push">
@@ -1939,14 +1945,6 @@
                         </with>
                      </and>
                   </visibleWhen>
-                  <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
-                        value="importpatch">
-                  </parameter>
-                  <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
-                        value="true">
-                  </parameter>
                </command>
                <separator
                      name="SeparatorTortoiseGit9"

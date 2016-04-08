@@ -15,28 +15,28 @@ import org.eclipse.core.runtime.Platform;
  */
 public class TortoisePossible extends PropertyTester {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
-	 * java.lang.String, java.lang.Object[], java.lang.Object)
-	 */
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		IAdapterManager adapterManager = Platform.getAdapterManager();
-		if (adapterManager != null) {
-			List<?> selection = (List<?>) receiver;
-			if (selection != null) {
-				for (Object selectedItem : selection) {
-					IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
-					if (resource != null) {
-						return true;
-					}
-				}
-			}
-		}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
+   * java.lang.String, java.lang.Object[], java.lang.Object)
+   */
+  @Override
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+    IAdapterManager adapterManager = Platform.getAdapterManager();
+    if (adapterManager != null) {
+      List<?> selection = (List<?>) receiver;
+      if (selection != null) {
+        for (Object selectedItem : selection) {
+          IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
+          if (resource != null) {
+            return true;
+          }
+        }
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
 }
