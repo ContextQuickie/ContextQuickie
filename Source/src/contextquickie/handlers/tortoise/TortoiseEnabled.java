@@ -2,13 +2,15 @@ package contextquickie.handlers.tortoise;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.List;
-
+import java.util.Collection;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.TextSelection;
+
 import contextquickie.Activator;
+import contextquickie.tools.WorkbenchUtil;
 
 /**
  * @author ContextQuickie
@@ -30,12 +32,16 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
       // afterwards
       addinEnabled = false;
 
-      List<?> selection = (List<?>) receiver;
+      Collection<?> selection = (Collection<?>) receiver;
       for (Object selectedItem : selection) {
+        IResource resource = null;
         if (selectedItem instanceof IAdaptable) {
           IAdaptable adaptable = (IAdaptable) selectedItem;
-          IResource resource = adaptable.getAdapter(IResource.class);
-
+          resource = adaptable.getAdapter(IResource.class);
+        } else if (selectedItem instanceof TextSelection) {
+          resource = WorkbenchUtil.getCurrentDocument();
+        }
+        if (resource != null) {
           // Get directory of currently selected item
           File currentDirectory = null;
           if ((resource.getType() == IResource.FOLDER) || (resource.getType() == IResource.PROJECT)) {
@@ -70,8 +76,8 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
   }
 
   /**
-   * @return The name of the preference indicating whether the add-in is
-   *         active or not.
+   * @return The name of the preference indicating whether the add-in is active
+   *         or not.
    */
   protected abstract String getPluginEnabledPreferenceName();
 

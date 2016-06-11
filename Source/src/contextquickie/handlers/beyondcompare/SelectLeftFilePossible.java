@@ -11,14 +11,14 @@ import org.eclipse.core.resources.IResource;
  */
 public class SelectLeftFilePossible extends PropertyTester {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
-	 * java.lang.String, java.lang.Object[], java.lang.Object)
-	 */
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		return SelectedResourceTester.test(receiver, property, args, expectedValue, IResource.FILE);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
+   * java.lang.String, java.lang.Object[], java.lang.Object)
+   */
+  @Override
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+    return SelectedResourceTester.test(receiver, property, args, expectedValue, IResource.FILE);
+  }
 }

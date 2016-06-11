@@ -8,6 +8,10 @@ import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import contextquickie.tools.WorkbenchUtil;
+
+import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
 
 /**
@@ -20,29 +24,34 @@ import org.eclipse.jface.viewers.TreeSelection;
  */
 public class SelectLeftSide extends AbstractHandler {
 
-	/**
-	 * the command has been executed, so extract extract the needed information
-	 * from the application context.
-	 */
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+  /**
+   * the command has been executed, so extract extract the needed information
+   * from the application context.
+   */
+  public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-
-		BeyondCompare bc = new BeyondCompare();
-		IAdapterManager adapterManager = Platform.getAdapterManager();
-		IResource resource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
-		if (resource != null) {
-			int resourceType = resource.getType();
-			if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
-				bc.setSavedLeft(resource.getLocation().toString());
-				bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-				bc.writeRegistry();
-			} else if (resourceType == IResource.FILE) {
-				bc.setSavedLeft(resource.getLocation().toString());
-				bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-				bc.writeRegistry();
-			}
-		}
-		return null;
-	}
+    ISelection selection = HandlerUtil.getCurrentSelection(event);
+    IResource resource = null;
+    if (selection instanceof TreeSelection) {
+      IAdapterManager adapterManager = Platform.getAdapterManager();
+      TreeSelection treeSelection = (TreeSelection) selection;
+      resource = adapterManager.getAdapter(treeSelection.getFirstElement(), IResource.class);
+    } else if (selection instanceof TextSelection) {
+      resource = WorkbenchUtil.getCurrentDocument();
+    }
+    if (resource != null) {
+      BeyondCompare bc = new BeyondCompare();
+      int resourceType = resource.getType();
+      if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
+        bc.setSavedLeft(resource.getLocation().toString());
+        bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+        bc.writeRegistry();
+      } else if (resourceType == IResource.FILE) {
+        bc.setSavedLeft(resource.getLocation().toString());
+        bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+        bc.writeRegistry();
+      }
+    }
+    return null;
+  }
 }

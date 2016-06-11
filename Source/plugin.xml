@@ -87,7 +87,11 @@
    <extension
          point="org.eclipse.ui.menus">
          <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=group.open">
+               locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+            <separator
+                  name="SeparatorBeforeBeyondCompare"
+                  visible="true">
+            </separator>
             <command
                   commandId="ContextQuickie.commands.Compare"
                   icon="icons/BeyondCompare/Compare.png"
@@ -758,35 +762,6 @@
                      icon="icons/TortoiseGit/pull1.png"
                      label="Pull..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="pull">
@@ -801,35 +776,6 @@
                      icon="icons/TortoiseGit/pull1.png"
                      label="Fetch..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="fetch">
@@ -844,35 +790,6 @@
                      icon="icons/TortoiseGit/Push.png"
                      label="Push..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="push">
@@ -891,35 +808,6 @@
                      icon="icons/TortoiseGit/menucompare.png"
                      label="Diff"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="diff">
@@ -934,35 +822,6 @@
                      icon="icons/TortoiseGit/menucompare.png"
                      label="Diff with previous version"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="diff">
@@ -985,35 +844,6 @@
                      icon="icons/TortoiseGit/menulog.png"
                      label="Show log"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="log">
@@ -1028,35 +858,6 @@
                      icon="icons/TortoiseGit/menulog.png"
                      label="Show Reflog"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="reflog">
@@ -1071,35 +872,6 @@
                      icon="icons/TortoiseGit/menurepobrowse.png"
                      label="Browse References"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="refbrowse">
@@ -1114,35 +886,6 @@
                      icon="icons/TortoiseGit/menudaemon.png"
                      label="Daemon"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="daemon">
@@ -1157,35 +900,6 @@
                      icon="icons/TortoiseGit/menurevisiongraph.png"
                      label="Revision graph"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="revisiongraph">
@@ -1200,35 +914,6 @@
                      icon="icons/TortoiseGit/menurepobrowse.png"
                      label="Repo-browser"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="repobrowser">
@@ -1243,35 +928,6 @@
                      icon="icons/TortoiseGit/menushowchanged.png"
                      label="Check for modifications"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="repostatus">
@@ -1286,35 +942,6 @@
                      icon="icons/TortoiseGit/menurebase.png"
                      label="Rebase..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="rebase">
@@ -1329,35 +956,6 @@
                      icon="icons/TortoiseGit/menucommit.png"
                      label="Stash Save"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="stashsave">
@@ -1376,35 +974,6 @@
                      icon="icons/TortoiseGit/menubisect.png"
                      label="Bisect start"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="bisect">
@@ -1427,35 +996,6 @@
                      icon="icons/TortoiseGit/menuresolve.png"
                      label="Resolve..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="resolve">
@@ -1470,35 +1010,6 @@
                      icon="icons/TortoiseGit/menurevert.png"
                      label="Revert..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="revert">
@@ -1513,35 +1024,6 @@
                      icon="icons/TortoiseGit/menucleanup.png"
                      label="Clean up..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="cleanup">
@@ -1560,35 +1042,6 @@
                      icon="icons/TortoiseGit/menuswitch.png"
                      label="Switch/Checkout..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="switch">
@@ -1603,35 +1056,6 @@
                      icon="icons/TortoiseGit/menumerge.png"
                      label="Merge..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="merge">
@@ -1646,35 +1070,6 @@
                      icon="icons/TortoiseGit/menucopy.png"
                      label="Create Branch..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="branch">
@@ -1689,35 +1084,6 @@
                      icon="icons/TortoiseGit/tag.png"
                      label="Create Tag..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="tag">
@@ -1732,35 +1098,6 @@
                      icon="icons/TortoiseGit/menuexport.png"
                      label="Export..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="export">
@@ -1779,35 +1116,6 @@
                      icon="icons/TortoiseGit/menuadd.png"
                      label="Add..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="add">
@@ -1826,35 +1134,6 @@
                      icon="icons/TortoiseGit/menuadd.png"
                      label="Submodule Add..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="subadd">
@@ -1873,35 +1152,6 @@
                      icon="icons/TortoiseGit/menudiff.png"
                      label="Create Patch Serial..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="formatpatch">
@@ -1916,35 +1166,6 @@
                      icon="icons/TortoiseGit/menupatch.png"
                      label="Apply Patch Serial..."
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit9"
@@ -1955,35 +1176,6 @@
                      icon="icons/TortoiseGit/menuabout.png"
                      label="About"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="about">
@@ -1994,35 +1186,6 @@
                      icon="icons/TortoiseGit/menuhelp.png"
                      label="Help"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="help">
@@ -2033,35 +1196,6 @@
                      icon="icons/TortoiseGit/menusettings.png"
                      label="Settings"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                        </test>
-                        <with
-                              variable="activeMenuSelection">
-                           <iterate>
-                              <or>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFile">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IFolder">
-                                 </adapt>
-                                 <adapt
-                                       type="org.eclipse.core.resources.IProject">
-                                 </adapt>
-                              </or>
-                           </iterate>
-                           <not>
-                              <count
-                                    value="0">
-                              </count>
-                           </not>
-                        </with>
-                     </and>
-                  </visibleWhen>
                   <parameter
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="settings">
