@@ -17,7 +17,10 @@ public class WorkbenchUtil {
     IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
     IWorkbenchPage page = window.getActivePage();
     IEditorPart editor = page.getActiveEditor();
-    IEditorInput input = editor.getEditorInput();
-    return adapterManager.getAdapter(input, IResource.class);
+    if (editor != null) {
+      IEditorInput input = editor.getEditorInput();
+      return adapterManager.getAdapter(input, IResource.class);
+    }
+    return null;
   }
 }

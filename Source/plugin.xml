@@ -102,15 +102,31 @@
                   <with
                         variable="activeMenuSelection">
                      <and>
-                        <count
-                              value="2">
-                        </count>
                         <test
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
-                        <test
-                              property="contextquickie.propertyHandlers.CompareAllowed">
-                        </test>
+                        <count
+                              value="2">
+                        </count>
+                        <or>
+                           <iterate>
+                              <test
+                                    property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                    value="IResource.FILE">
+                              </test></iterate>
+                           <iterate>
+                              <or>
+                                 <test
+                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                       value="IResource.FOLDER">
+                                 </test>
+                                 <test
+                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                       value="IResource.PROJECT">
+                                 </test>
+                              </or>
+                           </iterate>
+                        </or>
                      </and>
                   </with>
                </visibleWhen>
@@ -123,18 +139,29 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <count
-                              value="1">
-                        </count>
-                     </with>
                      <test
+                           args="activeFocusControl"
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <test
-                           property="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFilePossible">
-                     </test>
+                     <with
+                           variable="activeMenuSelection">
+                        <or>
+                           <instanceof
+                                 value="org.eclipse.jface.text.TextSelection">
+                           </instanceof>
+                           <and>
+                              <count
+                                    value="1">
+                              </count>
+                              <iterate>
+                                 <test
+                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                       value="IResource.FILE">
+                                 </test>
+                              </iterate>
+                           </and>
+                        </or>
+                     </with>
                   </and>
                </visibleWhen>
             </command>
@@ -146,18 +173,29 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <count
-                              value="1">
-                        </count>
-                     </with>
                      <test
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <test
-                           property="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFolderPossible">
-                     </test>
+                     <with
+                           variable="activeMenuSelection">
+                        <and>
+                           <count
+                                 value="1">
+                           </count>
+                           <iterate>
+                              <or>
+                                 <test
+                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                       value="IResource.FOLDER">
+                                 </test>
+                                 <test
+                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                       value="IResource.PROJECT">
+                                 </test>
+                              </or>
+                           </iterate>
+                        </and>
+                     </with>
                   </and>
                </visibleWhen>
             </command>
@@ -167,18 +205,59 @@
                <visibleWhen
                      checkEnabled="false">
                   <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <count
-                              value="1">
-                        </count>
-                     </with>
                      <test
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <test
-                           property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible">
-                     </test>
+                     <with
+                           variable="activeMenuSelection">
+                        <or>
+                           <and>
+                              <count
+                                    value="1">
+                              </count>
+                              <or>
+                                 <and>
+                                    <iterate>
+                                       <test
+                                             property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                             value="IResource.FILE">
+                                       </test>
+                                    </iterate>
+                                    <test
+                                          property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+                                          value="File">
+                                    </test></and>
+                                 <and>
+                                    <iterate>
+                                       <or>
+                                          <test
+                                                property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                                value="IResource.FOLDER">
+                                          </test>
+                                          <test
+                                                property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                                                value="IResource.PROJECT">
+                                          </test>
+                                       </or>
+                                    </iterate>
+                                    <test
+                                          property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+                                          value="Directory">
+                                    </test>
+                                 </and>
+                              </or>
+                           </and>
+                           <and>
+                              <instanceof
+                                    value="org.eclipse.jface.text.TextSelection">
+                              </instanceof>
+                              <test
+                                    property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+                                    value="File">
+                              </test>
+                           </and>
+                        </or>
+                     </with>
                   </and>
                </visibleWhen>
             </dynamic>
@@ -1207,13 +1286,6 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="contextquickie.handlers.beyondcompare.CompareAllowed"
-            id="contextquickie.propertyHandlers.CompareAllowed"
-            namespace="contextquickie.propertyHandlers"
-            properties="CompareAllowed"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
             class="contextquickie.handlers.beyondcompare.BeyondCompareEnabled"
             id="contextquickie.propertyHandlers.BeyondCompareEnabled"
             namespace="contextquickie.propertyHandlers"
@@ -1242,24 +1314,17 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="contextquickie.handlers.beyondcompare.SelectLeftFilePossible"
-            id="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFilePossible"
-            namespace="contextquickie.propertyHandlers.BeyondCompare"
-            properties="SelectLeftFilePossible"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.beyondcompare.SelectLeftFolderPossible"
-            id="contextquickie.propertyHandlers.BeyondCompare.SelectLeftFolderPossible"
-            namespace="contextquickie.propertyHandlers.BeyondCompare"
-            properties="SelectLeftFolderPossible"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
             class="contextquickie.handlers.beyondcompare.CompareToRightPossible"
             id="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
             namespace="contextquickie.propertyHandlers.BeyondCompare"
             properties="CompareToRightPossible"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+            id="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+            namespace="contextquickie.handlers.beyondcompare"
+            properties="SelectedResourceTester"
             type="java.lang.Object">
       </propertyTester>
    </extension>

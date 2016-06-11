@@ -6,8 +6,12 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
+
+import contextquickie.tools.WorkbenchUtil;
 
 /**
  * @author ContextQuickie
@@ -19,26 +23,40 @@ import org.eclipse.ui.handlers.HandlerUtil;
  */
 public class CompareToRight extends AbstractHandler {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
-	 * ExecutionEvent)
-	 */
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		BeyondCompare bc = new BeyondCompare();
-		bc.readRegistry();
-		String savedLeft = bc.getSavedLeft();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
+   * ExecutionEvent)
+   */
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-		IAdapterManager adapterManager = Platform.getAdapterManager();
+    ISelection selection = HandlerUtil.getCurrentSelection(event);
+    if (selection != null) {
 
-		IResource rightResource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
-		if (rightResource != null) {
-			BeyondCompare.compare(savedLeft, rightResource.getLocation().toString());
-		}
-		return null;
-	}
+      IAdapterManager adapterManager = Platform.getAdapterManager();
+      if ((selection != null) && (selection.isEmpty() == false)) {
+        Object receiver = null;
+        // Context menu has been opened in a tree view
+        if (selection instanceof IStructuredSelection) {
+          IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+          receiver = structuredSelection.getFirstElement();
+        } else if (selection instanceof TextSelection) {
+          receiver = WorkbenchUtil.getCurrentDocument();
+        }
+
+        IResource rightResource;
+        rightResource = adapterManager.getAdapter(receiver, IResource.class);
+        if (rightResource != null) {
+          BeyondCompare bc = new BeyondCompare();
+          bc.readRegistry();
+          String savedLeft = bc.getSavedLeft();
+          BeyondCompare.compare(savedLeft, rightResource.getLocation().toString());
+        }
+      }
+    }
+
+    return null;
+  }
 }

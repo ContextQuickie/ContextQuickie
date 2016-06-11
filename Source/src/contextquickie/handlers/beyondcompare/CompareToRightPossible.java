@@ -1,7 +1,6 @@
 package contextquickie.handlers.beyondcompare;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.core.resources.IResource;
 
 /**
  * @author ContextQuickie
@@ -11,21 +10,22 @@ import org.eclipse.core.resources.IResource;
  * 
  */
 public class CompareToRightPossible extends PropertyTester {
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[], java.lang.Object)
-	 */
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		BeyondCompare bc = new BeyondCompare();
-		bc.readRegistry();
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
+   * java.lang.String, java.lang.Object[], java.lang.Object)
+   */
+  @Override
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+    if (expectedValue != null) {
+      BeyondCompare bc = new BeyondCompare();
+      bc.readRegistry();
+      if (bc.getSavedLeftType() == BeyondCompareSavedLeft.valueOf(expectedValue.toString())) {
+        return true;
+      }
+    }
 
-		if (bc.getSavedLeftType() == BeyondCompareSavedLeft.File) {
-			return SelectedResourceTester.test(receiver, property, args, expectedValue, IResource.FILE);
-		} else if (bc.getSavedLeftType() == BeyondCompareSavedLeft.Directory) {
-			return SelectedResourceTester.test(receiver, property, args, expectedValue,
-					IResource.FOLDER | IResource.PROJECT);
-		} else {
-			return false;
-		}
-	}
+    return false;
+  }
 }
