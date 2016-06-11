@@ -36,6 +36,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_ENABLED, false);
 		store.setDefault(PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION, false);
+    store.setDefault(PreferenceConstants.P_TORTOISE_SVN_USE_MENU_CONFIG_FROM_REGISTRY, false);
 
 		// Try to retrieve the path to the Tortoise SVN executable.
 		this.getStoreConfigurationItemFromRegistry(
@@ -44,7 +45,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"ProcPath",
 				"C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
 				PreferenceConstants.P_TORTOISE_SVN_PATH);
-		
+
 		// Try to retrieve the path to the Tortoise SVN merge executable.
 		this.getStoreConfigurationItemFromRegistry(
 				store,
@@ -52,10 +53,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"TMergePath",
 				"C:\\Program Files\\TortoiseSVN\\bin\\TortoiseMerge.exe",
 				PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH);
-		
+
 		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_ENABLED, false);
 		store.setDefault(PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION, false);
-		
+    store.setDefault(PreferenceConstants.P_TORTOISE_SVN_USE_MENU_CONFIG_FROM_REGISTRY, false);
+
 		// Try to retrieve the path to the Tortoise GIT executable.
 		this.getStoreConfigurationItemFromRegistry(
 				store,
@@ -63,7 +65,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"ProcPath",
 				"C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe",
 				PreferenceConstants.P_TORTOISE_GIT_PATH);
-		
+
 		// Try to retrieve the path to the Tortoise GIT merge executable.
 		this.getStoreConfigurationItemFromRegistry(
 				store,

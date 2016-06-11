@@ -47,6 +47,11 @@ public class PreferenceConstants {
 	 */
 	public static final String P_TORTOISE_SVN_WORKING_COPY_DETECTION = "TortoiseSVNWorkingCopyDetection";
 
+  /**
+   * Configuration item which indicates if the context menu configuration is taken from the registry.
+   */
+  public static final String P_TORTOISE_SVN_USE_MENU_CONFIG_FROM_REGISTRY = "TortoiseSVNUseMenuConfigFromRegistry";
+
 	/**
 	 * Configuration item for enabling/disabling Tortoise Git.
 	 */
@@ -66,4 +71,9 @@ public class PreferenceConstants {
 	 * Configuration item which indicates if a working copy detection is performed or not.
 	 */
 	public static final String P_TORTOISE_GIT_WORKING_COPY_DETECTION = "TortoiseGitWorkingCopyDetection";
+
+  /**
+   * Configuration item which indicates if the context menu configuration is taken from the registry.
+   */
+  public static final String P_TORTOISE_GIT_USE_MENU_CONFIG_FROM_REGISTRY = "TortoiseGitUseMenuConfigFromRegistry";
 }

@@ -52,10 +52,12 @@ public class ContextQuickie extends FieldEditorPreferencePage
 	public void createFieldEditors() {
 		this.createBeyondCompareFieldEditors();
 		this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.P_TORTOISE_SVN_ENABLED,
-				PreferenceConstants.P_TORTOISE_SVN_PATH, PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH, PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION);
+				PreferenceConstants.P_TORTOISE_SVN_PATH, PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH, PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION,
+				PreferenceConstants.P_TORTOISE_SVN_USE_MENU_CONFIG_FROM_REGISTRY);
 
 		this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.P_TORTOISE_GIT_ENABLED,
-				PreferenceConstants.P_TORTOISE_GIT_PATH, PreferenceConstants.P_TORTOISE_GIT_MERGE_PATH, PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION);
+				PreferenceConstants.P_TORTOISE_GIT_PATH, PreferenceConstants.P_TORTOISE_GIT_MERGE_PATH, PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION,
+        PreferenceConstants.P_TORTOISE_GIT_USE_MENU_CONFIG_FROM_REGISTRY);
 
 		for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet()) {
 			featureEnabledEditor.setPropertyChangeListener(this);
@@ -154,7 +156,7 @@ public class ContextQuickie extends FieldEditorPreferencePage
 	 * @param execName
 	 *            The name of the executable of the feature.
 	 * @param mergeExecName
-	 *            The name of the merge executable of the feature.           
+	 *            The name of the merge executable of the feature.
 	 * @param enabledString
 	 *            The preference constant describing the setting for
 	 *            enabling/disabling the feature.
@@ -169,7 +171,7 @@ public class ContextQuickie extends FieldEditorPreferencePage
 	 *            enabling/disabling the working copy detection.
 	 */
 	private void createTortoiseFieldEditors(final String name, final String execName, final String mergeExeName, final String enabledString,
-			final String execPathString, final String mergeExecPathString, final String wokringCopyDetectionString) {
+			final String execPathString, final String mergeExecPathString, final String wokringCopyDetectionString, final String useRegistryMenuSettingsString) {
 		
 		FileFieldEditor fileFieldEditor;
 		FieldEditor dependentFieldEditor;
@@ -199,5 +201,11 @@ public class ContextQuickie extends FieldEditorPreferencePage
 				"Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
 		addField(dependentFieldEditor);
 		dependentFields.add(dependentFieldEditor);
+/* TODO: in progress
+    dependentFieldEditor = new BooleanFieldEditor(useRegistryMenuSettingsString,
+        "Show Tortoise " + name + " menu strucutre based on registry settings", getFieldEditorParent());
+    addField(dependentFieldEditor);
+    dependentFields.add(dependentFieldEditor);
+	*/
 	}
 }
