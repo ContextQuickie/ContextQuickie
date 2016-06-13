@@ -103,6 +103,7 @@
                         variable="activeMenuSelection">
                      <and>
                         <test
+                              args="activeMenuEditorInput"
                               property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                         </test>
                         <count
@@ -143,25 +144,14 @@
                            args="activeFocusControl"
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <with
-                           variable="activeMenuSelection">
-                        <or>
-                           <instanceof
-                                 value="org.eclipse.jface.text.TextSelection">
-                           </instanceof>
-                           <and>
-                              <count
-                                    value="1">
-                              </count>
-                              <iterate>
-                                 <test
-                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                       value="IResource.FILE">
-                                 </test>
-                              </iterate>
-                           </and>
-                        </or>
-                     </with>
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -176,26 +166,9 @@
                      <test
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <with
-                           variable="activeMenuSelection">
-                        <and>
-                           <count
-                                 value="1">
-                           </count>
-                           <iterate>
-                              <or>
-                                 <test
-                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                       value="IResource.FOLDER">
-                                 </test>
-                                 <test
-                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                       value="IResource.PROJECT">
-                                 </test>
-                              </or>
-                           </iterate>
-                        </and>
-                     </with>
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesOneFolder">
+                     </reference>
                   </and>
                </visibleWhen>
             </command>
@@ -208,56 +181,30 @@
                      <test
                            property="contextquickie.propertyHandlers.BeyondCompareEnabled">
                      </test>
-                     <with
-                           variable="activeMenuSelection">
-                        <or>
-                           <and>
-                              <count
-                                    value="1">
-                              </count>
-                              <or>
-                                 <and>
-                                    <iterate>
-                                       <test
-                                             property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                             value="IResource.FILE">
-                                       </test>
-                                    </iterate>
-                                    <test
-                                          property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-                                          value="File">
-                                    </test></and>
-                                 <and>
-                                    <iterate>
-                                       <or>
-                                          <test
-                                                property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                                value="IResource.FOLDER">
-                                          </test>
-                                          <test
-                                                property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                                value="IResource.PROJECT">
-                                          </test>
-                                       </or>
-                                    </iterate>
-                                    <test
-                                          property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-                                          value="Directory">
-                                    </test>
-                                 </and>
-                              </or>
-                           </and>
-                           <and>
-                              <instanceof
-                                    value="org.eclipse.jface.text.TextSelection">
-                              </instanceof>
-                              <test
-                                    property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-                                    value="File">
-                              </test>
-                           </and>
-                        </or>
-                     </with>
+                     <or>
+                        <and>
+                           <or>
+                              <reference
+                                    definitionId="ActivePartIsEditorAndProvidesFile">
+                              </reference>
+                              <reference
+                                    definitionId="ActiveMenuSelectionProvidesOneFile">
+                              </reference>
+                           </or>
+                           <test
+                                 property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+                                 value="File">
+                           </test>
+                        </and>
+                        <and>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
+                           </reference>
+                           <test
+                                 property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
+                                 value="Directory">
+                           </test>
+                        </and></or>
                   </and>
                </visibleWhen>
             </dynamic>
@@ -272,22 +219,9 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseSvnPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -305,22 +239,9 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseSvnPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -336,22 +257,9 @@
                   label="Tortoise SVN">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseSvnPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
@@ -755,22 +663,9 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseGitPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
@@ -788,22 +683,9 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseGitPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
@@ -819,22 +701,9 @@
                   label="TortoiseGit">
                <visibleWhen
                      checkEnabled="false">
-                  <and>
-                     <with
-                           variable="activeMenuSelection">
-                        <not>
-                           <count
-                                 value="0">
-                           </count>
-                        </not>
-                     </with>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-                     </test>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoisePossible">
-                     </test>
-                  </and>
+                  <reference
+                        definitionId="TortoiseGitPossibleAtCurrentItem">
+                  </reference>
                </visibleWhen>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -1327,5 +1196,141 @@
             properties="SelectedResourceTester"
             type="java.lang.Object">
       </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="ActivePartIsEditorAndProvidesFile">
+         <and>
+            <with
+                  variable="activeMenuSelection">
+               <instanceof
+                     value="org.eclipse.jface.text.TextSelection">
+               </instanceof>
+            </with>
+            <with
+                  variable="activePartId">
+               <not>
+                  <or>
+                     <equals
+                           value="org.eclipse.ui.console.ConsoleView">
+                     </equals>
+                  </or>
+               </not>
+            </with>
+         </and>
+      </definition>
+      <definition
+            id="ActiveMenuSelectionProvidesOneFile">
+         <with
+               variable="activeMenuSelection">
+            <count
+                  value="1">
+            </count>
+            <iterate>
+               <test
+                     property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                     value="IResource.FILE">
+               </test>
+            </iterate>
+         </with>
+      </definition>
+      <definition
+            id="ActiveMenuSelectionProvidesOneFolder">
+         <with
+               variable="activeMenuSelection">
+            <and>
+               <count
+                     value="1">
+               </count>
+               <iterate>
+                  <or>
+                     <test
+                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                           value="IResource.FOLDER">
+                     </test>
+                     <test
+                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                           value="IResource.PROJECT">
+                     </test>
+                  </or>
+               </iterate>
+            </and>
+         </with>
+      </definition>
+      <definition
+            id="TortoiseSvnPossibleAtCurrentItem">
+         <and>
+            <test
+                  property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
+            </test>
+            <or>
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <or>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FILE">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FOLDER">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.PROJECT">
+                        </test>
+                     </or>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="ActivePartIsEditorAndProvidesFile">
+               </reference>
+            </or>
+            <test
+                  property="contextquickie.propertyHandlers.TortoisePossible">
+            </test>
+         </and>
+      </definition>
+      <definition
+            id="TortoiseGitPossibleAtCurrentItem">
+         <and>
+            <test
+                  property="contextquickie.propertyHandlers.TortoiseGitEnabled">
+            </test>
+            <or>
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <or>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FILE">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FOLDER">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.PROJECT">
+                        </test>
+                     </or>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="ActivePartIsEditorAndProvidesFile">
+               </reference>
+            </or>
+            <test
+                  property="contextquickie.propertyHandlers.TortoisePossible">
+            </test>
+         </and>
+      </definition>
    </extension>
 </plugin>
