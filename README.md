@@ -15,6 +15,19 @@ The wiki provides further information:
 * [Installation](https://github.com/ContextQuickie/ContextQuickie/wiki/Installation)
 * [Usage] (https://github.com/ContextQuickie/ContextQuickie/wiki/Usage)
 
-Screenshot:
+# Screenshots
+Compare two files selected in a navigator view with Beyond Compare:
 
-![Screenshot](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/Screenshot.png)
+![Compare two files selected in a navigator view with Beyond Compare](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/CompareTwoFiles.png)
+
+Tortoise Git and Beyond Compare in a navigator view:
+
+![Tortoise Git and Beyond Compare in a navigator view](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/TortoiseGitAndBeyondCompare.png)
+
+Tortoise SVN and Beyond Compare in a navigator view:
+
+![Tortoise SVN and Beyond Compare in a navigator view](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/TortoiseSvnAndBeyondCompare.png)
+
+Tortoise SVN and Beyond Compare in an editor view:
+
+![Tortoise SVN and Beyond Compare in an editor view](https://github.com/ContextQuickie/ContextQuickie/blob/master/Images/TortoiseSvnAndBeyondCompareInEditor.png)
