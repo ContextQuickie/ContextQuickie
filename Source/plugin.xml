@@ -387,22 +387,17 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
-                     <with
-                           variable="activeMenuSelection">
-                        <count
-                              value="1">
-                        </count>
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFolder">
-                              </adapt>
-                           </or>
-                        </iterate>
-                     </with>
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                        </reference>
+                     </or>
                   </visibleWhen>
                </command>
                <command
@@ -544,19 +539,14 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
-                     <with
-                           variable="activeMenuSelection">
-                        <iterate>
-                           <or>
-                              <adapt
-                                    type="org.eclipse.core.resources.IFile">
-                              </adapt>
-                           </or>
-                        </iterate>
-                        <count
-                              value="1">
-                        </count>
-                     </with>
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
                   </visibleWhen>
                </command>
                <command
