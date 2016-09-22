@@ -83,6 +83,11 @@
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
             name="TortoiseGitMergeCommand">
       </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
+            id="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
+            name="TortoiseSvnDiffTwoFilesCommand">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -283,6 +288,17 @@
                               definitionId="ActiveMenuSelectionProvidesOneFile">
                         </reference>
                      </or>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
+                     icon="icons/TortoiseSVN/menucompare.png"
+                     label="Diff">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
+                     </reference>
                   </visibleWhen>
                </command>
                <command
@@ -1343,6 +1359,21 @@
                   property="contextquickie.propertyHandlers.TortoisePossible">
             </test>
          </and>
+      </definition>
+      <definition
+            id="ActiveMenuSelectionProvidesTwoFiles">
+         <with
+               variable="activeMenuSelection">
+            <count
+                  value="2">
+            </count>
+            <iterate>
+               <test
+                     property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                     value="IResource.FILE">
+               </test>
+            </iterate>
+         </with>
       </definition>
    </extension>
 </plugin>
