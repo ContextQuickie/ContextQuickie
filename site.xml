@@ -33,5 +33,8 @@
    <feature url="features/ContextQuickie_0.6.1.201606221732.jar" id="ContextQuickie" version="0.6.1.201606221732" os="win32" ws="win32">
       <category name="ContextQuickie"/>
    </feature>
+   <feature url="features/ContextQuickie_0.6.2.201609221956.jar" id="ContextQuickie" version="0.6.2.201609221956" os="win32" ws="win32">
+      <category name="ContextQuickie"/>
+   </feature>
    <category-def name="ContextQuickie" label="Context Quickie"/>
 </site>
