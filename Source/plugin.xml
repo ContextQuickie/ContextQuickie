@@ -273,6 +273,17 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
@@ -754,6 +765,17 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
