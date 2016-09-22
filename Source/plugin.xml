@@ -88,6 +88,11 @@
             id="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
             name="TortoiseSvnDiffTwoFilesCommand">
       </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffTwoFilesCommand"
+            id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
+            name="TortoiseGitDiffTwoFilesCommand">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -791,6 +796,18 @@
                               definitionId="ActiveMenuSelectionProvidesOneFile">
                         </reference>
                      </or>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
+                     icon="icons/TortoiseGit/menucompare.png"
+                     label="Diff"
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
+                     </reference>
                   </visibleWhen>
                </command>
                <command
