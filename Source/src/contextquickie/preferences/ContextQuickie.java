@@ -53,8 +53,9 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
   public void createFieldEditors()
   {
     this.createBeyondCompareFieldEditors();
+    this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.TortoiseSvn);
-
+    this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TortoiseGit);
 
     for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet())
@@ -184,6 +185,16 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     addField(featureEnabledEditor);
 
     this.controlMapping.put(featureEnabledEditor, dependentFields);
+    
+    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getScanForLinkedResources(), "Include linked files and folders",
+        getFieldEditorParent());
+    addField(dependentFieldEditor);
+    dependentFields.add(dependentFieldEditor);
+    
+    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getWorkingCopyDetection(),
+        "Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
+    addField(dependentFieldEditor);
+    dependentFields.add(dependentFieldEditor);
 
     /* Parameter for setting the main executable */
     fileFieldEditor = new ConditionalFileFieldEditor(preferenceConstants.getPath(), "Path to " + execName, getFieldEditorParent(),
@@ -200,16 +211,6 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     { mergeExeName });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
-
-    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getWorkingCopyDetection(),
-        "Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
-    addField(dependentFieldEditor);
-    dependentFields.add(dependentFieldEditor);
-
-    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getScanForLinkedResources(), "Include linked files and folders",
-        getFieldEditorParent());
-    addField(dependentFieldEditor);
-    dependentFields.add(dependentFieldEditor);
 
     /*
      * TODO: in progress dependentFieldEditor = new
