@@ -13,10 +13,9 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseGitCommand extends TortoiseCommand
 {
-  @Override
-  protected String getCommandPathName()
+  public TortoiseGitCommand()
   {
-    return PreferenceConstants.P_TORTOISE_GIT_PATH;
+    super(PreferenceConstants.TortoiseGit);
   }
 
   @Override

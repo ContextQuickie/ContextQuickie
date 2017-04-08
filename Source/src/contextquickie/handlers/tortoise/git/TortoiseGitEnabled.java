@@ -10,19 +10,10 @@ import contextquickie.preferences.PreferenceConstants;
  *         settings. It is used to show/hide the Tortoise Git context menu
  *         entries.
  */
-public class TortoiseGitEnabled extends TortoiseEnabled {
-	@Override
-	protected String getPluginEnabledPreferenceName() {
-		return PreferenceConstants.P_TORTOISE_GIT_ENABLED;
-	}
-
-	@Override
-	protected String getPluginWorkingCopyDetectionPreferenceName() {
-		return PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION;
-	}
-
-	@Override
-	protected String getWokringCopyFolderName() {
-		return ".git";
-	}
+public class TortoiseGitEnabled extends TortoiseEnabled
+{
+  public TortoiseGitEnabled()
+  {
+    super(PreferenceConstants.TortoiseGit);
+  }
 }

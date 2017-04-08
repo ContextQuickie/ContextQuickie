@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import contextquickie.Activator;
+import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
 import contextquickie.tools.WorkbenchUtil;
@@ -32,11 +33,10 @@ import contextquickie.tools.WorkbenchUtil;
  */
 public abstract class TortoiseCommand extends AbstractHandler
 {
-
   /**
-   * @return The preference name of the command path.
+   * The preferences of the current instance.
    */
-  protected abstract String getCommandPathName();
+  private TortoisePreferenceConstants _preferences;
 
   /**
    * @return The name of the "command Id" parameter.
@@ -62,6 +62,11 @@ public abstract class TortoiseCommand extends AbstractHandler
    *         found.
    */
   protected abstract String getWorkingCopyRoot(IPath path);
+
+  protected TortoiseCommand(TortoisePreferenceConstants preferences)
+  {
+    this._preferences = preferences;
+  }
 
   /*
    * (non-Javadoc)
@@ -89,12 +94,19 @@ public abstract class TortoiseCommand extends AbstractHandler
       arguments.add(parameter1);
     }
 
-    String command = Activator.getDefault().getPreferenceStore().getString(this.getCommandPathName());
+    String command = Activator.getDefault().getPreferenceStore().getString(this._preferences.getPath());
     ProcessWrapper.executeCommand(command, arguments);
 
     return null;
   }
 
+  /**
+   * Gets all selected resources of the specified execution event.
+   * 
+   * @param event
+   *          The used execution event.
+   * @return A collection containing all selected resources.
+   */
   private Collection<String> getSelectedResources(ExecutionEvent event)
   {
     HashSet<String> currentResources = new HashSet<String>();
@@ -109,25 +121,16 @@ public abstract class TortoiseCommand extends AbstractHandler
           IAdaptable adaptable = (IAdaptable) selectedItem;
           currentResources.add(getResourcePath(adaptable));
 
-          IContainer container = adaptable.getAdapter(IContainer.class);
-          String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
-          if ((container != null) && (workingCopyRoot != null))
+          if (Activator.getDefault().getPreferenceStore().getBoolean(this._preferences.getScanForLinkedResources()))
           {
-            try
+            IContainer container = adaptable.getAdapter(IContainer.class);
+            if (container != null)
             {
-              for (IResource member : container.members())
+              String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+              if (workingCopyRoot != null)
               {
-                String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
-                if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
-                {
-                  currentResources.add(this.getResourcePath(member));
-                }
+                currentResources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
               }
-            }
-            catch (CoreException e)
-            {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
             }
           }
         }
@@ -139,6 +142,47 @@ public abstract class TortoiseCommand extends AbstractHandler
     }
 
     return currentResources;
+  }
+
+  /**
+   * Gets all linked resources in the specified container which have the same
+   * working copy root.
+   * 
+   * @param container
+   *          The container which is used for searching for linked resources.
+   * @param workingCopyRoot
+   *          The root path to the working copy folder of the container.
+   * @return
+   */
+  private HashSet<String> getLinkedResourcesOfContainer(IContainer container, String workingCopyRoot)
+  {
+    HashSet<String> linkedResources = new HashSet<String>();
+    try
+    {
+      for (IResource member : container.members())
+      {
+        String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
+        if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
+        {
+          linkedResources.add(this.getResourcePath(member));
+
+          // Check if there are also linked resourced within the linked resource
+          // container
+          IAdaptable adaptable = (IAdaptable) member;
+          container = adaptable.getAdapter(IContainer.class);
+          if (container != null)
+          {
+            this.getLinkedResourcesOfContainer(container, workingCopyRoot);
+          }
+        }
+      }
+    }
+    catch (CoreException e)
+    {
+      e.printStackTrace();
+    }
+
+    return linkedResources;
   }
 
   private String getResourcePath(IAdaptable adaptable)

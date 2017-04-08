@@ -11,6 +11,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextSelection;
 
 import contextquickie.Activator;
+import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.WorkbenchUtil;
 
 /**
@@ -22,12 +23,22 @@ import contextquickie.tools.WorkbenchUtil;
  */
 public abstract class TortoiseEnabled extends PropertyTester implements FileFilter
 {
+  /**
+   * The preferences of the current instance.
+   */
+  private TortoisePreferenceConstants _preferences;
+
+  protected TortoiseEnabled(TortoisePreferenceConstants preferences)
+  {
+    this._preferences = preferences;
+  }
+
   @Override
   public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
   {
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    boolean addinEnabled = preferenceStore.getBoolean(this.getPluginEnabledPreferenceName());
-    boolean detectWorkingCopy = preferenceStore.getBoolean(this.getPluginWorkingCopyDetectionPreferenceName());
+    boolean addinEnabled = preferenceStore.getBoolean(this._preferences.getEnabled());
+    boolean detectWorkingCopy = preferenceStore.getBoolean(this._preferences.getWorkingCopyDetection());
 
     if ((addinEnabled == true) && (detectWorkingCopy == false))
     {
@@ -58,7 +69,7 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
             {
               return true;
             }
-          }         
+          }
         }
       }
     }
@@ -69,7 +80,7 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
   @Override
   public boolean accept(File dir)
   {
-    return (dir.isDirectory() && this.getWokringCopyFolderName().equals(dir.getName()));
+    return (dir.isDirectory() && this._preferences.getWokringCopyFolderName().equals(dir.getName()));
   }
 
   /**
@@ -100,21 +111,4 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
 
     return null;
   }
-
-  /**
-   * @return The name of the preference indicating whether the add-in is active
-   *         or not.
-   */
-  protected abstract String getPluginEnabledPreferenceName();
-
-  /**
-   * @return The name of the preference indicating whether a working copy
-   *         detection shall be performed or not.
-   */
-  protected abstract String getPluginWorkingCopyDetectionPreferenceName();
-
-  /**
-   * @return The name of the folder indicating a working copy.
-   */
-  protected abstract String getWokringCopyFolderName();
 }

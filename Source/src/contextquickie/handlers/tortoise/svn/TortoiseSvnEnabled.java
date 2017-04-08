@@ -12,22 +12,8 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseSvnEnabled extends TortoiseEnabled
 {
-  @Override
-  protected String getPluginEnabledPreferenceName()
+  public TortoiseSvnEnabled()
   {
-    return PreferenceConstants.P_TORTOISE_SVN_ENABLED;
+    super(PreferenceConstants.TortoiseSvn);
   }
-
-  @Override
-  protected String getPluginWorkingCopyDetectionPreferenceName()
-  {
-    return PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION;
-  }
-
-  @Override
-  protected String getWokringCopyFolderName()
-  {
-    return ".svn";
-  }
-
 }

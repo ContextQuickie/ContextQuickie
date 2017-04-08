@@ -13,10 +13,9 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseSvnCommand extends TortoiseCommand
 {
-  @Override
-  protected String getCommandPathName()
+  public TortoiseSvnCommand()
   {
-    return PreferenceConstants.P_TORTOISE_SVN_PATH;
+    super(PreferenceConstants.TortoiseSvn);
   }
 
   @Override

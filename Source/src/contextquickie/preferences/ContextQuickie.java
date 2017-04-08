@@ -26,9 +26,8 @@ import org.eclipse.ui.IWorkbench;
  * preferences can be accessed directly via the preference store.
  */
 
-public class ContextQuickie extends FieldEditorPreferencePage
-    implements IWorkbenchPreferencePage, IPropertyChangeListener {
-
+public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbenchPreferencePage, IPropertyChangeListener
+{
   /**
    * Map which stores the relation between a field editor for enabling/disabling
    * a feature and the child controls for setting up the feature. The key is the
@@ -40,7 +39,8 @@ public class ContextQuickie extends FieldEditorPreferencePage
   /**
    * Constructor
    */
-  public ContextQuickie() {
+  public ContextQuickie()
+  {
     super(GRID);
     setPreferenceStore(Activator.getDefault().getPreferenceStore());
   }
@@ -50,22 +50,19 @@ public class ContextQuickie extends FieldEditorPreferencePage
    * blocks needed to manipulate various types of preferences. Each field editor
    * knows how to save and restore itself.
    */
-  public void createFieldEditors() {
+  public void createFieldEditors()
+  {
     this.createBeyondCompareFieldEditors();
-    this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe",
-        PreferenceConstants.P_TORTOISE_SVN_ENABLED, PreferenceConstants.P_TORTOISE_SVN_PATH,
-        PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH, PreferenceConstants.P_TORTOISE_SVN_WORKING_COPY_DETECTION,
-        PreferenceConstants.P_TORTOISE_SVN_USE_MENU_CONFIG_FROM_REGISTRY);
+    this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.TortoiseSvn);
 
-    this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe",
-        PreferenceConstants.P_TORTOISE_GIT_ENABLED, PreferenceConstants.P_TORTOISE_GIT_PATH,
-        PreferenceConstants.P_TORTOISE_GIT_MERGE_PATH, PreferenceConstants.P_TORTOISE_GIT_WORKING_COPY_DETECTION,
-        PreferenceConstants.P_TORTOISE_GIT_USE_MENU_CONFIG_FROM_REGISTRY);
+    this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TortoiseGit);
 
-    for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet()) {
+    for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet())
+    {
       featureEnabledEditor.setPropertyChangeListener(this);
       boolean featureEnabled = this.getPreferenceStore().getBoolean(featureEnabledEditor.getPreferenceName());
-      for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
+      for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor))
+      {
         fieldEditor.setPropertyChangeListener(this);
         fieldEditor.setEnabled(featureEnabled, getFieldEditorParent());
       }
@@ -78,7 +75,8 @@ public class ContextQuickie extends FieldEditorPreferencePage
    * @see
    * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
    */
-  public void init(IWorkbench workbench) {
+  public void init(IWorkbench workbench)
+  {
   }
 
   /*
@@ -89,13 +87,17 @@ public class ContextQuickie extends FieldEditorPreferencePage
    * .eclipse.jface.util.PropertyChangeEvent)
    */
   @Override
-  public void propertyChange(PropertyChangeEvent event) {
+  public void propertyChange(PropertyChangeEvent event)
+  {
     Object eventSource = event.getSource();
-    if (eventSource instanceof BooleanFieldEditor) {
+    if (eventSource instanceof BooleanFieldEditor)
+    {
       final BooleanFieldEditor featureEnabledEditor = (BooleanFieldEditor) eventSource;
-      if (this.controlMapping.keySet().contains(featureEnabledEditor)) {
+      if (this.controlMapping.keySet().contains(featureEnabledEditor))
+      {
         boolean featureEnabled = featureEnabledEditor.getBooleanValue();
-        for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
+        for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor))
+        {
           fieldEditor.setEnabled(featureEnabled, getFieldEditorParent());
         }
       }
@@ -107,12 +109,17 @@ public class ContextQuickie extends FieldEditorPreferencePage
   }
 
   @Override
-  public boolean isValid() {
+  public boolean isValid()
+  {
     // Search for enabled features wit invalid configuration options
-    for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet()) {
-      if (featureEnabledEditor.getBooleanValue() == true) {
-        for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor)) {
-          if (fieldEditor.isValid() == false) {
+    for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet())
+    {
+      if (featureEnabledEditor.getBooleanValue() == true)
+      {
+        for (FieldEditor fieldEditor : this.controlMapping.get(featureEnabledEditor))
+        {
+          if (fieldEditor.isValid() == false)
+          {
             return false;
           }
         }
@@ -125,28 +132,30 @@ public class ContextQuickie extends FieldEditorPreferencePage
   /**
    * Creates the field editors for Beyond Compare.
    */
-  private void createBeyondCompareFieldEditors() {
+  private void createBeyondCompareFieldEditors()
+  {
     ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
 
-    BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_ENABLED,
-        "Enable Beyond Compare", getFieldEditorParent());
+    BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_ENABLED, "Enable Beyond Compare",
+        getFieldEditorParent());
     addField(featureEnabledEditor);
 
     this.controlMapping.put(featureEnabledEditor, dependentFields);
 
-    FileFieldEditor fileFieldEditor = new ConditionalFileFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_PATH,
-        "Path to BCompare.exe", getFieldEditorParent(), featureEnabledEditor);
-    fileFieldEditor.setFileExtensions(new String[] { "BCompare.exe" });
+    FileFieldEditor fileFieldEditor = new ConditionalFileFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_PATH, "Path to BCompare.exe",
+        getFieldEditorParent(), featureEnabledEditor);
+    fileFieldEditor.setFileExtensions(new String[]
+    { "BCompare.exe" });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
 
-    StringFieldEditor shellRegPathEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH,
-        "Left Side Registy Path", getFieldEditorParent());
+    StringFieldEditor shellRegPathEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH, "Left Side Registy Path",
+        getFieldEditorParent());
     addField(shellRegPathEditor);
     dependentFields.add(shellRegPathEditor);
 
-    StringFieldEditor shellRegKeyEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY,
-        "Left Side Registy Key", getFieldEditorParent());
+    StringFieldEditor shellRegKeyEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "Left Side Registy Key",
+        getFieldEditorParent());
     addField(shellRegKeyEditor);
     dependentFields.add(shellRegKeyEditor);
   }
@@ -160,48 +169,45 @@ public class ContextQuickie extends FieldEditorPreferencePage
    *          The name of the executable of the feature.
    * @param mergeExecName
    *          The name of the merge executable of the feature.
-   * @param enabledString
-   *          The preference constant describing the setting for
-   *          enabling/disabling the feature.
-   * @param execPathString
-   *          The preference constant describing the setting for the executable
-   *          path.
-   * @param mergeExecPathString
-   *          The preference constant describing the setting for the merge
-   *          executable path.
-   * @param wokringCopyDetectionString
-   *          The preference constant describing the setting for
-   *          enabling/disabling the working copy detection.
+   * @param preferenceConstants
+   *          The preference constants describing the settings.
    */
   private void createTortoiseFieldEditors(final String name, final String execName, final String mergeExeName,
-      final String enabledString, final String execPathString, final String mergeExecPathString,
-      final String wokringCopyDetectionString, final String useRegistryMenuSettingsString) {
+      final TortoisePreferenceConstants preferenceConstants)
+  {
     FileFieldEditor fileFieldEditor;
     FieldEditor dependentFieldEditor;
 
     ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
-    BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(enabledString, "Enable Tortoise " + name,
+    BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(preferenceConstants.getEnabled(), "Enable Tortoise " + name,
         getFieldEditorParent());
     addField(featureEnabledEditor);
 
     this.controlMapping.put(featureEnabledEditor, dependentFields);
 
     /* Parameter for setting the main executable */
-    fileFieldEditor = new ConditionalFileFieldEditor(execPathString, "Path to " + execName, getFieldEditorParent(),
+    fileFieldEditor = new ConditionalFileFieldEditor(preferenceConstants.getPath(), "Path to " + execName, getFieldEditorParent(),
         featureEnabledEditor);
-    fileFieldEditor.setFileExtensions(new String[] { execName });
+    fileFieldEditor.setFileExtensions(new String[]
+    { execName });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
 
     /* Parameter for setting the merge executable */
-    fileFieldEditor = new ConditionalFileFieldEditor(mergeExecPathString, "Path to " + mergeExeName,
-        getFieldEditorParent(), featureEnabledEditor);
-    fileFieldEditor.setFileExtensions(new String[] { mergeExeName });
+    fileFieldEditor = new ConditionalFileFieldEditor(preferenceConstants.getMergePath(), "Path to " + mergeExeName, getFieldEditorParent(),
+        featureEnabledEditor);
+    fileFieldEditor.setFileExtensions(new String[]
+    { mergeExeName });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
 
-    dependentFieldEditor = new BooleanFieldEditor(wokringCopyDetectionString,
+    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getWorkingCopyDetection(),
         "Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
+    addField(dependentFieldEditor);
+    dependentFields.add(dependentFieldEditor);
+
+    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getScanForLinkedResources(), "Include linked files and folders",
+        getFieldEditorParent());
     addField(dependentFieldEditor);
     dependentFields.add(dependentFieldEditor);
 

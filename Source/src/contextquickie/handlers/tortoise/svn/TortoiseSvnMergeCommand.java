@@ -8,6 +8,6 @@ public class TortoiseSvnMergeCommand extends TortoiseMergeCommand
   @Override
   protected String getMergeCommandPathName()
   {
-    return PreferenceConstants.P_TORTOISE_SVN_MERGE_PATH;
+    return PreferenceConstants.TortoiseSvn.getMergePath();
   }
 }

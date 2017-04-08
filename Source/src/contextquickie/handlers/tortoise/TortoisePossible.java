@@ -13,7 +13,8 @@ import contextquickie.tools.WorkbenchUtil;
  *         Class which checks if a Tortoise context menu is possible with the
  *         current selection.
  */
-public class TortoisePossible extends PropertyTester {
+public class TortoisePossible extends PropertyTester
+{
 
   /*
    * (non-Javadoc)
@@ -22,25 +23,33 @@ public class TortoisePossible extends PropertyTester {
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  {
     IAdapterManager adapterManager = Platform.getAdapterManager();
-    if (adapterManager != null) {
-      if (receiver instanceof Collection<?>) {
+    if (adapterManager != null)
+    {
+      if (receiver instanceof Collection<?>)
+      {
         Collection<?> selection = (Collection<?>) receiver;
-        if (selection != null) {
-          for (Object selectedItem : selection) {
+        if (selection != null)
+        {
+          for (Object selectedItem : selection)
+          {
             IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
-            if (resource != null) {
+            if (resource != null)
+            {
               return true;
             }
-            
-            if (WorkbenchUtil.getCurrentDocument() != null) {
+
+            if (WorkbenchUtil.getCurrentDocument() != null)
+            {
               return true;
             }
           }
         }
       }
-      else if (receiver instanceof Collection<?>){
+      else if (receiver instanceof Collection<?>)
+      {
         return true;
       }
     }
