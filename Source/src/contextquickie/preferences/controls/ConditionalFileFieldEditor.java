@@ -4,7 +4,8 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
-public class ConditionalFileFieldEditor extends FileFieldEditor {
+public class ConditionalFileFieldEditor extends FileFieldEditor
+{
 
   private BooleanFieldEditor activationControl;
 
@@ -20,17 +21,21 @@ public class ConditionalFileFieldEditor extends FileFieldEditor {
    * @param parentActivationControl
    *          The parent control to enable/disable this feature.
    */
-  public ConditionalFileFieldEditor(String name, String labelText, Composite parent,
-      BooleanFieldEditor parentActivationControl) {
+  public ConditionalFileFieldEditor(String name, String labelText, Composite parent, BooleanFieldEditor parentActivationControl)
+  {
     super(name, labelText, false, parent);
     this.activationControl = parentActivationControl;
   }
 
   @Override
-  protected boolean checkState() {
-    if (this.activationControl.getBooleanValue() == false) {
+  protected boolean checkState()
+  {
+    if (this.activationControl.getBooleanValue() == false)
+    {
       return true;
-    } else {
+    }
+    else
+    {
       return super.checkState();
     }
   }

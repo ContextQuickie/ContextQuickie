@@ -9,7 +9,8 @@ import org.eclipse.core.expressions.PropertyTester;
  *         with the current selection.
  * 
  */
-public class CompareToRightPossible extends PropertyTester {
+public class CompareToRightPossible extends PropertyTester
+{
   /*
    * (non-Javadoc)
    * 
@@ -17,11 +18,14 @@ public class CompareToRightPossible extends PropertyTester {
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-    if (expectedValue != null) {
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  {
+    if (expectedValue != null)
+    {
       BeyondCompare bc = new BeyondCompare();
       bc.readRegistry();
-      if (bc.getSavedLeftType() == BeyondCompareSavedLeft.valueOf(expectedValue.toString())) {
+      if (bc.getSavedLeftType() == BeyondCompareSavedLeft.valueOf(expectedValue.toString()))
+      {
         return true;
       }
     }

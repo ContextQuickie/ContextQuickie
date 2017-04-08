@@ -13,46 +13,60 @@ import org.eclipse.jface.viewers.TreeSelection;
  *         Beyond Compare.
  *
  */
-public class CompareAllowed extends PropertyTester {
+public class CompareAllowed extends PropertyTester
+{
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
-	 * java.lang.String, java.lang.Object[], java.lang.Object)
-	 */
-	@Override
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		TreeSelection selection = (TreeSelection) receiver;
-		Object[] paths = selection.toArray();
-		IAdapterManager adapterManager = Platform.getAdapterManager();
-		if (adapterManager != null) {
-			int leftType = IResource.NONE;
-			
-			IResource left = adapterManager.getAdapter(paths[0], IResource.class);
-			if (left != null) {
-				leftType = left.getType();
-			}
-			
-			int rightType = IResource.NONE;
-			IResource right = adapterManager.getAdapter(paths[1], IResource.class);
-			if (right != null) {
-				rightType = right.getType();
-			}
-			
-			if ((leftType == IResource.FILE) && (rightType == IResource.FILE)) {
-				return true;
-			} else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER)) {
-				return true;
-			} else if ((leftType == IResource.FOLDER) && (rightType == IResource.PROJECT)) {
-				return true;
-			} else if ((leftType == IResource.PROJECT) && (rightType == IResource.FOLDER)) {
-				return true;
-			} else if ((leftType == IResource.PROJECT) && (rightType == IResource.PROJECT)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object,
+   * java.lang.String, java.lang.Object[], java.lang.Object)
+   */
+  @Override
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  {
+    TreeSelection selection = (TreeSelection) receiver;
+    Object[] paths = selection.toArray();
+    IAdapterManager adapterManager = Platform.getAdapterManager();
+    if (adapterManager != null)
+    {
+      int leftType = IResource.NONE;
+
+      IResource left = adapterManager.getAdapter(paths[0], IResource.class);
+      if (left != null)
+      {
+        leftType = left.getType();
+      }
+
+      int rightType = IResource.NONE;
+      IResource right = adapterManager.getAdapter(paths[1], IResource.class);
+      if (right != null)
+      {
+        rightType = right.getType();
+      }
+
+      if ((leftType == IResource.FILE) && (rightType == IResource.FILE))
+      {
+        return true;
+      }
+      else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER))
+      {
+        return true;
+      }
+      else if ((leftType == IResource.FOLDER) && (rightType == IResource.PROJECT))
+      {
+        return true;
+      }
+      else if ((leftType == IResource.PROJECT) && (rightType == IResource.FOLDER))
+      {
+        return true;
+      }
+      else if ((leftType == IResource.PROJECT) && (rightType == IResource.PROJECT))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

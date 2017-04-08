@@ -5,10 +5,11 @@ import org.eclipse.swt.widgets.Composite;
 
 public class EmptyFieldEitor extends FieldEditor
 {
-  public EmptyFieldEitor(Composite parent) {
+  public EmptyFieldEitor(Composite parent)
+  {
     super("label", "", parent);
   }
-  
+
   @Override
   protected void adjustForNumColumns(int numColumns)
   {

@@ -22,31 +22,40 @@ import org.eclipse.jface.viewers.TreeSelection;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class SelectLeftSide extends AbstractHandler {
+public class SelectLeftSide extends AbstractHandler
+{
 
   /**
    * the command has been executed, so extract extract the needed information
    * from the application context.
    */
-  public Object execute(ExecutionEvent event) throws ExecutionException {
+  public Object execute(ExecutionEvent event) throws ExecutionException
+  {
 
     ISelection selection = HandlerUtil.getCurrentSelection(event);
     IResource resource = null;
-    if (selection instanceof TreeSelection) {
+    if (selection instanceof TreeSelection)
+    {
       IAdapterManager adapterManager = Platform.getAdapterManager();
       TreeSelection treeSelection = (TreeSelection) selection;
       resource = adapterManager.getAdapter(treeSelection.getFirstElement(), IResource.class);
-    } else if (selection instanceof TextSelection) {
+    }
+    else if (selection instanceof TextSelection)
+    {
       resource = WorkbenchUtil.getCurrentDocument();
     }
-    if (resource != null) {
+    if (resource != null)
+    {
       BeyondCompare bc = new BeyondCompare();
       int resourceType = resource.getType();
-      if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT)) {
+      if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT))
+      {
         bc.setSavedLeft(resource.getLocation().toString());
         bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
         bc.writeRegistry();
-      } else if (resourceType == IResource.FILE) {
+      }
+      else if (resourceType == IResource.FILE)
+      {
         bc.setSavedLeft(resource.getLocation().toString());
         bc.setSavedLeftType(BeyondCompareSavedLeft.File);
         bc.writeRegistry();

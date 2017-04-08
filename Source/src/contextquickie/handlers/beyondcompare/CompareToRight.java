@@ -21,7 +21,8 @@ import contextquickie.tools.WorkbenchUtil;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class CompareToRight extends AbstractHandler {
+public class CompareToRight extends AbstractHandler
+{
 
   /*
    * (non-Javadoc)
@@ -30,25 +31,32 @@ public class CompareToRight extends AbstractHandler {
    * ExecutionEvent)
    */
   @Override
-  public Object execute(ExecutionEvent event) throws ExecutionException {
+  public Object execute(ExecutionEvent event) throws ExecutionException
+  {
 
     ISelection selection = HandlerUtil.getCurrentSelection(event);
-    if (selection != null) {
+    if (selection != null)
+    {
 
       IAdapterManager adapterManager = Platform.getAdapterManager();
-      if ((selection != null) && (selection.isEmpty() == false)) {
+      if ((selection != null) && (selection.isEmpty() == false))
+      {
         Object receiver = null;
         // Context menu has been opened in a tree view
-        if (selection instanceof IStructuredSelection) {
+        if (selection instanceof IStructuredSelection)
+        {
           IStructuredSelection structuredSelection = (IStructuredSelection) selection;
           receiver = structuredSelection.getFirstElement();
-        } else if (selection instanceof TextSelection) {
+        }
+        else if (selection instanceof TextSelection)
+        {
           receiver = WorkbenchUtil.getCurrentDocument();
         }
 
         IResource rightResource;
         rightResource = adapterManager.getAdapter(receiver, IResource.class);
-        if (rightResource != null) {
+        if (rightResource != null)
+        {
           BeyondCompare bc = new BeyondCompare();
           bc.readRegistry();
           String savedLeft = bc.getSavedLeft();

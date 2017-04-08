@@ -12,28 +12,40 @@ import org.eclipse.core.runtime.Platform;
  *         type.
  * 
  */
-public final class SelectedResourceTester extends PropertyTester {
+public final class SelectedResourceTester extends PropertyTester
+{
 
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-    if ((receiver != null) && (expectedValue != null)) {
+  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  {
+    if ((receiver != null) && (expectedValue != null))
+    {
       int expectedType = IResource.NONE;
-      if (expectedValue.toString().toUpperCase().equals("IResource.FILE".toUpperCase())) {
+      if (expectedValue.toString().toUpperCase().equals("IResource.FILE".toUpperCase()))
+      {
         expectedType = IResource.FILE;
-      } else if (expectedValue.toString().toUpperCase().equals("IResource.FOLDER".toUpperCase())) {
+      }
+      else if (expectedValue.toString().toUpperCase().equals("IResource.FOLDER".toUpperCase()))
+      {
         expectedType = IResource.FOLDER;
-      } else if (expectedValue.toString().toUpperCase().equals("IResource.PROJECT".toUpperCase())) {
+      }
+      else if (expectedValue.toString().toUpperCase().equals("IResource.PROJECT".toUpperCase()))
+      {
         expectedType = IResource.PROJECT;
-      } else {
+      }
+      else
+      {
         // Invalid or unknown expected value
         return false;
       }
 
       IAdapterManager adapterManager = Platform.getAdapterManager();
-      if (adapterManager != null) {
+      if (adapterManager != null)
+      {
         // Check if selected item is of expected type
         IResource resource = adapterManager.getAdapter(receiver, IResource.class);
-        if ((resource != null) && ((resource.getType() & expectedType) != IResource.NONE)) {
+        if ((resource != null) && ((resource.getType() & expectedType) != IResource.NONE))
+        {
           return true;
         }
       }
