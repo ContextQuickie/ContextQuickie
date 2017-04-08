@@ -34,7 +34,7 @@
             name="CompareToRight">
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSVNCommand"
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
             id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
             name="TortoiseSVNCommand">
          <commandParameter
@@ -74,7 +74,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSVNMergeCommand"
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
             id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
             name="TortoiseSVNMergeCommand">
       </command>
@@ -1207,7 +1207,7 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="contextquickie.handlers.tortoise.svn.TortoiseSVNEnabled"
+            class="contextquickie.handlers.tortoise.svn.TortoiseSvnEnabled"
             id="contextquickie.propertyHandlers.TortoiseSVNEnabled"
             namespace="contextquickie.propertyHandlers"
             properties="TortoiseSVNEnabled"
