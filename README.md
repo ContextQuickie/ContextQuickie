@@ -13,7 +13,7 @@ Supported Tools:
 
 The wiki provides further information:
 * [Installation](https://github.com/ContextQuickie/ContextQuickie/wiki/Installation)
-* [Usage] (https://github.com/ContextQuickie/ContextQuickie/wiki/Usage)
+* [Usage](https://github.com/ContextQuickie/ContextQuickie/wiki/Usage)
 
 # Screenshots
 Compare two files selected in a navigator view with Beyond Compare:
