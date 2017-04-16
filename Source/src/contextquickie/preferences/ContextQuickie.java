@@ -171,7 +171,8 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
       final TortoisePreferenceConstants preferenceConstants)
   {
     FieldEditor dependentFieldEditor;
-
+    final String showTortoise = "Show Tortoise ";
+    
     final ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
     final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(preferenceConstants.getEnabled(), "Enable Tortoise " + name,
         getFieldEditorParent());
@@ -185,7 +186,12 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     dependentFields.add(dependentFieldEditor);
 
     dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getWorkingCopyDetection(),
-        "Show Tortoise " + name + " only if a working copy has been found", getFieldEditorParent());
+        showTortoise + name + " only if a working copy has been found", getFieldEditorParent());
+    addField(dependentFieldEditor);
+    dependentFields.add(dependentFieldEditor);
+    
+    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getUseMenuConfigFromRegistry(),
+        showTortoise + name + " context menu entries based on settings in registry", getFieldEditorParent());
     addField(dependentFieldEditor);
     dependentFields.add(dependentFieldEditor);
 
@@ -207,13 +213,5 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     { mergeExeName });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
-
-    /*
-     * TODO: in progress dependentFieldEditor = new
-     * BooleanFieldEditor(useRegistryMenuSettingsString, "Show Tortoise " + name
-     * + " menu strucutre based on registry settings", getFieldEditorParent());
-     * addField(dependentFieldEditor);
-     * dependentFields.add(dependentFieldEditor);
-     */
   }
 }
