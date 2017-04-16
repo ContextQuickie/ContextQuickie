@@ -1,9 +1,9 @@
 package contextquickie.preferences;
 
 /**
- * Constant definitions for plug-in preferences
+ * Constant definitions for plug-in preferences.
  */
-public class PreferenceConstants
+public final class PreferenceConstants
 {
   /**
    * Configuration item for enabling/disabling Beyond Compare.
@@ -30,10 +30,17 @@ public class PreferenceConstants
   /**
    * Configuration items for the configuration of Tortoise SVN.
    */
-  public static final TortoisePreferenceConstants TortoiseSvn = new TortoisePreferenceConstants("TortoiseSvn", ".svn");
+  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn");
 
   /**
    * Configuration items for the configuration of Tortoise Git.
    */
-  public static final TortoisePreferenceConstants TortoiseGit = new TortoisePreferenceConstants("TortoiseGit", ".git");
+  public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git");
+  
+  /**
+   * Prevents from creating instances.
+   */
+  private PreferenceConstants()
+  {
+  }
 }

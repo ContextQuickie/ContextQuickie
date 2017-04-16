@@ -10,18 +10,31 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-public class WorkbenchUtil
+/**
+ *  Utility class for accessing workbench data.
+ */
+public final class WorkbenchUtil
 {
+  /**
+   * Prevents from creating instances.
+   */
+  private WorkbenchUtil()
+  {
+  }
+
+  /**
+   * @return The current document of the workbench.
+   */
   public static IResource getCurrentDocument()
   {
-    IAdapterManager adapterManager = Platform.getAdapterManager();
-    IWorkbench wb = PlatformUI.getWorkbench();
-    IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
-    IWorkbenchPage page = window.getActivePage();
-    IEditorPart editor = page.getActiveEditor();
+    final IAdapterManager adapterManager = Platform.getAdapterManager();
+    final IWorkbench wb = PlatformUI.getWorkbench();
+    final IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
+    final IWorkbenchPage page = window.getActivePage();
+    final IEditorPart editor = page.getActiveEditor();
     if (editor != null)
     {
-      IEditorInput input = editor.getEditorInput();
+      final IEditorInput input = editor.getEditorInput();
       return adapterManager.getAdapter(input, IResource.class);
     }
     return null;

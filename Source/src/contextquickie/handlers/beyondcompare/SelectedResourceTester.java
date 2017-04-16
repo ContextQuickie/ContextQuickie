@@ -16,8 +16,9 @@ public final class SelectedResourceTester extends PropertyTester
 {
 
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
+    boolean result = false;
     if ((receiver != null) && (expectedValue != null))
     {
       int expectedType = IResource.NONE;
@@ -39,17 +40,17 @@ public final class SelectedResourceTester extends PropertyTester
         return false;
       }
 
-      IAdapterManager adapterManager = Platform.getAdapterManager();
+      final IAdapterManager adapterManager = Platform.getAdapterManager();
       if (adapterManager != null)
       {
         // Check if selected item is of expected type
-        IResource resource = adapterManager.getAdapter(receiver, IResource.class);
+        final IResource resource = adapterManager.getAdapter(receiver, IResource.class);
         if ((resource != null) && ((resource.getType() & expectedType) != IResource.NONE))
         {
-          return true;
+          result = true;
         }
       }
     }
-    return false;
+    return result;
   }
 }

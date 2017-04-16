@@ -1,9 +1,9 @@
 package contextquickie.handlers.tortoise.svn;
 
-import org.eclipse.core.runtime.IPath;
-
-import contextquickie.handlers.tortoise.TortoiseCommand;
+import contextquickie.handlers.tortoise.AbstractTortoiseCommand;
 import contextquickie.preferences.PreferenceConstants;
+
+import org.eclipse.core.runtime.IPath;
 
 /**
  * @author ContextQuickie
@@ -11,33 +11,36 @@ import contextquickie.preferences.PreferenceConstants;
  *         Class which executes all Tortoise SVN commands based on the passed
  *         parameters.
  */
-public class TortoiseSvnCommand extends TortoiseCommand
+public class TortoiseSvnCommand extends AbstractTortoiseCommand
 {
+  /**
+   * Default constructor.
+   */
   public TortoiseSvnCommand()
   {
-    super(PreferenceConstants.TortoiseSvn);
+    super(PreferenceConstants.TORTOISE_SVN);
   }
 
   @Override
-  protected String getCommandIdName()
+  protected final String getCommandIdName()
   {
     return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID";
   }
 
   @Override
-  protected String getRequiresPathName()
+  protected final String getRequiresPathName()
   {
     return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath";
   }
 
   @Override
-  protected String getParameter1Name()
+  protected final String getParameter1Name()
   {
     return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1";
   }
 
   @Override
-  protected String getWorkingCopyRoot(IPath path)
+  protected final String getWorkingCopyRoot(final IPath path)
   {
     return new TortoiseSvnEnabled().getWorkingCopyRoot(path);
   }

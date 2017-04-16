@@ -9,11 +9,17 @@ import java.util.regex.Pattern;
 /**
  * @author ContextQuickie
  * 
- *         Class for accessing the registry using the "reg" command
+ *         Class for accessing the registry using the "reg" command.
  *
  */
-public class Registry
+public final class Registry
 {
+  /**
+   * Prevents from creating instances.
+   */
+  private Registry()
+  {
+  }
 
   /**
    * Reads a value from the registry.
@@ -24,7 +30,7 @@ public class Registry
    *          The key of the registry entry.
    * @return The read value.
    */
-  public static String ReadKey(String location, String key)
+  public static String readKey(final String location, final String key)
   {
 
     String value = null;
@@ -41,19 +47,21 @@ public class Registry
 
     if (p != null)
     {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+      final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
       String line;
       /**
        * Regular expression for parsing the output of the query " +": One or
        * more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
        * REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)": The queried value
        */
-      Pattern queryPattern = Pattern.compile(" +" + key + " +" + "[A-Z_]+" + " +" + "(.*)" + "$");
+      final String regexOneOrMoreSpaces = " +";
+      final Pattern queryPattern = Pattern.compile(
+          regexOneOrMoreSpaces + key + regexOneOrMoreSpaces + "[A-Z_]+" + regexOneOrMoreSpaces + "(.*)" + "$");
       try
       {
         while ((line = reader.readLine()) != null)
         {
-          Matcher matcher = queryPattern.matcher(line);
+          final Matcher matcher = queryPattern.matcher(line);
           if (matcher.matches())
           {
             value = matcher.group(1);
@@ -79,7 +87,7 @@ public class Registry
    * @param value
    *          The value to write.
    */
-  public static void WriteKey(String location, String key, String value)
+  public static void writeKey(final String location, final String key, final String value)
   {
     ProcessWrapper.executeCommand("reg", "add", location, "/v", key, "/d", value, "/f");
   }

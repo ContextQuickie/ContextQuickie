@@ -1,9 +1,16 @@
 package contextquickie.handlers.tortoise;
 
+import contextquickie.Activator;
+import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ProcessWrapper;
+import contextquickie.tools.StringUtil;
+import contextquickie.tools.WorkbenchUtil;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -17,26 +24,29 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import contextquickie.Activator;
-import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.tools.ProcessWrapper;
-import contextquickie.tools.StringUtil;
-import contextquickie.tools.WorkbenchUtil;
-
 /**
- * @author ContextQuickie
+ * Class which executes all Tortoise commands based on the passed parameters.
  * 
- *         Class which executes all Tortoise commands based on the passed
- *         parameters.
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public abstract class TortoiseCommand extends AbstractHandler
+public abstract class AbstractTortoiseCommand extends AbstractHandler
 {
   /**
    * The preferences of the current instance.
    */
-  private TortoisePreferenceConstants _preferences;
+  private TortoisePreferenceConstants preferences;
+  
+  /**
+   * Default constructor.
+   * 
+   * @param tortoisePreferences
+   *          The preferences which will be used for execution.
+   */
+  protected AbstractTortoiseCommand(final TortoisePreferenceConstants tortoisePreferences)
+  {
+    this.preferences = tortoisePreferences;
+  }
 
   /**
    * @return The name of the "command Id" parameter.
@@ -63,38 +73,27 @@ public abstract class TortoiseCommand extends AbstractHandler
    */
   protected abstract String getWorkingCopyRoot(IPath path);
 
-  protected TortoiseCommand(TortoisePreferenceConstants preferences)
-  {
-    this._preferences = preferences;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
-   * ExecutionEvent)
-   */
   @Override
-  public Object execute(ExecutionEvent event)
+  public final Object execute(final ExecutionEvent event)
   {
-    List<String> arguments = new ArrayList<String>();
+    final List<String> arguments = new ArrayList<String>();
     arguments.add("/command:" + event.getParameter(this.getCommandIdName()));
 
-    String requiresPathString = event.getParameter(this.getRequiresPathName());
-    if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString) == true))
+    final String requiresPathString = event.getParameter(this.getRequiresPathName());
+    if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString)))
     {
-      Collection<String> currentResources = this.getSelectedResources(event);
-      String pathArgument = String.join("*", currentResources);
-      arguments.add("/path:" + StringUtil.QuoteString(pathArgument));
+      final Collection<String> currentResources = this.getSelectedResources(event);
+      final String pathArgument = String.join("*", currentResources);
+      arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
-    String parameter1 = event.getParameter(this.getParameter1Name());
+    final String parameter1 = event.getParameter(this.getParameter1Name());
     if (parameter1 != null)
     {
       arguments.add(parameter1);
     }
 
-    String command = Activator.getDefault().getPreferenceStore().getString(this._preferences.getPath());
+    final String command = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
     ProcessWrapper.executeCommand(command, arguments);
 
     return null;
@@ -107,26 +106,26 @@ public abstract class TortoiseCommand extends AbstractHandler
    *          The used execution event.
    * @return A collection containing all selected resources.
    */
-  private Collection<String> getSelectedResources(ExecutionEvent event)
+  private Collection<String> getSelectedResources(final ExecutionEvent event)
   {
-    HashSet<String> currentResources = new HashSet<String>();
-    ISelection selection = HandlerUtil.getCurrentSelection(event);
+    final Set<String> currentResources = new HashSet<String>();
+    final ISelection selection = HandlerUtil.getCurrentSelection(event);
     if (selection instanceof TreeSelection)
     {
-      TreeSelection treeSelection = (TreeSelection) selection;
+      final TreeSelection treeSelection = (TreeSelection) selection;
       for (Object selectedItem : treeSelection.toList())
       {
         if (selectedItem instanceof IAdaptable)
         {
-          IAdaptable adaptable = (IAdaptable) selectedItem;
+          final IAdaptable adaptable = (IAdaptable) selectedItem;
           currentResources.add(getResourcePath(adaptable));
 
-          if (Activator.getDefault().getPreferenceStore().getBoolean(this._preferences.getScanForLinkedResources()))
+          if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
           {
-            IContainer container = adaptable.getAdapter(IContainer.class);
+            final IContainer container = adaptable.getAdapter(IContainer.class);
             if (container != null)
             {
-              String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+              final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
               if (workingCopyRoot != null)
               {
                 currentResources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
@@ -152,27 +151,28 @@ public abstract class TortoiseCommand extends AbstractHandler
    *          The container which is used for searching for linked resources.
    * @param workingCopyRoot
    *          The root path to the working copy folder of the container.
-   * @return
+   * @return A HashSet containing all linked resources of the specified
+   *         container.
    */
-  private HashSet<String> getLinkedResourcesOfContainer(IContainer container, String workingCopyRoot)
+  private Set<String> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
   {
-    HashSet<String> linkedResources = new HashSet<String>();
+    final Set<String> linkedResources = new HashSet<String>();
     try
     {
       for (IResource member : container.members())
       {
-        String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
+        final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
         if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
         {
           linkedResources.add(this.getResourcePath(member));
 
           // Check if there are also linked resourced within the linked resource
           // container
-          IAdaptable adaptable = (IAdaptable) member;
-          container = adaptable.getAdapter(IContainer.class);
-          if (container != null)
+          final IAdaptable adaptable = (IAdaptable) member;
+          final IContainer childContainer = adaptable.getAdapter(IContainer.class);
+          if (childContainer != null)
           {
-            this.getLinkedResourcesOfContainer(container, workingCopyRoot);
+            this.getLinkedResourcesOfContainer(childContainer, workingCopyRoot);
           }
         }
       }
@@ -185,9 +185,16 @@ public abstract class TortoiseCommand extends AbstractHandler
     return linkedResources;
   }
 
-  private String getResourcePath(IAdaptable adaptable)
+  /**
+   * Gets the resource path from the specified IAdaptable instance.
+   * 
+   * @param adaptable
+   *          The instance which will be evaluated.
+   * @return The resource path or null if the path cannot be determined.
+   */
+  private String getResourcePath(final IAdaptable adaptable)
   {
-    IResource resource = adaptable.getAdapter(IResource.class);
+    final IResource resource = adaptable.getAdapter(IResource.class);
     if (resource != null)
     {
       return resource.getLocation().toOSString();

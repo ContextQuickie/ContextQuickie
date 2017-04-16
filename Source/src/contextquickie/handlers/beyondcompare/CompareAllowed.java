@@ -23,23 +23,24 @@ public class CompareAllowed extends PropertyTester
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
-    TreeSelection selection = (TreeSelection) receiver;
-    Object[] paths = selection.toArray();
-    IAdapterManager adapterManager = Platform.getAdapterManager();
+    boolean returnValue = false;
+    final TreeSelection selection = (TreeSelection) receiver;
+    final Object[] paths = selection.toArray();
+    final IAdapterManager adapterManager = Platform.getAdapterManager();
     if (adapterManager != null)
     {
       int leftType = IResource.NONE;
 
-      IResource left = adapterManager.getAdapter(paths[0], IResource.class);
+      final IResource left = adapterManager.getAdapter(paths[0], IResource.class);
       if (left != null)
       {
         leftType = left.getType();
       }
 
       int rightType = IResource.NONE;
-      IResource right = adapterManager.getAdapter(paths[1], IResource.class);
+      final IResource right = adapterManager.getAdapter(paths[1], IResource.class);
       if (right != null)
       {
         rightType = right.getType();
@@ -47,26 +48,27 @@ public class CompareAllowed extends PropertyTester
 
       if ((leftType == IResource.FILE) && (rightType == IResource.FILE))
       {
-        return true;
+        returnValue = true;
       }
       else if ((leftType == IResource.FOLDER) && (rightType == IResource.FOLDER))
       {
-        return true;
+        returnValue = true;
       }
       else if ((leftType == IResource.FOLDER) && (rightType == IResource.PROJECT))
       {
-        return true;
+        returnValue = true;
       }
       else if ((leftType == IResource.PROJECT) && (rightType == IResource.FOLDER))
       {
-        return true;
+        returnValue = true;
       }
       else if ((leftType == IResource.PROJECT) && (rightType == IResource.PROJECT))
       {
-        return true;
+        returnValue = true;
       }
     }
-    return false;
+
+    return returnValue;
   }
 
 }

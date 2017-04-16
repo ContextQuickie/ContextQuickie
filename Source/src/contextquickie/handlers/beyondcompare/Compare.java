@@ -25,13 +25,13 @@ public class Compare extends AbstractHandler
    * ExecutionEvent)
    */
   @Override
-  public Object execute(ExecutionEvent event) throws ExecutionException
+  public Object execute(final ExecutionEvent event) throws ExecutionException
   {
-    TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-    Object[] paths = selection.toArray();
-    IAdapterManager adapterManager = Platform.getAdapterManager();
-    IResource leftResource = adapterManager.getAdapter(paths[0], IResource.class);
-    IResource rightResource = adapterManager.getAdapter(paths[1], IResource.class);
+    final TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
+    final Object[] paths = selection.toArray();
+    final IAdapterManager adapterManager = Platform.getAdapterManager();
+    final IResource leftResource = adapterManager.getAdapter(paths[0], IResource.class);
+    final IResource rightResource = adapterManager.getAdapter(paths[1], IResource.class);
     if ((leftResource != null) && (rightResource != null))
     {
       BeyondCompare.compare(leftResource.getLocation().toString(), rightResource.getLocation().toString());
@@ -39,5 +39,4 @@ public class Compare extends AbstractHandler
 
     return null;
   }
-
 }

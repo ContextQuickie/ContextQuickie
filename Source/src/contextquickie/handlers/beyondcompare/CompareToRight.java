@@ -1,5 +1,7 @@
 package contextquickie.handlers.beyondcompare;
 
+import contextquickie.tools.WorkbenchUtil;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -10,8 +12,6 @@ import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-
-import contextquickie.tools.WorkbenchUtil;
 
 /**
  * @author ContextQuickie
@@ -31,21 +31,21 @@ public class CompareToRight extends AbstractHandler
    * ExecutionEvent)
    */
   @Override
-  public Object execute(ExecutionEvent event) throws ExecutionException
+  public Object execute(final ExecutionEvent event) throws ExecutionException
   {
 
-    ISelection selection = HandlerUtil.getCurrentSelection(event);
+    final ISelection selection = HandlerUtil.getCurrentSelection(event);
     if (selection != null)
     {
 
-      IAdapterManager adapterManager = Platform.getAdapterManager();
+      final IAdapterManager adapterManager = Platform.getAdapterManager();
       if ((selection != null) && (selection.isEmpty() == false))
       {
         Object receiver = null;
         // Context menu has been opened in a tree view
         if (selection instanceof IStructuredSelection)
         {
-          IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+          final IStructuredSelection structuredSelection = (IStructuredSelection) selection;
           receiver = structuredSelection.getFirstElement();
         }
         else if (selection instanceof TextSelection)
@@ -53,13 +53,13 @@ public class CompareToRight extends AbstractHandler
           receiver = WorkbenchUtil.getCurrentDocument();
         }
 
-        IResource rightResource;
+        final IResource rightResource;
         rightResource = adapterManager.getAdapter(receiver, IResource.class);
         if (rightResource != null)
         {
-          BeyondCompare bc = new BeyondCompare();
+          final BeyondCompare bc = new BeyondCompare();
           bc.readRegistry();
-          String savedLeft = bc.getSavedLeft();
+          final String savedLeft = bc.getSavedLeft();
           BeyondCompare.compare(savedLeft, rightResource.getLocation().toString());
         }
       }

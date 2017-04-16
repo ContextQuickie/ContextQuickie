@@ -5,8 +5,15 @@ package contextquickie.tools;
  *
  *         Utility class for string manipulation.
  */
-public class StringUtil
+public final class StringUtil
 {
+  /**
+   * Prevents from creating instances.
+   */
+  private StringUtil()
+  {
+  }
+
   /**
    * Quotes the string.
    * 
@@ -14,7 +21,7 @@ public class StringUtil
    *          The source string.
    * @return The quoted string.
    */
-  public static String QuoteString(String source)
+  public static String quoteString(final String source)
   {
     return '"' + source + '"';
   }

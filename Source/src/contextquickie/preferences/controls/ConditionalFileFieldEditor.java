@@ -4,10 +4,16 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
+/**
+ * @author ContextQuickie
+ *     Implementation of a file field editor where its checks can be enabled or disabled.
+ */
 public class ConditionalFileFieldEditor extends FileFieldEditor
 {
-
-  private BooleanFieldEditor activationControl;
+  /**
+   * The field editor whose value is used to enable or disable checks.
+   */
+  private BooleanFieldEditor currentActivationControl;
 
   /**
    * Creates a file field editor.
@@ -18,19 +24,19 @@ public class ConditionalFileFieldEditor extends FileFieldEditor
    *          the label text of the field editor
    * @param parent
    *          the parent of the field editor's control
-   * @param parentActivationControl
+   * @param activationControl
    *          The parent control to enable/disable this feature.
    */
-  public ConditionalFileFieldEditor(String name, String labelText, Composite parent, BooleanFieldEditor parentActivationControl)
+  public ConditionalFileFieldEditor(final String name, final String labelText, final Composite parent, final BooleanFieldEditor activationControl)
   {
     super(name, labelText, false, parent);
-    this.activationControl = parentActivationControl;
+    this.currentActivationControl = activationControl;
   }
 
   @Override
-  protected boolean checkState()
+  protected final boolean checkState()
   {
-    if (this.activationControl.getBooleanValue() == false)
+    if (this.currentActivationControl.getBooleanValue() == false)
     {
       return true;
     }

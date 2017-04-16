@@ -10,8 +10,15 @@ import java.util.List;
  *
  *         Wrapper class for starting processes.
  */
-public class ProcessWrapper
+public final class ProcessWrapper
 {
+  /**
+   * Prevents from creating instances.
+   */
+  private ProcessWrapper()
+  {
+  }
+
   /**
    * Executes a command with the passed arguments.
    * 
@@ -20,7 +27,7 @@ public class ProcessWrapper
    * @param arguments
    *          The arguments of the command.
    */
-  public static void executeCommand(String command, String... arguments)
+  public static void executeCommand(final String command, final String... arguments)
   {
     executeCommand(command, Arrays.asList(arguments));
   }
@@ -33,22 +40,22 @@ public class ProcessWrapper
    * @param arguments
    *          The arguments of the command.
    */
-  public static void executeCommand(String command, List<String> arguments)
+  public static void executeCommand(final String command, final List<String> arguments)
   {
-    List<String> commandAndArguments = new ArrayList<String>();
+    final List<String> commandAndArguments = new ArrayList<String>();
     commandAndArguments.add(command);
     for (String parameter : arguments)
     {
       if (parameter.contains(" "))
       {
-        commandAndArguments.add(StringUtil.QuoteString(parameter));
+        commandAndArguments.add(StringUtil.quoteString(parameter));
       }
       else
       {
         commandAndArguments.add(parameter);
       }
     }
-    ProcessBuilder processBuilder = new ProcessBuilder(commandAndArguments);
+    final ProcessBuilder processBuilder = new ProcessBuilder(commandAndArguments);
     try
     {
       processBuilder.start();

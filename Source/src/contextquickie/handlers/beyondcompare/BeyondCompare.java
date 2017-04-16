@@ -1,17 +1,15 @@
 package contextquickie.handlers.beyondcompare;
 
-import org.eclipse.jface.preference.IPreferenceStore;
-
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.Registry;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+
 /**
- * @author ContextQuickie
- * 
- *         Class for accessing Beyond Compare registry settings and executing
- *         beyond compare.
+ * Class for accessing Beyond Compare registry settings and executing beyond
+ * compare.
  *
  */
 public class BeyondCompare
@@ -20,52 +18,52 @@ public class BeyondCompare
    * The prefix used in the registry to specify a file for the left side of
    * comparison.
    */
-  private static final String savedLeftFile = "F";
+  private static final String SAVED_LEFT_FILE = "F";
 
   /**
    * The prefix used in the registry to specify a directory for the left side of
    * comparison.
    */
-  private static final String savedLeftDirectory = "D";
+  private static final String SAVED_LEFT_DIRECTORY = "D";
 
   /**
    * The current registry value for the saved left side. The value will be read
    * by {@link readRegistry} and written by {@link writeRegistry}
    */
-  private String _savedLeft = null;
+  private String savedLeft;
 
   /**
    * The current registry value for the type of the saved left side. The value
    * will be read by {@link readRegistry} and written by {@link writeRegistry}
    */
-  private BeyondCompareSavedLeft _savedLeftType = BeyondCompareSavedLeft.None;
+  private BeyondCompareSavedLeft savedLeftType = BeyondCompareSavedLeft.None;
 
   /**
    * Reads the current left side for comparison from the registry.
    */
   public void readRegistry()
   {
-    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
-    String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
-    String savedLeft = Registry.ReadKey(registryPath, registryKey);
-    if (savedLeft != null)
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
+    final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
+    final String savedLeftFromRegistry = Registry.readKey(registryPath, registryKey);
+    if (savedLeftFromRegistry != null)
     {
-      if (savedLeft.startsWith(savedLeftFile))
+      if (savedLeftFromRegistry.startsWith(SAVED_LEFT_FILE))
       {
-        this._savedLeftType = BeyondCompareSavedLeft.File;
+        this.savedLeftType = BeyondCompareSavedLeft.File;
       }
-      else if (savedLeft.startsWith(savedLeftDirectory))
+      else if (savedLeftFromRegistry.startsWith(SAVED_LEFT_DIRECTORY))
       {
-        this._savedLeftType = BeyondCompareSavedLeft.Directory;
+        this.savedLeftType = BeyondCompareSavedLeft.Directory;
       }
 
-      this._savedLeft = savedLeft.substring(1);
+      this.savedLeft = savedLeftFromRegistry.substring(1);
     }
     else
     {
-      this._savedLeft = null;
-      this._savedLeftType = BeyondCompareSavedLeft.None;
+      this.savedLeft = null;
+      this.savedLeftType = BeyondCompareSavedLeft.None;
     }
   }
 
@@ -74,16 +72,16 @@ public class BeyondCompare
    */
   public void writeRegistry()
   {
-    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
-    String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
-    if (this._savedLeftType == BeyondCompareSavedLeft.File)
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
+    final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
+    if (this.savedLeftType == BeyondCompareSavedLeft.File)
     {
-      Registry.WriteKey(registryPath, registryKey, savedLeftFile + this._savedLeft);
+      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_FILE + this.savedLeft);
     }
-    else if (this._savedLeftType == BeyondCompareSavedLeft.Directory)
+    else if (this.savedLeftType == BeyondCompareSavedLeft.Directory)
     {
-      Registry.WriteKey(registryPath, registryKey, savedLeftDirectory + this._savedLeft);
+      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_DIRECTORY + this.savedLeft);
     }
   }
 
@@ -92,16 +90,16 @@ public class BeyondCompare
    */
   public String getSavedLeft()
   {
-    return _savedLeft;
+    return savedLeft;
   }
 
   /**
-   * @param savedLeft
+   * @param value
    *          The current registry value for the saved left side.
    */
-  public void setSavedLeft(String savedLeft)
+  public void setSavedLeft(final String value)
   {
-    this._savedLeft = savedLeft;
+    this.savedLeft = value;
   }
 
   /**
@@ -109,16 +107,16 @@ public class BeyondCompare
    */
   public BeyondCompareSavedLeft getSavedLeftType()
   {
-    return _savedLeftType;
+    return savedLeftType;
   }
 
   /**
-   * @param savedLeftType
+   * @param value
    *          The current registry value for the type of the saved left side.
    */
-  public void setSavedLeftType(BeyondCompareSavedLeft savedLeftType)
+  public void setSavedLeftType(final BeyondCompareSavedLeft value)
   {
-    this._savedLeftType = savedLeftType;
+    this.savedLeftType = value;
   }
 
   /**
@@ -129,9 +127,9 @@ public class BeyondCompare
    * @param right
    *          The path of the right side for comparison.
    */
-  public static void compare(String left, String right)
+  public static void compare(final String left, final String right)
   {
-    String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
+    final String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 
     ProcessWrapper.executeCommand(command, left, right);
   }

@@ -1,5 +1,7 @@
 package contextquickie.handlers.beyondcompare;
 
+import contextquickie.tools.WorkbenchUtil;
+
 import java.io.File;
 
 import org.eclipse.core.resources.IResource;
@@ -17,8 +19,6 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.menus.IWorkbenchContribution;
 import org.eclipse.ui.services.IServiceLocator;
 
-import contextquickie.tools.WorkbenchUtil;
-
 /**
  * @author ContextQuickie
  * 
@@ -33,7 +33,7 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
    * The service locator used to create the
    * {@link CommandContributionItemParameter} for the menu entry.
    */
-  private IServiceLocator serviceLocator;
+  private IServiceLocator currentServiceLocator;
 
   /**
    * The {@link BeyondCompare} instance used for accessing the registry. The
@@ -53,13 +53,8 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
     bc.readRegistry();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.ui.actions.CompoundContributionItem#getContributionItems()
-   */
   @Override
-  protected IContributionItem[] getContributionItems()
+  protected final IContributionItem[] getContributionItems()
   {
 
     // By default, return an empty list (if context menu entry must not be
@@ -68,17 +63,17 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
     IContributionItem[] items = new IContributionItem[]
     {};
 
-    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+    final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
     if (window != null)
     {
-      ISelection selection = window.getSelectionService().getSelection();
+      final ISelection selection = window.getSelectionService().getSelection();
       if ((selection != null) && (selection.isEmpty() == false))
       {
         Object receiver = null;
         // Context menu has been opened in a tree view
         if (selection instanceof IStructuredSelection)
         {
-          IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+          final IStructuredSelection structuredSelection = (IStructuredSelection) selection;
           receiver = structuredSelection.getFirstElement();
         }
         else if (selection instanceof TextSelection)
@@ -88,13 +83,13 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 
         if (receiver != null)
         {
-          BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
+          final BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
 
-          IAdapterManager adapterManager = Platform.getAdapterManager();
+          final IAdapterManager adapterManager = Platform.getAdapterManager();
           if (adapterManager != null)
           {
             int resourceType = IResource.NONE;
-            IResource resource = adapterManager.getAdapter(receiver, IResource.class);
+            final IResource resource = adapterManager.getAdapter(receiver, IResource.class);
             if (resource != null)
             {
               resourceType = resource.getType();
@@ -115,12 +110,12 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
 
             if (showEntry)
             {
-              String savedLeft = bc.getSavedLeft();
+              final String savedLeft = bc.getSavedLeft();
               if (savedLeft != null)
               {
-                CommandContributionItemParameter parameter = new CommandContributionItemParameter(this.serviceLocator, null,
+                final CommandContributionItemParameter parameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
                     "ContextQuickie.commands.compareToRight", 0);
-                String filename = new File(savedLeft).getName();
+                final String filename = new File(savedLeft).getName();
                 parameter.label = "Compare to " + filename;
                 parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
                 items = new IContributionItem[]
@@ -142,8 +137,8 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
    * services.IServiceLocator)
    */
   @Override
-  public void initialize(IServiceLocator serviceLocator)
+  public void initialize(final IServiceLocator serviceLocator)
   {
-    this.serviceLocator = serviceLocator;
+    this.currentServiceLocator = serviceLocator;
   }
 }

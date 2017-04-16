@@ -1,5 +1,9 @@
 package contextquickie.handlers.tortoise;
 
+import contextquickie.Activator;
+import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.WorkbenchUtil;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Collection;
@@ -10,10 +14,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextSelection;
 
-import contextquickie.Activator;
-import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.tools.WorkbenchUtil;
-
 /**
  * @author ContextQuickie
  *
@@ -21,38 +21,44 @@ import contextquickie.tools.WorkbenchUtil;
  *         settings. It is used to show/hide the Tortoise add-in context menu
  *         entries.
  */
-public abstract class TortoiseEnabled extends PropertyTester implements FileFilter
+public abstract class AbstractTortoiseEnabled extends PropertyTester implements FileFilter
 {
   /**
    * The preferences of the current instance.
    */
-  private TortoisePreferenceConstants _preferences;
+  private TortoisePreferenceConstants preferences;
 
-  protected TortoiseEnabled(TortoisePreferenceConstants preferences)
+  /**
+   * Default constructor.
+   * 
+   * @param tortoisePreferences
+   *          The preferences which are required for execution.
+   */
+  protected AbstractTortoiseEnabled(final TortoisePreferenceConstants tortoisePreferences)
   {
-    this._preferences = preferences;
+    this.preferences = tortoisePreferences;
   }
 
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public final boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
-    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    boolean addinEnabled = preferenceStore.getBoolean(this._preferences.getEnabled());
-    boolean detectWorkingCopy = preferenceStore.getBoolean(this._preferences.getWorkingCopyDetection());
-
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final boolean addinEnabled = preferenceStore.getBoolean(this.preferences.getEnabled());
+    final boolean detectWorkingCopy = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
+    boolean result = false;
     if ((addinEnabled == true) && (detectWorkingCopy == false))
     {
-      return true;
+      result = true;
     }
     else if ((addinEnabled == true) && (detectWorkingCopy == true))
     {
-      Collection<?> selection = (Collection<?>) receiver;
+      final Collection<?> selection = (Collection<?>) receiver;
       for (Object selectedItem : selection)
       {
         IResource resource = null;
         if (selectedItem instanceof IAdaptable)
         {
-          IAdaptable adaptable = (IAdaptable) selectedItem;
+          final IAdaptable adaptable = (IAdaptable) selectedItem;
           resource = adaptable.getAdapter(IResource.class);
         }
         else if (selectedItem instanceof TextSelection)
@@ -74,13 +80,13 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
       }
     }
 
-    return false;
+    return result;
   }
 
   @Override
-  public boolean accept(File dir)
+  public final boolean accept(final File dir)
   {
-    return (dir.isDirectory() && this._preferences.getWokringCopyFolderName().equals(dir.getName()));
+    return dir.isDirectory() && this.preferences.getWokringCopyFolderName().equals(dir.getName());
   }
 
   /**
@@ -91,7 +97,7 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
    * @return The path to the working copy or null if no working copy has been
    *         found.
    */
-  public String getWorkingCopyRoot(IPath path)
+  public String getWorkingCopyRoot(final IPath path)
   {
     File currentPath = path.toFile();
     if (currentPath.isFile())
@@ -101,7 +107,7 @@ public abstract class TortoiseEnabled extends PropertyTester implements FileFilt
 
     while ((currentPath != null) && (currentPath.isDirectory()))
     {
-      File[] childItems = currentPath.listFiles(this);
+      final File[] childItems = currentPath.listFiles(this);
       if ((childItems != null) && (childItems.length > 0))
       {
         return childItems[0].getAbsolutePath();

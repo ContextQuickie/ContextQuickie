@@ -1,11 +1,11 @@
 package contextquickie.handlers.tortoise;
 
+import contextquickie.tools.WorkbenchUtil;
 import java.util.Collection;
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
-import contextquickie.tools.WorkbenchUtil;
 
 /**
  * @author ContextQuickie
@@ -23,37 +23,35 @@ public class TortoisePossible extends PropertyTester
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
-    IAdapterManager adapterManager = Platform.getAdapterManager();
-    if (adapterManager != null)
+    boolean returnValue = false;
+
+    if (receiver instanceof Collection<?>)
     {
-      if (receiver instanceof Collection<?>)
+      final Collection<?> selection = (Collection<?>) receiver;
+      if (selection != null)
       {
-        Collection<?> selection = (Collection<?>) receiver;
-        if (selection != null)
+        final IAdapterManager adapterManager = Platform.getAdapterManager();
+        if (adapterManager != null)
         {
           for (Object selectedItem : selection)
           {
-            IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
+            final IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
             if (resource != null)
             {
-              return true;
-            }
-
-            if (WorkbenchUtil.getCurrentDocument() != null)
-            {
-              return true;
+              returnValue = true;
+              break;
             }
           }
         }
       }
-      else if (receiver instanceof Collection<?>)
-      {
-        return true;
-      }
+    }
+    else if (WorkbenchUtil.getCurrentDocument() != null)
+    {
+      returnValue = true;
     }
 
-    return false;
+    return returnValue;
   }
 }

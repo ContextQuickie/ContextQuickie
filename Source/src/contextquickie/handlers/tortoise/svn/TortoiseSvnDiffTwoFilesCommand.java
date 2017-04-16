@@ -1,13 +1,17 @@
 package contextquickie.handlers.tortoise.svn;
 
-import contextquickie.handlers.tortoise.TortoiseDiffTwoFilesCommand;
+import contextquickie.handlers.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 import contextquickie.preferences.PreferenceConstants;
 
-public class TortoiseSvnDiffTwoFilesCommand extends TortoiseDiffTwoFilesCommand
+/**
+ * @author ContextQuickie
+ *     Class for execute a Tortoise SVN diff command with two selected files.
+ */
+public class TortoiseSvnDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {
   @Override
-  protected String getCommandPathName()
+  protected final String getCommandPathName()
   {
-    return PreferenceConstants.TortoiseSvn.getPath();
+    return PreferenceConstants.TORTOISE_SVN.getPath();
   }
 }

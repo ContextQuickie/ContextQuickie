@@ -1,9 +1,9 @@
 package contextquickie.handlers.beyondcompare;
 
-import org.eclipse.core.expressions.PropertyTester;
-
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
+
+import org.eclipse.core.expressions.PropertyTester;
 
 /**
  * @author ContextQuickie
@@ -21,7 +21,7 @@ public class BeyondCompareEnabled extends PropertyTester
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
     return Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.P_BEYOND_COMPARE_ENABLED);
   }

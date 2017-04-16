@@ -1,78 +1,93 @@
 package contextquickie.preferences;
 
+/**
+ * @author ContextQuickie
+ *
+ *         Class which collects all settings for Tortoise tools.
+ */
 public class TortoisePreferenceConstants
 {
-  private String _prefix;
-  
-  private String _workingCopyFolderName;
-  
+  /**
+   * The prefix which is used to generate the settings.
+   */
+  private String prefix;
+
+  /**
+   * The name of a directory which is used to detect a working copy folder.
+   */
+  private String workingCopyFolderName;
+
   /**
    * Creates a new instance of the {@link TortoisePreferenceConstants} class.
-   * @param prefix
-   * The prefix which is used for generating the constants.
    * 
-   * @param workingCopyFolderName
-   * The name of the folder indicating a working copy.
+   * @param settingsPrefix
+   *          The prefix which is used for generating the constants.
+   * 
+   * @param wcFolderName
+   *          The name of the folder indicating a working copy.
    */
-  public TortoisePreferenceConstants(String prefix, String workingCopyFolderName)
+  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName)
   {
-    this._prefix = prefix;
-    this._workingCopyFolderName = workingCopyFolderName;
+    this.prefix = settingsPrefix;
+    this.workingCopyFolderName = wcFolderName;
   }
-  
+
   /**
    * @return Configuration item for the enabled/disabled switch.
    */
   public String getEnabled()
   {
-    return this._prefix + "Enabled";
+    return this.prefix + "Enabled";
   }
-  
+
   /**
-   * @return Configuration item for the enabled/disabled switch for scanning for linked resources.
+   * @return Configuration item for the enabled/disabled switch for scanning for
+   *         linked resources.
    */
   public String getScanForLinkedResources()
   {
-    return this._prefix + "ScanForLinkedResources";
+    return this.prefix + "ScanForLinkedResources";
   }
-  
+
   /**
    * @return Configuration item for the path to the Tortoise executable.
    */
   public String getPath()
   {
-    return this._prefix + "Path";
+    return this.prefix + "Path";
   }
-  
+
   /**
    * @return Configuration item for the path to the Tortoise merge executable.
    */
   public String getMergePath()
   {
-    return this._prefix + "MergePath";
+    return this.prefix + "MergePath";
   }
-  
+
   /**
-   * @return Configuration item which indicates if a working copy detection is performed or not.
+   * @return Configuration item which indicates if a working copy detection is
+   *         performed or not.
    */
   public String getWorkingCopyDetection()
   {
-    return this._prefix + "WorkingCopyDetection";
+    return this.prefix + "WorkingCopyDetection";
   }
-  
+
   /**
-   * @return Configuration item which indicates if the context menu configuration is taken from the registry.
+   * @return Configuration item which indicates if the context menu
+   *         configuration is taken from the registry.
    */
   public String getUseMenuConfigFromRegistry()
   {
-    return this._prefix + "UseMenuConfigFromRegistry";
+    return this.prefix + "UseMenuConfigFromRegistry";
   }
-  
+
   /**
    * @return The name of the folder indicating a working copy.
    */
   public String getWokringCopyFolderName()
   {
-    return this._workingCopyFolderName;
+    return this.workingCopyFolderName;
   }
 }

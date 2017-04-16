@@ -1,6 +1,6 @@
 package contextquickie.handlers.tortoise.svn;
 
-import contextquickie.handlers.tortoise.TortoiseEnabled;
+import contextquickie.handlers.tortoise.AbstractTortoiseEnabled;
 import contextquickie.preferences.PreferenceConstants;
 
 /**
@@ -10,10 +10,13 @@ import contextquickie.preferences.PreferenceConstants;
  *         settings. It is used to show/hide the Tortoise SVN context menu
  *         entries.
  */
-public class TortoiseSvnEnabled extends TortoiseEnabled
+public class TortoiseSvnEnabled extends AbstractTortoiseEnabled
 {
+  /**
+   * Default constructor.
+   */
   public TortoiseSvnEnabled()
   {
-    super(PreferenceConstants.TortoiseSvn);
+    super(PreferenceConstants.TORTOISE_SVN);
   }
 }

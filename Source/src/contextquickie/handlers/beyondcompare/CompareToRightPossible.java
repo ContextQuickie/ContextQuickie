@@ -18,11 +18,11 @@ public class CompareToRightPossible extends PropertyTester
    * java.lang.String, java.lang.Object[], java.lang.Object)
    */
   @Override
-  public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+  public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
   {
     if (expectedValue != null)
     {
-      BeyondCompare bc = new BeyondCompare();
+      final BeyondCompare bc = new BeyondCompare();
       bc.readRegistry();
       if (bc.getSavedLeftType() == BeyondCompareSavedLeft.valueOf(expectedValue.toString()))
       {
