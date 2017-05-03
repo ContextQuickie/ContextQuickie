@@ -1195,6 +1195,29 @@
                   </parameter>
                </command>
             </menu>
+            <separator
+                  name="SeparatorTortoiseSvnTortoiseHg">
+            </separator>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
+                  icon="icons/TortoiseGit/menucommit.png"
+                  label="Hg Commit..."
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="TortoiseHgPossibleAtCurrentItem">
+                  </reference>
+               </visibleWhen>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                     value="commit">
+               </parameter>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                     value="true">
+               </parameter>
+            </command>
          </menuContribution>
    </extension>
    <extension
@@ -1239,6 +1262,13 @@
             id="contextquickie.handlers.beyondcompare.SelectedResourceTester"
             namespace="contextquickie.handlers.beyondcompare"
             properties="SelectedResourceTester"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.tortoise.svn.TortoiseHgEnabled"
+            id="contextquickie.propertyHandlers.TortoiseHgEnabled"
+            namespace="contextquickie.propertyHandlers"
+            properties="TortoiseHgEnabled"
             type="java.lang.Object">
       </propertyTester>
    </extension>
@@ -1391,6 +1421,43 @@
                </test>
             </iterate>
          </with>
+      </definition>
+      <definition
+            id="TortoiseHgPossibleAtCurrentItem">
+         <and>
+            <test
+                  property="contextquickie.propertyHandlers.TortoiseHgEnabled">
+            </test>
+            <or>
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <or>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FILE">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.FOLDER">
+                        </test>
+                        <test
+                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                              value="IResource.PROJECT">
+                        </test>
+                     </or>
+                  </iterate>
+               </with>
+               <reference
+                     definitionId="ActivePartIsEditorAndProvidesFile">
+               </reference>
+            </or>
+            <test
+                  property="contextquickie.propertyHandlers.TortoisePossible">
+            </test>
+         </and>
       </definition>
    </extension>
 </plugin>
