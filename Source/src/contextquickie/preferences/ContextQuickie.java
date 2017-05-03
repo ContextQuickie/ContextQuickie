@@ -63,6 +63,10 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.TORTOISE_SVN);
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT);
+    
+    final String tortoiseHgExecutable = "thg.exe";
+    this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
+    this.createTortoiseFieldEditors("Hg", tortoiseHgExecutable, tortoiseHgExecutable, PreferenceConstants.TORTOISE_HG);
 
     for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet())
     {
@@ -196,7 +200,7 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     dependentFields.add(dependentFieldEditor);
 
     /* Parameter for setting the main executable */
-    final String pathToDescriptionPrefix = "Path to";
+    final String pathToDescriptionPrefix = "Path to ";
     FileFieldEditor fileFieldEditor = new ConditionalFileFieldEditor(
         preferenceConstants.getPath(), pathToDescriptionPrefix + execName, getFieldEditorParent(),
         featureEnabledEditor);

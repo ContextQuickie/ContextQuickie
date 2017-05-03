@@ -60,7 +60,16 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
     // Try to retrieve the path to the Tortoise GIT merge executable.
     this.getStoreConfigurationItemFromRegistry(store, tortoiseGitRegPath, tortoiseMergePathKey,
         "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT.getMergePath());
+    
+    store.setDefault(PreferenceConstants.TORTOISE_HG.getEnabled(), false);
+    store.setDefault(PreferenceConstants.TORTOISE_HG.getWorkingCopyDetection(), false);
+    store.setDefault(PreferenceConstants.TORTOISE_HG.getUseMenuConfigFromRegistry(), false);
+    store.setDefault(PreferenceConstants.TORTOISE_HG.getScanForLinkedResources(), false);
 
+    // Try to retrieve the path to the Tortoise GIT executable.
+    final String tortoiseHgRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg";
+    this.getStoreConfigurationItemFromRegistry(store, tortoiseHgRegPath, tortoiseProcPathKey,
+        "C:\\Program Files\\TortoiseHg\\thg.exe", PreferenceConstants.TORTOISE_HG.getPath());
   }
 
   /**

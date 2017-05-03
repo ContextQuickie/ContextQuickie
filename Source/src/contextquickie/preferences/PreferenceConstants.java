@@ -36,6 +36,11 @@ public final class PreferenceConstants
    * Configuration items for the configuration of Tortoise Git.
    */
   public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git");
+
+  /**
+   * Configuration items for the configuration of Tortoise Hg.
+   */
+  public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg");
   
   /**
    * Prevents from creating instances.
