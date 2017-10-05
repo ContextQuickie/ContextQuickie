@@ -828,6 +828,31 @@
                         value="HEAD^">
                   </parameter>
                </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/TortoiseGit/menublame.png"
+                     label="Blame"
+                     style="push">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="blame">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
+               </command>
                <separator
                      name="SeparatorTortoiseGit2"
                      visible="true">

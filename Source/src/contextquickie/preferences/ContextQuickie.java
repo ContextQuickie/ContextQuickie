@@ -64,10 +64,10 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT);
     
-    final String tortoiseHgExecutable = "thg.exe";
+    /*final String tortoiseHgExecutable = "thg.exe";
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Hg", tortoiseHgExecutable, tortoiseHgExecutable, PreferenceConstants.TORTOISE_HG);
-
+*/
     for (BooleanFieldEditor featureEnabledEditor : this.controlMapping.keySet())
     {
       featureEnabledEditor.setPropertyChangeListener(this);
