@@ -1269,13 +1269,6 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="contextquickie.handlers.tortoise.TortoisePossible"
-            id="contextquickie.propertyHandlers.TortoisePossible"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoisePossible"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
             class="contextquickie.handlers.beyondcompare.CompareToRightPossible"
             id="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
             namespace="contextquickie.propertyHandlers.BeyondCompare"
@@ -1390,9 +1383,6 @@
                      definitionId="ActivePartIsEditorAndProvidesFile">
                </reference>
             </or>
-            <test
-                  property="contextquickie.propertyHandlers.TortoisePossible">
-            </test>
          </and>
       </definition>
       <definition
@@ -1427,9 +1417,6 @@
                      definitionId="ActivePartIsEditorAndProvidesFile">
                </reference>
             </or>
-            <test
-                  property="contextquickie.propertyHandlers.TortoisePossible">
-            </test>
          </and>
       </definition>
       <definition
@@ -1479,9 +1466,6 @@
                      definitionId="ActivePartIsEditorAndProvidesFile">
                </reference>
             </or>
-            <test
-                  property="contextquickie.propertyHandlers.TortoisePossible">
-            </test>
          </and>
       </definition>
    </extension>
