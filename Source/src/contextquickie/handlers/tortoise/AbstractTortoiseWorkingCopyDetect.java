@@ -83,7 +83,7 @@ public abstract class AbstractTortoiseWorkingCopyDetect extends PropertyTester i
     
     if (expectedValue != null)
     {
-      result = (result == (Boolean)expectedValue);
+      result = (result == (Boolean) expectedValue);
     }
 
     return result;

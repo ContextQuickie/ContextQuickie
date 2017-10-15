@@ -93,6 +93,26 @@
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
             name="TortoiseGitDiffTwoFilesCommand">
       </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
+            id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
+            name="TortoiseHgCommand">
+         <commandParameter
+               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
+               name="CommandID"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
+               name="RequiresPath"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.Parameter1"
+               name="Parameter1"
+               optional="true">
+         </commandParameter>
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -236,6 +256,10 @@
                      <test
                            property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
                            value="false">
+                     </test>
+                     <test
+                           args="MENUCHECKOUT"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
                   </and>
                </visibleWhen>
@@ -1288,6 +1312,13 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
+            class="contextquickie.handlers.tortoise.svn.TortoiseSvnItemInMainMenu"
+            id="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+            namespace="contextquickie.propertyHandlers"
+            properties="TortoiseSvnItemInMainMenu"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
             class="contextquickie.handlers.tortoise.svn.TortoiseSvnWorkingCopyDetect"
             id="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
             namespace="contextquickie.propertyHandlers"
@@ -1323,7 +1354,7 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="contextquickie.handlers.tortoise.svn.TortoiseHgEnabled"
+            class="contextquickie.handlers.tortoise.hg.TortoiseHgEnabled"
             id="contextquickie.propertyHandlers.TortoiseHgEnabled"
             namespace="contextquickie.propertyHandlers"
             properties="TortoiseHgEnabled"
