@@ -18,7 +18,14 @@ public class TortoisePreferenceConstants
   private String workingCopyFolderName;
 
   /**
+   * The directory in the registry which contains the user specific settings.
+   */
+  private String registryUserDirectory;
+
+  /**
    * Creates a new instance of the {@link TortoisePreferenceConstants} class.
+   * The directory in the registry which contains the user specific settings
+   * must be identical to the settings prefix.
    * 
    * @param settingsPrefix
    *          The prefix which is used for generating the constants.
@@ -28,8 +35,27 @@ public class TortoisePreferenceConstants
    */
   public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName)
   {
+    this(settingsPrefix, wcFolderName, settingsPrefix);
+  }
+
+  /**
+   * Creates a new instance of the {@link TortoisePreferenceConstants} class.
+   * 
+   * @param settingsPrefix
+   *          The prefix which is used for generating the constants.
+   * 
+   * @param wcFolderName
+   *          The name of the folder indicating a working copy.
+   * 
+   * @param regUserDir
+   *          The directory in the registry which contains the user specific
+   *          settings.
+   */
+  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String regUserDir)
+  {
     this.prefix = settingsPrefix;
     this.workingCopyFolderName = wcFolderName;
+    this.registryUserDirectory = regUserDir;
   }
 
   /**
@@ -89,5 +115,13 @@ public class TortoisePreferenceConstants
   public String getWokringCopyFolderName()
   {
     return this.workingCopyFolderName;
+  }
+
+  /**
+   * @return The directory in the registry which contains the user specific settings.
+   */
+  public String getRegistryUserDirectory()
+  {
+    return this.registryUserDirectory;
   }
 }

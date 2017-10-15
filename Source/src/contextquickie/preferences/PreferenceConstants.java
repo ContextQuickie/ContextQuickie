@@ -30,7 +30,7 @@ public final class PreferenceConstants
   /**
    * Configuration items for the configuration of Tortoise SVN.
    */
-  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn");
+  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN");
 
   /**
    * Configuration items for the configuration of Tortoise Git.
