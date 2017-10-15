@@ -42,6 +42,6 @@ public class TortoiseGitCommand extends AbstractTortoiseCommand
   @Override
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    return new TortoiseGitEnabled().getWorkingCopyRoot(path);
+    return new TortoiseGitWorkingCopyDetect().getWorkingCopyRoot(path);
   }
 }

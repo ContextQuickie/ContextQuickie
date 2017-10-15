@@ -42,6 +42,6 @@ public class TortoiseSvnCommand extends AbstractTortoiseCommand
   @Override
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    return new TortoiseSvnEnabled().getWorkingCopyRoot(path);
+    return new TortoiseSvnWorkingCopyDetect().getWorkingCopyRoot(path);
   }
 }

@@ -224,6 +224,32 @@
             </separator>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  icon="icons/TortoiseSVN/menucheckout.png"
+                  label="SVN Checkout..."
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesOneFolder">
+                     </reference>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
+                           value="false">
+                     </test>
+                  </and>
+               </visibleWhen>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     value="checkout">
+               </parameter>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     value="true">
+               </parameter>
+            </command>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                   icon="icons/TortoiseSVN/menuupdate.png"
                   label="SVN Update"
                   style="push">
@@ -1256,9 +1282,16 @@
       </propertyTester>
       <propertyTester
             class="contextquickie.handlers.tortoise.svn.TortoiseSvnEnabled"
-            id="contextquickie.propertyHandlers.TortoiseSVNEnabled"
+            id="contextquickie.propertyHandlers.TortoiseSvnEnabled"
             namespace="contextquickie.propertyHandlers"
-            properties="TortoiseSVNEnabled"
+            properties="TortoiseSvnEnabled"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.tortoise.svn.TortoiseSvnWorkingCopyDetect"
+            id="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
+            namespace="contextquickie.propertyHandlers"
+            properties="TortoiseSvnWorkingCopyDetect"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
@@ -1266,6 +1299,13 @@
             id="contextquickie.propertyHandlers.TortoiseGitEnabled"
             namespace="contextquickie.propertyHandlers"
             properties="TortoiseGitEnabled"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.tortoise.git.TortoiseGitWorkingCopyDetect"
+            id="contextquickie.propertyHandlers.TortoiseGitWorkingCopyDetect"
+            namespace="contextquickie.propertyHandlers"
+            properties="TortoiseGitWorkingCopyDetect"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
@@ -1355,7 +1395,10 @@
             id="TortoiseSvnPossibleAtCurrentItem">
          <and>
             <test
-                  property="contextquickie.propertyHandlers.TortoiseSVNEnabled">
+                  property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
+            </test>
+            <test
+                  property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect">
             </test>
             <or>
                <with
@@ -1390,6 +1433,10 @@
          <and>
             <test
                   property="contextquickie.propertyHandlers.TortoiseGitEnabled">
+            </test>
+            <test
+                  args="true"
+                  property="contextquickie.propertyHandlers.TortoiseGitWorkingCopyDetect">
             </test>
             <or>
                <with
