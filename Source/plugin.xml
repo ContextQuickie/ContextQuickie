@@ -315,12 +315,37 @@
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
-               <visibleWhen
-                     checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseSvnPossibleAtCurrentItem">
-                  </reference>
-               </visibleWhen>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menucheckout.png"
+                     label="Checkout..."
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                        </reference>
+                        <test
+                              property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
+                              value="false">
+                        </test>
+                        <test
+                              args="MENUCHECKOUT"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="checkout">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menucompare.png"

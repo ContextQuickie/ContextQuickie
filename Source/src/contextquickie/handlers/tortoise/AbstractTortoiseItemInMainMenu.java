@@ -15,12 +15,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 public abstract class AbstractTortoiseItemInMainMenu extends PropertyTester
 {
   /**
-   * A value indicating whether the context menu settings has already been read
-   * from the registry or not.
-   */
-  private static boolean contextMenuSettingsRead;
-
-  /**
    * The preferences of the current instance.
    */
   private TortoisePreferenceConstants preferences;
@@ -44,14 +38,24 @@ public abstract class AbstractTortoiseItemInMainMenu extends PropertyTester
 
     if (useMenuConfigFromRegistry == true)
     {
-      if (contextMenuSettingsRead == false)
+      this.readSettingsFromRegistry();
+    }
+
+    final boolean entryIsInMainMenu = this.isEntryInMainMenu(args[0].toString());
+    boolean result = entryIsInMainMenu;
+    if (expectedValue != null)
+    {
+      if (entryIsInMainMenu == (Boolean) expectedValue)
       {
-        this.readSettingsFromRegistry();
-        contextMenuSettingsRead = true;
+        result = true;
+      }
+      else
+      {
+        result = false;
       }
     }
 
-    return this.isEntryInMainMenu(args[0].toString());
+    return result;
   }
 
   /**

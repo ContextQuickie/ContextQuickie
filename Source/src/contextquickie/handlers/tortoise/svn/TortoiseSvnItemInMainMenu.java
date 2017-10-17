@@ -14,6 +14,12 @@ import contextquickie.tools.Registry;
 public class TortoiseSvnItemInMainMenu extends AbstractTortoiseItemInMainMenu
 {
   /**
+   * A value indicating whether the context menu settings has already been read
+   * from the registry or not.
+   */
+  private static boolean contextMenuSettingsRead;
+
+  /**
    * Value of the registry key ContextMenuEntries.
    */
   private long contextMenuEntries = TortoiseSvnMenuItems.MENUCHECKOUT | TortoiseSvnMenuItems.MENUUPDATE | TortoiseSvnMenuItems.MENUCOMMIT;
@@ -49,7 +55,7 @@ public class TortoiseSvnItemInMainMenu extends AbstractTortoiseItemInMainMenu
       e.printStackTrace();
       return false;
     }
-    
+
     if (entryValue > int32BitMaxValue)
     {
       entryValue = entryValue >> Integer.SIZE;
@@ -59,7 +65,7 @@ public class TortoiseSvnItemInMainMenu extends AbstractTortoiseItemInMainMenu
     {
       compareValue = this.contextMenuEntries;
     }
-    
+
     if ((entryValue & compareValue) != 0)
     {
       result = true;
@@ -71,19 +77,23 @@ public class TortoiseSvnItemInMainMenu extends AbstractTortoiseItemInMainMenu
   @Override
   protected final void readSettingsFromRegistry()
   {
-    final String registryLocation = "HKEY_CURRENT_USER\\Software\\TortoiseSVN";
-    String registryValue;
-
-    registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
-    if (registryValue != null)
+    if (contextMenuSettingsRead == false)
     {
-      this.contextMenuEntries = Long.decode(registryValue);
-    }
+      contextMenuSettingsRead = true;
+      final String registryLocation = "HKEY_CURRENT_USER\\Software\\TortoiseSVN";
+      String registryValue;
 
-    registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
-    if (registryValue != null)
-    {
-      this.contextMenuEntriesHigh = Long.decode(registryValue);
+      registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
+      if (registryValue != null)
+      {
+        this.contextMenuEntries = Long.decode(registryValue);
+      }
+
+      registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
+      if (registryValue != null)
+      {
+        this.contextMenuEntriesHigh = Long.decode(registryValue);
+      }
     }
   }
 }
