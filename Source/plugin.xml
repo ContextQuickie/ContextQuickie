@@ -279,9 +279,15 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseSvnPossibleAtCurrentItem">
-                  </reference>
+                  <and>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
+                     <test
+                           args="MENUUPDATE"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
+                  </and>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -340,6 +346,33 @@
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
                         value="checkout">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menuupdate.png"
+                     label="Update"
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUUPDATE"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="update">
                   </parameter>
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
