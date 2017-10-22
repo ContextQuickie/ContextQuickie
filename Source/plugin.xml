@@ -510,6 +510,42 @@
                   </and>
                </visibleWhen>
             </command>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  icon="icons/TortoiseSVN/menurevisiongraph.png"
+                  label="SVN Revision graph">
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     value="revisiongraph">
+               </parameter>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     value="true">
+               </parameter>
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
+                     <test
+                           args="MENUREVISIONGRAPH"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                        </reference>
+                     </or>
+                  </and>
+               </visibleWhen>
+            </command>
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
@@ -806,6 +842,30 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUREVISIONGRAPH"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                        <or>
+                           <reference
+                                 definitionId="ActivePartIsEditorAndProvidesFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
+                           </reference>
+                        </or>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseSVN1"
