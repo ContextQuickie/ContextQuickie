@@ -2,7 +2,7 @@
 <feature
       id="ContextQuickie"
       label="ContextQuickie"
-      version="0.7.2.qualifier"
+      version="0.8.0.qualifier"
       provider-name="ContextQuickie"
       plugin="ContextQuickie"
       os="win32"
@@ -702,7 +702,7 @@ Public License instead of this License.  But first, please read
          id="ContextQuickie"
          download-size="0"
          install-size="0"
-         version="0.7.2.qualifier"
+         version="0.8.0.qualifier"
          unpack="false"/>
 
 </feature>
