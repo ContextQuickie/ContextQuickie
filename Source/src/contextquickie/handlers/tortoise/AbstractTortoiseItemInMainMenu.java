@@ -20,14 +20,39 @@ public abstract class AbstractTortoiseItemInMainMenu extends PropertyTester
   private TortoisePreferenceConstants preferences;
 
   /**
+   * Value of the registry key ContextMenuEntries.
+   */
+  private long contextMenuEntries;
+
+  /**
+   * Value of the registry key ContextMenuEntriesHigh.
+   */
+  private long contextMenuEntriesHigh;
+  
+  /**
+   * The class containing the menu item numbers.
+   */
+  private Class<?> menuItems;
+
+  /**
    * Default constructor.
    * 
    * @param tortoisePreferences
    *          The preferences which are required for execution.
+   * @param contextMenuEntriesDefault
+   *          The default value of the registry key of ContextMenuEntries
+   * @param contextMenuEntriesHighDefault
+   *          The default value of the registry key of ContextMenuEntriesHigh
+   * @param menuItemsClass
+   *          The class containing the menu item numbers.
    */
-  protected AbstractTortoiseItemInMainMenu(final TortoisePreferenceConstants tortoisePreferences)
+  protected AbstractTortoiseItemInMainMenu(final TortoisePreferenceConstants tortoisePreferences, final long contextMenuEntriesDefault,
+      final long contextMenuEntriesHighDefault, final Class<?> menuItemsClass)
   {
     this.preferences = tortoisePreferences;
+    this.contextMenuEntries = contextMenuEntriesDefault;
+    this.contextMenuEntriesHigh = contextMenuEntriesHighDefault;
+    this.menuItems = menuItemsClass;
   }
 
   @Override
@@ -71,5 +96,78 @@ public abstract class AbstractTortoiseItemInMainMenu extends PropertyTester
    * @return <b>true</b> if the menu entry is visible in the main menu;
    *         otherwise false.
    */
-  protected abstract boolean isEntryInMainMenu(String entry);
+  private boolean isEntryInMainMenu(final String entry)
+  {
+    final long int32BitMaxValue = 0xFFFFFFFFL;
+    long entryValue = 0;
+    final long compareValue;
+    boolean result = false;
+    Exception reflectionException = null;
+    try
+    {
+      entryValue = this.menuItems.getDeclaredField(entry).getLong(null);
+    }
+    catch (IllegalArgumentException e)
+    {
+      reflectionException = e;
+    }
+    catch (IllegalAccessException e)
+    {
+      reflectionException = e;
+    }
+    catch (NoSuchFieldException e)
+    {
+      reflectionException = e;
+    }
+    catch (SecurityException e)
+    {
+      reflectionException = e;
+    }
+
+    if (reflectionException != null)
+    {
+      reflectionException.printStackTrace();
+    }
+    else
+    {
+      if (entryValue > int32BitMaxValue)
+      {
+        entryValue = entryValue >> Integer.SIZE;
+        compareValue = this.contextMenuEntriesHigh;
+      }
+      else
+      {
+        compareValue = this.contextMenuEntries;
+      }
+
+      if ((entryValue & compareValue) != 0)
+      {
+        result = true;
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Sets the value of the registry entry "ContextMenuEntries".
+   * 
+   * @param value
+   *          The value.
+   */
+  protected final void setContextMenuEntries(final long value)
+  {
+    this.contextMenuEntries = value;
+  }
+
+  /**
+   * Sets the value of the registry entry "ContextMenuEntriesHigh".
+   * 
+   * @param value
+   *          The value.
+   */
+  protected final void setContextMenuEntriesHigh(final long value)
+  {
+    this.contextMenuEntriesHigh = value;
+  }
 }
