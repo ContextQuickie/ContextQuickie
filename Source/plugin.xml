@@ -324,6 +324,39 @@
                      value="true">
                </parameter>
             </command>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  icon="icons/TortoiseSVN/menucompare.png"
+                  label="SVN Diff">
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     value="diff">
+               </parameter>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     value="true">
+               </parameter>
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <test
+                           args="MENUDIFF"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
+                  <or>
+                     <reference
+                           definitionId="ActivePartIsEditorAndProvidesFile">
+                     </reference>
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesOneFile">
+                     </reference>
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesOneFolder">
+                     </reference>
+                  </or>
+                  </and>
+               </visibleWhen>
+            </command>
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
@@ -430,6 +463,12 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
+                        <and>
+                           <test
+                                 args="MENUDIFF"
+                                 property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                                 value="false">
+                           </test>
                      <or>
                         <reference
                               definitionId="ActivePartIsEditorAndProvidesFile">
@@ -437,7 +476,11 @@
                         <reference
                               definitionId="ActiveMenuSelectionProvidesOneFile">
                         </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                        </reference>
                      </or>
+                     </and>
                   </visibleWhen>
                </command>
                <command
