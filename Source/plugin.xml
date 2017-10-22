@@ -264,6 +264,9 @@
                            args="MENUCHECKOUT"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
+                     <test
+                           property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
+                     </test>
                   </and>
                </visibleWhen>
                <parameter
@@ -2021,6 +2024,12 @@
                      </test>
                   </visibleWhen>
                </command>
+               <visibleWhen
+                     checkEnabled="false">
+                  <test
+                        property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
+                  </test>
+               </visibleWhen>
             </menu>
          </menuContribution>
          <menuContribution
