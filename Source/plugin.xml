@@ -305,9 +305,15 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseSvnPossibleAtCurrentItem">
-                  </reference>
+                  <and>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
+                     <test
+                           args="MENUCOMMIT"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
+                  </and>
                </visibleWhen>
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -379,6 +385,37 @@
                         value="true">
                   </parameter>
                </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     icon="icons/TortoiseSVN/menucommit.png"
+                     label="Commit..."
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUCOMMIT"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        value="commit">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <separator
+                     name="SeparatorTortoiseSvn0"
+                     visible="true">
+               </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menucompare.png"
