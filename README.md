@@ -4,7 +4,7 @@ An eclipse add-on which extends the context menu for accessing various windows t
 Current status: 
 * Under development
 * Basic integration of Beyond Compare, Tortoise SVN and Tortoise Git works
-* Tested with Eclipse Mars on Windows 7 and Windows 10
+* Tested with Eclipse Mars, Neon and Oxygen on Windows 7 and Windows 10
 
 Supported Tools:
 * Beyond Compare
