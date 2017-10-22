@@ -42,33 +42,51 @@ public class TortoiseSvnItemInMainMenu extends AbstractTortoiseItemInMainMenu
   protected final boolean isEntryInMainMenu(final String entry)
   {
     final long int32BitMaxValue = 0xFFFFFFFFL;
-    long entryValue;
+    long entryValue = 0;
     final long compareValue;
     boolean result = false;
+    Exception reflectionException = null;
     try
     {
       entryValue = TortoiseSvnMenuItems.class.getDeclaredField(entry).getLong(null);
     }
-    catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e)
+    catch (IllegalArgumentException e)
     {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      return false;
+      reflectionException = e;
+    }
+    catch (IllegalAccessException e)
+    {
+      reflectionException = e;
+    }
+    catch (NoSuchFieldException e)
+    {
+      reflectionException = e;
+    }
+    catch (SecurityException e)
+    {
+      reflectionException = e;
     }
 
-    if (entryValue > int32BitMaxValue)
+    if (reflectionException != null)
     {
-      entryValue = entryValue >> Integer.SIZE;
-      compareValue = this.contextMenuEntriesHigh;
+      reflectionException.printStackTrace();
     }
     else
     {
-      compareValue = this.contextMenuEntries;
-    }
+      if (entryValue > int32BitMaxValue)
+      {
+        entryValue = entryValue >> Integer.SIZE;
+        compareValue = this.contextMenuEntriesHigh;
+      }
+      else
+      {
+        compareValue = this.contextMenuEntries;
+      }
 
-    if ((entryValue & compareValue) != 0)
-    {
-      result = true;
+      if ((entryValue & compareValue) != 0)
+      {
+        result = true;
+      }
     }
 
     return result;
