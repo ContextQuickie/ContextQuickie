@@ -64,7 +64,7 @@ public final class TortoiseSvnMenuItems
   public static final long MENUCREATEREPOS = 0x0000000000000400;
 
   /**
-   * Copy menu entry.
+   * Branch/tag menu entry.
    */
   public static final long MENUCOPY = 0x0000000000000800;
 
@@ -144,12 +144,12 @@ public final class TortoiseSvnMenuItems
   public static final long MENUREVISIONGRAPH = 0x0000000004000000;
 
   /**
-   * Lock menu entry.
+   * Get Lock menu entry.
    */
   public static final long MENULOCK = 0x0000000008000000;
 
   /**
-   * Unlock menu entry.
+   * Release Lock menu entry.
    */
   public static final long MENUUNLOCK = 0x0000000010000000;
 
