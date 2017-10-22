@@ -343,6 +343,9 @@
                            args="MENUDIFF"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
                   <or>
                      <reference
                            definitionId="ActivePartIsEditorAndProvidesFile">
@@ -354,6 +357,26 @@
                            definitionId="ActiveMenuSelectionProvidesOneFolder">
                      </reference>
                   </or>
+                  </and>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
+                  icon="icons/TortoiseSVN/menucompare.png"
+                  label="SVN Diff">
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
+                     <reference
+                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
+                     </reference>
+                     <test
+                           args="MENUDIFF"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
                   </and>
                </visibleWhen>
             </command>
@@ -464,6 +487,9 @@
                   <visibleWhen
                         checkEnabled="false">
                         <and>
+                           <reference
+                                 definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           </reference>
                            <test
                                  args="MENUDIFF"
                                  property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
@@ -489,9 +515,19 @@
                      label="Diff">
                   <visibleWhen
                         checkEnabled="false">
+                        <and>
+                           <reference
+                                 definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           </reference>
                      <reference
                            definitionId="ActiveMenuSelectionProvidesTwoFiles">
                      </reference>
+                     <test
+                           args="MENUDIFF"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                           value="false">
+                     </test>
+                     </and>
                   </visibleWhen>
                </command>
                <command
