@@ -174,7 +174,7 @@ public final class TortoiseSvnMenuItems
   public static final long MENUMERGEALL = 0x0000000100000000L;
 
   /**
-   * Merge menu entry.
+   * Diff with previous version menu entry.
    */
   public static final long MENUPREVDIFF = 0x0000000200000000L;
 
