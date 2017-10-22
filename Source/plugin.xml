@@ -1212,6 +1212,30 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUMERGE"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                        <or>
+                           <reference
+                                 definitionId="ActivePartIsEditorAndProvidesFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
+                           </reference>
+                        </or>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
@@ -1225,6 +1249,22 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUEXPORT"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseSVN3"
@@ -1244,14 +1284,24 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
-                     <or>
+                     <and>
                         <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
                         </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                     </or>
+                        <test
+                              args="MENUBLAME"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                        <or>
+                           <reference
+                                 definitionId="ActivePartIsEditorAndProvidesFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFile">
+                           </reference>
+                        </or>
+                     </and>
                   </visibleWhen>
                </command>
                <command
@@ -1266,6 +1316,19 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUADD"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
@@ -1279,6 +1342,19 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUCOPYURL"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseSVN4"
