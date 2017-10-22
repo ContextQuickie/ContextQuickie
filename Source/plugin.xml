@@ -546,6 +546,31 @@
                   </and>
                </visibleWhen>
             </command>
+            <command
+                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  icon="icons/TortoiseSVN/menuresolve.png"
+                  label="SVN Resolve...">
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     value="resolve">
+               </parameter>
+               <parameter
+                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     value="true">
+               </parameter>
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                     <reference
+                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                     </reference>
+                     <test
+                           args="MENURESOLVE"
+                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
+                     </test>
+                  </and>
+               </visibleWhen>
+            </command>
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
@@ -883,6 +908,19 @@
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseSvnPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENURESOLVE"
+                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
