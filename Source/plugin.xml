@@ -306,7 +306,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucommit.png"
+                  icon="icons/Tortoise/menucommit.png"
                   label="SVN Commit..."
                   style="push">
                <visibleWhen
@@ -332,7 +332,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
+                  icon="icons/Tortoise/menucompare.png"
                   label="SVN Diff">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -368,7 +368,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
+                  icon="icons/Tortoise/menucompare.png"
                   label="SVN Diff">
                <visibleWhen
                      checkEnabled="false">
@@ -388,7 +388,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
+                  icon="icons/Tortoise/menucompare.png"
                   label="SVN Diff with previous version">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -421,7 +421,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menulog.png"
+                  icon="icons/Tortoise/menulog.png"
                   label="SVN Show Log">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -457,7 +457,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menurepobrowse.png"
+                  icon="icons/Tortoise/menurepobrowse.png"
                   label="SVN Repo-browser">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -493,7 +493,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menushowchanged.png"
+                  icon="icons/Tortoise/menushowchanged.png"
                   label="SVN Check for modifications">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -518,7 +518,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menurevisiongraph.png"
+                  icon="icons/Tortoise/menurevisiongraph.png"
                   label="SVN Revision graph">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -554,7 +554,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuresolve.png"
+                  icon="icons/Tortoise/menuresolve.png"
                   label="SVN Resolve...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -669,7 +669,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menurevert.png"
+                  icon="icons/Tortoise/menurevert.png"
                   label="SVN Revert...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -694,7 +694,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucleanup.png"
+                  icon="icons/Tortoise/menucleanup.png"
                   label="SVN Clean up...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -772,7 +772,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucopy.png"
+                  icon="icons/Tortoise/menucopy.png"
                   label="SVN Branch/tag...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -808,7 +808,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuswitch.png"
+                  icon="icons/Tortoise/menuswitch.png"
                   label="SVN Switch...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -844,7 +844,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menumerge.png"
+                  icon="icons/Tortoise/menumerge.png"
                   label="SVN Merge...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -880,7 +880,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuexport.png"
+                  icon="icons/Tortoise/menuexport.png"
                   label="SVN Export...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -908,7 +908,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menublame.png"
+                  icon="icons/Tortoise/menublame.png"
                   label="SVN Blame...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -941,7 +941,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuadd.png"
+                  icon="icons/Tortoise/menuadd.png"
                   label="SVN Add...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -991,7 +991,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menudiff.png"
+                  icon="icons/Tortoise/menudiff.png"
                   label="SVN Create patch...">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1016,7 +1016,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-                  icon="icons/TortoiseSVN/menupatch.png"
+                  icon="icons/Tortoise/menupatch.png"
                   label="SVN Apply patch...">
                <visibleWhen
                      checkEnabled="false">
@@ -1061,7 +1061,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menusettings.png"
+                  icon="icons/Tortoise/menusettings.png"
                   label="SVN Settings">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1077,7 +1077,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuhelp.png"
+                  icon="icons/Tortoise/menuhelp.png"
                   label="SVN Help">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1093,7 +1093,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menuabout.png"
+                  icon="icons/Tortoise/menuabout.png"
                   label="SVN About">
                <parameter
                      name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1170,7 +1170,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucommit.png"
+                     icon="icons/Tortoise/menucommit.png"
                      label="Commit..."
                      style="push">
                   <visibleWhen
@@ -1201,7 +1201,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1238,7 +1238,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff">
                   <visibleWhen
                         checkEnabled="false">
@@ -1259,7 +1259,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff with previous version">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1293,7 +1293,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menulog.png"
+                     icon="icons/Tortoise/menulog.png"
                      label="Show Log">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1330,7 +1330,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurepobrowse.png"
+                     icon="icons/Tortoise/menurepobrowse.png"
                      label="Repo-browser">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1367,7 +1367,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menushowchanged.png"
+                     icon="icons/Tortoise/menushowchanged.png"
                      label="Check for modifications">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1393,7 +1393,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurevisiongraph.png"
+                     icon="icons/Tortoise/menurevisiongraph.png"
                      label="Revision graph">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1434,7 +1434,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuresolve.png"
+                     icon="icons/Tortoise/menuresolve.png"
                      label="Resolve...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1553,7 +1553,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurevert.png"
+                     icon="icons/Tortoise/menurevert.png"
                      label="Revert...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1579,7 +1579,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucleanup.png"
+                     icon="icons/Tortoise/menucleanup.png"
                      label="Clean up...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1664,7 +1664,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucopy.png"
+                     icon="icons/Tortoise/menucopy.png"
                      label="Branch/tag...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1701,7 +1701,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuswitch.png"
+                     icon="icons/Tortoise/menuswitch.png"
                      label="Switch...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1738,7 +1738,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menumerge.png"
+                     icon="icons/Tortoise/menumerge.png"
                      label="Merge...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1775,7 +1775,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuexport.png"
+                     icon="icons/Tortoise/menuexport.png"
                      label="Export...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1808,7 +1808,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menublame.png"
+                     icon="icons/Tortoise/menublame.png"
                      label="Blame...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1842,7 +1842,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuadd.png"
+                     icon="icons/Tortoise/menuadd.png"
                      label="Add...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1898,7 +1898,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menudiff.png"
+                     icon="icons/Tortoise/menudiff.png"
                      label="Create patch...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1924,7 +1924,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-                     icon="icons/TortoiseSVN/menupatch.png"
+                     icon="icons/Tortoise/menupatch.png"
                      label="Apply patch...">
                   <visibleWhen
                         checkEnabled="false">
@@ -1975,7 +1975,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menusettings.png"
+                     icon="icons/Tortoise/menusettings.png"
                      label="Settings">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1992,7 +1992,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuhelp.png"
+                     icon="icons/Tortoise/menuhelp.png"
                      label="Help">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -2009,7 +2009,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menuabout.png"
+                     icon="icons/Tortoise/menuabout.png"
                      label="About">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -2060,7 +2060,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                  icon="icons/TortoiseGit/menucommit.png"
+                  icon="icons/Tortoise/menucommit.png"
                   label="Git Commit..."
                   style="push">
                <visibleWhen
@@ -2166,7 +2166,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff"
                      style="push">
                   <parameter
@@ -2191,7 +2191,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff"
                      style="push">
                   <visibleWhen
@@ -2203,7 +2203,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff with previous version"
                      style="push">
                   <parameter
@@ -2221,7 +2221,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menublame.png"
+                     icon="icons/Tortoise/menublame.png"
                      label="Blame"
                      style="push">
                   <parameter
@@ -2250,7 +2250,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menulog.png"
+                     icon="icons/Tortoise/menulog.png"
                      label="Show log"
                      style="push">
                   <parameter
@@ -2264,7 +2264,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menulog.png"
+                     icon="icons/Tortoise/menulog.png"
                      label="Show Reflog"
                      style="push">
                   <parameter
@@ -2278,7 +2278,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurepobrowse.png"
+                     icon="icons/Tortoise/menurepobrowse.png"
                      label="Browse References"
                      style="push">
                   <parameter
@@ -2306,7 +2306,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurevisiongraph.png"
+                     icon="icons/Tortoise/menurevisiongraph.png"
                      label="Revision graph"
                      style="push">
                   <parameter
@@ -2320,7 +2320,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurepobrowse.png"
+                     icon="icons/Tortoise/menurepobrowse.png"
                      label="Repo-browser"
                      style="push">
                   <parameter
@@ -2334,7 +2334,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menushowchanged.png"
+                     icon="icons/Tortoise/menushowchanged.png"
                      label="Check for modifications"
                      style="push">
                   <parameter
@@ -2362,7 +2362,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucommit.png"
+                     icon="icons/Tortoise/menucommit.png"
                      label="Stash Save"
                      style="push">
                   <parameter
@@ -2402,7 +2402,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuresolve.png"
+                     icon="icons/Tortoise/menuresolve.png"
                      label="Resolve..."
                      style="push">
                   <parameter
@@ -2416,7 +2416,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurevert.png"
+                     icon="icons/Tortoise/menurevert.png"
                      label="Revert..."
                      style="push">
                   <parameter
@@ -2430,7 +2430,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucleanup.png"
+                     icon="icons/Tortoise/menucleanup.png"
                      label="Clean up..."
                      style="push">
                   <parameter
@@ -2448,7 +2448,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuswitch.png"
+                     icon="icons/Tortoise/menuswitch.png"
                      label="Switch/Checkout..."
                      style="push">
                   <parameter
@@ -2462,7 +2462,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menumerge.png"
+                     icon="icons/Tortoise/menumerge.png"
                      label="Merge..."
                      style="push">
                   <parameter
@@ -2476,7 +2476,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucopy.png"
+                     icon="icons/Tortoise/menucopy.png"
                      label="Create Branch..."
                      style="push">
                   <parameter
@@ -2504,7 +2504,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuexport.png"
+                     icon="icons/Tortoise/menuexport.png"
                      label="Export..."
                      style="push">
                   <parameter
@@ -2522,7 +2522,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuadd.png"
+                     icon="icons/Tortoise/menuadd.png"
                      label="Add..."
                      style="push">
                   <parameter
@@ -2540,7 +2540,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuadd.png"
+                     icon="icons/Tortoise/menuadd.png"
                      label="Submodule Add..."
                      style="push">
                   <parameter
@@ -2558,7 +2558,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menudiff.png"
+                     icon="icons/Tortoise/menudiff.png"
                      label="Create Patch Serial..."
                      style="push">
                   <parameter
@@ -2572,7 +2572,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
-                     icon="icons/TortoiseGit/menupatch.png"
+                     icon="icons/Tortoise/menupatch.png"
                      label="Apply Patch Serial..."
                      style="push">
                </command>
@@ -2582,7 +2582,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuabout.png"
+                     icon="icons/Tortoise/menuabout.png"
                      label="About"
                      style="push">
                   <parameter
@@ -2592,7 +2592,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuhelp.png"
+                     icon="icons/Tortoise/menuhelp.png"
                      label="Help"
                      style="push">
                   <parameter
@@ -2602,7 +2602,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menusettings.png"
+                     icon="icons/Tortoise/menusettings.png"
                      label="Settings"
                      style="push">
                   <parameter
@@ -2620,7 +2620,7 @@
             </separator>
             <command
                   commandId="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
-                  icon="icons/TortoiseGit/menucommit.png"
+                  icon="icons/Tortoise/menucommit.png"
                   label="Hg Commit..."
                   style="push">
                <visibleWhen
