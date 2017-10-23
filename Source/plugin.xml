@@ -2497,6 +2497,18 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUREPOBROWSE"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2956,6 +2968,17 @@
             </or>
             <reference
                   definitionId="TortoiseGitPossibleAtCurrentItem">
+            </reference>
+         </and>
+      </definition>
+      <definition
+            id="OneFolderSelectedInGitWorkingCopy">
+         <and>
+            <reference
+                  definitionId="TortoiseGitPossibleAtCurrentItem">
+            </reference>
+            <reference
+                  definitionId="ActiveMenuSelectionProvidesOneFolder">
             </reference>
          </and>
       </definition>
