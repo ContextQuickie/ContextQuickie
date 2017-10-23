@@ -2157,6 +2157,18 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUFETCH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2171,6 +2183,18 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUPUSH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit1"
@@ -2191,14 +2215,26 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                     </or>
+                    <and>
+                       <or>
+                          <reference
+                                definitionId="ActivePartIsEditorAndProvidesFile">
+                          </reference>
+                          <reference
+                                definitionId="ActiveMenuSelectionProvidesOneFile">
+                          </reference>
+                          <reference
+                                definitionId="ActiveMenuSelectionProvidesOneFolder">
+                          </reference>
+                       </or>
+                       <reference
+                             definitionId="TortoiseGitPossibleAtCurrentItem">
+                       </reference>
+                       <test
+                             args="MENUDIFF"
+                             property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                       </test>
+                     </and>
                   </visibleWhen>
                </command>
                <command

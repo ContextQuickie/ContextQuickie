@@ -204,7 +204,7 @@ public final class TortoiseGitMenuItems
   public static final long MENUDIFFLATER = 0x0000020000000000L;
 
   /**
-   * TODO menu entry.
+   * Fetch menu entry.
    */
   public static final long MENUFETCH = 0x0000040000000000L;
 
