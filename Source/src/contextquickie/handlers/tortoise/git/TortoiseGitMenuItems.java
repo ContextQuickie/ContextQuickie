@@ -99,7 +99,7 @@ public final class TortoiseGitMenuItems
   public static final long MENUCONFLICTEDITOR = 0x0000000000040000;
 
   /**
-   * TODO menu entry.
+   * Browse References menu entry.
    */
   public static final long MENUREFBROWSE = 0x0000000000080000;
 
