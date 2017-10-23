@@ -2448,24 +2448,13 @@
                   <visibleWhen
                         checkEnabled="false">
                      <and>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
-                        <reference
-                              definitionId="TortoiseGitPossibleAtCurrentItem">
-                        </reference>
                         <test
                               args="MENUDAEMON"
                               property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
                         </test>
+                        <reference
+                              definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
+                        </reference>
                      </and>
                   </visibleWhen>
                </command>
@@ -2482,6 +2471,18 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUREVISIONGRAPH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                        <reference
+                              definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2938,6 +2939,25 @@
                </iterate>
             </and>
          </with>
+      </definition>
+      <definition
+            id="OneFileOrOneFolderSelectedInGitWorkingCopy">
+         <and>
+            <or>
+               <reference
+                     definitionId="ActivePartIsEditorAndProvidesFile">
+               </reference>
+               <reference
+                     definitionId="ActiveMenuSelectionProvidesOneFile">
+               </reference>
+               <reference
+                     definitionId="ActiveMenuSelectionProvidesOneFolder">
+               </reference>
+            </or>
+            <reference
+                  definitionId="TortoiseGitPossibleAtCurrentItem">
+            </reference>
+         </and>
       </definition>
       <definition
             id="TortoiseSvnPossibleAtCurrentItem">
