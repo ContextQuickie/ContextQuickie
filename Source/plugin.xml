@@ -2244,9 +2244,18 @@
                      style="push">
                   <visibleWhen
                         checkEnabled="false">
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
-                     </reference>
+                     <and>
+	                     <reference
+	                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
+	                     </reference>
+                      <reference
+                            definitionId="TortoiseGitPossibleAtCurrentItem">
+                      </reference>
+                      <test
+                            args="MENUDIFF"
+                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                      </test>
+	                 </and>
                   </visibleWhen>
                </command>
                <command
