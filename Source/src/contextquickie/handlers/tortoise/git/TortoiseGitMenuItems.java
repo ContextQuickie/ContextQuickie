@@ -159,7 +159,7 @@ public final class TortoiseGitMenuItems
   public static final long MENULOGSUBMODULE = 0x0000000100000000L;
 
   /**
-   * TODO menu entry.
+   * Diff with previous version menu entry.
    */
   public static final long MENUPREVDIFF = 0x0000000200000000L;
 
