@@ -2350,6 +2350,29 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <or>
+                           <reference
+                                 definitionId="ActivePartIsEditorAndProvidesFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFile">
+                           </reference>
+                           <reference
+                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
+                           </reference>
+                        </or>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENULOG"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
