@@ -2131,6 +2131,18 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUPULL"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2818,7 +2830,6 @@
                   property="contextquickie.propertyHandlers.TortoiseGitEnabled">
             </test>
             <test
-                  args="true"
                   property="contextquickie.propertyHandlers.TortoiseGitWorkingCopyDetect">
             </test>
             <or>
