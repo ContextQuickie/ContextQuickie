@@ -2314,14 +2314,23 @@
                   </parameter>
                   <visibleWhen
                         checkEnabled="false">
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                     </or>
+                     <and>
+                       <or>
+                          <reference
+                                definitionId="ActivePartIsEditorAndProvidesFile">
+                          </reference>
+                          <reference
+                                definitionId="ActiveMenuSelectionProvidesOneFile">
+                          </reference>
+                       </or>
+                      <reference
+                            definitionId="TortoiseGitPossibleAtCurrentItem">
+                      </reference>
+                      <test
+                            args="MENUBLAME"
+                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                      </test>
+                     </and>
                   </visibleWhen>
                </command>
                <separator
