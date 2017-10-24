@@ -2040,19 +2040,8 @@
                   <visibleWhen
                         checkEnabled="false">
                     <and>
-                       <or>
-                          <reference
-                                definitionId="ActivePartIsEditorAndProvidesFile">
-                          </reference>
-                          <reference
-                                definitionId="ActiveMenuSelectionProvidesOneFile">
-                          </reference>
-                          <reference
-                                definitionId="ActiveMenuSelectionProvidesOneFolder">
-                          </reference>
-                       </or>
                        <reference
-                             definitionId="TortoiseGitPossibleAtCurrentItem">
+                             definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
                        </reference>
                        <test
                              args="MENUDIFF"
@@ -2102,19 +2091,8 @@
                   <visibleWhen
                         checkEnabled="false">
                      <and>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
                         <reference
-                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                              definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
                         </reference>
                         <test
                               args="MENUPREVDIFF"
@@ -2177,19 +2155,8 @@
                   <visibleWhen
                         checkEnabled="false">
                      <and>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
                         <reference
-                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                              definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
                         </reference>
                         <test
                               args="MENULOG"
@@ -2244,15 +2211,12 @@
                         checkEnabled="false">
                      <and>
                         <reference
-                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
                         </reference>
                         <test
                               args="MENUREFBROWSE"
                               property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
                         </test>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
                      </and>
                   </visibleWhen>
                </command>
