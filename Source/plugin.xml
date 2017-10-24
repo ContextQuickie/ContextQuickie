@@ -2264,7 +2264,8 @@
                      <and>
                         <test
                               args="MENUREVISIONGRAPH"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                         <reference
                               definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
@@ -2338,6 +2339,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUREBASE"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2352,6 +2366,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUSTASHSAVE"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit3"
@@ -2374,6 +2401,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
                         value="/start">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUBISECT"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit4"
