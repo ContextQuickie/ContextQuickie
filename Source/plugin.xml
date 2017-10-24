@@ -660,7 +660,7 @@
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
                      <reference
-                           definitionId="ActiveMenuSelectionProvidesOneFolder">
+                           definitionId="ActiveMenuSelectionProvidesOnlyFolders">
                      </reference>
                   </and>
                </visibleWhen>
@@ -1458,7 +1458,7 @@
                               value="false">
                         </test>
                         <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
+                              definitionId="ActiveMenuSelectionProvidesOnlyFolders">
                         </reference>
                      </and>
                   </visibleWhen>
@@ -1963,7 +1963,8 @@
                         </reference>
                         <test
                               args="MENUPULL"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -1989,7 +1990,8 @@
                         </reference>
                         <test
                               args="MENUFETCH"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -2015,7 +2017,8 @@
                         </reference>
                         <test
                               args="MENUPUSH"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -2045,7 +2048,8 @@
                        </reference>
                        <test
                              args="MENUDIFF"
-                             property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                             property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                             value="false">
                        </test>
                      </and>
                   </visibleWhen>
@@ -2066,7 +2070,8 @@
                       </reference>
                       <test
                             args="MENUDIFF"
-                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                            value="false">
                       </test>
 	                 </and>
                   </visibleWhen>
@@ -2096,7 +2101,8 @@
                         </reference>
                         <test
                               args="MENUPREVDIFF"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -2130,7 +2136,8 @@
                       </reference>
                       <test
                             args="MENUBLAME"
-                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                            property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                            value="false">
                       </test>
                      </and>
                   </visibleWhen>
@@ -2160,7 +2167,8 @@
                         </reference>
                         <test
                               args="MENULOG"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -2186,7 +2194,8 @@
                         </reference>
                         <test
                               args="MENUREFLOG"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                         <reference
                               definitionId="ActiveMenuSelectionProvidesOneFolder">
@@ -2215,7 +2224,8 @@
                         </reference>
                         <test
                               args="MENUREFBROWSE"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                      </and>
                   </visibleWhen>
@@ -2238,7 +2248,8 @@
                      <and>
                         <test
                               args="MENUDAEMON"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                         <reference
                               definitionId="OneFileOrOneFolderSelectedInGitWorkingCopy">
@@ -2291,7 +2302,8 @@
                      <and>
                         <test
                               args="MENUREPOBROWSE"
-                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu">
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
                         </test>
                         <reference
                               definitionId="OneFolderSelectedInGitWorkingCopy">
@@ -2432,6 +2444,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENURESOLVE"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2446,6 +2471,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUREVERT"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2460,6 +2498,22 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUCLEANUP"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOnlyFolders">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit5"
@@ -2478,6 +2532,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUSWITCH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2492,6 +2559,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUMERGE"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2506,6 +2586,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUCOPY"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2520,6 +2613,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUTAG"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2534,6 +2640,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUEXPORT"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit6"
@@ -2778,6 +2897,26 @@
                <count
                      value="1">
                </count>
+               <iterate>
+                  <or>
+                     <test
+                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                           value="IResource.FOLDER">
+                     </test>
+                     <test
+                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+                           value="IResource.PROJECT">
+                     </test>
+                  </or>
+               </iterate>
+            </and>
+         </with>
+      </definition>
+      <definition
+            id="ActiveMenuSelectionProvidesOnlyFolders">
+         <with
+               variable="activeMenuSelection">
+            <and>
                <iterate>
                   <or>
                      <test

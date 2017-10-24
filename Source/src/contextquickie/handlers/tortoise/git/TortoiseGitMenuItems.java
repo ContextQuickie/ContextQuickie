@@ -59,7 +59,7 @@ public final class TortoiseGitMenuItems
   public static final long MENUCREATEREPOS = 0x0000000000000400;
 
   /**
-   * Copy menu entry.
+   * Create branch menu entry.
    */
   public static final long MENUCOPY = 0x0000000000000800;
 
@@ -184,7 +184,7 @@ public final class TortoiseGitMenuItems
   public static final long MENUCLONE = 0x0000002000000000L;
 
   /**
-   * TODO menu entry.
+   * Create tag menu entry.
    */
   public static final long MENUTAG = 0x0000004000000000L;
 
