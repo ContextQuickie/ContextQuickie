@@ -350,19 +350,8 @@
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
                      <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           definitionId="OneFileOrOneFolderSelectedInSvnWorkingCopy">
                      </reference>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -435,23 +424,12 @@
                      checkEnabled="false">
                   <and>
                      <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           definitionId="OneFileOrOneFolderSelectedInSvnWorkingCopy">
                      </reference>
                      <test
                            args="MENULOG"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -471,23 +449,12 @@
                      checkEnabled="false">
                   <and>
                      <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           definitionId="OneFileOrOneFolderSelectedInSvnWorkingCopy">
                      </reference>
                      <test
                            args="MENUREPOBROWSE"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -532,23 +499,12 @@
                      checkEnabled="false">
                   <and>
                      <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           definitionId="OneFileOrOneFolderSelectedInSvnWorkingCopy">
                      </reference>
                      <test
                            args="MENUREVISIONGRAPH"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -622,23 +578,12 @@
                      checkEnabled="false">
                   <and>
                      <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
+                           definitionId="OneFileOrOneFolderSelectedInSvnWorkingCopy">
                      </reference>
                      <test
                            args="MENURENAME"
                            property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
                      </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
                   </and>
                </visibleWhen>
             </command>
@@ -3103,6 +3048,25 @@
                      definitionId="ActivePartIsEditorAndProvidesFile">
                </reference>
             </or>
+         </and>
+      </definition>
+      <definition
+            id="OneFileOrOneFolderSelectedInSvnWorkingCopy">
+         <and>
+            <or>
+               <reference
+                     definitionId="ActivePartIsEditorAndProvidesFile">
+               </reference>
+               <reference
+                     definitionId="ActiveMenuSelectionProvidesOneFile">
+               </reference>
+               <reference
+                     definitionId="ActiveMenuSelectionProvidesOneFolder">
+               </reference>
+            </or>
+            <reference
+                  definitionId="TortoiseSvnPossibleAtCurrentItem">
+            </reference>
          </and>
       </definition>
    </extension>
