@@ -2671,6 +2671,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUADD"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit7"
@@ -2689,6 +2702,19 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUSUBADD"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit8"
@@ -2707,12 +2733,38 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
                         value="true">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUFORMATPATCH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
                      icon="icons/Tortoise/menupatch.png"
                      label="Apply Patch Serial..."
                      style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <test
+                              args="MENUAPPLYPATCH"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                        <reference
+                              definitionId="OneFolderSelectedInGitWorkingCopy">
+                        </reference>
+                     </and>
+                  </visibleWhen>
                </command>
                <separator
                      name="SeparatorTortoiseGit9"
@@ -2727,6 +2779,14 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="about">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <test
+                           args="MENUABOUT"
+                           property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                           value="false">
+                     </test>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2737,6 +2797,14 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="help">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <test
+                           args="MENUHELP"
+                           property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                           value="false">
+                     </test>
+                  </visibleWhen>
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
@@ -2747,6 +2815,14 @@
                         name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
                         value="settings">
                   </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <test
+                           args="MENUSETTINGS"
+                           property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                           value="false">
+                     </test>
+                  </visibleWhen>
                </command>
             </menu>
          </menuContribution>
