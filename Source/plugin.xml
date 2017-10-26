@@ -1862,46 +1862,6 @@
                   name="SeparatorBeforeTortoiseGit"
                   visible="true">
             </separator>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                  icon="icons/TortoiseGit/menurelocate.png"
-                  label="Git Sync..."
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseGitPossibleAtCurrentItem">
-                  </reference>
-               </visibleWhen>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
-                     value="sync">
-               </parameter>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                  icon="icons/Tortoise/menucommit.png"
-                  label="Git Commit..."
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseGitPossibleAtCurrentItem">
-                  </reference>
-               </visibleWhen>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
-                     value="commit">
-               </parameter>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
             <menu
                   icon="icons/TortoiseGit/tsvnmenufolder.png"
                   label="TortoiseGit">
@@ -2022,6 +1982,64 @@
                         </test>
                      </and>
                   </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/TortoiseGit/menurelocate.png"
+                     label="Sync..."
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUSYNC"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="sync">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+               </command>
+               <separator
+                     name="SeparatorTortoiseGit0"
+                     visible="true">
+               </separator>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/Tortoise/menucommit.png"
+                     label="Commit..."
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <and>
+                        <reference
+                              definitionId="TortoiseGitPossibleAtCurrentItem">
+                        </reference>
+                        <test
+                              args="MENUCOMMIT"
+                              property="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
+                              value="false">
+                        </test>
+                     </and>
+                  </visibleWhen>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="commit">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
                </command>
                <separator
                      name="SeparatorTortoiseGit1"
