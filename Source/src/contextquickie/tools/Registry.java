@@ -41,7 +41,6 @@ public final class Registry
     }
     catch (IOException e)
     {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -70,7 +69,6 @@ public final class Registry
       }
       catch (IOException e)
       {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }

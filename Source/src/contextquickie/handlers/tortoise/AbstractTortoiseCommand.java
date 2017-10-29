@@ -49,21 +49,6 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   }
 
   /**
-   * @return The name of the "command Id" parameter.
-   */
-  protected abstract String getCommandIdName();
-
-  /**
-   * @return The name of the "requires path name" parameter.
-   */
-  protected abstract String getRequiresPathName();
-
-  /**
-   * @return The name of the "Parameter1" parameter.
-   */
-  protected abstract String getParameter1Name();
-
-  /**
    * Gets the working copy root directory of the specific directory.
    * 
    * @param path
@@ -77,9 +62,9 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   public final Object execute(final ExecutionEvent event)
   {
     final List<String> arguments = new ArrayList<String>();
-    arguments.add("/command:" + event.getParameter(this.getCommandIdName()));
+    arguments.add("/command:" + event.getParameter(TortoiseMenuConstants.COMMAND_ID));
 
-    final String requiresPathString = event.getParameter(this.getRequiresPathName());
+    final String requiresPathString = event.getParameter(TortoiseMenuConstants.REQUIRES_PATH_ID);
     if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString)))
     {
       final Collection<String> currentResources = this.getSelectedResources(event);
@@ -87,7 +72,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
       arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
-    final String parameter1 = event.getParameter(this.getParameter1Name());
+    final String parameter1 = event.getParameter(TortoiseMenuConstants.PARAMETER_1_ID);
     if (parameter1 != null)
     {
       arguments.add(parameter1);

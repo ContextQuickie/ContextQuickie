@@ -22,30 +22,8 @@ public class TortoiseHgCommand extends AbstractTortoiseCommand
   }
 
   @Override
-  protected final String getCommandIdName()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  protected final String getRequiresPathName()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  protected final String getParameter1Name()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    // TODO Auto-generated method stub
     return null;
   }
 
