@@ -1,6 +1,7 @@
 package contextquickie.handlers.tortoise.git;
 
 import contextquickie.handlers.tortoise.AbstractTortoiseCommand;
+import contextquickie.handlers.tortoise.TortoiseWorkingCopyDetect;
 import contextquickie.preferences.PreferenceConstants;
 
 import org.eclipse.core.runtime.IPath;
@@ -24,6 +25,6 @@ public class TortoiseGitCommand extends AbstractTortoiseCommand
   @Override
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    return new TortoiseGitWorkingCopyDetect().getWorkingCopyRoot(path);
+    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, ".git");
   }
 }

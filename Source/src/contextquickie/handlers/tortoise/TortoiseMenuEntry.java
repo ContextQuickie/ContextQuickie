@@ -31,39 +31,31 @@ public class TortoiseMenuEntry
    * The command which will be passed to the Tortoise program.
    */
   private String entryCommand;
-  
+
   /**
    * A value indicating whether the path must be passed to the Tortoise program.
    */
-  private Boolean entryRequiresPath;
+  private Boolean entryRequiresPath = true;
 
   /**
-   * Default constructor.
-   * 
-   * @param entryLabel
-   *          The label of the entry.
-   * @param entryCommandId
-   *          The command ID of the entry.
-   * @param entryMenuId
-   *          The menu identifier.
-   * @param icon
-   *          The menu icon.
-   * @param command
-   *          The command which will be passed to the Tortoise program.
-   * @param requiresPath
-   *          A value indicating whether the path must be passed to the Tortoise
-   *          program.
+   * A value indicating whether this entry is visible within a working copy.
    */
-  public TortoiseMenuEntry(final String entryLabel, final String entryCommandId, final long entryMenuId, final String icon, final String command,
-      final Boolean requiresPath)
-  {
-    this.setLabel(entryLabel);
-    this.setCommandId(entryCommandId);
-    this.setIconPath(icon);
-    this.setMenuId(entryMenuId);
-    this.setCommand(command);
-    this.setEntryRequiresPath(requiresPath);
-  }
+  private boolean isVisibleInWorkingCopy = true;
+
+  /**
+   * A value indicating whether this entry is visible without a working copy.
+   */
+  private boolean isVisibleWithoutWorkingCopy;
+
+  /**
+   * The maximum number of selected files to display this entry.
+   */
+  private int maxFileCount = Integer.MAX_VALUE;
+
+  /**
+   * The maximum number of selected folders to display this entry.
+   */
+  private int maxFolderCount = Integer.MAX_VALUE;
 
   /**
    * Gets the label of the instance.
@@ -80,10 +72,12 @@ public class TortoiseMenuEntry
    * 
    * @param value
    *          the label to set
+   * @return The instance with the changed value.
    */
-  public void setLabel(final String value)
+  public TortoiseMenuEntry setLabel(final String value)
   {
     this.label = value;
+    return this;
   }
 
   /**
@@ -101,10 +95,12 @@ public class TortoiseMenuEntry
    * 
    * @param value
    *          the iconPath to set
+   * @return The instance with the changed value.
    */
-  public void setIconPath(final String value)
+  public TortoiseMenuEntry setIconPath(final String value)
   {
     this.iconPath = value;
+    return this;
   }
 
   /**
@@ -122,10 +118,12 @@ public class TortoiseMenuEntry
    * 
    * @param value
    *          the commandId to set
+   * @return The instance with the changed value.
    */
-  public void setCommandId(final String value)
+  public TortoiseMenuEntry setCommandId(final String value)
   {
     this.commandId = value;
+    return this;
   }
 
   /**
@@ -143,10 +141,12 @@ public class TortoiseMenuEntry
    * 
    * @param value
    *          the menuId to set
+   * @return The instance with the changed value.
    */
-  public void setMenuId(final long value)
+  public TortoiseMenuEntry setMenuId(final long value)
   {
     this.menuId = value;
+    return this;
   }
 
   /**
@@ -160,14 +160,17 @@ public class TortoiseMenuEntry
   /**
    * @param value
    *          The command which will be passed to the Tortoise program.
+   * @return The instance with the changed value.
    */
-  public void setCommand(final String value)
+  public TortoiseMenuEntry setCommand(final String value)
   {
     this.entryCommand = value;
+    return this;
   }
 
   /**
-   * @return A value indicating whether the path must be passed to the Tortoise program.
+   * @return A value indicating whether the path must be passed to the Tortoise
+   *         program.
    */
   public Boolean getEntryRequiresPath()
   {
@@ -175,10 +178,95 @@ public class TortoiseMenuEntry
   }
 
   /**
-   * @param value A value indicating whether the path must be passed to the Tortoise program.
+   * @param value
+   *          A value indicating whether the path must be passed to the Tortoise
+   *          program.
+   * @return The instance with the changed value.
    */
-  public void setEntryRequiresPath(final Boolean value)
+  public TortoiseMenuEntry setEntryRequiresPath(final Boolean value)
   {
     this.entryRequiresPath = value;
+    return this;
+  }
+
+  /**
+   * @param value
+   *          A value indicating whether this entry is visible within an working
+   *          copy.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setIsVisibleInWorkingCopy(final boolean value)
+  {
+    this.isVisibleInWorkingCopy = value;
+    return this;
+  }
+
+  /**
+   * 
+   * @return A value indicating whether this entry is visible within an working
+   *         copy.
+   */
+  public boolean isVisibleInWorkingCopy()
+  {
+    return this.isVisibleInWorkingCopy;
+  }
+
+  /**
+   * @return The maximum number of selected folders to display this entry.
+   */
+  public int getMaxFolderCount()
+  {
+    return this.maxFolderCount;
+  }
+
+  /**
+   * @param value
+   *          The maximum number of selected folders to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMaxFolderCount(final int value)
+  {
+    this.maxFolderCount = value;
+    return this;
+  }
+
+  /**
+   * @return The maximum number of selected files to display this entry.
+   */
+  public int getMaxFileCount()
+  {
+    return this.maxFileCount;
+  }
+
+  /**
+   * @param value
+   *          The maximum number of selected files to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMaxFileCount(final int value)
+  {
+    this.maxFileCount = value;
+    return this;
+  }
+
+  /**
+   * @return A value indicating whether this entry is visible without a working
+   *         copy.
+   */
+  public boolean isVisibleWithoutWorkingCopy()
+  {
+    return isVisibleWithoutWorkingCopy;
+  }
+
+  /**
+   * @param value
+   *          A value indicating whether this entry is visible without a working
+   *          copy.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setVisibleWithoutWorkingCopy(final boolean value)
+  {
+    this.isVisibleWithoutWorkingCopy = value;
+    return this;
   }
 }

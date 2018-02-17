@@ -65,7 +65,7 @@
     <module name="CustomImportOrder"/>
     <module name="AnonInnerLength"/>
     <module name="ExecutableStatementCount">
-      <property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF"/>
+      <property name="tokens" value="INSTANCE_INIT,METHOD_DEF,CTOR_DEF"/>
     </module>
     <module name="LineLength">
       <property name="max" value="150"/>
@@ -95,7 +95,9 @@
       <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,DO_WHILE,EQUAL,GE,GT,LAMBDA,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
     </module>
     <module name="EmptyLineSeparator"/>
-    <module name="SeparatorWrap"/>
+    <module name="SeparatorWrap">
+      <property name="tokens" value="COMMA"/>
+    </module>
     <module name="SingleSpaceSeparator"/>
     <module name="Regexp"/>
     <module name="RegexpSinglelineJava"/>
@@ -185,7 +187,9 @@
     <module name="ClassDataAbstractionCoupling"/>
     <module name="ClassFanOutComplexity"/>
     <module name="CyclomaticComplexity"/>
-    <module name="JavaNCSS"/>
+    <module name="JavaNCSS">
+      <property name="methodMaximum" value="100"/>
+    </module>
     <module name="NPathComplexity"/>
     <module name="ArrayTypeStyle"/>
     <module name="DescendantToken"/>

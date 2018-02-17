@@ -43,6 +43,11 @@ public class TortoiseMenuSettings
    * The default value of the registry key ContextMenuEntriesHigh.
    */
   private long contextMenuEntriesHighDefault;
+  
+  /**
+   * The name of the folder indicating a working copy.
+   */
+  private String workingCopyFolderName;
 
   /**
    * @return The path to the icon for the sub menu.
@@ -154,5 +159,21 @@ public class TortoiseMenuSettings
   public void setContextMenuEntriesHighDefault(final long value)
   {
     this.contextMenuEntriesHighDefault = value;
+  }
+
+  /**
+   * @return The name of the folder indicating a working copy.
+   */
+  public String getWorkingCopyFolderName()
+  {
+    return workingCopyFolderName;
+  }
+
+  /**
+   * @param value The name of the folder indicating a working copy.
+   */
+  public void setWorkingCopyFolderName(final String value)
+  {
+    this.workingCopyFolderName = value;
   }
 }

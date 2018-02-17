@@ -4,7 +4,8 @@ import contextquickie.handlers.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.handlers.tortoise.TortoiseMenuEntry;
 import contextquickie.handlers.tortoise.TortoiseMenuSettings;
 import contextquickie.preferences.PreferenceConstants;
-import java.util.Arrays;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,90 +16,340 @@ import java.util.List;
 public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 {
   /**
-   * The default command ID.
-   */
-  private static final String DEFAULT_COMMAND_ID = "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand";
-  
-  /**
-   * Path to the "Update" icon.
-   */
-  private static final String MENU_UPDATE_ICON_PATH = "TortoiseSVN/menuupdate.png";
-  
-  /**
-   * Path to the "Compare" icon.
-   */
-  private static final String MENU_COMPARE_ICON_PATH = "Tortoise/menucompare.png";
-  
-  /**
-   * Path to the "Merge" icon.
-   */
-  private static final String MENU_MERGE_ICON_PATH = "Tortoise/menumerge.png";
-  
-  /**
-   * Path to the "Delete" icon.
-   */
-  private static final String MENU_DELETE_ICON_PATH = "TortoiseSVN/menudelete.png";
-
-  /**
    * Tortoise SVN menu configuration.
    */
-  private static List<TortoiseMenuEntry> entries = Arrays.asList(
-      new TortoiseMenuEntry("Chekout...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCHECKOUT, "Tortoise/menucheckout.png", "checkout", true),
-      new TortoiseMenuEntry("Update", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUUPDATE, MENU_UPDATE_ICON_PATH, "update", true),
-      new TortoiseMenuEntry("Commit", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCOMMIT, "Tortoise/menucommit.png", "commit", true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry("Diff", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUDIFF, MENU_COMPARE_ICON_PATH, "", true),
-      new TortoiseMenuEntry("Diff later", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUDIFFLATER, MENU_COMPARE_ICON_PATH, "diff", true),
-      new TortoiseMenuEntry("Diff with \"%ls\"", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUDIFFNOW, MENU_COMPARE_ICON_PATH, "", true),
-      new TortoiseMenuEntry("Diff with previous version", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUPREVDIFF, MENU_COMPARE_ICON_PATH,
-          "prevdiff", true),
-      new TortoiseMenuEntry("Diff with URL", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUURLDIFF, MENU_COMPARE_ICON_PATH, "", true),
-      new TortoiseMenuEntry("Show log", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENULOG, "Tortoise/menulog.png", "log", true),
-      new TortoiseMenuEntry("Repo-browser", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUREPOBROWSE, "Tortoise/menurepobrowse.png", "repobrowser",
-          true),
-      new TortoiseMenuEntry("Check for modifications", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUSHOWCHANGED, "Tortoise/menushowchanged.png",
-          "repostatus", true),
-      new TortoiseMenuEntry("Revision graph", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUREVISIONGRAPH, "Tortoise/menurevisiongraph.png",
-          "revisiongraph", true),
-      new TortoiseMenuEntry("Edit conflicts", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCONFLICTEDITOR, MENU_COMPARE_ICON_PATH, "", true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry("Resolve...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENURESOLVE, "Tortoise/menuresolve.png", "resolve", true),
-      new TortoiseMenuEntry("Update to revision...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUUPDATEEXT, MENU_UPDATE_ICON_PATH, "/rev",
-          true),
-      new TortoiseMenuEntry("Rename...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENURENAME, "TortoiseSVN/menurename.png", "rename", true),
-      new TortoiseMenuEntry("Delete", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUREMOVE, MENU_DELETE_ICON_PATH, "remove", true),
-      new TortoiseMenuEntry("Revert...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUREVERT, "Tortoise/menurevert.png", "revert", true),
-      new TortoiseMenuEntry("Delete unversioned items...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUDELUNVERSIONED, MENU_DELETE_ICON_PATH,
-          "", true),
-      new TortoiseMenuEntry("Clean up...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCLEANUP, "Tortoise/menucleanup.png", "cleanup", true),
-      new TortoiseMenuEntry("Get lock...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENULOCK, "TortoiseSVN/menulock.png", "lock", true),
-      new TortoiseMenuEntry("Release lock...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUUNLOCK, "TortoiseSVN/menuunlock.png", "unlock", true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry("Branch/tag...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCOPY, "Tortoise/menucopy.png", "copy", true),
-      new TortoiseMenuEntry("Switch...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUSWITCH, "Tortoise/menuswitch.png", "switch", true),
-      new TortoiseMenuEntry("Merge...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUMERGE, MENU_MERGE_ICON_PATH, "merge", true),
-      new TortoiseMenuEntry("Merge all..", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUMERGEALL, MENU_MERGE_ICON_PATH, "", true),
-      new TortoiseMenuEntry("Export...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUEXPORT, "Tortoise/menuexport.png", "export", true),
-      new TortoiseMenuEntry("Relocate...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENURELOCATE, "TortoiseSVN/menurelocate.png", "", true),
-      new TortoiseMenuEntry("Create repository here", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCREATEREPOS, "TortoiseSVN/menucreaterepos.png", "",
-          true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry("Add...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUADD, "Tortoise/menuadd.png", "add", true),
-      new TortoiseMenuEntry("Import...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUIMPORT, "TortoiseSVN/menuimport.png", "", true),
-      new TortoiseMenuEntry("Blame...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUBLAME, "Tortoise/menublame.png", "blame", true),
-      new TortoiseMenuEntry("Copy URL to clipboard", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCOPYURL, "TortoiseSVN/copy.png", "", true),
-      new TortoiseMenuEntry("Add to ignore list", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUIGNORE, "TortoiseSVN/menuignore.png", "", true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry(
-          "Create patch...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCREATEPATCH, "Tortoise/menudiff.png", "createpatch", true),
-      new TortoiseMenuEntry("Apply patch...", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUAPPLYPATCH, "Tortoise/menupatch.png", "", true),
-      new TortoiseMenuEntry("Properties", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUPROPERTIES, "TortoiseSVN/menuproperties.png", "properties",
-          true),
-      new TortoiseMenuEntry(null, null, 0, null, "", true),
-      new TortoiseMenuEntry("Settings", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUSETTINGS, "Tortoise/menusettings.png", "settings", false),
-      new TortoiseMenuEntry("Help", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUHELP, "Tortoise/menuhelp.png", "help", false),
-      new TortoiseMenuEntry("About", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUABOUT, "Tortoise/menuabout.png", "about", true),
-      new TortoiseMenuEntry("Paste", DEFAULT_COMMAND_ID, TortoiseSvnMenuItems.MENUCLIPPASTE, MENU_COMPARE_ICON_PATH, "", true));
+  private static List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+  
+  static
+  {
+    final String defaultCommandId = "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand";
+    
+    // Path to the "Update" icon
+    final String menuUpdateIconPath = "TortoiseSVN/menuupdate.png";
+   
+    // Path to the "Compare" icon.
+    final String menuCompareIconPath = "Tortoise/menucompare.png";
+
+    // Path to the "Merge" icon.
+    final String menuMergeIconPath = "Tortoise/menumerge.png";
+
+    // Path to the "Delete" icon
+    final String menuDeleteIconPath = "TortoiseSVN/menudelete.png";
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Chekout...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCHECKOUT)
+        .setIconPath("Tortoise/menucheckout.png")
+        .setCommand("checkout")
+        .setIsVisibleInWorkingCopy(false)
+        .setMaxFolderCount(1)
+        .setMaxFileCount(0));
+
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Update")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUUPDATE)
+        .setIconPath(menuUpdateIconPath)
+        .setCommand("update"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Commit")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCOMMIT)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("commit"));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUDIFF)
+        .setIconPath(menuCompareIconPath)
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff later")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUDIFFLATER)
+        .setIconPath(menuCompareIconPath)
+        .setCommand("diff"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff with \"%ls\"")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUDIFFNOW)
+        .setIconPath(menuCompareIconPath)
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff with previous version")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUPREVDIFF)
+        .setIconPath(menuCompareIconPath)
+        .setCommand("prevdiff"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff with URL")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUURLDIFF)
+        .setIconPath(menuCompareIconPath)
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Show log")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENULOG)
+        .setIconPath("Tortoise/menulog.png")
+        .setCommand("log"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Repo-browser")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUREPOBROWSE)
+        .setIconPath("Tortoise/menurepobrowse.png")
+        .setCommand("repobrowser")
+        .setEntryRequiresPath(true));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Check for modifications")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUSHOWCHANGED)
+        .setIconPath("Tortoise/menushowchanged.png")
+        .setCommand("repostatus"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Revision graph")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUREVISIONGRAPH)
+        .setIconPath("Tortoise/menurevisiongraph.png")
+        .setCommand("revisiongraph"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Edit conflicts")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCONFLICTEDITOR)
+        .setIconPath(menuCompareIconPath)
+        .setCommand(""));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Resolve...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENURESOLVE)
+        .setIconPath("Tortoise/menuresolve.png")
+        .setCommand("resolve"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Update to revision...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUUPDATEEXT)
+        .setIconPath(menuUpdateIconPath)
+        .setCommand("/rev"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Rename...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENURENAME)
+        .setIconPath("TortoiseSVN/menurename.png")
+        .setCommand("rename"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Delete")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUREMOVE)
+        .setIconPath(menuDeleteIconPath)
+        .setCommand("remove"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Revert...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUREVERT)
+        .setIconPath("Tortoise/menurevert.png")
+        .setCommand("revert"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Delete unversioned items...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUDELUNVERSIONED)
+        .setIconPath(menuDeleteIconPath)
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Clean up...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCLEANUP)
+        .setIconPath("Tortoise/menucleanup.png")
+        .setCommand("cleanup"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Get lock...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENULOCK)
+        .setIconPath("TortoiseSVN/menulock.png")
+        .setCommand("lock"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Release lock...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUUNLOCK)
+        .setIconPath("TortoiseSVN/menuunlock.png")
+        .setCommand("unlock"));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Branch/tag...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCOPY)
+        .setIconPath("Tortoise/menucopy.png")
+        .setCommand("copy"));
+
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Switch...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUSWITCH)
+        .setIconPath("Tortoise/menuswitch.png")
+        .setCommand("switch"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Merge...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUMERGE)
+        .setIconPath(menuMergeIconPath)
+        .setCommand("merge"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Merge all..")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUMERGEALL)
+        .setIconPath(menuMergeIconPath)
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Export...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUEXPORT)
+        .setIconPath("Tortoise/menuexport.png")
+        .setCommand("export"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Relocate...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENURELOCATE)
+        .setIconPath("TortoiseSVN/menurelocate.png")
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Create repository here")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCREATEREPOS)
+        .setIconPath("TortoiseSVN/menucreaterepos.png")
+        .setCommand(""));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Add...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUADD)
+        .setIconPath("Tortoise/menuadd.png")
+        .setCommand("add"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Import...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUIMPORT)
+        .setIconPath("TortoiseSVN/menuimport.png")
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Blame...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUBLAME)
+        .setIconPath("Tortoise/menublame.png")
+        .setCommand("blame"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Copy URL to clipboard")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCOPYURL)
+        .setIconPath("TortoiseSVN/copy.png")
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Add to ignore list")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUIGNORE)
+        .setIconPath("TortoiseSVN/menuignore.png")
+        .setCommand(""));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Create patch...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCREATEPATCH)
+        .setIconPath("Tortoise/menudiff.png")
+        .setCommand("createpatch"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Apply patch...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUAPPLYPATCH)
+        .setIconPath("Tortoise/menupatch.png")
+        .setCommand(""));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Properties")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUPROPERTIES)
+        .setIconPath("TortoiseSVN/menuproperties.png")
+        .setCommand("properties"));
+    
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Settings")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUSETTINGS)
+        .setCommand("Tortoise/menusettings.png")
+        .setCommand("settings")
+        .setEntryRequiresPath(false)
+        .setVisibleWithoutWorkingCopy(true));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Help")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUHELP)
+        .setIconPath("Tortoise/menuhelp.png")
+        .setCommand("help")
+        .setEntryRequiresPath(false)
+        .setVisibleWithoutWorkingCopy(true));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("About")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUABOUT)
+        .setIconPath("Tortoise/menuabout.png")
+        .setCommand("about")
+        .setVisibleWithoutWorkingCopy(true));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Paste")
+        .setCommandId(defaultCommandId)
+        .setMenuId(TortoiseSvnMenuItems.MENUCLIPPASTE)
+        .setIconPath(menuCompareIconPath)
+        .setCommand(""));
+  }
 
   /**
    * The settings for the menu.
@@ -115,6 +366,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     settings.setSubMenuIconPath("TortoiseSVN/tsvnmenumultiple.png");
     settings.setSubMenuText("TortioseSVN");
     settings.setMainMenuPrefix("SVN");
+    settings.setWorkingCopyFolderName(".svn");
     settings.setRegistryUserPath("HKEY_CURRENT_USER\\Software\\TortoiseSVN");
     settings.setContextMenuEntriesDefault(TortoiseSvnMenuItems.MENUCHECKOUT | TortoiseSvnMenuItems.MENUUPDATE | TortoiseSvnMenuItems.MENUCOMMIT);
   }

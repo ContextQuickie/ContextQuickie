@@ -296,41 +296,6 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="contextquickie.handlers.tortoise.git.TortoiseGitEnabled"
-            id="contextquickie.propertyHandlers.TortoiseGitEnabled"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseGitEnabled"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.tortoise.git.TortoiseGitItemInMainMenu"
-            id="contextquickie.propertyHandlers.TortoiseGitItemInMainMenu"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseGitItemInMainMenu"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.tortoise.git.TortoiseGitWorkingCopyDetect"
-            id="contextquickie.propertyHandlers.TortoiseGitWorkingCopyDetect"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseGitWorkingCopyDetect"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.tortoise.svn.TortoiseSvnEnabled"
-            id="contextquickie.propertyHandlers.TortoiseSvnEnabled"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseSvnEnabled"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.tortoise.svn.TortoiseSvnWorkingCopyDetect"
-            id="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseSvnWorkingCopyDetect"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
             class="contextquickie.handlers.beyondcompare.CompareToRightPossible"
             id="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
             namespace="contextquickie.propertyHandlers.BeyondCompare"
@@ -342,13 +307,6 @@
             id="contextquickie.handlers.beyondcompare.SelectedResourceTester"
             namespace="contextquickie.handlers.beyondcompare"
             properties="SelectedResourceTester"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.tortoise.hg.TortoiseHgEnabled"
-            id="contextquickie.propertyHandlers.TortoiseHgEnabled"
-            namespace="contextquickie.propertyHandlers"
-            properties="TortoiseHgEnabled"
             type="java.lang.Object">
       </propertyTester>
    </extension>
@@ -434,25 +392,6 @@
          </with>
       </definition>
       <definition
-            id="OneFileOrOneFolderSelectedInGitWorkingCopy">
-         <and>
-            <or>
-               <reference
-                     definitionId="ActivePartIsEditorAndProvidesFile">
-               </reference>
-               <reference
-                     definitionId="ActiveMenuSelectionProvidesOneFile">
-               </reference>
-               <reference
-                     definitionId="ActiveMenuSelectionProvidesOneFolder">
-               </reference>
-            </or>
-            <reference
-                  definitionId="TortoiseGitPossibleAtCurrentItem">
-            </reference>
-         </and>
-      </definition>
-      <definition
             id="OneFolderSelectedInGitWorkingCopy">
          <and>
             <reference
@@ -461,80 +400,6 @@
             <reference
                   definitionId="ActiveMenuSelectionProvidesOneFolder">
             </reference>
-         </and>
-      </definition>
-      <definition
-            id="TortoiseSvnPossibleAtCurrentItem">
-         <and>
-            <test
-                  property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
-            </test>
-            <test
-                  property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect">
-            </test>
-            <or>
-               <with
-                     variable="activeMenuSelection">
-                  <iterate
-                        ifEmpty="false"
-                        operator="or">
-                     <or>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FILE">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FOLDER">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.PROJECT">
-                        </test>
-                     </or>
-                  </iterate>
-               </with>
-               <reference
-                     definitionId="ActivePartIsEditorAndProvidesFile">
-               </reference>
-            </or>
-         </and>
-      </definition>
-      <definition
-            id="TortoiseGitPossibleAtCurrentItem">
-         <and>
-            <test
-                  property="contextquickie.propertyHandlers.TortoiseGitEnabled">
-            </test>
-            <test
-                  property="contextquickie.propertyHandlers.TortoiseGitWorkingCopyDetect">
-            </test>
-            <or>
-               <with
-                     variable="activeMenuSelection">
-                  <iterate
-                        ifEmpty="false"
-                        operator="or">
-                     <or>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FILE">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FOLDER">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.PROJECT">
-                        </test>
-                     </or>
-                  </iterate>
-               </with>
-               <reference
-                     definitionId="ActivePartIsEditorAndProvidesFile">
-               </reference>
-            </or>
          </and>
       </definition>
       <definition
@@ -551,59 +416,6 @@
                </test>
             </iterate>
          </with>
-      </definition>
-      <definition
-            id="TortoiseHgPossibleAtCurrentItem">
-         <and>
-            <test
-                  property="contextquickie.propertyHandlers.TortoiseHgEnabled">
-            </test>
-            <or>
-               <with
-                     variable="activeMenuSelection">
-                  <iterate
-                        ifEmpty="false"
-                        operator="or">
-                     <or>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FILE">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.FOLDER">
-                        </test>
-                        <test
-                              property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                              value="IResource.PROJECT">
-                        </test>
-                     </or>
-                  </iterate>
-               </with>
-               <reference
-                     definitionId="ActivePartIsEditorAndProvidesFile">
-               </reference>
-            </or>
-         </and>
-      </definition>
-      <definition
-            id="OneFileOrOneFolderSelectedInSvnWorkingCopy">
-         <and>
-            <or>
-               <reference
-                     definitionId="ActivePartIsEditorAndProvidesFile">
-               </reference>
-               <reference
-                     definitionId="ActiveMenuSelectionProvidesOneFile">
-               </reference>
-               <reference
-                     definitionId="ActiveMenuSelectionProvidesOneFolder">
-               </reference>
-            </or>
-            <reference
-                  definitionId="TortoiseSvnPossibleAtCurrentItem">
-            </reference>
-         </and>
       </definition>
    </extension>
 </plugin>

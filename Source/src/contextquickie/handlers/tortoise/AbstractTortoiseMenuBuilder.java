@@ -3,11 +3,13 @@ package contextquickie.handlers.tortoise;
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.Registry;
+import contextquickie.tools.WorkbenchUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
@@ -38,7 +40,7 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
    * Value of the registry key ContextMenuEntries.
    */
   private long contextMenuEntries;
-  
+
   /**
    * Value of the registry key ContextMenuEntriesHigh.
    */
@@ -83,36 +85,60 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
 
     if (preferenceStore.getBoolean(this.preferences.getEnabled()))
     {
+      // Trigger reading the registry settings every time to detect if using the
+      // registry settings has been disabled.
       this.readSettingsFromRegistry();
+      final TortoiseEnvironment currentEnvironment = this.getCurrentMenuEnvironment();
+      final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
 
-      // Create main menu entry
+      // Create sub menu entry
       final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
       final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
+
       for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
       {
+        boolean entryVisible = true;
+
+        if (workingCopyDetection == true)
+        {
+          if (entry.isVisibleInWorkingCopy() != currentEnvironment.isWorkingCopyFound())
+          {
+            entryVisible = false;
+          }
+
+          if (entry.isVisibleWithoutWorkingCopy() != currentEnvironment.isWorkingCopyFound())
+          {
+            entryVisible = false;
+          }
+        }
+
         if (entry.getMenuId() == 0)
         {
           subMenu.add(new Separator());
         }
-        else
+        else if (entryVisible == true)
         {
-          final CommandContributionItemParameter parameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
+          final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
               entry.getCommandId(), CommandContributionItem.STYLE_PUSH);
-          final Map<String, Object> arguments = new HashMap<String, Object>();
-          arguments.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
-          arguments.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath());
-          parameter.parameters = arguments;
+
+          // Create map of parameters for the command
+          final Map<String, Object> parameters = new HashMap<String, Object>();
+          parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
+          parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
+          parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
+          commandParameter.parameters = parameters;
+
           if (this.isEntryInMainMenu(entry.getMenuId()))
           {
-            parameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
+            commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
           }
           else
           {
-            parameter.label = entry.getLabel();
+            commandParameter.label = entry.getLabel();
           }
 
-          parameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
-          final CommandContributionItem commandContributionItem = new CommandContributionItem(parameter);
+          commandParameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
+          final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
           if (this.isEntryInMainMenu(entry.getMenuId()))
           {
             mainMenu.add(commandContributionItem);
@@ -133,6 +159,35 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
     return mainMenu.toArray(new IContributionItem[mainMenu.size()]);
   }
 
+  /**
+   * Checks in which environment the current menu will be used.
+   * 
+   * @return The current menu environment.
+   */
+  private TortoiseEnvironment getCurrentMenuEnvironment()
+  {
+    final TortoiseEnvironment result = new TortoiseEnvironment();
+    result.setSelectedResources(WorkbenchUtil.getCurrentlySelectedRessources());
+    if (new TortoiseWorkingCopyDetect().test(result.getSelectedResources(), this.entriesConfiguration.getWorkingCopyFolderName()))
+    {
+      result.setWorkingCopyFound(true);
+    }
+
+    for (IResource resource : WorkbenchUtil.getCurrentlySelectedRessources())
+    {
+      if (resource.getType() == IResource.FILE)
+      {
+        result.setSelectedFilesCount(result.getSelectedFilesCount() + 1);
+      }
+      if (resource.getType() == IResource.FOLDER)
+      {
+        result.setSelectedFoldersCount(result.getSelectedFoldersCount() + 1);
+      }
+    }
+
+    return result;
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -150,23 +205,33 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
    */
   private void readSettingsFromRegistry()
   {
-    if ((CONTEXT_MENU_ENTRIES_READ.containsKey(this.getClass()) == false) || (CONTEXT_MENU_ENTRIES_READ.get(this.getClass()) == false))
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
     {
-      CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), true);
-      final String registryLocation = this.entriesConfiguration.getRegistryUserPath();
-      String registryValue;
-
-      registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
-      if (registryValue != null)
+      // Check if the registry settings for this class type has already been read. Avoid multiple readouts to increase performance.
+      if ((CONTEXT_MENU_ENTRIES_READ.containsKey(this.getClass()) == false) || (CONTEXT_MENU_ENTRIES_READ.get(this.getClass()) == false))
       {
-        this.contextMenuEntries = Long.decode(registryValue);
-      }
+        CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), true);
+        final String registryLocation = this.entriesConfiguration.getRegistryUserPath();
+        String registryValue;
 
-      registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
-      if (registryValue != null)
-      {
-        this.contextMenuEntriesHigh = Long.decode(registryValue);
+        registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
+        if (registryValue != null)
+        {
+          this.contextMenuEntries = Long.decode(registryValue);
+        }
+
+        registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
+        if (registryValue != null)
+        {
+          this.contextMenuEntriesHigh = Long.decode(registryValue);
+        }
       }
+    }
+    else
+    {
+      this.contextMenuEntries = this.entriesConfiguration.getContextMenuEntriesDefault();
+      this.contextMenuEntriesHigh = this.entriesConfiguration.getContextMenuEntriesHighDefault();
     }
   }
 
@@ -183,7 +248,6 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
     final long int32BitMaxValue = 0xFFFFFFFFL;
     final long compareValue;
     final long entryValue;
-    boolean result = false;
 
     if (entry > int32BitMaxValue)
     {
@@ -195,10 +259,7 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
       entryValue = entry;
       compareValue = this.contextMenuEntries;
     }
-    if ((entryValue & compareValue) != 0)
-    {
-      result = true;
-    }
-    return result;
+
+    return (entryValue & compareValue) != 0;
   }
 }

@@ -23,6 +23,11 @@ public final class TortoiseMenuConstants
   public static final String PARAMETER_1_ID = "Parameter1"; 
   
   /**
+   * The identifier for the current environment.
+   */
+  public static final String CURRENT_ENVIRONMENT_ID = "CurrentEnvironment";
+  
+  /**
    * Prevents from creating instances.
    */
   private TortoiseMenuConstants()
