@@ -2580,11 +2580,11 @@
                   </reference>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
                      value="commit">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
                      value="true">
                </parameter>
             </command>
