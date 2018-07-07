@@ -7,7 +7,6 @@ import contextquickie.tools.StringUtil;
 import contextquickie.tools.WorkbenchUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -78,12 +77,17 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   {
     final List<String> arguments = new ArrayList<String>();
     arguments.add("/command:" + event.getParameter(this.getCommandIdName()));
-
+    Set<IResource> currentResources = null;
     final String requiresPathString = event.getParameter(this.getRequiresPathName());
     if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString)))
     {
-      final Collection<String> currentResources = this.getSelectedResources(event);
-      final String pathArgument = String.join("*", currentResources);
+      currentResources = this.getSelectedResources(event);
+      final Set<String> pathArguments = new HashSet<String>();
+      for (IResource resource : currentResources)
+      {
+        pathArguments.add(this.getResourcePath(resource));
+      }
+      final String pathArgument = String.join("*", pathArguments);
       arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
@@ -94,7 +98,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
 
     final String command = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
-    ProcessWrapper.executeCommand(command, arguments);
+    ProcessWrapper.executeCommand(command, currentResources, arguments);
 
     return null;
   }
@@ -106,9 +110,9 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    *          The used execution event.
    * @return A collection containing all selected resources.
    */
-  private Collection<String> getSelectedResources(final ExecutionEvent event)
+  private Set<IResource> getSelectedResources(final ExecutionEvent event)
   {
-    final Set<String> currentResources = new HashSet<String>();
+    final Set<IResource> currentResources = new HashSet<IResource>();
     final ISelection selection = HandlerUtil.getCurrentSelection(event);
     if (selection instanceof TreeSelection)
     {
@@ -118,7 +122,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
         if (selectedItem instanceof IAdaptable)
         {
           final IAdaptable adaptable = (IAdaptable) selectedItem;
-          currentResources.add(getResourcePath(adaptable));
+          currentResources.add(adaptable.getAdapter(IResource.class));
 
           if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
           {
@@ -137,7 +141,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
     else if (selection instanceof TextSelection)
     {
-      currentResources.add(this.getResourcePath(WorkbenchUtil.getCurrentDocument()));
+      currentResources.add(WorkbenchUtil.getCurrentDocument());
     }
 
     return currentResources;
@@ -154,9 +158,9 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    * @return A HashSet containing all linked resources of the specified
    *         container.
    */
-  private Set<String> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
+  private Set<IResource> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
   {
-    final Set<String> linkedResources = new HashSet<String>();
+    final Set<IResource> linkedResources = new HashSet<IResource>();
     try
     {
       for (IResource member : container.members())
@@ -164,7 +168,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
         final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
         if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
         {
-          linkedResources.add(this.getResourcePath(member));
+          linkedResources.add(member);
 
           // Check if there are also linked resourced within the linked resource
           // container

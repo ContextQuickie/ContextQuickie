@@ -601,7 +601,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurename.png"
+                     icon="icons/Tortoise/menurename.png"
                      label="SVN Rename...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -637,7 +637,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menudelete.png"
+                     icon="icons/Tortoise/menudelete.png"
                      label="SVN Delete...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1484,7 +1484,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menurename.png"
+                     icon="icons/Tortoise/menurename.png"
                      label="Rename...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -1521,7 +1521,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menudelete.png"
+                     icon="icons/Tortoise/menudelete.png"
                      label="Delete...">
                   <parameter
                         name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
@@ -2330,6 +2330,89 @@
                </command>
                <separator
                      name="SeparatorTortoiseGit3"
+                     visible="true">
+               </separator>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/Tortoise/menurename.png"
+                     label="Rename..."
+                     style="push">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="rename">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/Tortoise/menudelete.png"
+                     label="Delete"
+                     style="push">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="remove">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
+               </command>
+               <command
+                     commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
+                     icon="icons/Tortoise/menudelete.png"
+                     label="Delete (keep local)"
+                     style="push">
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        value="diff">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        value="true">
+                  </parameter>
+                  <parameter
+                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+                        value="/keep">
+                  </parameter>
+                  <visibleWhen
+                        checkEnabled="false">
+                     <or>
+                        <reference
+                              definitionId="ActivePartIsEditorAndProvidesFile">
+                        </reference>
+                        <reference
+                              definitionId="ActiveMenuSelectionProvidesOneFile">
+                        </reference>
+                     </or>
+                  </visibleWhen>
+               </command>
+               <separator
+                     name="SeparatorTortoiseGit10"
                      visible="true">
                </separator>
                <command
