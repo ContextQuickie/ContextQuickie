@@ -1,6 +1,7 @@
 package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 
 import java.util.ArrayList;
@@ -9,10 +10,6 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdapterManager;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Base class for execute a Tortoise merge command.
@@ -30,17 +27,11 @@ public abstract class AbstractTortoiseMergeCommand extends AbstractHandler
   {
     final List<String> arguments = new ArrayList<String>();
     final String command = Activator.getDefault().getPreferenceStore().getString(this.getMergeCommandPathName());
-
-    final TreeSelection selection = (TreeSelection) HandlerUtil.getCurrentSelection(event);
-    if (selection.isEmpty() == false)
+    final IResource resource = new ContextMenuEnvironment().getSelectedResources().stream().findFirst().orElse(null);
+    if (resource != null)
     {
-      final IAdapterManager adapterManager = Platform.getAdapterManager();
-      final IResource resource = adapterManager.getAdapter(selection.getFirstElement(), IResource.class);
-      if (resource != null)
-      {
-        arguments.add("/patchpath:" + resource.getLocation().toString());
-        ProcessWrapper.executeCommand(command, arguments);
-      }
+      arguments.add("/patchpath:" + resource.getLocation().toString());
+      ProcessWrapper.executeCommand(command, arguments);
     }
 
     return null;

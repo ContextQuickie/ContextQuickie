@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -95,18 +96,14 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
 
     if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
     {
-      for (IResource resource : resources)
+      resources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
       {
-        final IContainer container = resource.getAdapter(IContainer.class);
-        if (container != null)
-        {
           final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
           if (workingCopyRoot != null)
           {
             resourcesPaths.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
           }
-        }
-      }
+      });
     }
 
     return resourcesPaths;
@@ -133,7 +130,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
         final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
         if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
         {
-          linkedResources.add(this.getResourcePath(member));
+          linkedResources.add(member.getLocation().toOSString());
 
           // Check if there are also linked resourced within the linked resource
           // container
@@ -152,23 +149,5 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
 
     return linkedResources;
-  }
-
-  /**
-   * Gets the resource path from the specified IAdaptable instance.
-   * 
-   * @param adaptable
-   *          The instance which will be evaluated.
-   * @return The resource path or null if the path cannot be determined.
-   */
-  private String getResourcePath(final IAdaptable adaptable)
-  {
-    final IResource resource = adaptable.getAdapter(IResource.class);
-    if (resource != null)
-    {
-      return resource.getLocation().toOSString();
-    }
-
-    return null;
   }
 }

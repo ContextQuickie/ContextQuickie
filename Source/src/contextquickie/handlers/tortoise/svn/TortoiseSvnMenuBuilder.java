@@ -364,7 +364,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   {
     super(PreferenceConstants.TORTOISE_SVN, settings);
     settings.setEntries(entries);
-    settings.setSubMenuIconPath("TortoiseSVN/tsvnmenumultiple.png");
+    settings.setSubMenuIconPath("TortoiseSvn/tsvnmenumultiple.png");
     settings.setSubMenuText("TortioseSVN");
     settings.setMainMenuPrefix("SVN");
     settings.setWorkingCopyFolderName(".svn");
