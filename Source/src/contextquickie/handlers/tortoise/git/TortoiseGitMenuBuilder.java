@@ -1,4 +1,4 @@
-package contextquickie.handlers.tortoise.svn;
+package contextquickie.handlers.tortoise.git;
 
 import contextquickie.handlers.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.handlers.tortoise.TortoiseMenuEntry;
@@ -11,226 +11,284 @@ import java.util.List;
 /**
  * @author ContextQuickie
  *
- *         Menu configuration for Tortoise SVN.
+ *         Menu configuration for Tortoise Git.
  */
-public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
+public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
 {
   /**
-   * Checkout menu entry.
+   * Sync menu entry.
    */
-  private static final long MENUCHECKOUT = 0x0000000000000001;
-
-  /**
-   * Update menu entry.
-   */
-  private static final long MENUUPDATE = 0x0000000000000002;
+  public static final long MENUSYNC = 0x0000000000000002;
 
   /**
    * Commit menu entry.
    */
-  private static final long MENUCOMMIT = 0x0000000000000004;
+  public static final long MENUCOMMIT = 0x0000000000000004;
 
   /**
    * Add menu entry.
    */
-  private static final long MENUADD = 0x0000000000000008;
+  public static final long MENUADD = 0x0000000000000008;
 
   /**
    * Revert menu entry.
    */
-  private static final long MENUREVERT = 0x0000000000000010;
+  public static final long MENUREVERT = 0x0000000000000010;
 
   /**
    * Cleanup menu entry.
    */
-  private static final long MENUCLEANUP = 0x0000000000000020;
+  public static final long MENUCLEANUP = 0x0000000000000020;
 
   /**
    * Resolve menu entry.
    */
-  private static final long MENURESOLVE = 0x0000000000000040;
+  public static final long MENURESOLVE = 0x0000000000000040;
 
   /**
    * Switch menu entry.
    */
-  private static final long MENUSWITCH = 0x0000000000000080;
+  public static final long MENUSWITCH = 0x0000000000000080;
 
   /**
-   * Import menu entry.
+   * Send mail menu entry.
    */
-  private static final long MENUIMPORT = 0x0000000000000100;
+  public static final long MENUSENDMAIL = 0x0000000000000100;
 
   /**
    * Export menu entry.
    */
-  private static final long MENUEXPORT = 0x0000000000000200;
+  public static final long MENUEXPORT = 0x0000000000000200;
 
   /**
    * Create repository menu entry.
    */
-  private static final long MENUCREATEREPOS = 0x0000000000000400;
+  public static final long MENUCREATEREPOS = 0x0000000000000400;
 
   /**
-   * Branch/tag menu entry.
+   * Create branch menu entry.
    */
-  private static final long MENUCOPY = 0x0000000000000800;
+  public static final long MENUCOPY = 0x0000000000000800;
 
   /**
    * Merge menu entry.
    */
-  private static final long MENUMERGE = 0x0000000000001000;
+  public static final long MENUMERGE = 0x0000000000001000;
 
   /**
    * Remove menu entry.
    */
-  private static final long MENUREMOVE = 0x0000000000002000;
+  public static final long MENUREMOVE = 0x0000000000002000;
 
   /**
    * Rename menu entry.
    */
-  private static final long MENURENAME = 0x0000000000004000;
+  public static final long MENURENAME = 0x0000000000004000;
 
   /**
-   * Update to revision menu entry.
+   * TODO menu entry.
    */
-  private static final long MENUUPDATEEXT = 0x0000000000008000;
+  public static final long MENUUPDATEEXT = 0x0000000000008000;
 
   /**
    * Diff menu entry.
    */
-  private static final long MENUDIFF = 0x0000000000010000;
+  public static final long MENUDIFF = 0x0000000000010000;
 
   /**
    * Show log menu entry.
    */
-  private static final long MENULOG = 0x0000000000020000;
+  public static final long MENULOG = 0x0000000000020000;
 
   /**
    * Edit conflicts menu entry.
    */
-  private static final long MENUCONFLICTEDITOR = 0x0000000000040000;
+  public static final long MENUCONFLICTEDITOR = 0x0000000000040000;
 
   /**
-   * Relocate menu entry.
+   * Browse References menu entry.
    */
-  private static final long MENURELOCATE = 0x0000000000080000;
+  public static final long MENUREFBROWSE = 0x0000000000080000;
 
   /**
    * Check for modifications menu entry.
    */
-  private static final long MENUSHOWCHANGED = 0x0000000000100000;
+  public static final long MENUSHOWCHANGED = 0x0000000000100000;
 
   /**
    * Ignore menu entry.
    */
-  private static final long MENUIGNORE = 0x0000000000200000;
+  public static final long MENUIGNORE = 0x0000000000200000;
 
   /**
-   * Repository browser menu entry.
+   * Show Reflog menu entry.
    */
-  private static final long MENUREPOBROWSE = 0x0000000000400000;
+  public static final long MENUREFLOG = 0x0000000000400000;
 
   /**
    * Blame menu entry.
    */
-  private static final long MENUBLAME = 0x0000000000800000;
+  public static final long MENUBLAME = 0x0000000000800000;
 
   /**
-   * Create Patch menu entry.
+   * Repo browser menu entry.
    */
-  private static final long MENUCREATEPATCH = 0x0000000001000000;
+  public static final long MENUREPOBROWSE = 0x0000000001000000;
 
   /**
-   * Apply Patch menu entry.
+   * Apply patch menu entry.
    */
-  private static final long MENUAPPLYPATCH = 0x0000000002000000;
+  public static final long MENUAPPLYPATCH = 0x0000000002000000;
 
   /**
-   * Revision graph menu entry.
+   * Delete (keep local) menu entry.
    */
-  private static final long MENUREVISIONGRAPH = 0x0000000004000000;
+  public static final long MENUREMOVEKEEP = 0x0000000004000000;
 
   /**
-   * Get Lock menu entry.
+   * SVN Rebase menu entry.
    */
-  private static final long MENULOCK = 0x0000000008000000;
+  public static final long MENUSVNREBASE = 0x0000000008000000;
 
   /**
-   * Release Lock menu entry.
+   * SVN DCommit menu entry.
    */
-  private static final long MENUUNLOCK = 0x0000000010000000;
+  public static final long MENUSVNDCOMMIT = 0x0000000010000000;
 
   /**
-   * Properties menu entry.
+   * Import SVN Ignore menu entry.
    */
-  private static final long MENUPROPERTIES = 0x0000000020000000;
+  public static final long MENUSVNIGNORE = 0x0000000040000000;
 
   /**
-   * Diff with URL menu entry.
+   * TODO menu entry.
    */
-  private static final long MENUURLDIFF = 0x0000000040000000;
-
-  /**
-   * Delete unversioned items menu entry.
-   */
-  private static final long MENUDELUNVERSIONED = 0x0000000080000000;
-
-  /**
-   * Merge all entry.
-   */
-  private static final long MENUMERGEALL = 0x0000000100000000L;
+  public static final long MENULOGSUBMODULE = 0x0000000100000000L;
 
   /**
    * Diff with previous version menu entry.
    */
-  private static final long MENUPREVDIFF = 0x0000000200000000L;
+  public static final long MENUPREVDIFF = 0x0000000200000000L;
 
   /**
-   * Paste menu entry.
+   * TODO menu entry.
    */
-  private static final long MENUCLIPPASTE = 0x0000000400000000L;
+  public static final long MENUCLIPPASTE = 0x0000000400000000L;
 
   /**
-   * Upgrade working copy menu entry.
-   * TODO: currently not supported.
+   * Pull menu entry.
    */
-  //private static final long MENUUPGRADE = 0x0000000800000000L;
+  public static final long MENUPULL = 0x0000000800000000L;
 
   /**
-   * Diff later menu entry.
+   * Push menu entry.
    */
-  private static final long MENUDIFFLATER = 0x0000001000000000L;
+  public static final long MENUPUSH = 0x0000001000000000L;
 
   /**
-   * Diff menu entry.
+   * Clone menu entry.
    */
-  private static final long MENUDIFFNOW = 0x0000002000000000L;
+  public static final long MENUCLONE = 0x0000002000000000L;
 
   /**
-   * Unified diff menu entry.
-   * TODO: currently not supported.
+   * Create tag menu entry.
    */
-  //private static final long MENUUNIDIFF = 0x0000004000000000L;
+  public static final long MENUTAG = 0x0000004000000000L;
 
   /**
-   * Copy URL to clipboard menu entry.
+   * TODO menu entry.
    */
-  private static final long MENUCOPYURL = 0x0000008000000000L;
+  public static final long MENUFORMATPATCH = 0x0000008000000000L;
+
+  /**
+   * TODO menu entry.
+   */
+  public static final long MENUIMPORTPATCH = 0x0000010000000000L;
+
+  /**
+   * TODO menu entry.
+   */
+  public static final long MENUDIFFLATER = 0x0000020000000000L;
+
+  /**
+   * Fetch menu entry.
+   */
+  public static final long MENUFETCH = 0x0000040000000000L;
+
+  /**
+   * Rebase menu entry.
+   */
+  public static final long MENUREBASE = 0x0000080000000000L;
+
+  /**
+   * Stash Save menu entry.
+   */
+  public static final long MENUSTASHSAVE = 0x0000100000000000L;
+
+  /**
+   * Stash Apply menu entry.
+   */
+  public static final long MENUSTASHAPPLY = 0x0000200000000000L;
+
+  /**
+   * Stash List menu entry.
+   */
+  public static final long MENUSTASHLIST = 0x0000400000000000L;
+
+  /**
+   * Submodule add menu entry.
+   */
+  public static final long MENUSUBADD = 0x0000800000000000L;
+
+  /**
+   * Submodule Sync menu entry.
+   */
+  public static final long MENUSUBSYNC = 0x0001000000000000L;
+
+  /**
+   * Stash Pop menu entry.
+   */
+  public static final long MENUSTASHPOP = 0x0002000000000000L;
+
+  /**
+   * TODO menu entry.
+   */
+  public static final long MENUDIFFTWO = 0x0004000000000000L;
+
+  /**
+   * Bisect start menu entry.
+   */
+  public static final long MENUBISECT = 0x0008000000000000L;
+
+  /**
+   * SVN Fetch menu entry.
+   */
+  public static final long MENUSVNFETCH = 0x0080000000000000L;
+
+  /**
+   * Revision Graph menu entry.
+   */
+  public static final long MENUREVISIONGRAPH = 0x0100000000000000L;
+
+  /**
+   * Daemon menu entry.
+   */
+  public static final long MENUDAEMON = 0x0200000000000000L;
 
   /**
    * Settings menu entry.
    */
-  private static final long MENUSETTINGS = 0x2000000000000000L;
+  public static final long MENUSETTINGS = 0x2000000000000000L;
 
   /**
    * Help menu entry.
    */
-  private static final long MENUHELP = 0x4000000000000000L;
+  public static final long MENUHELP = 0x4000000000000000L;
 
   /**
    * About menu entry.
    */
-  private static final long MENUABOUT = 0x8000000000000000L;
+  public static final long MENUABOUT = 0x8000000000000000L;
   
   /**
    * Tortoise SVN menu configuration.
@@ -239,7 +297,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   
   static
   {
-    final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
+    final String defaultCommandId = "ContextQuickie.commands.TortoiseGit.TortoiseGitCommand";
     
     // Path to the "Update" icon
     final String menuUpdateIconPath = "TortoiseSvn/menuupdate.png";
@@ -254,29 +312,78 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final String menuDeleteIconPath = "TortoiseSvn/menudelete.png";
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Chekout...")
+        .setLabel("Clone...")
         .setCommandId(defaultCommandId)
-        .setMenuId(MENUCHECKOUT)
+        .setMenuId(MENUCLONE)
         .setIconPath("Tortoise/menucheckout.png")
-        .setCommand("checkout")
+        .setCommand("clone")
         .setIsVisibleInWorkingCopy(false)
         .setVisibleWithoutWorkingCopy(true)
         .setMaxFolderCount(1)
         .setMaxFileCount(0));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Update")
+        .setLabel("Pull...")
         .setCommandId(defaultCommandId)
-        .setMenuId(MENUUPDATE)
-        .setIconPath(menuUpdateIconPath)
-        .setCommand("update"));
+        .setMenuId(MENUPULL)
+        .setIconPath("TortoiseGit/menupull.png")
+        .setCommand("pull"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Commit")
+        .setLabel("Fetch...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUFETCH)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("fetch"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Push...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUPUSH)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("push"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Sync...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUSYNC)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("sync")); // TODO
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Commit...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOMMIT)
         .setIconPath("Tortoise/menucommit.png")
         .setCommand("commit"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("SVN DCommit...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUSVNDCOMMIT)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("commit")); // TODO
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("SVN Rebase")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUSVNDCOMMIT)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("commit")); // TODO
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("SVN Fetch")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUSVNDCOMMIT)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("commit")); // TODO
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Import SVN Ignore ...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUSVNDCOMMIT)
+        .setIconPath("Tortoise/menucommit.png")
+        .setCommand("commit")); // TODO
     
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -286,21 +393,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));
+        .setCommand("diff"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
-        .setCommand("diff"));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff with \"%ls\"")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUDIFFNOW)
-        .setIconPath(menuCompareIconPath)
-        .setCommand(""));
+        .setCommand("diff")); //TODO
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with previous version")
@@ -310,13 +410,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("prevdiff"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff with URL")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUURLDIFF)
-        .setIconPath(menuCompareIconPath)
-        .setCommand(""));
-    
-    entries.add(new TortoiseMenuEntry()
         .setLabel("Show log")
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOG)
@@ -324,13 +417,28 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("log"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Repo-browser")
+        .setLabel("Show log of this folder")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENULOG)
+        .setIconPath("Tortoise/menulog.png")
+        .setCommand("log")); // TODO
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Show Reflog")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENULOG)
+        .setIconPath("Tortoise/menulog.png")
+        .setCommand("reflog"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Browse References")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREPOBROWSE)
         .setIconPath("Tortoise/menurepobrowse.png")
-        .setCommand("repobrowser")
+        .setCommand("refbrowse")
         .setEntryRequiresPath(true));
     
+    //TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Check for modifications")
         .setCommandId(defaultCommandId)
@@ -391,32 +499,11 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("revert"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Delete unversioned items...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUDELUNVERSIONED)
-        .setIconPath(menuDeleteIconPath)
-        .setCommand(""));
-    
-    entries.add(new TortoiseMenuEntry()
         .setLabel("Clean up...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLEANUP)
         .setIconPath("Tortoise/menucleanup.png")
         .setCommand("cleanup"));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Get lock...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENULOCK)
-        .setIconPath("TortoiseSvn/menulock.png")
-        .setCommand("lock"));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Release lock...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUUNLOCK)
-        .setIconPath("TortoiseSvn/menuunlock.png")
-        .setCommand("unlock"));
     
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -443,25 +530,11 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("merge"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Merge all..")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUMERGEALL)
-        .setIconPath(menuMergeIconPath)
-        .setCommand(""));
-    
-    entries.add(new TortoiseMenuEntry()
         .setLabel("Export...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUEXPORT)
         .setIconPath("Tortoise/menuexport.png")
         .setCommand("export"));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Relocate...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENURELOCATE)
-        .setIconPath("TortoiseSVN/menurelocate.png")
-        .setCommand(""));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Create repository here")
@@ -481,25 +554,11 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("add"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Import...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUIMPORT)
-        .setIconPath("TortoiseSVN/menuimport.png")
-        .setCommand(""));
-    
-    entries.add(new TortoiseMenuEntry()
         .setLabel("Blame...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBLAME)
         .setIconPath("Tortoise/menublame.png")
         .setCommand("blame"));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Copy URL to clipboard")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUCOPYURL)
-        .setIconPath("TortoiseSVN/copy.png")
-        .setCommand(""));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add to ignore list")
@@ -514,7 +573,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     entries.add(new TortoiseMenuEntry()
         .setLabel("Create patch...")
         .setCommandId(defaultCommandId)
-        .setMenuId(MENUCREATEPATCH)
+        .setMenuId(MENUFORMATPATCH) //TODO
         .setIconPath("Tortoise/menudiff.png")
         .setCommand("createpatch"));
     
@@ -524,13 +583,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUAPPLYPATCH)
         .setIconPath("Tortoise/menupatch.png")
         .setCommand(""));
-    
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Properties")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUPROPERTIES)
-        .setIconPath("TortoiseSVN/menuproperties.png")
-        .setCommand("properties"));
     
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -577,15 +629,15 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   /**
    * Default constructor.
    */
-  public TortoiseSvnMenuBuilder()
+  public TortoiseGitMenuBuilder()
   {
-    super(PreferenceConstants.TORTOISE_SVN, settings);
+    super(PreferenceConstants.TORTOISE_GIT, settings);
     settings.setEntries(entries);
     settings.setSubMenuIconPath("TortoiseSvn/tsvnmenumultiple.png");
-    settings.setSubMenuText("TortioseSVN");
-    settings.setMainMenuPrefix("SVN");
-    settings.setWorkingCopyFolderName(".svn");
-    settings.setRegistryUserPath("HKEY_CURRENT_USER\\Software\\TortoiseSVN");
-    settings.setContextMenuEntriesDefault(MENUCHECKOUT | MENUUPDATE | MENUCOMMIT);
+    settings.setSubMenuText("TortioseGit");
+    settings.setMainMenuPrefix("Git");
+    settings.setWorkingCopyFolderName(".git");
+    settings.setRegistryUserPath("HKEY_CURRENT_USER\\Software\\TortoiseGit");
+    settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
   }
 }

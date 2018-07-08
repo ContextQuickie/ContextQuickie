@@ -237,11 +237,6 @@
                   </and>
                </visibleWhen>
             </dynamic>
-            
-         </menuContribution>
-         <menuContribution
-               allPopups="false"
-               locationURI="popup:org.eclipse.ui.popup.any?before=additions">
             <separator
                   name="SeparatorBeforeTortoiseSvn"
                   visible="true">
@@ -250,37 +245,19 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder">
             </dynamic>
-         </menuContribution>
-         <menuContribution
-               locationURI="popup:org.eclipse.ui.popup.any?before=additions">
             <separator
                   name="SeparatorBeforeTortoiseGit"
                   visible="true">
             </separator>
-         </menuContribution>
-         <menuContribution
-               locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+            <dynamic
+                  class="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder"
+                  id="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder">
+            </dynamic>
             <separator
                   name="SeparatorBeforeTortoiseHg"
                   visible="true">
             </separator>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
-                  icon="icons/Tortoise/menucommit.png"
-                  label="Hg Commit..."
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-               </visibleWhen>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
-                     value="commit">
-               </parameter>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
+            
          </menuContribution>
    </extension>
    <extension
@@ -387,14 +364,6 @@
                </iterate>
             </and>
          </with>
-      </definition>
-      <definition
-            id="OneFolderSelectedInGitWorkingCopy">
-         <and>
-            <reference
-                  definitionId="ActiveMenuSelectionProvidesOneFolder">
-            </reference>
-         </and>
       </definition>
       <definition
             id="ActiveMenuSelectionProvidesTwoFiles">
