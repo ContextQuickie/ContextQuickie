@@ -2,15 +2,16 @@ package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tools.WorkbenchUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -19,10 +20,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Class which executes all Tortoise commands based on the passed parameters.
@@ -91,41 +88,28 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    *          The used execution event.
    * @return A collection containing all selected resources.
    */
-  private Collection<String> getSelectedResources(final ExecutionEvent event)
+  private Set<String> getSelectedResources(final ExecutionEvent event)
   {
-    final Set<String> currentResources = new HashSet<String>();
-    final ISelection selection = HandlerUtil.getCurrentSelection(event);
-    if (selection instanceof TreeSelection)
-    {
-      final TreeSelection treeSelection = (TreeSelection) selection;
-      for (Object selectedItem : treeSelection.toList())
-      {
-        if (selectedItem instanceof IAdaptable)
-        {
-          final IAdaptable adaptable = (IAdaptable) selectedItem;
-          currentResources.add(getResourcePath(adaptable));
+    final Set<IResource> resources = new ContextMenuEnvironment().getSelectedResources();
+    final Set<String> resourcesPaths = resources.stream().map(resource -> resource.getLocation().toOSString()).collect(Collectors.toSet());
 
-          if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
+    if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
+    {
+      for (IResource resource : resources)
+      {
+        final IContainer container = resource.getAdapter(IContainer.class);
+        if (container != null)
+        {
+          final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+          if (workingCopyRoot != null)
           {
-            final IContainer container = adaptable.getAdapter(IContainer.class);
-            if (container != null)
-            {
-              final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
-              if (workingCopyRoot != null)
-              {
-                currentResources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
-              }
-            }
+            resourcesPaths.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
           }
         }
       }
     }
-    else if (selection instanceof TextSelection)
-    {
-      currentResources.add(this.getResourcePath(WorkbenchUtil.getCurrentDocument()));
-    }
 
-    return currentResources;
+    return resourcesPaths;
   }
 
   /**

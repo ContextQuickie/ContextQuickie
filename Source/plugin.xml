@@ -19,23 +19,23 @@
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="contextquickie.handlers.beyondcompare.Compare"
-            id="ContextQuickie.commands.Compare"
-            name="Compare">
+            id="ContextQuickie.commands.BeyondCompare.Compare"
+            name="BeyondComare_Compare">
       </command>
       <command
             defaultHandler="contextquickie.handlers.beyondcompare.SelectLeftSide"
-            id="ContextQuickie.commands.selectLeftSide"
-            name="SelectLeftSide">
+            id="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
+            name="BeyondCompare_SelectLeftSide">
       </command>
       <command
             defaultHandler="contextquickie.handlers.beyondcompare.CompareToRight"
-            id="ContextQuickie.commands.compareToRight"
-            name="CompareToRight">
+            id="ContextQuickie.commands.BeyondCompare.CompareToRight"
+            name="BeyondCompare_CompareToRight">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-            name="TortoiseSVNCommand">
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
+            name="TortoiseSvnCommand">
          <commandParameter
                id="CommandId"
                name="CommandId"
@@ -51,6 +51,16 @@
                name="Parameter1"
                optional="true">
          </commandParameter>
+      </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand"
+            name="TortoiseSvnMergeCommand">
+      </command>
+      <command
+            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand"
+            name="TortoiseSvnDiffTwoFilesCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
@@ -73,19 +83,9 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-            name="TortoiseSVNMergeCommand">
-      </command>
-      <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
             name="TortoiseGitMergeCommand">
-      </command>
-      <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
-            name="TortoiseSvnDiffTwoFilesCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffTwoFilesCommand"
@@ -93,7 +93,7 @@
             name="TortoiseGitDiffTwoFilesCommand">
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
+            defaultHandler="contextquickie.handlers.tortoise.hg.TortoiseHgCommand"
             id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
             name="TortoiseHgCommand">
          <commandParameter
@@ -122,7 +122,7 @@
                   visible="true">
             </separator>
             <command
-                  commandId="ContextQuickie.commands.Compare"
+                  commandId="ContextQuickie.commands.BeyondCompare.Compare"
                   icon="icons/BeyondCompare/Compare.png"
                   label="Compare"
                   style="push">
@@ -162,7 +162,7 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.selectLeftSide"
+                  commandId="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
                   icon="icons/BeyondCompare/SelectLeftFile.png"
                   label="Select Left File"
                   style="push">
@@ -185,7 +185,7 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.selectLeftSide"
+                  commandId="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
                   icon="icons/BeyondCompare/SelectLeftFile.png"
                   label="Select Left Folder"
                   style="push">
@@ -243,7 +243,7 @@
                allPopups="false"
                locationURI="popup:org.eclipse.ui.popup.any?before=additions">
             <separator
-                  name="SeparatorBeforeTortoiseSVN"
+                  name="SeparatorBeforeTortoiseSvn"
                   visible="true">
             </separator>
             <dynamic
@@ -271,16 +271,13 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
-                  <reference
-                        definitionId="TortoiseHgPossibleAtCurrentItem">
-                  </reference>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
                      value="commit">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
                      value="true">
                </parameter>
             </command>
@@ -394,9 +391,6 @@
       <definition
             id="OneFolderSelectedInGitWorkingCopy">
          <and>
-            <reference
-                  definitionId="TortoiseGitPossibleAtCurrentItem">
-            </reference>
             <reference
                   definitionId="ActiveMenuSelectionProvidesOneFolder">
             </reference>

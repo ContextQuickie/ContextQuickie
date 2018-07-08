@@ -1,23 +1,16 @@
 package contextquickie.handlers.beyondcompare;
 
-import contextquickie.tools.WorkbenchUtil;
-
 import java.io.File;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdapterManager;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IContributionItem;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.menus.IWorkbenchContribution;
 import org.eclipse.ui.services.IServiceLocator;
+
+import contextquickie.tools.ContextMenuEnvironment;
 
 /**
  * @author ContextQuickie
@@ -56,73 +49,40 @@ public class CompareToRightDynamic extends CompoundContributionItem implements I
   @Override
   protected final IContributionItem[] getContributionItems()
   {
-
-    // By default, return an empty list (if context menu entry must not be
-    // shown)
+    // By default, return an empty list (if context menu entry must not be shown)
     Boolean showEntry = false;
-    IContributionItem[] items = new IContributionItem[]
-    {};
+    IContributionItem[] items = new IContributionItem[] {};
+    IResource selectedResource = new ContextMenuEnvironment().getSelectedResources().stream().findFirst().orElse(null);
 
-    final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-    if (window != null)
+    if (selectedResource != null)
     {
-      final ISelection selection = window.getSelectionService().getSelection();
-      if ((selection != null) && (selection.isEmpty() == false))
+      int resourceType = selectedResource.getType();
+      final BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
+      
+      if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER)) && (savedLeftType == BeyondCompareSavedLeft.Directory))
       {
-        Object receiver = null;
-        // Context menu has been opened in a tree view
-        if (selection instanceof IStructuredSelection)
+        showEntry = true;
+      }
+      else if ((resourceType == IResource.FILE) && (savedLeftType == BeyondCompareSavedLeft.File))
+      {
+        showEntry = true;
+      }
+      else
+      {
+        showEntry = false;
+      }
+
+      if (showEntry)
+      {
+        final String savedLeft = bc.getSavedLeft();
+        if (savedLeft != null)
         {
-          final IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-          receiver = structuredSelection.getFirstElement();
-        }
-        else if (selection instanceof TextSelection)
-        {
-          receiver = WorkbenchUtil.getCurrentDocument();
-        }
-
-        if (receiver != null)
-        {
-          final BeyondCompareSavedLeft savedLeftType = bc.getSavedLeftType();
-
-          final IAdapterManager adapterManager = Platform.getAdapterManager();
-          if (adapterManager != null)
-          {
-            int resourceType = IResource.NONE;
-            final IResource resource = adapterManager.getAdapter(receiver, IResource.class);
-            if (resource != null)
-            {
-              resourceType = resource.getType();
-            }
-
-            if (((resourceType == IResource.PROJECT) || (resourceType == IResource.FOLDER)) && (savedLeftType == BeyondCompareSavedLeft.Directory))
-            {
-              showEntry = true;
-            }
-            else if ((resourceType == IResource.FILE) && (savedLeftType == BeyondCompareSavedLeft.File))
-            {
-              showEntry = true;
-            }
-            else
-            {
-              showEntry = false;
-            }
-
-            if (showEntry)
-            {
-              final String savedLeft = bc.getSavedLeft();
-              if (savedLeft != null)
-              {
-                final CommandContributionItemParameter parameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
-                    "ContextQuickie.commands.compareToRight", 0);
-                final String filename = new File(savedLeft).getName();
-                parameter.label = "Compare to " + filename;
-                parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
-                items = new IContributionItem[]
-                { new CommandContributionItem(parameter) };
-              }
-            }
-          }
+          final CommandContributionItemParameter parameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
+              "ContextQuickie.commands.BeyondCompare.CompareToRight", 0);
+          final String filename = new File(savedLeft).getName();
+          parameter.label = "Compare to " + filename;
+          parameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
+          items = new IContributionItem[] { new CommandContributionItem(parameter) };
         }
       }
     }

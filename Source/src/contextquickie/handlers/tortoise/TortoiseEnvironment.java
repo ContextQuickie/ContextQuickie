@@ -1,6 +1,6 @@
 package contextquickie.handlers.tortoise;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
 
@@ -29,7 +29,7 @@ public class TortoiseEnvironment
   /**
    * A list containing all selected resources.
    */
-  private List<IResource> selectedResources;
+  private Set<IResource> selectedResources;
 
   /**
    * @return The number of selected files.
@@ -83,7 +83,7 @@ public class TortoiseEnvironment
   /**
    * @return A list containing all selected resources.
    */
-  public List<IResource> getSelectedResources()
+  public Set<IResource> getSelectedResources()
   {
     return selectedResources;
   }
@@ -91,7 +91,7 @@ public class TortoiseEnvironment
   /**
    * @param value A list containing all selected resources.
    */
-  public void setSelectedResources(final List<IResource> value)
+  public void setSelectedResources(final Set<IResource> value)
   {
     this.selectedResources = value;
   }

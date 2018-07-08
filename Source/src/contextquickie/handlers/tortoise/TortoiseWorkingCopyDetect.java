@@ -2,7 +2,7 @@ package contextquickie.handlers.tortoise;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.IPath;
  */
 public class TortoiseWorkingCopyDetect
 {
-  public final boolean test(final List<IResource> receiver, final String workingCopyFolderName)
+  public final boolean test(final Set<IResource> receiver, final String workingCopyFolderName)
   {
     boolean result = false;
     for (IResource resource : receiver)

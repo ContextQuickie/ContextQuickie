@@ -2,9 +2,8 @@ package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.Registry;
-import contextquickie.tools.WorkbenchUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,17 +33,9 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
    * already been read. The registry keys are read out once for each derived
    * class on the first usage and stored to avoid multiple registry accesses.
    */
-  private static final Map<Class<?>, Boolean> CONTEXT_MENU_ENTRIES_READ = new HashMap<Class<?>, Boolean>();
+  private static final Map<Class<?>, ContextMenuRegistry> CONTEXT_MENU_ENTRIES_READ = new HashMap<Class<?>, ContextMenuRegistry>();
 
-  /**
-   * Value of the registry key ContextMenuEntries.
-   */
-  private long contextMenuEntries;
 
-  /**
-   * Value of the registry key ContextMenuEntriesHigh.
-   */
-  private long contextMenuEntriesHigh;
 
   /**
    * The preferences of the current instance.
@@ -125,7 +116,7 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
           final Map<String, Object> parameters = new HashMap<String, Object>();
           parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
           parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
-          parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
+         // parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
           commandParameter.parameters = parameters;
 
           if (this.isEntryInMainMenu(entry.getMenuId()))
@@ -139,6 +130,7 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
 
           commandParameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
           final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
+          
           if (this.isEntryInMainMenu(entry.getMenuId()))
           {
             mainMenu.add(commandContributionItem);
@@ -167,13 +159,13 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
   private TortoiseEnvironment getCurrentMenuEnvironment()
   {
     final TortoiseEnvironment result = new TortoiseEnvironment();
-    result.setSelectedResources(WorkbenchUtil.getCurrentlySelectedRessources());
+    result.setSelectedResources(new ContextMenuEnvironment().getSelectedResources());
     if (new TortoiseWorkingCopyDetect().test(result.getSelectedResources(), this.entriesConfiguration.getWorkingCopyFolderName()))
     {
       result.setWorkingCopyFound(true);
     }
 
-    for (IResource resource : WorkbenchUtil.getCurrentlySelectedRessources())
+    for (IResource resource : result.getSelectedResources())
     {
       if (resource.getType() == IResource.FILE)
       {
@@ -209,29 +201,33 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
     if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
     {
       // Check if the registry settings for this class type has already been read. Avoid multiple readouts to increase performance.
-      if ((CONTEXT_MENU_ENTRIES_READ.containsKey(this.getClass()) == false) || (CONTEXT_MENU_ENTRIES_READ.get(this.getClass()) == false))
+      if ((CONTEXT_MENU_ENTRIES_READ.containsKey(this.getClass()) == false) || (CONTEXT_MENU_ENTRIES_READ.get(this.getClass()).ReadPerformed == false))
       {
-        CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), true);
+        ContextMenuRegistry registrySettings = new ContextMenuRegistry();
+        registrySettings.ReadPerformed = true;
+        CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), registrySettings);
         final String registryLocation = this.entriesConfiguration.getRegistryUserPath();
         String registryValue;
 
         registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
         if (registryValue != null)
         {
-          this.contextMenuEntries = Long.decode(registryValue);
+          registrySettings.ContextMenuEntries = Long.decode(registryValue);
         }
 
         registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
         if (registryValue != null)
         {
-          this.contextMenuEntriesHigh = Long.decode(registryValue);
+          registrySettings.ContextMenuEntriesHigh = Long.decode(registryValue);
         }
       }
     }
     else
     {
-      this.contextMenuEntries = this.entriesConfiguration.getContextMenuEntriesDefault();
-      this.contextMenuEntriesHigh = this.entriesConfiguration.getContextMenuEntriesHighDefault();
+      ContextMenuRegistry registrySettings = new ContextMenuRegistry();
+      registrySettings.ContextMenuEntries = this.entriesConfiguration.getContextMenuEntriesDefault();
+      registrySettings.ContextMenuEntriesHigh = this.entriesConfiguration.getContextMenuEntriesHighDefault();
+      CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), registrySettings);
     }
   }
 
@@ -252,12 +248,12 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
     if (entry > int32BitMaxValue)
     {
       entryValue = entry >> Integer.SIZE;
-      compareValue = this.contextMenuEntriesHigh;
+      compareValue = CONTEXT_MENU_ENTRIES_READ.get(this.getClass()).ContextMenuEntriesHigh;
     }
     else
     {
       entryValue = entry;
-      compareValue = this.contextMenuEntries;
+      compareValue = CONTEXT_MENU_ENTRIES_READ.get(this.getClass()).ContextMenuEntries;
     }
 
     return (entryValue & compareValue) != 0;

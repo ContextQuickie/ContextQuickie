@@ -22,10 +22,10 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   
   static
   {
-    final String defaultCommandId = "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand";
+    final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
     
     // Path to the "Update" icon
-    final String menuUpdateIconPath = "TortoiseSVN/menuupdate.png";
+    final String menuUpdateIconPath = "TortoiseSvn/menuupdate.png";
    
     // Path to the "Compare" icon.
     final String menuCompareIconPath = "Tortoise/menucompare.png";
@@ -34,7 +34,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final String menuMergeIconPath = "Tortoise/menumerge.png";
 
     // Path to the "Delete" icon
-    final String menuDeleteIconPath = "TortoiseSVN/menudelete.png";
+    final String menuDeleteIconPath = "TortoiseSvn/menudelete.png";
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Chekout...")
@@ -43,6 +43,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menucheckout.png")
         .setCommand("checkout")
         .setIsVisibleInWorkingCopy(false)
+        .setVisibleWithoutWorkingCopy(true)
         .setMaxFolderCount(1)
         .setMaxFileCount(0));
 
@@ -155,7 +156,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Rename...")
         .setCommandId(defaultCommandId)
         .setMenuId(TortoiseSvnMenuItems.MENURENAME)
-        .setIconPath("TortoiseSVN/menurename.png")
+        .setIconPath("TortoiseSvn/menurename.png")
         .setCommand("rename"));
     
     entries.add(new TortoiseMenuEntry()
@@ -190,14 +191,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Get lock...")
         .setCommandId(defaultCommandId)
         .setMenuId(TortoiseSvnMenuItems.MENULOCK)
-        .setIconPath("TortoiseSVN/menulock.png")
+        .setIconPath("TortoiseSvn/menulock.png")
         .setCommand("lock"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Release lock...")
         .setCommandId(defaultCommandId)
         .setMenuId(TortoiseSvnMenuItems.MENUUNLOCK)
-        .setIconPath("TortoiseSVN/menuunlock.png")
+        .setIconPath("TortoiseSvn/menuunlock.png")
         .setCommand("unlock"));
     
     // Separator
