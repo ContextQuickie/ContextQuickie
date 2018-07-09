@@ -76,7 +76,7 @@ public final class ProcessWrapper
       Process p = processBuilder.start();
       if (resources != null)
       {
-        new ResourceRefresher(p, resources).run();
+        new ResourceRefresher(p, resources).start();
       }
     }
     catch (IOException e)
