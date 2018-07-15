@@ -30,8 +30,7 @@ public class MenuBuilder extends AbstractMenuBuilder
   private static final List<Integer> requiredResourceTypesForFiles = Arrays.asList(IResource.FILE);
   
   private static final List<Integer> requiredResourceTypesForFolders = Arrays.asList(IResource.FOLDER, IResource.PROJECT);
-  
-  private static final String CompareCommand = "ContextQuickie.commands.BeyondCompare.Compare";
+
   /**
    * Constructor.
    */
@@ -117,20 +116,11 @@ public class MenuBuilder extends AbstractMenuBuilder
     if ((requiredResourceTypesForFiles.contains(selectedResources.get(0).getType()) && requiredResourceTypesForFiles.contains(selectedResources.get(1).getType())) ||
         (requiredResourceTypesForFolders.contains(selectedResources.get(0).getType()) && requiredResourceTypesForFolders.contains(selectedResources.get(1).getType())))
     {
-      final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(
-          this.getServiceLocator(), 
-          null,
-          CompareCommand, 
-          CommandContributionItem.STYLE_PUSH);
-
-      // Create map of parameters for the command
-      final Map<String, Object> parameters = new HashMap<String, Object>();
-      parameters.put(Compare.LeftSideParameterName, selectedResources.get(0).getLocation().toOSString());
-      parameters.put(Compare.RightSideParameterName, selectedResources.get(1).getLocation().toOSString());
-      commandParameter.parameters = parameters;
-      commandParameter.label = "Compare";
-      commandParameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/Compare.png");
-      menuEntries.add(new CommandContributionItem(commandParameter));
+      menuEntries.add(
+          this.createCompareCommandMenuEntry(
+              selectedResources.get(0).getLocation().toOSString(), 
+              selectedResources.get(1).getLocation().toOSString(), 
+              "Compare"));
     }
   }
   
@@ -139,7 +129,7 @@ public class MenuBuilder extends AbstractMenuBuilder
     final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(
         this.getServiceLocator(), 
         null,
-        CompareCommand, 
+        "ContextQuickie.commands.BeyondCompare.Compare", 
         CommandContributionItem.STYLE_PUSH);
 
     // Create map of parameters for the command

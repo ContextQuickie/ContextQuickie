@@ -1,5 +1,6 @@
 package base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.action.IContributionItem;
@@ -32,20 +33,19 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   @Override
   protected final IContributionItem[] getContributionItems()
   {
+    List<IContributionItem> menuEntries = new ArrayList<IContributionItem>();
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     if (preferenceStore.getBoolean(this.componentActiveConfigKey))
     {
-      List<IContributionItem> menuEntries = this.getMenuEntries();
-      if (menuEntries.isEmpty() == false)
-      {
-        //menuEntries.add(0, new Separator());
-      }
-      return menuEntries.stream().toArray(size -> new IContributionItem[size]);
+      menuEntries = this.getMenuEntries();
     }
-    else
+    
+    if (menuEntries.isEmpty())
     {
-      return new IContributionItem[] {};
+      this.setVisible(false);
     }
+
+    return menuEntries.stream().toArray(size -> new IContributionItem[size]);
   }
   
   @Override

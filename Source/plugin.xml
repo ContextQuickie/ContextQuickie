@@ -127,12 +127,16 @@
          point="org.eclipse.ui.menus">
          <menuContribution
                locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+            <separator
+                  name="ContextQuickie.SeparatorBeforeBeyondCompare"
+                  visible="true">
+            </separator>
             <dynamic
                   class="contextquickie.handlers.beyondcompare.MenuBuilder"
                   id="BeyondCompare">
             </dynamic>
             <separator
-                  name="SeparatorBeforeTortoiseSvn"
+                  name="ContextQuickie.SeparatorBeforeTortoiseSvn"
                   visible="true">
             </separator>
             <dynamic
@@ -140,118 +144,17 @@
                   id="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder">
             </dynamic>
             <separator
-                  name="SeparatorBeforeTortoiseGit"
+                  name="ContextQuickie.SeparatorBeforeTortoiseGit"
                   visible="true">
             </separator>
             <dynamic
                   class="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder"
                   id="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder">
             </dynamic>
-            <separator
-                  name="SeparatorBeforeTortoiseHg"
-                  visible="true">
-            </separator>
             
          </menuContribution>
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
-   </extension>
-   <extension
-         point="org.eclipse.core.expressions.definitions">
-      <definition
-            id="ActivePartIsEditorAndProvidesFile">
-         <and>
-            <with
-                  variable="activeMenuSelection">
-               <instanceof
-                     value="org.eclipse.jface.text.TextSelection">
-               </instanceof>
-            </with>
-            <with
-                  variable="activePartId">
-               <not>
-                  <or>
-                     <equals
-                           value="org.eclipse.ui.console.ConsoleView">
-                     </equals>
-                  </or>
-               </not>
-            </with>
-         </and>
-      </definition>
-      <definition
-            id="ActiveMenuSelectionProvidesOneFile">
-         <with
-               variable="activeMenuSelection">
-            <count
-                  value="1">
-            </count>
-            <iterate>
-               <test
-                     property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                     value="IResource.FILE">
-               </test>
-            </iterate>
-         </with>
-      </definition>
-      <definition
-            id="ActiveMenuSelectionProvidesOneFolder">
-         <with
-               variable="activeMenuSelection">
-            <and>
-               <count
-                     value="1">
-               </count>
-               <iterate>
-                  <or>
-                     <test
-                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                           value="IResource.FOLDER">
-                     </test>
-                     <test
-                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                           value="IResource.PROJECT">
-                     </test>
-                  </or>
-               </iterate>
-            </and>
-         </with>
-      </definition>
-      <definition
-            id="ActiveMenuSelectionProvidesOnlyFolders">
-         <with
-               variable="activeMenuSelection">
-            <and>
-               <iterate>
-                  <or>
-                     <test
-                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                           value="IResource.FOLDER">
-                     </test>
-                     <test
-                           property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                           value="IResource.PROJECT">
-                     </test>
-                  </or>
-               </iterate>
-            </and>
-         </with>
-      </definition>
-      <definition
-            id="ActiveMenuSelectionProvidesTwoFiles">
-         <with
-               variable="activeMenuSelection">
-            <count
-                  value="2">
-            </count>
-            <iterate>
-               <test
-                     property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                     value="IResource.FILE">
-               </test>
-            </iterate>
-         </with>
-      </definition>
    </extension>
 </plugin>
