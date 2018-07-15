@@ -1104,6 +1104,12 @@
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
                   label="Tortoise SVN">
+               <visibleWhen
+                     checkEnabled="false">
+                  <test
+                        property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
+                  </test>
+               </visibleWhen>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
                      icon="icons/TortoiseSVN/menucheckout.png"
