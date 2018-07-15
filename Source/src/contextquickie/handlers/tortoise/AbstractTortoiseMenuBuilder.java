@@ -6,6 +6,7 @@ import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
@@ -14,11 +15,9 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
-import org.eclipse.ui.menus.IWorkbenchContribution;
-import org.eclipse.ui.services.IServiceLocator;
+import base.AbstractMenuBuilder;
 
 /**
  * @author ContextQuickie
@@ -26,7 +25,7 @@ import org.eclipse.ui.services.IServiceLocator;
  *         Class which builds Tortoise menu entries based on configuration
  *         structures.
  */
-public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionItem implements IWorkbenchContribution
+public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder 
 {
   /**
    * Map which stores the information whether the context menu settings has
@@ -47,11 +46,7 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
    */
   private TortoiseMenuSettings entriesConfiguration;
 
-  /**
-   * The service locator used to create the
-   * {@link CommandContributionItemParameter} for the menu entry.
-   */
-  private IServiceLocator currentServiceLocator;
+
 
   /**
    * Default constructor.
@@ -63,92 +58,93 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
    */
   protected AbstractTortoiseMenuBuilder(final TortoisePreferenceConstants tortoisePreferences, final TortoiseMenuSettings settings)
   {
+    super(tortoisePreferences.getEnabled());
     this.preferences = tortoisePreferences;
     this.entriesConfiguration = settings;
   }
 
   @Override
-  protected final IContributionItem[] getContributionItems()
+  protected List<IContributionItem> getMenuEntries()
   {
     final String iconFolder = "icons/";
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     final ArrayList<IContributionItem> mainMenu = new ArrayList<IContributionItem>();
 
-    if (preferenceStore.getBoolean(this.preferences.getEnabled()))
+    // Trigger reading the registry settings every time to detect if using the
+    // registry settings has been disabled.
+    this.readSettingsFromRegistry();
+    final TortoiseEnvironment currentEnvironment = this.getCurrentMenuEnvironment();
+    final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
+
+    // Create sub menu entry
+    final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
+    final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
+
+    for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
     {
-      // Trigger reading the registry settings every time to detect if using the
-      // registry settings has been disabled.
-      this.readSettingsFromRegistry();
-      final TortoiseEnvironment currentEnvironment = this.getCurrentMenuEnvironment();
-      final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
+      boolean entryVisible = true;
 
-      // Create sub menu entry
-      final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
-      final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
-
-      for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
+      if (workingCopyDetection == true)
       {
-        boolean entryVisible = true;
-
-        if (workingCopyDetection == true)
+        if (entry.isVisibleInWorkingCopy() != currentEnvironment.isWorkingCopyFound())
         {
-          if (entry.isVisibleInWorkingCopy() != currentEnvironment.isWorkingCopyFound())
-          {
-            entryVisible = false;
-          }
-
-          if (entry.isVisibleWithoutWorkingCopy() != currentEnvironment.isWorkingCopyFound())
-          {
-            entryVisible = false;
-          }
+          entryVisible = false;
         }
 
-        if (entry.getMenuId() == 0)
+        if (entry.isVisibleWithoutWorkingCopy() != currentEnvironment.isWorkingCopyFound())
         {
-          subMenu.add(new Separator());
-        }
-        else if (entryVisible == true)
-        {
-          final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(this.currentServiceLocator, null,
-              entry.getCommandId(), CommandContributionItem.STYLE_PUSH);
-
-          // Create map of parameters for the command
-          final Map<String, Object> parameters = new HashMap<String, Object>();
-          parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
-          parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
-         // parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
-          commandParameter.parameters = parameters;
-
-          if (this.isEntryInMainMenu(entry.getMenuId()))
-          {
-            commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
-          }
-          else
-          {
-            commandParameter.label = entry.getLabel();
-          }
-
-          commandParameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
-          final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
-          
-          if (this.isEntryInMainMenu(entry.getMenuId()))
-          {
-            mainMenu.add(commandContributionItem);
-          }
-          else
-          {
-            subMenu.add(commandContributionItem);
-          }
+          entryVisible = false;
         }
       }
 
-      if (subMenu.isEmpty() == false)
+      if (entry.getMenuId() == 0)
       {
-        mainMenu.add(subMenu);
+        subMenu.add(new Separator());
+      }
+      else if (entryVisible == true)
+      {
+        final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(
+            this.getServiceLocator(), 
+            null,
+            entry.getCommandId(), 
+            CommandContributionItem.STYLE_PUSH);
+
+        // Create map of parameters for the command
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
+        parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
+       // parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
+        commandParameter.parameters = parameters;
+
+        if (this.isEntryInMainMenu(entry.getMenuId()))
+        {
+          commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
+        }
+        else
+        {
+          commandParameter.label = entry.getLabel();
+        }
+
+        commandParameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
+        final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
+        
+        if (this.isEntryInMainMenu(entry.getMenuId()))
+        {
+          mainMenu.add(commandContributionItem);
+        }
+        else
+        {
+          subMenu.add(commandContributionItem);
+        }
       }
     }
 
-    return mainMenu.toArray(new IContributionItem[mainMenu.size()]);
+    if (subMenu.isEmpty() == false)
+    {
+      mainMenu.add(subMenu);
+    }
+
+    return mainMenu;
   }
 
   /**
@@ -178,18 +174,6 @@ public abstract class AbstractTortoiseMenuBuilder extends CompoundContributionIt
     }
 
     return result;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.eclipse.ui.menus.IWorkbenchContribution#initialize(org.eclipse.ui.
-   * services.IServiceLocator)
-   */
-  @Override
-  public void initialize(final IServiceLocator serviceLocator)
-  {
-    this.currentServiceLocator = serviceLocator;
   }
 
   /**

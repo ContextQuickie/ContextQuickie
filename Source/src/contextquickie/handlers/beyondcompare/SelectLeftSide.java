@@ -1,10 +1,10 @@
 package contextquickie.handlers.beyondcompare;
 
+import java.io.File;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IResource;
-import contextquickie.tools.ContextMenuEnvironment;
 
 /**
  * @author ContextQuickie
@@ -16,27 +16,27 @@ import contextquickie.tools.ContextMenuEnvironment;
  */
 public class SelectLeftSide extends AbstractHandler
 {
+  public static final String PathParameterName = "Path";
+  
   @Override
   public final Object execute(final ExecutionEvent event) throws ExecutionException
   {
-    IResource resource = new ContextMenuEnvironment().getSelectedResources().stream().findFirst().orElse(null);
-    if (resource != null)
+    String path = event.getParameter(PathParameterName);
+
+    File file = new File(path);
+    final BeyondCompare bc = new BeyondCompare();
+    bc.setSavedLeft(path);
+    if (file.isDirectory())
     {
-      final BeyondCompare bc = new BeyondCompare();
-      final int resourceType = resource.getType();
-      if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT))
-      {
-        bc.setSavedLeft(resource.getLocation().toString());
-        bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-        bc.writeRegistry();
-      }
-      else if (resourceType == IResource.FILE)
-      {
-        bc.setSavedLeft(resource.getLocation().toString());
-        bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-        bc.writeRegistry();
-      }
+      bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+      bc.writeRegistry();
     }
+    else if (file.isFile())
+    {
+      bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+      bc.writeRegistry();
+    }
+
     return null;
   }
 }

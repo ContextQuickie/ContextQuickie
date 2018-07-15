@@ -20,17 +20,27 @@
       <command
             defaultHandler="contextquickie.handlers.beyondcompare.Compare"
             id="ContextQuickie.commands.BeyondCompare.Compare"
-            name="BeyondComare_Compare">
+            name="ContextQuickie.commands.BeyondCompare.Compare">
+         <commandParameter
+               id="LeftSide"
+               name="LeftSide"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="RightSide"
+               name="RightSide"
+               optional="false">
+         </commandParameter>
       </command>
       <command
             defaultHandler="contextquickie.handlers.beyondcompare.SelectLeftSide"
             id="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
-            name="BeyondCompare_SelectLeftSide">
-      </command>
-      <command
-            defaultHandler="contextquickie.handlers.beyondcompare.CompareToRight"
-            id="ContextQuickie.commands.BeyondCompare.CompareToRight"
-            name="BeyondCompare_CompareToRight">
+            name="ContextQuickie.commands.BeyondCompare.SelectLeftSide">
+         <commandParameter
+               id="Path"
+               name="Path"
+               optional="false">
+         </commandParameter>
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
@@ -117,125 +127,9 @@
          point="org.eclipse.ui.menus">
          <menuContribution
                locationURI="popup:org.eclipse.ui.popup.any?before=additions">
-            <separator
-                  name="SeparatorBeforeBeyondCompare"
-                  visible="true">
-            </separator>
-            <command
-                  commandId="ContextQuickie.commands.BeyondCompare.Compare"
-                  icon="icons/BeyondCompare/Compare.png"
-                  label="Compare"
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <with
-                        variable="activeMenuSelection">
-                     <and>
-                        <test
-                              args="activeMenuEditorInput"
-                              property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                        </test>
-                        <count
-                              value="2">
-                        </count>
-                        <or>
-                           <iterate>
-                              <test
-                                    property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                    value="IResource.FILE">
-                              </test></iterate>
-                           <iterate>
-                              <or>
-                                 <test
-                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                       value="IResource.FOLDER">
-                                 </test>
-                                 <test
-                                       property="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-                                       value="IResource.PROJECT">
-                                 </test>
-                              </or>
-                           </iterate>
-                        </or>
-                     </and>
-                  </with>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
-                  icon="icons/BeyondCompare/SelectLeftFile.png"
-                  label="Select Left File"
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           args="activeFocusControl"
-                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                     </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                     </or>
-                  </and>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
-                  icon="icons/BeyondCompare/SelectLeftFile.png"
-                  label="Select Left Folder"
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                     </test>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesOneFolder">
-                     </reference>
-                  </and>
-               </visibleWhen>
-            </command>
             <dynamic
-                  class="contextquickie.handlers.beyondcompare.CompareToRightDynamic"
-                  id="ContextQuickie.CompareToRightDynamic">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           property="contextquickie.propertyHandlers.BeyondCompareEnabled">
-                     </test>
-                     <or>
-                        <and>
-                           <or>
-                              <reference
-                                    definitionId="ActivePartIsEditorAndProvidesFile">
-                              </reference>
-                              <reference
-                                    definitionId="ActiveMenuSelectionProvidesOneFile">
-                              </reference>
-                           </or>
-                           <test
-                                 property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-                                 value="File">
-                           </test>
-                        </and>
-                        <and>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                           <test
-                                 property="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-                                 value="Directory">
-                           </test>
-                        </and></or>
-                  </and>
-               </visibleWhen>
+                  class="contextquickie.handlers.beyondcompare.MenuBuilder"
+                  id="BeyondCompare">
             </dynamic>
             <separator
                   name="SeparatorBeforeTortoiseSvn"
@@ -262,27 +156,6 @@
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
-      <propertyTester
-            class="contextquickie.handlers.beyondcompare.BeyondCompareEnabled"
-            id="contextquickie.propertyHandlers.BeyondCompareEnabled"
-            namespace="contextquickie.propertyHandlers"
-            properties="BeyondCompareEnabled"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.beyondcompare.CompareToRightPossible"
-            id="contextquickie.propertyHandlers.BeyondCompare.CompareToRightPossible"
-            namespace="contextquickie.propertyHandlers.BeyondCompare"
-            properties="CompareToRightPossible"
-            type="java.lang.Object">
-      </propertyTester>
-      <propertyTester
-            class="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-            id="contextquickie.handlers.beyondcompare.SelectedResourceTester"
-            namespace="contextquickie.handlers.beyondcompare"
-            properties="SelectedResourceTester"
-            type="java.lang.Object">
-      </propertyTester>
    </extension>
    <extension
          point="org.eclipse.core.expressions.definitions">

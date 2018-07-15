@@ -17,10 +17,6 @@ import org.eclipse.ui.PlatformUI;
 
 public class ContextMenuEnvironment
 {
-  public ContextMenuEnvironment()
-  {
-  }
-  
   public Set<IResource> getSelectedResources()
   {
     final Set<IResource> selectedResources = new HashSet<IResource>();
