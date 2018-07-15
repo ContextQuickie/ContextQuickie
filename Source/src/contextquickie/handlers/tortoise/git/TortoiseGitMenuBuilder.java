@@ -348,7 +348,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSYNC)
         .setIconPath("Tortoise/menucommit.png")
-        .setCommand("sync")); // TODO
+        .setCommand("sync"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Commit...")
