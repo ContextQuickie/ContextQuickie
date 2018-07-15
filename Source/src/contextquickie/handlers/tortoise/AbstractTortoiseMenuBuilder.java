@@ -84,15 +84,25 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
       if (workingCopyDetection == true)
       {
-        if (entry.isVisibleInWorkingCopy() != currentEnvironment.isWorkingCopyFound())
+        if ((entry.isVisibleInWorkingCopy() == true) && 
+            (entry.isVisibleWithoutWorkingCopy() == false) &&
+            (currentEnvironment.isWorkingCopyFound() == false))
         {
           entryVisible = false;
         }
-
-        if (entry.isVisibleWithoutWorkingCopy() != currentEnvironment.isWorkingCopyFound())
+        if ((entry.isVisibleInWorkingCopy() == false) && 
+            (entry.isVisibleWithoutWorkingCopy() == true) &&
+            (currentEnvironment.isWorkingCopyFound() == true))
         {
           entryVisible = false;
         }
+      }
+      
+      if ((currentEnvironment.getSelectedResources().size() > entry.getMaxItemsCount()) ||
+          (currentEnvironment.getSelectedFilesCount() > entry.getMaxFileCount()) ||
+          (currentEnvironment.getSelectedFoldersCount() > entry.getMaxFolderCount()))
+      {
+        entryVisible = false;
       }
 
       if (entry.getMenuId() == 0)
@@ -111,7 +121,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         final Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
         parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
-       // parameters.put(TortoiseMenuConstants.CURRENT_ENVIRONMENT_ID, currentEnvironment);
         commandParameter.parameters = parameters;
 
         if (this.isEntryInMainMenu(entry.getMenuId()))
@@ -159,17 +168,8 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       result.setWorkingCopyFound(true);
     }
 
-    for (IResource resource : result.getSelectedResources())
-    {
-      if (resource.getType() == IResource.FILE)
-      {
-        result.setSelectedFilesCount(result.getSelectedFilesCount() + 1);
-      }
-      if (resource.getType() == IResource.FOLDER)
-      {
-        result.setSelectedFoldersCount(result.getSelectedFoldersCount() + 1);
-      }
-    }
+    result.setSelectedFilesCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FILE).count());
+    result.setSelectedFoldersCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FOLDER).count());
 
     return result;
   }

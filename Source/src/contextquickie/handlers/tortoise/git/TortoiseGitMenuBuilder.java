@@ -482,7 +482,9 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENURENAME)
         .setIconPath("TortoiseSvn/menurename.png")
-        .setCommand("rename"));
+        .setCommand("rename")
+        .setMaxFileCount(1)
+        .setMaxFolderCount(1));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete")
@@ -541,7 +543,9 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
         .setIconPath("TortoiseSVN/menucreaterepos.png")
-        .setCommand(""));
+        .setCommand("")
+        .setVisibleWithoutWorkingCopy(true)
+        .setIsVisibleInWorkingCopy(false));
     
     // Separator
     entries.add(new TortoiseMenuEntry());

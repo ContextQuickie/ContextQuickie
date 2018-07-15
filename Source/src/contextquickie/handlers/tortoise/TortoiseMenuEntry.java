@@ -45,7 +45,7 @@ public class TortoiseMenuEntry
   /**
    * A value indicating whether this entry is visible without a working copy.
    */
-  private boolean isVisibleWithoutWorkingCopy;
+  private boolean isVisibleWithoutWorkingCopy = false;
 
   /**
    * The maximum number of selected files to display this entry.
@@ -56,6 +56,11 @@ public class TortoiseMenuEntry
    * The maximum number of selected folders to display this entry.
    */
   private int maxFolderCount = Integer.MAX_VALUE;
+  
+  /**
+   * The maximum number of selected items to display this entry.
+   */
+  private int maxItemsCount = Integer.MAX_VALUE;
 
   /**
    * Gets the label of the instance.
@@ -246,6 +251,25 @@ public class TortoiseMenuEntry
   public TortoiseMenuEntry setMaxFileCount(final int value)
   {
     this.maxFileCount = value;
+    return this;
+  }
+  
+  /**
+   * @return The maximum number of selected items to display this entry.
+   */
+  public int getMaxItemsCount()
+  {
+    return this.maxItemsCount;
+  }
+
+  /**
+   * @param value
+   *          The maximum number of selected items to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMaxItemsCount(final int value)
+  {
+    this.maxItemsCount = value;
     return this;
   }
 

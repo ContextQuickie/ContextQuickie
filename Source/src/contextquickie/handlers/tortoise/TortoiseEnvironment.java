@@ -14,12 +14,12 @@ public class TortoiseEnvironment
   /**
    * The number of selected files.
    */
-  private int selectedFilesCount;
+  private long selectedFilesCount;
   
   /**
    * The number of selected folders.
    */
-  private int selectedFoldersCount;
+  private long selectedFoldersCount;
   
   /**
    * A value indicating whether a working copy has been found or not.
@@ -34,7 +34,7 @@ public class TortoiseEnvironment
   /**
    * @return The number of selected files.
    */
-  public int getSelectedFilesCount()
+  public long getSelectedFilesCount()
   {
     return this.selectedFilesCount;
   }
@@ -43,7 +43,7 @@ public class TortoiseEnvironment
    * @param value
    *          The number of selected files.
    */
-  public void setSelectedFilesCount(final int value)
+  public void setSelectedFilesCount(final long value)
   {
     this.selectedFilesCount = value;
   }
@@ -51,7 +51,7 @@ public class TortoiseEnvironment
   /**
    * @return The number of selected folders.
    */
-  public int getSelectedFoldersCount()
+  public long getSelectedFoldersCount()
   {
     return selectedFoldersCount;
   }
@@ -59,7 +59,7 @@ public class TortoiseEnvironment
   /**
    * @param value The number of selected folders.
    */
-  public void setSelectedFoldersCount(final int value)
+  public void setSelectedFoldersCount(final long value)
   {
     this.selectedFoldersCount = value;
   }

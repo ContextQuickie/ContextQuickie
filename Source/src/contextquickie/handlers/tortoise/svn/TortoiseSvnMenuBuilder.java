@@ -374,7 +374,8 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENURENAME)
         .setIconPath("TortoiseSvn/menurename.png")
-        .setCommand("rename"));
+        .setCommand("rename")
+        .setMaxItemsCount(1));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete")
