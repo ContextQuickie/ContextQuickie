@@ -13,7 +13,7 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import base.AbstractMenuBuilder;
+import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 

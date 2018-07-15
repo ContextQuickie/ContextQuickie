@@ -1,4 +1,4 @@
-package base;
+package contextquickie.base;
 
 import java.util.ArrayList;
 import java.util.List;

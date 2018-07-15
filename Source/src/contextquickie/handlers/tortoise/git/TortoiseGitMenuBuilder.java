@@ -86,7 +86,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public static final long MENURENAME = 0x0000000000004000;
 
   /**
-   * TODO menu entry.
+   * Submodule Update menu entry.
    */
   public static final long MENUUPDATEEXT = 0x0000000000008000;
 
@@ -161,7 +161,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public static final long MENUSVNIGNORE = 0x0000000040000000;
 
   /**
-   * TODO menu entry.
+   * "Show log of this folder" menu entry.
    */
   public static final long MENULOGSUBMODULE = 0x0000000100000000L;
 
@@ -171,7 +171,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public static final long MENUPREVDIFF = 0x0000000200000000L;
 
   /**
-   * TODO menu entry.
+   * "Paste" menu entry.
    */
   public static final long MENUCLIPPASTE = 0x0000000400000000L;
 
@@ -196,17 +196,17 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public static final long MENUTAG = 0x0000004000000000L;
 
   /**
-   * TODO menu entry.
+   * "Create Patch Serial..." menu entry.
    */
   public static final long MENUFORMATPATCH = 0x0000008000000000L;
 
   /**
-   * TODO menu entry.
+   * "Apply Patch Serial..." menu entry.
    */
   public static final long MENUIMPORTPATCH = 0x0000010000000000L;
 
   /**
-   * TODO menu entry.
+   * "Diff later" menu entry.
    */
   public static final long MENUDIFFLATER = 0x0000020000000000L;
 
@@ -251,7 +251,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public static final long MENUSTASHPOP = 0x0002000000000000L;
 
   /**
-   * TODO menu entry.
+   * "Diff Two Commits" menu entry.
    */
   public static final long MENUDIFFTWO = 0x0004000000000000L;
 
@@ -471,7 +471,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("resolve"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Update to revision...")
+        .setLabel("Submodule Update...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATEEXT)
         .setIconPath(menuUpdateIconPath)
@@ -633,7 +633,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   {
     super(PreferenceConstants.TORTOISE_GIT, settings);
     settings.setEntries(entries);
-    settings.setSubMenuIconPath("TortoiseSvn/tsvnmenumultiple.png");
+    settings.setSubMenuIconPath("TortoiseGit/tsvnmenufolder.png");
     settings.setSubMenuText("TortioseGit");
     settings.setMainMenuPrefix("Git");
     settings.setWorkingCopyFolderName(".git");

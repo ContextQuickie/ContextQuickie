@@ -1,6 +1,7 @@
 package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
+import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.Registry;
@@ -17,7 +18,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
-import base.AbstractMenuBuilder;
 
 /**
  * @author ContextQuickie
@@ -33,8 +33,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
    * class on the first usage and stored to avoid multiple registry accesses.
    */
   private static final Map<Class<?>, ContextMenuRegistry> CONTEXT_MENU_ENTRIES_READ = new HashMap<Class<?>, ContextMenuRegistry>();
-
-
 
   /**
    * The preferences of the current instance.
@@ -68,7 +66,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   {
     final String iconFolder = "icons/";
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    final ArrayList<IContributionItem> mainMenu = new ArrayList<IContributionItem>();
+    final List<IContributionItem> mainMenu = new ArrayList<IContributionItem>();
 
     // Trigger reading the registry settings every time to detect if using the
     // registry settings has been disabled.
@@ -106,7 +104,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(
             this.getServiceLocator(), 
             null,
-            entry.getCommandId(), 
+            entry.getCommandId(),
             CommandContributionItem.STYLE_PUSH);
 
         // Create map of parameters for the command

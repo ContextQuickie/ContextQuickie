@@ -45,7 +45,7 @@
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-            name="TortoiseSvnCommand">
+            name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand">
          <commandParameter
                id="CommandId"
                name="CommandId"
@@ -65,29 +65,29 @@
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand"
-            name="TortoiseSvnMergeCommand">
+            name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand"
-            name="TortoiseSvnDiffTwoFilesCommand">
+            name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-            name="TortoiseGitCommand">
+            name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand">
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
-               name="CommandID"
+               id="CommandId"
+               name="CommandId"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+               id="RequiresPath"
                name="RequiresPath"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+               id="Parameter1"
                name="Parameter1"
                optional="true">
          </commandParameter>
@@ -95,29 +95,29 @@
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
-            name="TortoiseGitMergeCommand">
+            name="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
-            name="TortoiseGitDiffTwoFilesCommand">
+            name="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.hg.TortoiseHgCommand"
             id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
-            name="TortoiseHgCommand">
+            name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand">
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
+               id="CommandID"
                name="CommandID"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
+               id="RequiresPath"
                name="RequiresPath"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.Parameter1"
+               id="Parameter1"
                name="Parameter1"
                optional="true">
          </commandParameter>
@@ -153,8 +153,5 @@
             </dynamic>
             
          </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.core.expressions.propertyTesters">
    </extension>
 </plugin>
