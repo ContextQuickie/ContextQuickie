@@ -143,6 +143,6 @@ public class BeyondCompare
   {
     final String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 
-    ProcessWrapper.executeCommand(command, left, right);
+    new ProcessWrapper().executeCommand(command, left, right);
   }
 }

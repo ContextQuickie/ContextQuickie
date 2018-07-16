@@ -58,6 +58,12 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
    */
   public void createFieldEditors()
   {
+    final BooleanFieldEditor refreshWorkspaceEditor = new BooleanFieldEditor(
+        PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, 
+        "Refresh workspace after executing external tools",
+        getFieldEditorParent());
+    addField(refreshWorkspaceEditor);
+    
     this.createBeyondCompareFieldEditors();
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.TORTOISE_SVN);
