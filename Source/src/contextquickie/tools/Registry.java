@@ -87,7 +87,7 @@ public final class Registry
    */
   public static void writeKey(final String location, final String key, final String value)
   {
-    ProcessWrapper.executeCommand("reg", "add", location, "/v", key, "/d", value, "/f");
+    new ProcessWrapper().executeCommand("reg", "add", location, "/v", key, "/d", value, "/f");
   }
 
 }

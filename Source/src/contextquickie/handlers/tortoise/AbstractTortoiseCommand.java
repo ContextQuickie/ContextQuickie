@@ -7,7 +7,6 @@ import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -61,12 +60,12 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   {
     final List<String> arguments = new ArrayList<String>();
     arguments.add("/command:" + event.getParameter(TortoiseMenuConstants.COMMAND_ID));
-
+    Set<IResource> currentResources = null;
     final String requiresPathString = event.getParameter(TortoiseMenuConstants.REQUIRES_PATH_ID);
     if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString)))
     {
-      final Collection<String> currentResources = this.getSelectedResources(event);
-      final String pathArgument = String.join("*", currentResources);
+      currentResources = this.getSelectedResources(event);
+      final String pathArgument = String.join("*", currentResources.stream().map(resource -> resource.getLocation().toOSString()).collect(Collectors.toSet()));
       arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
@@ -77,7 +76,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
 
     final String command = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
-    ProcessWrapper.executeCommand(command, arguments);
+    new ProcessWrapper().executeCommand(command, currentResources, arguments);
 
     return null;
   }
@@ -89,10 +88,9 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    *          The used execution event.
    * @return A collection containing all selected resources.
    */
-  private Set<String> getSelectedResources(final ExecutionEvent event)
+  private Set<IResource> getSelectedResources(final ExecutionEvent event)
   {
     final Set<IResource> resources = new ContextMenuEnvironment().getSelectedResources();
-    final Set<String> resourcesPaths = resources.stream().map(resource -> resource.getLocation().toOSString()).collect(Collectors.toSet());
 
     if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
     {
@@ -101,12 +99,12 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
           final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
           if (workingCopyRoot != null)
           {
-            resourcesPaths.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
+            resources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
           }
       });
     }
 
-    return resourcesPaths;
+    return resources;
   }
 
   /**
@@ -120,9 +118,9 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    * @return A HashSet containing all linked resources of the specified
    *         container.
    */
-  private Set<String> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
+  private Set<IResource> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
   {
-    final Set<String> linkedResources = new HashSet<String>();
+    final Set<IResource> linkedResources = new HashSet<IResource>();
     try
     {
       for (IResource member : container.members())
@@ -130,7 +128,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
         final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
         if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
         {
-          linkedResources.add(member.getLocation().toOSString());
+          linkedResources.add(member);
 
           // Check if there are also linked resourced within the linked resource
           // container

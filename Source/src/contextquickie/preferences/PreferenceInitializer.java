@@ -70,6 +70,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
     final String tortoiseHgRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg";
     this.getStoreConfigurationItemFromRegistry(store, tortoiseHgRegPath, tortoiseProcPathKey,
         "C:\\Program Files\\TortoiseHg\\thg.exe", PreferenceConstants.TORTOISE_HG.getPath());
+    
+    store.setDefault(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, false);
   }
 
   /**

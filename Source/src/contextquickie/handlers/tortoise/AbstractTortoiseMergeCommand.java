@@ -31,7 +31,7 @@ public abstract class AbstractTortoiseMergeCommand extends AbstractHandler
     if (resource != null)
     {
       arguments.add("/patchpath:" + resource.getLocation().toString());
-      ProcessWrapper.executeCommand(command, arguments);
+      new ProcessWrapper().executeCommand(command, null, arguments);
     }
 
     return null;

@@ -43,6 +43,11 @@ public final class PreferenceConstants
   public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg");
   
   /**
+   * Configuration item for enabling/disabling refresh of the workspace after execution of external applications.
+   */
+  public static final String REFRESH_WORKSPACE_AFTER_EXECUTION = "RefreshWorkspaceAfterExecution";
+  
+  /**
    * Prevents from creating instances.
    */
   private PreferenceConstants()
