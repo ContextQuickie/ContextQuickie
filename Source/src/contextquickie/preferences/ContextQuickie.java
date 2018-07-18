@@ -58,6 +58,12 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
    */
   public void createFieldEditors()
   {
+    final BooleanFieldEditor showProgressForExternalTools = new BooleanFieldEditor(
+        PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS, 
+        "Show progress when executing external tools",
+        getFieldEditorParent());
+    addField(showProgressForExternalTools);
+
     final BooleanFieldEditor refreshWorkspaceEditor = new BooleanFieldEditor(
         PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, 
         "Refresh workspace after executing external tools",

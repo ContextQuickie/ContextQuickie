@@ -114,16 +114,31 @@ public final class ProcessWrapper implements IRunnableWithProgress
     {
       protected IStatus run(IProgressMonitor monitor) 
       {
-        monitor.setTaskName("Running external application");
-        while (ProcessWrapper.this.process.isAlive())
+        if (Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS) == true)
         {
-          if (monitor.isCanceled())
+          monitor.setTaskName("Running external application");
+          while (ProcessWrapper.this.process.isAlive())
           {
-            return Status.CANCEL_STATUS;
+            if (monitor.isCanceled())
+            {
+              ProcessWrapper.this.process.destroy();
+              return Status.CANCEL_STATUS;
+            }
+            try
+            {
+              Thread.sleep(10);
+            }
+            catch (InterruptedException e)
+            {
+              e.printStackTrace();
+            }
           }
+        }
+        else
+        {
           try
           {
-            Thread.sleep(10);
+            ProcessWrapper.this.process.waitFor();
           }
           catch (InterruptedException e)
           {
@@ -144,7 +159,7 @@ public final class ProcessWrapper implements IRunnableWithProgress
           }
           try
           {
-            resource.refreshLocal(IResource.DEPTH_INFINITE, null);
+            resource.refreshLocal(IResource.DEPTH_INFINITE, monitor);
           }
           catch (CoreException e)
           {
