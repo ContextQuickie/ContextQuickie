@@ -90,7 +90,40 @@ public final class Registry
     {
       root = WinReg.HKEY_LOCAL_MACHINE;
       location = location.substring("HKEY_LOCAL_MACHINE\\".length());
+    catch (IOException e)
+    {
+      e.printStackTrace();
     }
+
+    if (p != null)
+    {
+      final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+      String line;
+      /**
+       * Regular expression for parsing the output of the query " +": One or
+       * more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
+       * REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)": The queried value
+       */
+      final String regexOneOrMoreSpaces = " +";
+      final Pattern queryPattern = Pattern.compile(
+          regexOneOrMoreSpaces + key + regexOneOrMoreSpaces + "[A-Z_]+" + regexOneOrMoreSpaces + "(.*)" + "$");
+      try
+      {
+        while ((line = reader.readLine()) != null)
+        {
+          final Matcher matcher = queryPattern.matcher(line);
+          if (matcher.matches())
+          {
+            value = matcher.group(1);
+          }
+        }
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
+
     value = Advapi32Util.registryGetStringValue(root, location, key);
     
     System.out.println("Reading took " + (System.currentTimeMillis() - startTime) + " ms");

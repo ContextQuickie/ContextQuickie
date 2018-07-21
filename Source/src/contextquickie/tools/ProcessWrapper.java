@@ -42,7 +42,7 @@ public final class ProcessWrapper implements IRunnableWithProgress
   {
     this.executeCommand(command, null, Arrays.asList(arguments));
   }
-  
+
   /**
    * Executes a command with the passed arguments.
    * 
@@ -172,6 +172,5 @@ public final class ProcessWrapper implements IRunnableWithProgress
     };
     
     applicationJob.schedule();
-    
   }
 }
