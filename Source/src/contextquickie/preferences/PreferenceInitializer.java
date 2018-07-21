@@ -72,6 +72,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
         "C:\\Program Files\\TortoiseHg\\thg.exe", PreferenceConstants.TORTOISE_HG.getPath());
     
     store.setDefault(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, false);
+    
+    store.setDefault(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS, false);
   }
 
   /**
