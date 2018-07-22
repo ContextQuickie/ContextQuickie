@@ -45,7 +45,7 @@ public abstract class AbstractTortoiseDiffTwoFilesCommand extends AbstractHandle
       }
     }
 
-    new ProcessWrapper().executeCommand(command, null, arguments);
+    new ProcessWrapper().executeCommand(command, selectedResources, arguments);
 
     return null;
   }
