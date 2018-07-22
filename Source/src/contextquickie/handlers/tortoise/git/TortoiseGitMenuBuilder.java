@@ -326,7 +326,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Pull...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPULL)
-        .setIconPath("TortoiseGit/menupull.png")
+        .setIconPath("TortoiseGit/pull1.png")
         .setCommand("pull"));
     
     entries.add(new TortoiseMenuEntry()
@@ -595,7 +595,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Settings")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
-        .setCommand("Tortoise/menusettings.png")
+        .setIconPath("Tortoise/menusettings.png")
         .setCommand("settings")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));

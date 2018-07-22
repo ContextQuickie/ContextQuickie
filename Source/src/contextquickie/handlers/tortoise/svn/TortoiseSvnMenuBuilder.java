@@ -540,7 +540,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Settings")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
-        .setCommand("Tortoise/menusettings.png")
+        .setIconPath("Tortoise/menusettings.png")
         .setCommand("settings")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
