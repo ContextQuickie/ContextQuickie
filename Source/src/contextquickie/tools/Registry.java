@@ -1,29 +1,81 @@
 package contextquickie.tools;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import com.sun.jna.platform.win32.Advapi32Util;
-import com.sun.jna.platform.win32.WinReg;
-import com.sun.jna.platform.win32.WinReg.HKEY;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author ContextQuickie
  * 
- *         Class for accessing the registry using the "reg" command.
+ *         Class for accessing the windows registry.
  *
  */
 public final class Registry
 {
-  /**
-   * Prevents from creating instances.
-   */
-  private Registry()
+  private static final int HKEY_CLASSES_ROOT = 0x80000000;
+  private static final int HKEY_CURRENT_CONFIG = 0x80000005;
+  private static final int HKEY_CURRENT_USER = 0x80000001;
+  private static final int HKEY_LOCAL_MACHINE = 0x80000002;
+  private static final int HKEY_PERFORMANCE_DATA = 0x80000004;
+  private static final int HKEY_PERFORMANCE_NLSTEXT = 0x80000060;
+  private static final int HKEY_PERFORMANCE_TEXT = 0x80000050;
+  private static final int HKEY_USERS = 0x80000003;
+
+  private class RootMapping
   {
-    // Read a string
-    
+    public int root;
+    public String location;
+  }
+
+  /**
+   * Mapping from registry root elements as string to the corresponding HKEY
+   * value.
+   */
+  private static final Map<String, Integer> rootMapping = new HashMap<String, Integer>();
+
+  static
+  {
+    String archDataModel = System.getProperty("sun.arch.data.model");
+    System.loadLibrary("ContextQuickie.native" + archDataModel);
+    rootMapping.put("HKEY_CURRENT_USER\\", HKEY_CURRENT_USER);
+    rootMapping.put("HKEY_LOCAL_MACHINE\\", HKEY_LOCAL_MACHINE);
+  }
+  
+  private RootMapping mapRegistryRoot(String location)
+  {
+    RootMapping mapping = new RootMapping();
+    mapping.root = HKEY_CURRENT_USER;
+    for (String rootString : rootMapping.keySet())
+    {
+      if (location.startsWith(rootString))
+      {
+        mapping.root = rootMapping.get(rootString);
+        mapping.location = location.substring(rootString.length());
+      }
+    }
+    return mapping;
+  }
+  
+  private native long readLongValue(final int hKey, final String location, final String key, final long defaultValue);
+  private native String readStringValue(final int hKey, final String location, final String key, final String defaultValue);
+  
+  private native void writeStringValue(final int hKey, final String location, final String key, final String value);
+
+  /**
+   * Reads a value from the registry.
+   * 
+   * @param location
+   *          The location of the registry entry.
+   * @param key
+   *          The key of the registry entry.
+   * @param defaultValue
+   *          The default value which is returned in case of an error (e.g. the
+   *          entry doesn't exist)
+   * @return The read value.
+   */
+  public String readStringValue(String location, final String key, final String defaultValue)
+  {
+    RootMapping mapping = this.mapRegistryRoot(location);
+    return readStringValue(mapping.root, mapping.location, key, defaultValue);
   }
 
   /**
@@ -33,101 +85,15 @@ public final class Registry
    *          The location of the registry entry.
    * @param key
    *          The key of the registry entry.
+   * @param defaultValue
+   *          The default value which is returned in case of an error (e.g. the
+   *          entry doesn't exist)
    * @return The read value.
    */
-  public static String readKey(String location, final String key)
+  public long getIntValue(String location, final String key, long defaultValue)
   {
-    long startTime = System.currentTimeMillis();
-    System.out.println("Reading registry: " + location + ", key: " + key);
-    String value = null;
-//    Process p = null;
-//    try
-//    {
-//      p = Runtime.getRuntime().exec("reg query " + '"' + location + "\" /v " + key);
-//    }
-//    catch (IOException e)
-//    {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
-//
-//    if (p != null)
-//    {
-//      final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//      String line;
-//      /**
-//       * Regular expression for parsing the output of the query " +": One or
-//       * more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
-//       * REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)": The queried value
-//       */
-//      final String regexOneOrMoreSpaces = " +";
-//      final Pattern queryPattern = Pattern.compile(
-//          regexOneOrMoreSpaces + key + regexOneOrMoreSpaces + "[A-Z_]+" + regexOneOrMoreSpaces + "(.*)" + "$");
-//      try
-//      {
-//        while ((line = reader.readLine()) != null)
-//        {
-//          final Matcher matcher = queryPattern.matcher(line);
-//          if (matcher.matches())
-//          {
-//            value = matcher.group(1);
-//          }
-//        }
-//      }
-//      catch (IOException e)
-//      {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//      }
-//    }
-    HKEY root = WinReg.HKEY_CURRENT_USER;
-    if (location.startsWith("HKEY_CURRENT_USER"))
-    {
-      root = WinReg.HKEY_CURRENT_USER;
-      location = location.substring("HKEY_CURRENT_USER\\".length());
-    }
-    else if (location.startsWith("HKEY_LOCAL_MACHINE"))
-    {
-      root = WinReg.HKEY_LOCAL_MACHINE;
-      location = location.substring("HKEY_LOCAL_MACHINE\\".length());
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-
-    if (p != null)
-    {
-      final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-      String line;
-      /**
-       * Regular expression for parsing the output of the query " +": One or
-       * more spaces "[A-Z_]+": one of REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
-       * REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE "(.*)": The queried value
-       */
-      final String regexOneOrMoreSpaces = " +";
-      final Pattern queryPattern = Pattern.compile(
-          regexOneOrMoreSpaces + key + regexOneOrMoreSpaces + "[A-Z_]+" + regexOneOrMoreSpaces + "(.*)" + "$");
-      try
-      {
-        while ((line = reader.readLine()) != null)
-        {
-          final Matcher matcher = queryPattern.matcher(line);
-          if (matcher.matches())
-          {
-            value = matcher.group(1);
-          }
-        }
-      }
-      catch (IOException e)
-      {
-        e.printStackTrace();
-      }
-    }
-
-    value = Advapi32Util.registryGetStringValue(root, location, key);
-    
-    System.out.println("Reading took " + (System.currentTimeMillis() - startTime) + " ms");
-    return value;
+    RootMapping mapping = this.mapRegistryRoot(location);
+    return readLongValue(mapping.root, mapping.location, key, defaultValue);
   }
 
   /**
@@ -140,9 +106,9 @@ public final class Registry
    * @param value
    *          The value to write.
    */
-  public static void writeKey(final String location, final String key, final String value)
+  public void writeKey(final String location, final String key, final String value)
   {
-    new ProcessWrapper().executeCommand("reg", "add", location, "/v", key, "/d", value, "/f");
+    RootMapping mapping = this.mapRegistryRoot(location);
+    writeStringValue(mapping.root, mapping.location, key, value);
   }
-
 }

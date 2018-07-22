@@ -117,7 +117,9 @@ public final class ProcessWrapper implements IRunnableWithProgress
         if (Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS) == true)
         {
           monitor.setTaskName("Running external application");
-          while (ProcessWrapper.this.process.isAlive())
+          // Java 1.6 compatibility
+          boolean processIsAlive = true;
+          while (processIsAlive)
           {
             if (monitor.isCanceled())
             {
@@ -131,6 +133,16 @@ public final class ProcessWrapper implements IRunnableWithProgress
             catch (InterruptedException e)
             {
               e.printStackTrace();
+            }
+            
+            processIsAlive = false;
+            try
+            {
+              process.exitValue();
+            }
+            catch (IllegalThreadStateException e)
+            {
+              processIsAlive = true;
             }
           }
         }

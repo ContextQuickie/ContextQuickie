@@ -90,18 +90,7 @@ public class TortoiseGitItemInMainMenu extends AbstractTortoiseItemInMainMenu
   protected final void readSettingsFromRegistry()
   {
     final String registryLocation = "HKEY_CURRENT_USER\\Software\\TortoiseGit";
-    String registryValue;
-
-    registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
-    if (registryValue != null)
-    {
-      this.contextMenuEntries = Long.decode(registryValue);
-    }
-
-    registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
-    if (registryValue != null)
-    {
-      this.contextMenuEntriesHigh = Long.decode(registryValue);
-    }
+    this.contextMenuEntries = new Registry().getIntValue(registryLocation, "ContextMenuEntries", this.contextMenuEntries);
+    this.contextMenuEntriesHigh = new Registry().getIntValue(registryLocation, "ContextMenuEntrieshigh", this.contextMenuEntriesHigh);
   }
 }

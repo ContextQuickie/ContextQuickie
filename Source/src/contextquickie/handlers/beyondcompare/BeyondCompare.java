@@ -56,7 +56,7 @@ public class BeyondCompare
     if ((new Date().getTime() - lastReadDate.getTime()) > 1000)
     {
       lastReadDate = new Date();
-      savedLeftFromRegistry = Registry.readKey(registryPath, registryKey);
+      savedLeftFromRegistry = new Registry().readStringValue(registryPath, registryKey, null);
     }
     
     if (savedLeftFromRegistry != null)
@@ -89,11 +89,11 @@ public class BeyondCompare
     final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
     if (this.savedLeftType == BeyondCompareSavedLeft.File)
     {
-      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_FILE + this.savedLeft);
+      new Registry().writeKey(registryPath, registryKey, SAVED_LEFT_FILE + this.savedLeft);
     }
     else if (this.savedLeftType == BeyondCompareSavedLeft.Directory)
     {
-      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_DIRECTORY + this.savedLeft);
+      new Registry().writeKey(registryPath, registryKey, SAVED_LEFT_DIRECTORY + this.savedLeft);
     }
   }
 
