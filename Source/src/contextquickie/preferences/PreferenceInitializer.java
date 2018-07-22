@@ -19,7 +19,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
     store.setDefault(PreferenceConstants.P_BEYOND_COMPARE_ENABLED, false);
 
     // Try to retrieve the path to the Beyond Compare executable.
-    String beyondComparePath = Registry.readKey("HKEY_CURRENT_USER\\SOFTWARE\\Scooter Software\\Beyond Compare", "ExePath");
+    String beyondComparePath = new Registry().readStringValue("HKEY_CURRENT_USER\\SOFTWARE\\Scooter Software\\Beyond Compare", "ExePath", null);
     if (beyondComparePath == null)
     {
       beyondComparePath = "C:\\Program Files (x86)\\Beyond Compare 4\\BCompare.exe";
@@ -70,6 +70,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
     final String tortoiseHgRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg";
     this.getStoreConfigurationItemFromRegistry(store, tortoiseHgRegPath, tortoiseProcPathKey,
         "C:\\Program Files\\TortoiseHg\\thg.exe", PreferenceConstants.TORTOISE_HG.getPath());
+    
+    store.setDefault(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, false);
+    
+    store.setDefault(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS, false);
   }
 
   /**
@@ -93,11 +97,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
       final String defaultValue, final String configurationItem)
   {
     // Try to retrieve the path to the Tortoise SVN executable.
-    String registryValue = Registry.readKey(registryLocation, registryKey);
-    if (registryValue == null)
-    {
-      registryValue = defaultValue;
-    }
+    String registryValue = new Registry().readStringValue(registryLocation, registryKey, defaultValue);
     store.setDefault(configurationItem, registryValue);
   }
 }

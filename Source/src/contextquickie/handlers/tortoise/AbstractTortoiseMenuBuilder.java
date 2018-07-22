@@ -189,19 +189,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         registrySettings.ReadPerformed = true;
         CONTEXT_MENU_ENTRIES_READ.put(this.getClass(), registrySettings);
         final String registryLocation = this.entriesConfiguration.getRegistryUserPath();
-        String registryValue;
 
-        registryValue = Registry.readKey(registryLocation, "ContextMenuEntries");
-        if (registryValue != null)
-        {
-          registrySettings.ContextMenuEntries = Long.decode(registryValue);
-        }
-
-        registryValue = Registry.readKey(registryLocation, "ContextMenuEntrieshigh");
-        if (registryValue != null)
-        {
-          registrySettings.ContextMenuEntriesHigh = Long.decode(registryValue);
-        }
+        registrySettings.ContextMenuEntries = new Registry().readIntValue(registryLocation, "ContextMenuEntries", registrySettings.ContextMenuEntries);
+        registrySettings.ContextMenuEntriesHigh = new Registry().readIntValue(registryLocation, "ContextMenuEntrieshigh", registrySettings.ContextMenuEntriesHigh);
       }
     }
     else

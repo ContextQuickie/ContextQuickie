@@ -46,7 +46,7 @@ public class BeyondCompare
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     final String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
     final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
-    final String savedLeftFromRegistry = Registry.readKey(registryPath, registryKey);
+    final String savedLeftFromRegistry = new Registry().readStringValue(registryPath, registryKey, null);
     if (savedLeftFromRegistry != null)
     {
       if (savedLeftFromRegistry.startsWith(SAVED_LEFT_FILE))
@@ -77,11 +77,11 @@ public class BeyondCompare
     final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
     if (this.savedLeftType == BeyondCompareSavedLeft.File)
     {
-      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_FILE + this.savedLeft);
+      new Registry().writeKey(registryPath, registryKey, SAVED_LEFT_FILE + this.savedLeft);
     }
     else if (this.savedLeftType == BeyondCompareSavedLeft.Directory)
     {
-      Registry.writeKey(registryPath, registryKey, SAVED_LEFT_DIRECTORY + this.savedLeft);
+      new Registry().writeKey(registryPath, registryKey, SAVED_LEFT_DIRECTORY + this.savedLeft);
     }
   }
 
@@ -131,6 +131,6 @@ public class BeyondCompare
   {
     final String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 
-    ProcessWrapper.executeCommand(command, left, right);
+    new ProcessWrapper().executeCommand(command, left, right);
   }
 }

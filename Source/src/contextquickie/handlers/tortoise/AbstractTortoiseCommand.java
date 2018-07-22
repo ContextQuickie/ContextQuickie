@@ -77,7 +77,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
 
     final String command = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
-    ProcessWrapper.executeCommand(command, arguments);
+    new ProcessWrapper().executeCommand(command, null, arguments);
 
     return null;
   }
