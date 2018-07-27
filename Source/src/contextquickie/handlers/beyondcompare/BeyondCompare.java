@@ -5,8 +5,6 @@ import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.Registry;
 
-import java.util.Date;
-
 import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
@@ -39,10 +37,6 @@ public class BeyondCompare
    * will be read by {@link readRegistry} and written by {@link writeRegistry}
    */
   private BeyondCompareSavedLeft savedLeftType = BeyondCompareSavedLeft.None;
-  
-  private static Date lastReadDate = new Date(0);
-  
-  private static String savedLeftFromRegistry;
 
   /**
    * Reads the current left side for comparison from the registry.
@@ -52,13 +46,7 @@ public class BeyondCompare
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     final String registryKey = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY);
     final String registryPath = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH);
-    
-    if ((new Date().getTime() - lastReadDate.getTime()) > 1000)
-    {
-      lastReadDate = new Date();
-      savedLeftFromRegistry = new Registry().readStringValue(registryPath, registryKey, null);
-    }
-    
+    final String savedLeftFromRegistry = new Registry().readStringValue(registryPath, registryKey, null);
     if (savedLeftFromRegistry != null)
     {
       if (savedLeftFromRegistry.startsWith(SAVED_LEFT_FILE))

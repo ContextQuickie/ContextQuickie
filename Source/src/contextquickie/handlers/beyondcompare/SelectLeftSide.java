@@ -1,17 +1,10 @@
 package contextquickie.handlers.beyondcompare;
 
-import contextquickie.tools.WorkbenchUtil;
+import java.io.File;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdapterManager;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * @author ContextQuickie
@@ -23,38 +16,27 @@ import org.eclipse.ui.handlers.HandlerUtil;
  */
 public class SelectLeftSide extends AbstractHandler
 {
+  public static final String PathParameterName = "Path";
+  
   @Override
   public final Object execute(final ExecutionEvent event) throws ExecutionException
   {
-    final ISelection selection = HandlerUtil.getCurrentSelection(event);
-    IResource resource = null;
-    if (selection instanceof TreeSelection)
+    String path = event.getParameter(PathParameterName);
+
+    File file = new File(path);
+    final BeyondCompare bc = new BeyondCompare();
+    bc.setSavedLeft(path);
+    if (file.isDirectory())
     {
-      final IAdapterManager adapterManager = Platform.getAdapterManager();
-      final TreeSelection treeSelection = (TreeSelection) selection;
-      resource = adapterManager.getAdapter(treeSelection.getFirstElement(), IResource.class);
+      bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
+      bc.writeRegistry();
     }
-    else if (selection instanceof TextSelection)
+    else if (file.isFile())
     {
-      resource = WorkbenchUtil.getCurrentDocument();
+      bc.setSavedLeftType(BeyondCompareSavedLeft.File);
+      bc.writeRegistry();
     }
-    if (resource != null)
-    {
-      final BeyondCompare bc = new BeyondCompare();
-      final int resourceType = resource.getType();
-      if ((resourceType == IResource.FOLDER) || (resourceType == IResource.PROJECT))
-      {
-        bc.setSavedLeft(resource.getLocation().toString());
-        bc.setSavedLeftType(BeyondCompareSavedLeft.Directory);
-        bc.writeRegistry();
-      }
-      else if (resourceType == IResource.FILE)
-      {
-        bc.setSavedLeft(resource.getLocation().toString());
-        bc.setSavedLeftType(BeyondCompareSavedLeft.File);
-        bc.writeRegistry();
-      }
-    }
+
     return null;
   }
 }
