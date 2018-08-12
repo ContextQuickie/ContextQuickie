@@ -8,7 +8,6 @@ import contextquickie.tools.WorkbenchUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -89,18 +88,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
         pathArguments.add(this.getResourcePath(resource));
       }
 
-      // Java 1.6 compatibility
-      String pathArgument = "";
-      Iterator<String> iterator = pathArguments.iterator();
-      while (iterator.hasNext())
-      {
-        pathArgument += iterator.next();
-        if (iterator.hasNext())
-        {
-          pathArgument += "*";
-        }
-      }
-
+      String pathArgument = String.join("*", pathArguments);
       arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
