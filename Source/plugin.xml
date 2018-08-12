@@ -2621,6 +2621,13 @@
             properties="TortoiseHgEnabled"
             type="java.lang.Object">
       </propertyTester>
+      <propertyTester
+            class="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+            id="contextquickie.handlers.beyondcompare.SelectedResourceTester"
+            namespace="contextquickie.handlers.beyondcompare"
+            properties="SelectedResourceTester"
+            type="java.lang.Object">
+      </propertyTester>
    </extension>
    <extension
          point="org.eclipse.core.expressions.definitions">
