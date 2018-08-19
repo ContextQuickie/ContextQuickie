@@ -251,7 +251,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final String menuMergeIconPath = "Tortoise/menumerge.png";
 
     // Path to the "Delete" icon
-    final String menuDeleteIconPath = "TortoiseSvn/menudelete.png";
+    final String menuDeleteIconPath = "Tortoise/menudelete.png";
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Chekout...")
@@ -403,14 +403,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menurename.png")
         .setCommand("rename")
         .setMaxItemsCount(1));
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove"));
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Revert...")
         .setCommandId(defaultCommandId)

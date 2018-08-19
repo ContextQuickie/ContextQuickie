@@ -160,31 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/Tortoise/menudelete.png"
-                     label="SVN Delete...">
-                  <parameter
-                        name="CommandId"
-                        value="remove">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUREMOVE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurevert.png"
                      label="SVN Revert...">
                   <parameter
@@ -641,32 +616,6 @@
                      name="SeparatorTortoiseSVN1"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/Tortoise/menudelete.png"
-                     label="Delete...">
-                  <parameter
-                        name="CommandId"
-                        value="remove">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUREMOVE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurevert.png"
