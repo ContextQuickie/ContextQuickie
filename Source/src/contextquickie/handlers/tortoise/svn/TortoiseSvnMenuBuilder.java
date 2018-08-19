@@ -355,14 +355,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
 
-    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Check for modifications")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSHOWCHANGED)
         .setIconPath("Tortoise/menushowchanged.png")
         .setCommand("repostatus"));
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Revision graph")
         .setCommandId(defaultCommandId)
