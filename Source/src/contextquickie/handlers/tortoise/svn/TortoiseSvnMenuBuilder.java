@@ -450,14 +450,15 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Branch/tag...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPY)
         .setIconPath("Tortoise/menucopy.png")
-        .setCommand("copy"));
-
+        .setCommand("copy")
+        .setMaxItemsCount(1));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Switch...")
         .setCommandId(defaultCommandId)
