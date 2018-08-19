@@ -273,7 +273,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("update"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Commit")
+        .setLabel("Commit...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOMMIT)
         .setIconPath("Tortoise/menucommit.png")
@@ -410,14 +410,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove"));
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Revert...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
         .setIconPath("Tortoise/menurevert.png")
         .setCommand("revert"));
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete unversioned items...")
         .setCommandId(defaultCommandId)
