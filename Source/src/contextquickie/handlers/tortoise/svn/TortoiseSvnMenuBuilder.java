@@ -491,7 +491,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
-    /* TODO: Continue here
+    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)
@@ -504,11 +504,11 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
         .setIconPath("TortoiseSVN/menucreaterepos.png")
-        .setCommand(""));
+        .setCommand("")); */
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add...")
         .setCommandId(defaultCommandId)
@@ -521,15 +521,17 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
         .setIconPath("TortoiseSVN/menuimport.png")
-        .setCommand(""));
+        .setCommand("")); */
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Blame...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBLAME)
         .setIconPath("Tortoise/menublame.png")
-        .setCommand("blame"));
-    
+        .setCommand("blame")
+        .setMaxFileCount(1)
+        .setMaxFolderCount(0));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Copy URL to clipboard")
         .setCommandId(defaultCommandId)

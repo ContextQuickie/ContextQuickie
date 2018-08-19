@@ -160,39 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menublame.png"
-                     label="SVN Blame...">
-                  <parameter
-                        name="CommandId"
-                        value="blame">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUBLAME"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuadd.png"
                      label="SVN Add...">
                   <parameter
@@ -381,40 +348,6 @@
                      name="SeparatorTortoiseSVN3"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menublame.png"
-                     label="Blame...">
-                  <parameter
-                        name="CommandId"
-                        value="blame">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUBLAME"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuadd.png"
@@ -756,7 +689,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menublame.png"
+                     icon="icons/Tortoise/menublame.png"
                      label="Blame"
                      style="push">
                   <parameter
