@@ -160,58 +160,6 @@
             </dynamic>
             <command
                   commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menuupdate.png"
-                  label="SVN Update"
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENUUPDATE"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </and>
-               </visibleWhen>
-               <parameter
-                     name="CommandId"
-                     value="update">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menucommit.png"
-                  label="SVN Commit..."
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENUCOMMIT"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </and>
-               </visibleWhen>
-               <parameter
-                     name="CommandId"
-                     value="commit">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menucompare.png"
                   label="SVN Diff">
                <parameter
@@ -997,95 +945,10 @@
                         property="contextquickie.propertyHandlers.TortoiseSvnEnabled">
                   </test>
                </visibleWhen>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/Tortoise/menucheckout.png"
-                     label="Checkout..."
-                     style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                        <test
-                              property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
-                              value="false">
-                        </test>
-                        <test
-                              args="MENUCHECKOUT"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-                  <parameter
-                        name="CommandId"
-                        value="checkout">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuupdate.png"
-                     label="Update"
-                     style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUUPDATE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-                  <parameter
-                        name="CommandId"
-                        value="update">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menucommit.png"
-                     label="Commit..."
-                     style="push">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUCOMMIT"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-                  <parameter
-                        name="CommandId"
-                        value="commit">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-               </command>
-               <separator
-                     name="SeparatorTortoiseSvn0"
-                     visible="true">
-               </separator>
+               <dynamic
+                     class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
+                     id="BeyondCompare">
+               </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucompare.png"
@@ -1938,7 +1801,7 @@
             </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                  icon="icons/TortoiseGit/menucommit.png"
+                  icon="icons/Tortoise/menucommit.png"
                   label="Git Commit..."
                   style="push">
                <visibleWhen
@@ -2209,7 +2072,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucommit.png"
+                     icon="icons/Tortoise/menucommit.png"
                      label="Stash Save"
                      style="push">
                   <parameter
@@ -2546,7 +2409,7 @@
             </separator>
             <command
                   commandId="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
-                  icon="icons/TortoiseGit/menucommit.png"
+                  icon="icons/Tortoise/menucommit.png"
                   label="Hg Commit..."
                   style="push">
                <visibleWhen

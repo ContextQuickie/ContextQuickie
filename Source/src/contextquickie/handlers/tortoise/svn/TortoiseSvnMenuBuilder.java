@@ -264,7 +264,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFolderCount(1)
         .setMaxFileCount(0)
         .setSupportingLinkedResources(false));
-    /* TODO: Continue here 
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Update")
         .setCommandId(defaultCommandId)
@@ -281,7 +281,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+    /* TODO: Continue here 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff")
         .setCommandId(defaultCommandId)
