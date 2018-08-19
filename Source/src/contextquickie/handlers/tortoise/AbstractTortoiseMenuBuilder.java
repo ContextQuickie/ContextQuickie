@@ -81,9 +81,8 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
 
     // Create sub menu entry
-    // final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
-    // final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
-    final List<IContributionItem> subMenu = new ArrayList<IContributionItem>();
+    final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
+    final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
 
     for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
     {
@@ -174,22 +173,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
     if (subMenu.isEmpty() == false)
     {
-      // TODO: Uncomment when main menu is working: mainMenu.add(subMenu);
+      mainMenu.add(subMenu);
     }
 
-    if (this.isSubMenu())
-    {
-      return subMenu;
-    }
-    else
-    {
-      return mainMenu;
-    }
-  }
-
-  public boolean isSubMenu()
-  {
-    return false;
+    return mainMenu;
   }
 
   /**
