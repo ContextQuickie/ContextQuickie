@@ -543,18 +543,19 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
         .setIconPath("TortoiseSVN/menuignore.png")
-        .setCommand(""));
+        .setCommand(""));*/
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Create patch...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEPATCH)
         .setIconPath("Tortoise/menudiff.png")
         .setCommand("createpatch"));
-    
+
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Apply patch...")
         .setCommandId(defaultCommandId)

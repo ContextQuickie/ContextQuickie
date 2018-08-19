@@ -159,31 +159,6 @@
                   id="BeyondCompare">
             </dynamic>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menudiff.png"
-                     label="SVN Create patch...">
-                  <parameter
-                        name="CommandId"
-                        value="createpatch">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUCREATEPATCH"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
                      icon="icons/TortoiseSVN/menupatch.png"
                      label="SVN Apply patch...">
@@ -294,32 +269,6 @@
                      name="SeparatorTortoiseSVN4"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menudiff.png"
-                     label="Create patch...">
-                  <parameter
-                        name="CommandId"
-                        value="createpatch">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUCREATEPATCH"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
                      icon="icons/TortoiseSVN/menupatch.png"
@@ -999,7 +948,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menudiff.png"
+                     icon="icons/Tortoise/menudiff.png"
                      label="Create Patch Serial..."
                      style="push">
                   <parameter
