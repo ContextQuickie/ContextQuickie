@@ -474,21 +474,24 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(menuMergeIconPath)
         .setCommand("merge")
         .setMaxItemsCount(1));
-    /* TODO: Continue here
+    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Merge all..")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGEALL)
         .setIconPath(menuMergeIconPath)
-        .setCommand(""));
+        .setCommand("")); */
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Export...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUEXPORT)
         .setIconPath("Tortoise/menuexport.png")
-        .setCommand("export"));
-    
+        .setCommand("export")
+        .setMaxFileCount(0)
+        .setMaxFolderCount(1)
+        .setMaxItemsCount(1));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)

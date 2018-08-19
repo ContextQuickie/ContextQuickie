@@ -207,7 +207,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     }
 
     result.setSelectedFilesCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FILE).count());
-    result.setSelectedFoldersCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FOLDER).count());
+    result.setSelectedFoldersCount(result.getSelectedResources().stream().filter(r -> (r.getType() == IResource.FOLDER) || (r.getType() == IResource.PROJECT)).count());
 
     return result;
   }
