@@ -531,14 +531,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menuadd.png")
         .setCommand("add"));
 
-    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Copy URL to clipboard")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPYURL)
         .setIconPath("TortoiseSVN/copy.png")
-        .setCommand(""));
-    
+        .setCommand("copyurls"));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
