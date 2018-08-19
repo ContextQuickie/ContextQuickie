@@ -160,31 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuunlock.png"
-                     label="SVN Release lock...">
-                  <parameter
-                        name="CommandId"
-                        value="unlock">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUUNLOCK"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucopy.png"
                      label="SVN Branch/tag...">
                   <parameter
@@ -536,36 +511,6 @@
                </dynamic>
                <separator
                      name="SeparatorTortoiseSVN1"
-                     visible="true">
-               </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuunlock.png"
-                     label="Release lock...">
-                  <parameter
-                        name="CommandId"
-                        value="unlock">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUUNLOCK"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <separator
-                     name="SeparatorTortoiseSVN2"
                      visible="true">
                </separator>
                <command

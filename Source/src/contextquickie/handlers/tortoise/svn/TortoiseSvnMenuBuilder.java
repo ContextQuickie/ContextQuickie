@@ -440,7 +440,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENULOCK)
         .setIconPath("TortoiseSvn/menulock.png")
         .setCommand("lock"));
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Release lock...")
         .setCommandId(defaultCommandId)
@@ -450,7 +450,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Branch/tag...")
         .setCommandId(defaultCommandId)
