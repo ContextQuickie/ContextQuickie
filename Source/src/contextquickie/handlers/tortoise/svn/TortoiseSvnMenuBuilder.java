@@ -433,14 +433,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("cleanup")
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Get lock...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOCK)
         .setIconPath("TortoiseSvn/menulock.png")
         .setCommand("lock"));
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Release lock...")
         .setCommandId(defaultCommandId)
