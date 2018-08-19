@@ -43,19 +43,6 @@ public final class ProcessWrapper
    * @param arguments
    *          The arguments of the command.
    */
-  public void executeCommand(final String command, Set<IResource> resources, final String... arguments)
-  {
-    this.executeCommand(command, resources, Arrays.asList(arguments));
-  }
-
-  /**
-   * Executes a command with the passed arguments.
-   * 
-   * @param command
-   *          The command to execute.
-   * @param arguments
-   *          The arguments of the command.
-   */
   public void executeCommand(final String command, Set<IResource> resources, final List<String> arguments)
   {
     final List<String> commandAndArguments = new ArrayList<String>();
