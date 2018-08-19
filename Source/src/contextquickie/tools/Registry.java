@@ -90,7 +90,7 @@ public final class Registry
    *          entry doesn't exist)
    * @return The read value.
    */
-  public long getIntValue(String location, final String key, long defaultValue)
+  public long readIntValue(String location, final String key, long defaultValue)
   {
     RootMapping mapping = this.mapRegistryRoot(location);
     return readLongValue(mapping.root, mapping.location, key, defaultValue);
