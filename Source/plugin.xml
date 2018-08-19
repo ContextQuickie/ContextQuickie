@@ -160,42 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menumerge.png"
-                     label="SVN Merge...">
-                  <parameter
-                        name="CommandId"
-                        value="merge">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUMERGE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuexport.png"
                      label="SVN Export...">
                   <parameter
@@ -441,43 +405,6 @@
                      name="SeparatorTortoiseSVN1"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menumerge.png"
-                     label="Merge...">
-                  <parameter
-                        name="CommandId"
-                        value="merge">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUMERGE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuexport.png"
@@ -1210,7 +1137,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menumerge.png"
+                     icon="icons/Tortoise/menumerge.png"
                      label="Merge..."
                      style="push">
                   <parameter
