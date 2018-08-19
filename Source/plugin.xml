@@ -158,54 +158,6 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="BeyondCompare">
             </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menusettings.png"
-                     label="SVN Settings">
-                  <parameter
-                        name="CommandId"
-                        value="settings">
-                  </parameter>
-		  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUSETTINGS"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuhelp.png"
-                     label="SVN Help">
-                  <parameter
-                        name="CommandId"
-                        value="help">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUHELP"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuabout.png"
-                     label="SVN About">
-                  <parameter
-                        name="CommandId"
-                        value="about">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUABOUT"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </visibleWhen>
-               </command>
             
             <menu
                   icon="icons/TortoiseSVN/tsvnmenumultiple.png"
@@ -220,57 +172,6 @@
                      class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
                      id="BeyondCompare">
                </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menusettings.png"
-                     label="Settings">
-                  <parameter
-                        name="CommandId"
-                        value="settings">
-                  </parameter>
-		  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUSETTINGS"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                           value="false">
-                     </test>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuhelp.png"
-                     label="Help">
-                  <parameter
-                        name="CommandId"
-                        value="help">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUHELP"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                           value="false">
-                     </test>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuabout.png"
-                     label="About">
-                  <parameter
-                        name="CommandId"
-                        value="about">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <test
-                           args="MENUABOUT"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                           value="false">
-                     </test>
-                  </visibleWhen>
-               </command>
             </menu>
             <separator
                   name="SeparatorTortoiseSVNTortoiseGit"
@@ -872,7 +773,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuabout.png"
+                     icon="icons/Tortoise/menuabout.png"
                      label="About"
                      style="push">
                   <parameter
@@ -882,7 +783,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuhelp.png"
+                     icon="icons/Tortoise/menuhelp.png"
                      label="Help"
                      style="push">
                   <parameter
@@ -892,7 +793,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menusettings.png"
+                     icon="icons/Tortoise/menusettings.png"
                      label="Settings"
                      style="push">
                   <parameter

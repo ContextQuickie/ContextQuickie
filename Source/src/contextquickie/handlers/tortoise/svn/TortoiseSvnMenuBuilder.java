@@ -573,7 +573,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     // Separator
     entries.add(new TortoiseMenuEntry());
-    /* TODO: Continue here
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Settings")
         .setCommandId(defaultCommandId)
@@ -599,7 +599,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menuabout.png")
         .setCommand("about")
         .setVisibleWithoutWorkingCopy(true));
-    
+    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Paste")
         .setCommandId(defaultCommandId)
