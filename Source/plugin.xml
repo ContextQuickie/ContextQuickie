@@ -158,35 +158,6 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="BeyondCompare">
             </dynamic>
-			<command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuupdate.png"
-                     label="SVN Update to revision...">
-                  <parameter
-                        name="CommandId"
-                        value="update">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <parameter
-                        name="Parameter1"
-                        value="/rev">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUUPDATEEXT"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menurename.png"
@@ -706,36 +677,6 @@
                      name="SeparatorTortoiseSVN1"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuupdate.png"
-                     label="Update to revision...">
-                  <parameter
-                        name="CommandId"
-                        value="update">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <parameter
-                        name="Parameter1"
-                        value="/rev">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUUPDATEEXT"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menurename.png"

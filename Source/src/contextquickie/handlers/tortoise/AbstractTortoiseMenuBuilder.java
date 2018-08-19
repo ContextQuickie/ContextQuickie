@@ -142,6 +142,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
           parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
           parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
           parameters.put(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID, entry.isSupportingLinkedResources().toString());
+          if (entry.getParameter1() != null)
+          {
+            parameters.put(TortoiseMenuConstants.PARAMETER_1_ID, entry.getParameter1());
+          }
           commandParameter.parameters = parameters;
         }
 

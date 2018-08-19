@@ -31,6 +31,11 @@ public class TortoiseMenuEntry
    * The command which will be passed to the Tortoise program.
    */
   private String entryCommand;
+  
+  /**
+   * The first parameter which will be passed to the Tortoise program.
+   */
+  private String parameter1;
 
   /**
    * A value indicating whether the path must be passed to the Tortoise program.
@@ -412,6 +417,25 @@ public class TortoiseMenuEntry
   public TortoiseMenuEntry setRequiresParameters(boolean value)
   {
     this.requiresParameters = value;
+    return this;
+  }
+
+  /**
+   * @return The first parameter which will be passed to the Tortoise program.
+   */
+  public String getParameter1()
+  {
+    return  this.parameter1;
+  }
+
+  /**
+   * @param value
+   *          The first parameter which will be passed to the Tortoise program.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setParameter1(String value)
+  {
+    this.parameter1 = value;
     return this;
   }
 }
