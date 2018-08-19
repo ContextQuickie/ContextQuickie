@@ -417,21 +417,23 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUREVERT)
         .setIconPath("Tortoise/menurevert.png")
         .setCommand("revert"));
-    /* TODO: Continue here
+    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete unversioned items...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDELUNVERSIONED)
         .setIconPath(menuDeleteIconPath)
-        .setCommand(""));
+        .setCommand("")); */
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Clean up...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLEANUP)
         .setIconPath("Tortoise/menucleanup.png")
-        .setCommand("cleanup"));
-    
+        .setCommand("cleanup")
+        .setMaxFolderCount(1)
+        .setMaxItemsCount(1));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Get lock...")
         .setCommandId(defaultCommandId)

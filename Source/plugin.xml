@@ -160,34 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menucleanup.png"
-                     label="SVN Clean up...">
-                  <parameter
-                        name="CommandId"
-                        value="cleanup">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUCLEANUP"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulock.png"
                      label="SVN Get lock...">
                   <parameter
@@ -591,35 +563,6 @@
                      name="SeparatorTortoiseSVN1"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menucleanup.png"
-                     label="Clean up...">
-                  <parameter
-                        name="CommandId"
-                        value="cleanup">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUCLEANUP"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulock.png"
@@ -1487,7 +1430,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucleanup.png"
+                     icon="icons/Tortoise/menucleanup.png"
                      label="Clean up..."
                      style="push">
                   <parameter
