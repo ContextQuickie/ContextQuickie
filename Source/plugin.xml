@@ -160,42 +160,6 @@
             </dynamic>
             <command
                   commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menurepobrowse.png"
-                  label="SVN Repo-browser">
-               <parameter
-                     name="CommandId"
-                     value="repobrowser">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENUREPOBROWSE"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
-                  </and>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menushowchanged.png"
                   label="SVN Check for modifications">
                <parameter
@@ -824,43 +788,6 @@
                      class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
                      id="BeyondCompare">
                </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menurepobrowse.png"
-                     label="Repo-browser">
-                  <parameter
-                        name="CommandId"
-                        value="repobrowser">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUREPOBROWSE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menushowchanged.png"
@@ -1734,7 +1661,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurepobrowse.png"
+                     icon="icons/Tortoise/menurepobrowse.png"
                      label="Browse References"
                      style="push">
                   <parameter
@@ -1776,7 +1703,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menurepobrowse.png"
+                     icon="icons/Tortoise/menurepobrowse.png"
                      label="Repo-browser"
                      style="push">
                   <parameter

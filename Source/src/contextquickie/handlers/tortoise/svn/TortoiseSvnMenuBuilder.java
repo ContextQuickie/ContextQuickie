@@ -345,15 +345,17 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
 
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Repo-browser")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREPOBROWSE)
         .setIconPath("Tortoise/menurepobrowse.png")
         .setCommand("repobrowser")
-        .setEntryRequiresPath(true));
-    
+        .setMaxItemsCount(1)
+        .setSupportingLinkedResources(false));
+
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Check for modifications")
         .setCommandId(defaultCommandId)
