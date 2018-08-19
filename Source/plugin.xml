@@ -160,31 +160,6 @@
             </dynamic>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuproperties.png"
-                     label="SVN Properties">
-                  <parameter
-                        name="CommandId"
-                        value="properties">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-		  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUPROPERTIES"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                     </and>
-                  </visibleWhen>  
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menusettings.png"
                      label="SVN Settings">
                   <parameter
@@ -245,40 +220,6 @@
                      class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
                      id="BeyondCompare">
                </dynamic>
-               <separator
-                     name="SeparatorTortoiseSVN4"
-                     visible="true">
-               </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuproperties.png"
-                     label="Properties">
-                  <parameter
-                        name="CommandId"
-                        value="properties">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-		  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUPROPERTIES"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>  
-               </command>
-               <separator
-                     name="SeparatorTortoiseSVN5"
-                     visible="true">
-               </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menusettings.png"

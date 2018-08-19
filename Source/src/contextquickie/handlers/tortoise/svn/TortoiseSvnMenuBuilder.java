@@ -563,17 +563,17 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
         .setRequiresParameters(false));
-    /* TODO: Continue here    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Properties")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPROPERTIES)
         .setIconPath("TortoiseSVN/menuproperties.png")
         .setCommand("properties"));
-    
+
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Settings")
         .setCommandId(defaultCommandId)
