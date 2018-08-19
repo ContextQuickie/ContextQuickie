@@ -555,14 +555,15 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menudiff.png")
         .setCommand("createpatch"));
 
-    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Apply patch...")
-        .setCommandId(defaultCommandId)
+        .setCommandId("ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand")
         .setMenuId(MENUAPPLYPATCH)
         .setIconPath("Tortoise/menupatch.png")
-        .setCommand(""));
-    
+        .setMaxFileCount(0)
+        .setMaxFolderCount(1)
+        .setRequiresParameters(false));
+    /* TODO: Continue here    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Properties")
         .setCommandId(defaultCommandId)

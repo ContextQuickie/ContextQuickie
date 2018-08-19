@@ -94,8 +94,8 @@
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-            name="TortoiseSVNMergeCommand">
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand"
+            name="TortoiseSvnMergeCommand">
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
@@ -158,26 +158,6 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="BeyondCompare">
             </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-                     icon="icons/TortoiseSVN/menupatch.png"
-                     label="SVN Apply patch...">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUAPPLYPATCH"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                        </test>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-         	          </reference>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuproperties.png"
@@ -269,27 +249,6 @@
                      name="SeparatorTortoiseSVN4"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNMergeCommand"
-                     icon="icons/TortoiseSVN/menupatch.png"
-                     label="Apply patch...">
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUAPPLYPATCH"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-         	          </reference>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuproperties.png"
@@ -962,7 +921,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
-                     icon="icons/TortoiseGit/menupatch.png"
+                     icon="icons/Tortoise/menupatch.png"
                      label="Apply Patch Serial..."
                      style="push">
                </command>
