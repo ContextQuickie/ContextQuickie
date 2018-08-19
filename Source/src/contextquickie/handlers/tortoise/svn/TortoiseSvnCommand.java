@@ -22,24 +22,6 @@ public class TortoiseSvnCommand extends AbstractTortoiseCommand
   }
 
   @Override
-  protected final String getCommandIdName()
-  {
-    return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID";
-  }
-
-  @Override
-  protected final String getRequiresPathName()
-  {
-    return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath";
-  }
-
-  @Override
-  protected final String getParameter1Name()
-  {
-    return "ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1";
-  }
-
-  @Override
   protected final String getWorkingCopyRoot(final IPath path)
   {
     return new TortoiseSvnWorkingCopyDetect().getWorkingCopyRoot(path);

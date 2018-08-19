@@ -262,8 +262,9 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIsVisibleInWorkingCopy(false)
         .setVisibleWithoutWorkingCopy(true)
         .setMaxFolderCount(1)
-        .setMaxFileCount(0));
-
+        .setMaxFileCount(0)
+        .setSupportingLinkedResources(false));
+    /* TODO: Continue here 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Update")
         .setCommandId(defaultCommandId)
@@ -568,6 +569,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUCLIPPASTE)
         .setIconPath(menuCompareIconPath)
         .setCommand(""));
+        */
   }
 
   /**

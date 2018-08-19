@@ -44,21 +44,26 @@
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-            name="TortoiseSVNCommand">
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
+            name="TortoiseSvnCommand">
          <commandParameter
-               id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+               id="CommandId"
                name="CommandID"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+               id="RequiresPath"
                name="RequiresPath"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1"
+               id="Parameter1"
                name="Parameter1"
+               optional="true">
+         </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
                optional="true">
          </commandParameter>
       </command>
@@ -67,18 +72,23 @@
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
             name="TortoiseGitCommand">
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+               id="CommandId"
                name="CommandID"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+               id="RequiresPath"
                name="RequiresPath"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+               id="Parameter1"
                name="Parameter1"
+               optional="true">
+         </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
                optional="true">
          </commandParameter>
       </command>
@@ -107,18 +117,23 @@
             id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
             name="TortoiseHgCommand">
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
+               id="CommandId"
                name="CommandID"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
+               id="RequiresPath"
                name="RequiresPath"
                optional="false">
          </commandParameter>
          <commandParameter
-               id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.Parameter1"
+               id="Parameter1"
                name="Parameter1"
+               optional="true">
+         </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
                optional="true">
          </commandParameter>
       </command>
@@ -136,41 +151,15 @@
                   id="BeyondCompare">
             </dynamic>
             <separator
-                  name="SeparatorBeyondCompareTortoiseSVN"
+                  name="SeparatorBeyondCompareTortoiseSvn"
                   visible="true">
             </separator>
+            <dynamic
+                  class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
+                  id="BeyondCompare">
+            </dynamic>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                  icon="icons/TortoiseSVN/menucheckout.png"
-                  label="SVN Checkout..."
-                  style="push">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesOneFolder">
-                     </reference>
-                     <test
-                           property="contextquickie.propertyHandlers.TortoiseSvnWorkingCopyDetect"
-                           value="false">
-                     </test>
-                     <test
-                           args="MENUCHECKOUT"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </and>
-               </visibleWhen>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
-                     value="checkout">
-               </parameter>
-               <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
-                     value="true">
-               </parameter>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menuupdate.png"
                   label="SVN Update"
                   style="push">
@@ -187,16 +176,16 @@
                   </and>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="update">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menucommit.png"
                   label="SVN Commit..."
                   style="push">
@@ -213,24 +202,24 @@
                   </and>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="commit">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menucompare.png"
                   label="SVN Diff">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="diff">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -278,15 +267,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menucompare.png"
                   label="SVN Diff with previous version">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="prevdiff">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -311,15 +300,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menulog.png"
                   label="SVN Show Log">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="log">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -347,15 +336,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menurepobrowse.png"
                   label="SVN Repo-browser">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="repobrowser">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -383,15 +372,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menushowchanged.png"
                   label="SVN Check for modifications">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="repostatus">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -408,15 +397,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menurevisiongraph.png"
                   label="SVN Revision graph">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="revisiongraph">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -444,15 +433,15 @@
                </visibleWhen>
             </command>
             <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menuresolve.png"
                   label="SVN Resolve...">
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                     name="CommandId"
                      value="resolve">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
                <visibleWhen
@@ -469,19 +458,19 @@
                </visibleWhen>
             </command>
 			<command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuupdate.png"
                      label="SVN Update to revision...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="update">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1"
+                        name="Parameter1"
                         value="/rev">
                   </parameter>
                   <visibleWhen
@@ -498,15 +487,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menurename.png"
                      label="SVN Rename...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="rename">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -534,15 +523,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menudelete.png"
                      label="SVN Delete...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="remove">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -559,15 +548,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurevert.png"
                      label="SVN Revert...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="revert">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -584,15 +573,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucleanup.png"
                      label="SVN Clean up...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="cleanup">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -612,15 +601,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulock.png"
                      label="SVN Get lock...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="lock">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -637,15 +626,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuunlock.png"
                      label="SVN Release lock...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="unlock">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -662,15 +651,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucopy.png"
                      label="SVN Branch/tag...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="copy">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -698,15 +687,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuswitch.png"
                      label="SVN Switch...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="switch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -734,15 +723,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menumerge.png"
                      label="SVN Merge...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="merge">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -770,15 +759,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuexport.png"
                      label="SVN Export...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="export">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -798,15 +787,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menublame.png"
                      label="SVN Blame...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="blame">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -831,15 +820,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuadd.png"
                      label="SVN Add...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="add">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -856,15 +845,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/copy.png"
                      label="SVN Copy URL to clipboard">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="createpatch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -881,15 +870,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menudiff.png"
                      label="SVN Create patch...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="createpatch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -926,15 +915,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuproperties.png"
                      label="SVN Properties">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="properties">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
 		  <visibleWhen
@@ -951,11 +940,11 @@
                   </visibleWhen>  
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menusettings.png"
                      label="SVN Settings">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="settings">
                   </parameter>
 		  <visibleWhen
@@ -967,11 +956,11 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuhelp.png"
                      label="SVN Help">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="help">
                   </parameter>
                   <visibleWhen
@@ -983,11 +972,11 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuabout.png"
                      label="SVN About">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="about">
                   </parameter>
                   <visibleWhen
@@ -1009,8 +998,8 @@
                   </test>
                </visibleWhen>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
-                     icon="icons/TortoiseSVN/menucheckout.png"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
+                     icon="icons/Tortoise/menucheckout.png"
                      label="Checkout..."
                      style="push">
                   <visibleWhen
@@ -1031,16 +1020,16 @@
                      </and>
                   </visibleWhen>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="checkout">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuupdate.png"
                      label="Update"
                      style="push">
@@ -1058,16 +1047,16 @@
                      </and>
                   </visibleWhen>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="update">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucommit.png"
                      label="Commit..."
                      style="push">
@@ -1085,11 +1074,11 @@
                      </and>
                   </visibleWhen>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="commit">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -1098,15 +1087,15 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucompare.png"
                      label="Diff">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="diff">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1156,15 +1145,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucompare.png"
                      label="Diff with previous version">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="prevdiff">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1190,15 +1179,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulog.png"
                      label="Show Log">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="log">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1227,15 +1216,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurepobrowse.png"
                      label="Repo-browser">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="repobrowser">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1264,15 +1253,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menushowchanged.png"
                      label="Check for modifications">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="repostatus">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1290,15 +1279,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurevisiongraph.png"
                      label="Revision graph">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="revisiongraph">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1331,15 +1320,15 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuresolve.png"
                      label="Resolve...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="resolve">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1357,19 +1346,19 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuupdate.png"
                      label="Update to revision...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="update">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.Parameter1"
+                        name="Parameter1"
                         value="/rev">
                   </parameter>
                   <visibleWhen
@@ -1387,15 +1376,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menurename.png"
                      label="Rename...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="rename">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1424,15 +1413,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/Tortoise/menudelete.png"
                      label="Delete...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="remove">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1450,15 +1439,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurevert.png"
                      label="Revert...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="revert">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1476,15 +1465,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucleanup.png"
                      label="Clean up...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="cleanup">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1505,15 +1494,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulock.png"
                      label="Get lock...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="lock">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1531,15 +1520,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuunlock.png"
                      label="Release lock...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="unlock">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1561,15 +1550,15 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menucopy.png"
                      label="Branch/tag...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="copy">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1598,15 +1587,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuswitch.png"
                      label="Switch...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="switch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1635,15 +1624,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menumerge.png"
                      label="Merge...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="merge">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1672,15 +1661,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuexport.png"
                      label="Export...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="export">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1705,15 +1694,15 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menublame.png"
                      label="Blame...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="blame">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1739,15 +1728,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuadd.png"
                      label="Add...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="add">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1765,15 +1754,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/copy.png"
                      label="Copy URL to clipboard">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="createpatch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1795,15 +1784,15 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menudiff.png"
                      label="Create patch...">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="createpatch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -1842,15 +1831,15 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuproperties.png"
                      label="Properties">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="properties">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
 		  <visibleWhen
@@ -1872,11 +1861,11 @@
                      visible="true">
                </separator>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menusettings.png"
                      label="Settings">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="settings">
                   </parameter>
 		  <visibleWhen
@@ -1889,11 +1878,11 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuhelp.png"
                      label="Help">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="help">
                   </parameter>
                   <visibleWhen
@@ -1906,11 +1895,11 @@
                   </visibleWhen>
                </command>
                <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand"
+                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuabout.png"
                      label="About">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseSVN.TortoiseSVNCommand.CommandID"
+                        name="CommandId"
                         value="about">
                   </parameter>
                   <visibleWhen
@@ -1939,11 +1928,11 @@
                   </reference>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                     name="CommandId"
                      value="sync">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
             </command>
@@ -1959,11 +1948,11 @@
                   </reference>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                     name="CommandId"
                      value="commit">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
             </command>
@@ -1982,11 +1971,11 @@
                      label="Pull..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="pull">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -1996,11 +1985,11 @@
                      label="Fetch..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="fetch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2010,11 +1999,11 @@
                      label="Push..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="push">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2028,11 +2017,11 @@
                      label="Diff"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="diff">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -2065,15 +2054,15 @@
                      label="Diff with previous version"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="diff">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+                        name="Parameter1"
                         value="HEAD^">
                   </parameter>
                </command>
@@ -2083,11 +2072,11 @@
                      label="Blame"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="blame">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -2112,11 +2101,11 @@
                      label="Show log"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="log">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2126,11 +2115,11 @@
                      label="Show Reflog"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="reflog">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2140,11 +2129,11 @@
                      label="Browse References"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="refbrowse">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2154,11 +2143,11 @@
                      label="Daemon"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="daemon">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2168,11 +2157,11 @@
                      label="Revision graph"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="revisiongraph">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2182,11 +2171,11 @@
                      label="Repo-browser"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="repobrowser">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2196,11 +2185,11 @@
                      label="Check for modifications"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="repostatus">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2210,11 +2199,11 @@
                      label="Rebase..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="rebase">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2224,11 +2213,11 @@
                      label="Stash Save"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="stashsave">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2242,11 +2231,11 @@
                      label="Rename..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="rename">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -2267,11 +2256,11 @@
                      label="Delete"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="remove">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <visibleWhen
@@ -2292,15 +2281,15 @@
                      label="Delete (keep local)"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="diff">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+                        name="Parameter1"
                         value="/keep">
                   </parameter>
                   <visibleWhen
@@ -2325,15 +2314,15 @@
                      label="Bisect start"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="bisect">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.Parameter1"
+                        name="Parameter1"
                         value="/start">
                   </parameter>
                </command>
@@ -2347,11 +2336,11 @@
                      label="Resolve..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="resolve">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2361,11 +2350,11 @@
                      label="Revert..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="revert">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2375,11 +2364,11 @@
                      label="Clean up..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="cleanup">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2393,11 +2382,11 @@
                      label="Switch/Checkout..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="switch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2407,11 +2396,11 @@
                      label="Merge..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="merge">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2421,11 +2410,11 @@
                      label="Create Branch..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="branch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2435,11 +2424,11 @@
                      label="Create Tag..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="tag">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2449,11 +2438,11 @@
                      label="Export..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="export">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2467,11 +2456,11 @@
                      label="Add..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="add">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2485,11 +2474,11 @@
                      label="Submodule Add..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="subadd">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2503,11 +2492,11 @@
                      label="Create Patch Serial..."
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="formatpatch">
                   </parameter>
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.RequiresPath"
+                        name="RequiresPath"
                         value="true">
                   </parameter>
                </command>
@@ -2527,7 +2516,7 @@
                      label="About"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="about">
                   </parameter>
                </command>
@@ -2537,7 +2526,7 @@
                      label="Help"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="help">
                   </parameter>
                </command>
@@ -2547,7 +2536,7 @@
                      label="Settings"
                      style="push">
                   <parameter
-                        name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand.CommandID"
+                        name="CommandId"
                         value="settings">
                   </parameter>
                </command>
@@ -2567,11 +2556,11 @@
                   </reference>
                </visibleWhen>
                <parameter
-                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.CommandID"
+                     name="CommandId"
                      value="commit">
                </parameter>
                <parameter
-                     name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand.RequiresPath"
+                     name="RequiresPath"
                      value="true">
                </parameter>
             </command>

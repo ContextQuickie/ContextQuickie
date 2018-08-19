@@ -2,14 +2,16 @@ package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tools.WorkbenchUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -18,10 +20,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Class which executes all Tortoise commands based on the passed parameters.
@@ -48,21 +46,6 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   }
 
   /**
-   * @return The name of the "command Id" parameter.
-   */
-  protected abstract String getCommandIdName();
-
-  /**
-   * @return The name of the "requires path name" parameter.
-   */
-  protected abstract String getRequiresPathName();
-
-  /**
-   * @return The name of the "Parameter1" parameter.
-   */
-  protected abstract String getParameter1Name();
-
-  /**
    * Gets the working copy root directory of the specific directory.
    * 
    * @param path
@@ -76,76 +59,65 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   public final Object execute(final ExecutionEvent event)
   {
     final List<String> arguments = new ArrayList<String>();
-    arguments.add("/command:" + event.getParameter(this.getCommandIdName()));
+    final String command = event.getParameter(TortoiseMenuConstants.COMMAND_ID);
+    final String requiresPathString = event.getParameter(TortoiseMenuConstants.REQUIRES_PATH_ID);
+    final String supportsLinkedResourcesString = event.getParameter(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID);
+    final String executable = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
+    
+    boolean supportsLinkedResources = true;
+    if ((supportsLinkedResourcesString != null) && (Boolean.parseBoolean(supportsLinkedResourcesString) == false))
+    {
+      supportsLinkedResources = false;
+    }
+    arguments.add("/command:" + command);
     Set<IResource> currentResources = null;
-    final String requiresPathString = event.getParameter(this.getRequiresPathName());
     if ((requiresPathString != null) && (Boolean.parseBoolean(requiresPathString)))
     {
-      currentResources = this.getSelectedResources(event);
-      final Set<String> pathArguments = new HashSet<String>();
-      for (IResource resource : currentResources)
+      if (supportsLinkedResources == true)
       {
-        pathArguments.add(this.getResourcePath(resource));
+        currentResources = new ContextMenuEnvironment().getSelectedResources();
+      }
+      else
+      {
+        currentResources = this.getSelectedResources(); 
       }
 
-      String pathArgument = String.join("*", pathArguments);
+      final String pathArgument = String.join("*", currentResources.stream().map(resource -> resource.getLocation().toOSString()).collect(Collectors.toSet()));
       arguments.add("/path:" + StringUtil.quoteString(pathArgument));
     }
 
-    final String parameter1 = event.getParameter(this.getParameter1Name());
+    final String parameter1 = event.getParameter(TortoiseMenuConstants.PARAMETER_1_ID);
     if (parameter1 != null)
     {
       arguments.add(parameter1);
     }
-
-    final String command = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
-    new ProcessWrapper().executeCommand(command, currentResources, arguments);
-
+    
+    new ProcessWrapper().executeCommand(executable, currentResources, arguments);
     return null;
   }
 
   /**
    * Gets all selected resources of the specified execution event.
    * 
-   * @param event
-   *          The used execution event.
    * @return A collection containing all selected resources.
    */
-  private Set<IResource> getSelectedResources(final ExecutionEvent event)
+  private Set<IResource> getSelectedResources()
   {
-    final Set<IResource> currentResources = new HashSet<IResource>();
-    final ISelection selection = HandlerUtil.getCurrentSelection(event);
-    if (selection instanceof TreeSelection)
+    final Set<IResource> resources = new ContextMenuEnvironment().getSelectedResources();
+
+    if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
     {
-      final TreeSelection treeSelection = (TreeSelection) selection;
-      for (Object selectedItem : treeSelection.toList())
+      resources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
       {
-        if (selectedItem instanceof IAdaptable)
-        {
-          final IAdaptable adaptable = (IAdaptable) selectedItem;
-          currentResources.add(adaptable.getAdapter(IResource.class));
-
-          if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
+          final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+          if (workingCopyRoot != null)
           {
-            final IContainer container = adaptable.getAdapter(IContainer.class);
-            if (container != null)
-            {
-              final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
-              if (workingCopyRoot != null)
-              {
-                currentResources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
-              }
-            }
+            resources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
           }
-        }
-      }
-    }
-    else if (selection instanceof TextSelection)
-    {
-      currentResources.add(WorkbenchUtil.getCurrentDocument());
+      });
     }
 
-    return currentResources;
+    return resources;
   }
 
   /**
@@ -188,23 +160,5 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     }
 
     return linkedResources;
-  }
-
-  /**
-   * Gets the resource path from the specified IAdaptable instance.
-   * 
-   * @param adaptable
-   *          The instance which will be evaluated.
-   * @return The resource path or null if the path cannot be determined.
-   */
-  private String getResourcePath(final IAdaptable adaptable)
-  {
-    final IResource resource = adaptable.getAdapter(IResource.class);
-    if (resource != null)
-    {
-      return resource.getLocation().toOSString();
-    }
-
-    return null;
   }
 }

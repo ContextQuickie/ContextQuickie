@@ -127,6 +127,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         final Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
         parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
+        parameters.put(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID, entry.isSupportingLinkedResources().toString());
         commandParameter.parameters = parameters;
 
         if (this.isEntryInMainMenu(entry.getMenuId()))
@@ -154,7 +155,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
     if (subMenu.isEmpty() == false)
     {
-      mainMenu.add(subMenu);
+      // TODO: Uncomment when main menu is working: mainMenu.add(subMenu);
     }
 
     return mainMenu;

@@ -61,6 +61,11 @@ public class TortoiseMenuEntry
    * The maximum number of selected items to display this entry.
    */
   private int maxItemsCount = Integer.MAX_VALUE;
+  
+  /**
+   * A value indicating whether this entry supports linked resources as child items or not.
+   */
+  private boolean isSupportingLinkedResources = true;
 
   /**
    * Gets the label of the instance.
@@ -274,23 +279,40 @@ public class TortoiseMenuEntry
   }
 
   /**
-   * @return A value indicating whether this entry is visible without a working
+   * @return A value indicating whether this entry is visible without a working.
    *         copy.
    */
   public boolean isVisibleWithoutWorkingCopy()
   {
-    return isVisibleWithoutWorkingCopy;
+    return this.isVisibleWithoutWorkingCopy;
   }
 
   /**
    * @param value
-   *          A value indicating whether this entry is visible without a working
+   *          A value indicating whether this entry is visible without a working.
    *          copy.
    * @return The instance with the changed value.
    */
   public TortoiseMenuEntry setVisibleWithoutWorkingCopy(final boolean value)
   {
     this.isVisibleWithoutWorkingCopy = value;
+    return this;
+  }
+
+  public Boolean isSupportingLinkedResources()
+  {
+    return this.isSupportingLinkedResources;
+  }
+
+  /**
+   * @param value
+   *          A value indicating whether this entry supports linked resources as child items or not.
+   *          copy.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setSupportingLinkedResources(boolean value)
+  {
+    this.isSupportingLinkedResources = value;
     return this;
   }
 }
