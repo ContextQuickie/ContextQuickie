@@ -158,31 +158,6 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="BeyondCompare">
             </dynamic>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menuresolve.png"
-                  label="SVN Resolve...">
-               <parameter
-                     name="CommandId"
-                     value="resolve">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENURESOLVE"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </and>
-               </visibleWhen>
-            </command>
 			<command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuupdate.png"
@@ -731,32 +706,6 @@
                      name="SeparatorTortoiseSVN1"
                      visible="true">
                </separator>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menuresolve.png"
-                     label="Resolve...">
-                  <parameter
-                        name="CommandId"
-                        value="resolve">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENURESOLVE"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menuupdate.png"
@@ -1744,7 +1693,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menuresolve.png"
+                     icon="icons/Tortoise/menuresolve.png"
                      label="Resolve..."
                      style="push">
                   <parameter

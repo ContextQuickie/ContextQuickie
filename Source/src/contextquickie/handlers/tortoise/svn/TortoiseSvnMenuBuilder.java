@@ -370,13 +370,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("revisiongraph")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
-    /* TODO: Continue here
+    /* TODO: currently not supported 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Edit conflicts")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCONFLICTEDITOR)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));
+        .setCommand(""));*/
     
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -387,7 +387,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENURESOLVE)
         .setIconPath("Tortoise/menuresolve.png")
         .setCommand("resolve"));
-    
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Update to revision...")
         .setCommandId(defaultCommandId)
