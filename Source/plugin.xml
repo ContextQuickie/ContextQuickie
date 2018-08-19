@@ -160,42 +160,6 @@
             </dynamic>
             <command
                   commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menulog.png"
-                  label="SVN Show Log">
-               <parameter
-                     name="CommandId"
-                     value="log">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENULOG"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
-                  </and>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menurepobrowse.png"
                   label="SVN Repo-browser">
                <parameter
@@ -860,43 +824,6 @@
                      class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
                      id="BeyondCompare">
                </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menulog.png"
-                     label="Show Log">
-                  <parameter
-                        name="CommandId"
-                        value="log">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENULOG"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFolder">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menurepobrowse.png"
@@ -1779,7 +1706,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menulog.png"
+                     icon="icons/Tortoise/menulog.png"
                      label="Show log"
                      style="push">
                   <parameter
@@ -1793,7 +1720,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menulog.png"
+                     icon="icons/Tortoise/menulog.png"
                      label="Show Reflog"
                      style="push">
                   <parameter

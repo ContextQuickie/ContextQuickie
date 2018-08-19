@@ -231,7 +231,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
    * About menu entry.
    */
   private static final long MENUABOUT = 0x8000000000000000L;
-  
+
   /**
    * Tortoise SVN menu configuration.
    */
@@ -240,10 +240,10 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   static
   {
     final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
-    
+
     // Path to the "Update" icon
     final String menuUpdateIconPath = "TortoiseSvn/menuupdate.png";
-   
+
     // Path to the "Compare" icon.
     final String menuCompareIconPath = "Tortoise/menucompare.png";
 
@@ -252,7 +252,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     // Path to the "Delete" icon
     final String menuDeleteIconPath = "TortoiseSvn/menudelete.png";
-    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Chekout...")
         .setCommandId(defaultCommandId)
@@ -264,24 +264,24 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFolderCount(1)
         .setMaxFileCount(0)
         .setSupportingLinkedResources(false));
-    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Update")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATE)
         .setIconPath(menuUpdateIconPath)
         .setCommand("update"));
-    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Commit")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOMMIT)
         .setIconPath("Tortoise/menucommit.png")
         .setCommand("commit"));
-    
+
     // Separator
     entries.add(new TortoiseMenuEntry());
-    
+
     // Diff for one file or folder
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff")
@@ -291,7 +291,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("diff")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
-    
+
     // Diff for two files
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff")
@@ -310,7 +310,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
         .setCommand("diff"));
-    
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with \"%ls\"")
         .setCommandId(defaultCommandId)
@@ -328,21 +328,24 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(1)
         .setSupportingLinkedResources(false));
 
-    /* TODO: Continue here 
+    /* TODO: currently not supported 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with URL")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUURLDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));
+        .setCommand("")); */
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Show log")
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOG)
         .setIconPath("Tortoise/menulog.png")
-        .setCommand("log"));
-    
+        .setCommand("log")
+        .setMaxItemsCount(1)
+        .setSupportingLinkedResources(false));
+
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Repo-browser")
         .setCommandId(defaultCommandId)
