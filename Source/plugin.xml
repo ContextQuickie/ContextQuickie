@@ -104,7 +104,7 @@
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
-            id="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
+            id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand"
             name="TortoiseSvnDiffTwoFilesCommand">
       </command>
       <command
@@ -158,95 +158,6 @@
                   class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="BeyondCompare">
             </dynamic>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
-                  label="SVN Diff">
-               <parameter
-                     name="CommandId"
-                     value="diff">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <test
-                           args="MENUDIFF"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                  <or>
-                     <reference
-                           definitionId="ActivePartIsEditorAndProvidesFile">
-                     </reference>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesOneFile">
-                     </reference>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesOneFolder">
-                     </reference>
-                  </or>
-                  </and>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
-                  label="SVN Diff">
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
-                     </reference>
-                     <test
-                           args="MENUDIFF"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                  </and>
-               </visibleWhen>
-            </command>
-            <command
-                  commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                  icon="icons/TortoiseSVN/menucompare.png"
-                  label="SVN Diff with previous version">
-               <parameter
-                     name="CommandId"
-                     value="prevdiff">
-               </parameter>
-               <parameter
-                     name="RequiresPath"
-                     value="true">
-               </parameter>
-               <visibleWhen
-                     checkEnabled="false">
-                  <and>
-                     <reference
-                           definitionId="TortoiseSvnPossibleAtCurrentItem">
-                     </reference>
-                     <test
-                           args="MENUPREVDIFF"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu">
-                     </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                     </or>
-                  </and>
-               </visibleWhen>
-            </command>
             <command
                   commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                   icon="icons/TortoiseSVN/menulog.png"
@@ -949,98 +860,6 @@
                      class="contextquickie.handlers.tortoise.svn.TortoiseSvnSubMenuBuilder"
                      id="BeyondCompare">
                </dynamic>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
-                     label="Diff">
-                  <parameter
-                        name="CommandId"
-                        value="diff">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                        <and>
-                           <reference
-                                 definitionId="TortoiseSvnPossibleAtCurrentItem">
-                           </reference>
-                           <test
-                                 args="MENUDIFF"
-                                 property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                                 value="false">
-                           </test>
-                     <or>
-                        <reference
-                              definitionId="ActivePartIsEditorAndProvidesFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFile">
-                        </reference>
-                        <reference
-                              definitionId="ActiveMenuSelectionProvidesOneFolder">
-                        </reference>
-                     </or>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSVN.TortoiseSvnDiffTwoFilesCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
-                     label="Diff">
-                  <visibleWhen
-                        checkEnabled="false">
-                        <and>
-                           <reference
-                                 definitionId="TortoiseSvnPossibleAtCurrentItem">
-                           </reference>
-                     <reference
-                           definitionId="ActiveMenuSelectionProvidesTwoFiles">
-                     </reference>
-                     <test
-                           args="MENUDIFF"
-                           property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                           value="false">
-                     </test>
-                     </and>
-                  </visibleWhen>
-               </command>
-               <command
-                     commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
-                     icon="icons/TortoiseSVN/menucompare.png"
-                     label="Diff with previous version">
-                  <parameter
-                        name="CommandId"
-                        value="prevdiff">
-                  </parameter>
-                  <parameter
-                        name="RequiresPath"
-                        value="true">
-                  </parameter>
-                  <visibleWhen
-                        checkEnabled="false">
-                     <and>
-                        <reference
-                              definitionId="TortoiseSvnPossibleAtCurrentItem">
-                        </reference>
-                        <test
-                              args="MENUPREVDIFF"
-                              property="contextquickie.propertyHandlers.TortoiseSvnItemInMainMenu"
-                              value="false">
-                        </test>
-                        <or>
-                           <reference
-                                 definitionId="ActivePartIsEditorAndProvidesFile">
-                           </reference>
-                           <reference
-                                 definitionId="ActiveMenuSelectionProvidesOneFile">
-                           </reference>
-                        </or>
-                     </and>
-                  </visibleWhen>
-               </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
                      icon="icons/TortoiseSVN/menulog.png"
@@ -1876,7 +1695,7 @@
                </separator>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff"
                      style="push">
                   <parameter
@@ -1901,7 +1720,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff"
                      style="push">
                   <visibleWhen
@@ -1913,7 +1732,7 @@
                </command>
                <command
                      commandId="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
-                     icon="icons/TortoiseGit/menucompare.png"
+                     icon="icons/Tortoise/menucompare.png"
                      label="Diff with previous version"
                      style="push">
                   <parameter

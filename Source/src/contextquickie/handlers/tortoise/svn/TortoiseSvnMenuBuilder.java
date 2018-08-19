@@ -281,14 +281,29 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     // Separator
     entries.add(new TortoiseMenuEntry());
-    /* TODO: Continue here 
+    
+    // Diff for one file or folder
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));
+        .setCommand("diff")
+        .setMaxItemsCount(1)
+        .setSupportingLinkedResources(false));
     
+    // Diff for two files
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Diff")
+        .setCommandId("ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand")
+        .setMenuId(MENUDIFF)
+        .setIconPath(menuCompareIconPath)
+        .setMaxItemsCount(2)
+        .setMinItemsCount(2)
+        .setMaxFolderCount(0)
+        .setRequiresParameters(false));
+
+    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
         .setCommandId(defaultCommandId)
@@ -301,15 +316,19 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFNOW)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));
-    
+        .setCommand("")); */
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with previous version")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPREVDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand("prevdiff"));
-    
+        .setCommand("prevdiff")
+        .setMaxFolderCount(0)
+        .setMaxFileCount(1)
+        .setSupportingLinkedResources(false));
+
+    /* TODO: Continue here 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with URL")
         .setCommandId(defaultCommandId)

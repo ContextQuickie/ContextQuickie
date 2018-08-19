@@ -75,11 +75,11 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     {
       if (supportsLinkedResources == true)
       {
-        currentResources = new ContextMenuEnvironment().getSelectedResources();
+        currentResources = this.getSelectedResources();
       }
       else
       {
-        currentResources = this.getSelectedResources(); 
+        currentResources = new ContextMenuEnvironment().getSelectedResources();
       }
 
       final String pathArgument = String.join("*", currentResources.stream().map(resource -> resource.getLocation().toOSString()).collect(Collectors.toSet()));

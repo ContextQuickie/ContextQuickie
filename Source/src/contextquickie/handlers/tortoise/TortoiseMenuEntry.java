@@ -63,9 +63,29 @@ public class TortoiseMenuEntry
   private int maxItemsCount = Integer.MAX_VALUE;
   
   /**
+   * The minimum number of selected files to display this entry.
+   */
+  private int minFileCount = Integer.MIN_VALUE;
+
+  /**
+   * The minimum number of selected folders to display this entry.
+   */
+  private int minFolderCount = Integer.MIN_VALUE;
+  
+  /**
+   * The minimum number of selected items to display this entry.
+   */
+  private int minItemsCount = Integer.MIN_VALUE;
+  
+  /**
    * A value indicating whether this entry supports linked resources as child items or not.
    */
   private boolean isSupportingLinkedResources = true;
+  
+  /**
+   * A value indicating whether this entry requires parameters or not.
+   */
+  private boolean requiresParameters = true;
 
   /**
    * Gets the label of the instance.
@@ -277,6 +297,63 @@ public class TortoiseMenuEntry
     this.maxItemsCount = value;
     return this;
   }
+  
+  /**
+   * @return The minimum number of selected folders to display this entry.
+   */
+  public int getMinFolderCount()
+  {
+    return this.minFolderCount;
+  }
+
+  /**
+   * @param value
+   *          The minimum number of selected folders to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMinFolderCount(final int value)
+  {
+    this.minFolderCount = value;
+    return this;
+  }
+
+  /**
+   * @return The minimum number of selected files to display this entry.
+   */
+  public int getMinFileCount()
+  {
+    return this.minFileCount;
+  }
+
+  /**
+   * @param value
+   *          The minimum number of selected files to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMinFileCount(final int value)
+  {
+    this.minFileCount = value;
+    return this;
+  }
+  
+  /**
+   * @return The minimum number of selected items to display this entry.
+   */
+  public int getMinItemsCount()
+  {
+    return this.minItemsCount;
+  }
+
+  /**
+   * @param value
+   *          The minimum number of selected items to display this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setMinItemsCount(final int value)
+  {
+    this.minItemsCount = value;
+    return this;
+  }
 
   /**
    * @return A value indicating whether this entry is visible without a working.
@@ -299,6 +376,9 @@ public class TortoiseMenuEntry
     return this;
   }
 
+  /**
+   * @return A value indicating whether this entry supports linked resources as child items or not.
+   */
   public Boolean isSupportingLinkedResources()
   {
     return this.isSupportingLinkedResources;
@@ -307,12 +387,31 @@ public class TortoiseMenuEntry
   /**
    * @param value
    *          A value indicating whether this entry supports linked resources as child items or not.
-   *          copy.
    * @return The instance with the changed value.
    */
   public TortoiseMenuEntry setSupportingLinkedResources(boolean value)
   {
     this.isSupportingLinkedResources = value;
+    return this;
+  }
+
+  /**
+   * @return A value indicating whether this entry requires parameters or not.
+   */
+  public Boolean getRequiresParameters()
+  {
+    return this.requiresParameters;
+  }
+
+  /**
+   * @param value
+   *          A value indicating whether this entry requires parameters or not.
+   *          copy.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setRequiresParameters(boolean value)
+  {
+    this.requiresParameters = value;
     return this;
   }
 }

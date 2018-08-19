@@ -111,6 +111,14 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       {
         entryVisible = false;
       }
+      
+      if ((currentEnvironment.getSelectedResources().size() < entry.getMinItemsCount()) ||
+          (currentEnvironment.getSelectedFilesCount() < entry.getMinFileCount()) ||
+          (currentEnvironment.getSelectedFoldersCount() < entry.getMinFolderCount()))
+      {
+        entryVisible = false;
+      }
+
 
       if (entry.getMenuId() == 0)
       {
@@ -128,11 +136,14 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
             CommandContributionItem.STYLE_PUSH);
 
         // Create map of parameters for the command
-        final Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
-        parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
-        parameters.put(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID, entry.isSupportingLinkedResources().toString());
-        commandParameter.parameters = parameters;
+        if (entry.getRequiresParameters())
+        {
+          final Map<String, Object> parameters = new HashMap<String, Object>();
+          parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
+          parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
+          parameters.put(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID, entry.isSupportingLinkedResources().toString());
+          commandParameter.parameters = parameters;
+        }
 
         if (this.isEntryInMainMenu(entry.getMenuId()))
         {
