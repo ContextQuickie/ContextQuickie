@@ -458,14 +458,15 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menucopy.png")
         .setCommand("copy")
         .setMaxItemsCount(1));
-    /* TODO: Continue here
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Switch...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSWITCH)
         .setIconPath("Tortoise/menuswitch.png")
-        .setCommand("switch"));
-    
+        .setCommand("switch")
+        .setMaxItemsCount(1));
+    /* TODO: Continue here
     entries.add(new TortoiseMenuEntry()
         .setLabel("Merge...")
         .setCommandId(defaultCommandId)
