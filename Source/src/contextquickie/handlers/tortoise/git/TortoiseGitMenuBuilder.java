@@ -385,7 +385,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Import SVN Ignore")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNIGNORE)
-        .setIconPath("Tortoise/menucommit.png")
+        .setIconPath("TortoiseSvn/menuignore.png")
         .setCommand("commit")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -685,7 +685,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Create repository here")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
-        .setIconPath("TortoiseSVN/menucreaterepos.png")
+        .setIconPath("Tortoise/menucreaterepos.png")
         .setCommand("repocreate")
         .setVisibleWithoutWorkingCopy(true)
         .setIsVisibleInWorkingCopy(false));
@@ -710,7 +710,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
-        .setIconPath("TortoiseSVN/menuignore.png")
+        .setIconPath("TortoiseGit/menuignore.png")
         .setCommand(""));
 
     // Separator

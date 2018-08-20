@@ -192,9 +192,8 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
   /**
    * Upgrade working copy menu entry.
-   * TODO: currently not supported.
    */
-  //private static final long MENUUPGRADE = 0x0000000800000000L;
+  private static final long MENUUPGRADE = 0x0000000800000000L;
 
   /**
    * Diff later menu entry.
@@ -208,9 +207,8 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
   /**
    * Unified diff menu entry.
-   * TODO: currently not supported.
    */
-  //private static final long MENUUNIDIFF = 0x0000004000000000L;
+  private static final long MENUUNIDIFF = 0x0000004000000000L;
 
   /**
    * Copy URL to clipboard menu entry.
@@ -266,6 +264,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setSupportingLinkedResources(false));
 
     entries.add(new TortoiseMenuEntry()
+        .setLabel("Upgrade working copy")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUUPGRADE)
+        .setIconPath(menuUpdateIconPath)
+        .setCommand("wcupgrade")
+        .setMaxItemsCount(0)); // TODO: Disabled
+    
+    entries.add(new TortoiseMenuEntry()
         .setLabel("Update")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATE)
@@ -303,20 +309,21 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFolderCount(0)
         .setRequiresParameters(false));
 
-    /* TODO: currently not supported
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
-        .setCommand("diff"));
+        .setCommand("diff")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with \"%ls\"")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFNOW)
         .setIconPath(menuCompareIconPath)
-        .setCommand("")); */
+        .setCommand("diff")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with previous version")
@@ -328,13 +335,21 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(1)
         .setSupportingLinkedResources(false));
 
-    /* TODO: currently not supported 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with URL")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUURLDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand("")); */
+        .setCommand("urldiff")
+        .setMaxItemsCount(0)); // TODO: Disabled
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Unified Diff")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUUNIDIFF)
+        .setIconPath(menuCompareIconPath)
+        .setCommand("urldiff")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Show log")
@@ -369,16 +384,17 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("revisiongraph")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
-    /* TODO: currently not supported 
+
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Edit conflicts")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCONFLICTEDITOR)
         .setIconPath(menuCompareIconPath)
-        .setCommand(""));*/
-
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+        .setCommand("conflicteditor")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Resolve...")
@@ -409,6 +425,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Delete (keep local)")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUREMOVE)
+        .setIconPath(menuDeleteIconPath)
+        .setCommand("remove")
+        .setParameter1("/keep"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Revert...")
@@ -416,13 +440,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUREVERT)
         .setIconPath("Tortoise/menurevert.png")
         .setCommand("revert"));
-    /* TODO: currently not supported
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Delete unversioned items...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDELUNVERSIONED)
         .setIconPath(menuDeleteIconPath)
-        .setCommand("")); */
+        .setCommand("delunversioned"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Clean up...")
@@ -473,13 +497,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(menuMergeIconPath)
         .setCommand("merge")
         .setMaxItemsCount(1));
-    /* TODO: currently not supported
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Merge all..")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGEALL)
         .setIconPath(menuMergeIconPath)
-        .setCommand("")); */
+        .setCommand("mergeall"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Export...")
@@ -490,30 +514,40 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
-    /* TODO: currently not supported
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURELOCATE)
         .setIconPath("TortoiseSVN/menurelocate.png")
-        .setCommand(""));
+        .setCommand("relocate")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
+    // Separator
+    entries.add(new TortoiseMenuEntry());
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Create repository here")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
-        .setIconPath("TortoiseSVN/menucreaterepos.png")
-        .setCommand("")); */
+        .setIconPath("Tortoise/menucreaterepos.png")
+        .setCommand("repocreate")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
-    /* TODO: Continue here
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Add...")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUADD)
+        .setIconPath("Tortoise/menuadd.png")
+        .setCommand("add"));
+
      entries.add(new TortoiseMenuEntry()
         .setLabel("Import...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
         .setIconPath("TortoiseSVN/menuimport.png")
-        .setCommand("")); */
+        .setCommand("import")
+        .setMaxItemsCount(0)); // TODO: Disabled
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Blame...")
@@ -525,25 +559,19 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFolderCount(0));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Add...")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUADD)
-        .setIconPath("Tortoise/menuadd.png")
-        .setCommand("add"));
-
-    entries.add(new TortoiseMenuEntry()
         .setLabel("Copy URL to clipboard")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPYURL)
         .setIconPath("TortoiseSVN/copy.png")
         .setCommand("copyurls"));
-    /* TODO: Continue here
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
         .setIconPath("TortoiseSVN/menuignore.png")
-        .setCommand(""));*/
+        .setCommand("ignore")
+        .setMaxItemsCount(0)); // TODO: Disabled
     
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -570,6 +598,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMenuId(MENUPROPERTIES)
         .setIconPath("TortoiseSVN/menuproperties.png")
         .setCommand("properties"));
+    
+    entries.add(new TortoiseMenuEntry()
+        .setLabel("Paste")
+        .setCommandId(defaultCommandId)
+        .setMenuId(MENUCLIPPASTE)
+        .setIconPath("TortoiseSVN/menuignore.png")
+        .setCommand("pastecopy")
+        .setMaxItemsCount(0)); // TODO: Disabled
 
     // Separator
     entries.add(new TortoiseMenuEntry());
@@ -599,14 +635,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menuabout.png")
         .setCommand("about")
         .setVisibleWithoutWorkingCopy(true));
-    /* TODO: currently not supported
-    entries.add(new TortoiseMenuEntry()
-        .setLabel("Paste")
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUCLIPPASTE)
-        .setIconPath(menuCompareIconPath)
-        .setCommand(""));
-        */
   }
 
   /**
