@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/">
-      ContextQuickie Update Site
+   <description name="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/Releases">
+      ContextQuickie Update Site (Releases)
    </description>
    <feature url="features/ContextQuickie_0.0.9.201510221856.jar" id="ContextQuickie" version="0.0.9.201510221856" os="win32" ws="win32">
       <category name="ContextQuickie"/>
