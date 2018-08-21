@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/Development">
+      ContextQuickie Update Site (Development)
+   </description>
+   <feature url="features/ContextQuickie_0.9.1.201808211810.jar" id="ContextQuickie" version="0.9.1.201808211810" os="win32" ws="win32">
+      <category name="ContextQuickie"/>
+   </feature>
+   <category-def name="ContextQuickie" label="Context Quickie"/>
+</site>
