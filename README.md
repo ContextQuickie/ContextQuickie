@@ -1,5 +1,8 @@
 # ContextQuickie
 An eclipse add-on which extends the context menu for accessing various windows tools like Beyond Compare, Tortoise SVN or Tortoise Git.
+Important note: The update site URL has changed:
+* Releases: http://contextquickie.github.io/ContextQuickie/Releases
+* Development: http://contextquickie.github.io/ContextQuickie/Development
 
 The wiki provides further information:
 * [Installation](https://github.com/ContextQuickie/ContextQuickie/wiki/Installation)
