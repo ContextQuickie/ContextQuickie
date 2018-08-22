@@ -519,7 +519,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURELOCATE)
-        .setIconPath("TortoiseSVN/menurelocate.png")
+        .setIconPath("TortoiseSvn/menurelocate.png")
         .setCommand("relocate")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -545,7 +545,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Import...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
-        .setIconPath("TortoiseSVN/menuimport.png")
+        .setIconPath("TortoiseSvn/menuimport.png")
         .setCommand("import")
         .setMaxItemsCount(0)); // TODO: Disabled
     
@@ -562,14 +562,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Copy URL to clipboard")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPYURL)
-        .setIconPath("TortoiseSVN/copy.png")
+        .setIconPath("TortoiseSvn/copy.png")
         .setCommand("copyurls"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
-        .setIconPath("TortoiseSVN/menuignore.png")
+        .setIconPath("TortoiseSvn/menuignore.png")
         .setCommand("ignore")
         .setMaxItemsCount(0)); // TODO: Disabled
     
@@ -596,14 +596,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Properties")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPROPERTIES)
-        .setIconPath("TortoiseSVN/menuproperties.png")
+        .setIconPath("TortoiseSvn/menuproperties.png")
         .setCommand("properties"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Paste")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLIPPASTE)
-        .setIconPath("TortoiseSVN/menuignore.png")
+        .setIconPath("TortoiseSvn/menuignore.png")
         .setCommand("pastecopy")
         .setMaxItemsCount(0)); // TODO: Disabled
 
