@@ -103,21 +103,21 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    */
   private Set<IResource> getSelectedResources()
   {
-    final Set<IResource> resources = new ContextMenuEnvironment().getSelectedResources();
-
+    final Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();
+    final Set<IResource> result = new HashSet<IResource>(selectedResources);
     if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
     {
-      resources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
+      selectedResources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
       {
-          final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
-          if (workingCopyRoot != null)
-          {
-            resources.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
-          }
+        final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+        if (workingCopyRoot != null)
+        {
+          result.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
+        }
       });
     }
 
-    return resources;
+    return result;
   }
 
   /**
