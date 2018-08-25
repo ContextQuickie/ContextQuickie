@@ -1,10 +1,7 @@
 package contextquickie.handlers.tortoise.hg;
 
 import contextquickie.handlers.tortoise.AbstractTortoiseCommand;
-import contextquickie.handlers.tortoise.TortoiseWorkingCopyDetect;
 import contextquickie.preferences.PreferenceConstants;
-
-import org.eclipse.core.runtime.IPath;
 
 /**
  * @author ContextQuickie
@@ -20,11 +17,5 @@ public class TortoiseHgCommand extends AbstractTortoiseCommand
   public TortoiseHgCommand()
   {
     super(PreferenceConstants.TORTOISE_HG);
-  }
-
-  @Override
-  protected final String getWorkingCopyRoot(final IPath path)
-  {
-    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, ".hg");
   }
 }

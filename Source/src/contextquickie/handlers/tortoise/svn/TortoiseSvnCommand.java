@@ -1,10 +1,7 @@
 package contextquickie.handlers.tortoise.svn;
 
 import contextquickie.handlers.tortoise.AbstractTortoiseCommand;
-import contextquickie.handlers.tortoise.TortoiseWorkingCopyDetect;
 import contextquickie.preferences.PreferenceConstants;
-
-import org.eclipse.core.runtime.IPath;
 
 /**
  * @author ContextQuickie
@@ -20,11 +17,5 @@ public class TortoiseSvnCommand extends AbstractTortoiseCommand
   public TortoiseSvnCommand()
   {
     super(PreferenceConstants.TORTOISE_SVN);
-  }
-
-  @Override
-  protected final String getWorkingCopyRoot(final IPath path)
-  {
-    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, ".svn");
   }
 }

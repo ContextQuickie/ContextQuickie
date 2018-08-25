@@ -53,7 +53,10 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    * @return The path to the working copy or null if no working copy has been
    *         found.
    */
-  protected abstract String getWorkingCopyRoot(IPath path);
+  protected final String getWorkingCopyRoot(final IPath path)
+  {
+    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, this.preferences.getWokringCopyFolderName());
+  }
 
   @Override
   public final Object execute(final ExecutionEvent event)
