@@ -112,7 +112,7 @@ public class TortoisePreferenceConstants
   /**
    * @return The name of the folder indicating a working copy.
    */
-  public String getWokringCopyFolderName()
+  public String getWorkingCopyFolderName()
   {
     return this.workingCopyFolderName;
   }

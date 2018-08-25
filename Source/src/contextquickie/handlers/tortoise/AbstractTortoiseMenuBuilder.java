@@ -188,7 +188,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   {
     final TortoiseEnvironment result = new TortoiseEnvironment();
     result.setSelectedResources(new ContextMenuEnvironment().getSelectedResources());
-    if (new TortoiseWorkingCopyDetect().test(result.getSelectedResources(), this.entriesConfiguration.getWorkingCopyFolderName()))
+    if (new TortoiseWorkingCopyDetect().test(result.getSelectedResources(), this.preferences.getWorkingCopyFolderName()))
     {
       result.setWorkingCopyFound(true);
     }

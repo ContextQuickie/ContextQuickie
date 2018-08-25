@@ -55,7 +55,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    */
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, this.preferences.getWokringCopyFolderName());
+    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, this.preferences.getWorkingCopyFolderName());
   }
 
   @Override
