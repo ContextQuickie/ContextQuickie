@@ -210,7 +210,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       if (this.registryReadPerformed == false)
       {
         this.registryReadPerformed = true;
-        final String registryLocation = this.entriesConfiguration.getRegistryUserPath();
+        final String registryLocation = "HKEY_CURRENT_USER\\Software\\" + this.preferences.getRegistryUserDirectory();
 
         Registry registry = new Registry();
         this.registryContextMenuEntries = registry.readIntValue(registryLocation, "ContextMenuEntries", this.entriesConfiguration.getContextMenuEntriesDefault());

@@ -30,11 +30,6 @@ public class TortoiseMenuSettings
   private String mainMenuPrefix;
   
   /**
-   * The registry path containing the context menu settings.
-   */
-  private String registryUserPath;
-  
-  /**
    * The default value of the registry key ContextMenuEntries.
    */
   private long contextMenuEntriesDefault;
@@ -106,22 +101,6 @@ public class TortoiseMenuSettings
   public void setMainMenuPrefix(final String value)
   {
     this.mainMenuPrefix = value;
-  }
-
-  /**
-   * @return The registry path containing the context menu settings.
-   */
-  public String getRegistryUserPath()
-  {
-    return registryUserPath;
-  }
-
-  /**
-   * @param value The registry path containing the context menu settings.
-   */
-  public void setRegistryUserPath(final String value)
-  {
-    this.registryUserPath = value;
   }
 
   /**

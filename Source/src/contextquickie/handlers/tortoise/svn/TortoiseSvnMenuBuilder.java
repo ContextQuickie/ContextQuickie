@@ -652,7 +652,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     settings.setSubMenuIconPath("TortoiseSvn/tsvnmenumultiple.png");
     settings.setSubMenuText("TortioseSVN");
     settings.setMainMenuPrefix("SVN");
-    settings.setRegistryUserPath("HKEY_CURRENT_USER\\Software\\TortoiseSVN");
     settings.setContextMenuEntriesDefault(MENUCHECKOUT | MENUUPDATE | MENUCOMMIT);
   }
 }

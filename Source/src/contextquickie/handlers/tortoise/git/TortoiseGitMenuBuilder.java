@@ -872,7 +872,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
     settings.setSubMenuIconPath("TortoiseGit/tsvnmenufolder.png");
     settings.setSubMenuText("TortioseGit");
     settings.setMainMenuPrefix("Git");
-    settings.setRegistryUserPath("HKEY_CURRENT_USER\\Software\\TortoiseGit");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
   }
 }
