@@ -12,8 +12,14 @@ import org.eclipse.core.commands.ExecutionException;
  */
 public class Compare extends AbstractHandler
 {
+  /**
+   * The name of command parameter which stores the left side for comparison.
+   */
   public static final String LeftSideParameterName = "LeftSide";
-  
+
+  /**
+   * The name of command parameter which stores the right side for comparison.
+   */
   public static final String RightSideParameterName = "RightSide";
 
   @Override

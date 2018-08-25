@@ -17,6 +17,11 @@ import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 
+/**
+ * @author ContextQuickie
+ *
+ *         Class for creating Beyond Compare menu entries.
+ */
 public class MenuBuilder extends AbstractMenuBuilder
 {
   /**

@@ -40,9 +40,7 @@ public class ConditionalFileFieldEditor extends FileFieldEditor
     {
       return true;
     }
-    else
-    {
-      return super.checkState();
-    }
+    
+    return super.checkState();
   }
 }

@@ -40,6 +40,8 @@ public final class ProcessWrapper
    * 
    * @param command
    *          The command to execute.
+   * @param resources
+   *          The selected resources of the command.
    * @param arguments
    *          The arguments of the command.
    */

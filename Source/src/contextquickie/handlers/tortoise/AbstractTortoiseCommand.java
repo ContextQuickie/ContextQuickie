@@ -142,13 +142,13 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
       for (IResource member : container.members())
       {
         final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
-        if (member.isLinked() && (member instanceof IAdaptable) && (workingCopyRoot.equals(memberWorkingCopyRoot)))
+        if (member.isLinked() && (workingCopyRoot.equals(memberWorkingCopyRoot)))
         {
           linkedResources.add(member);
 
           // Check if there are also linked resourced within the linked resource
           // container
-          final IAdaptable adaptable = (IAdaptable) member;
+          final IAdaptable adaptable = member;
           final IContainer childContainer = adaptable.getAdapter(IContainer.class);
           if (childContainer != null)
           {

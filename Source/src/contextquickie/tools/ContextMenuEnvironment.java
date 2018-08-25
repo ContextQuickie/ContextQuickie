@@ -13,12 +13,23 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * @author ContextQuickie
+ *
+ *         Class which provides information about the current context menu
+ *         environment.
+ */
 public class ContextMenuEnvironment
 {
+  /**
+   * Gets the currently selected resources.
+   * 
+   * @return The currently selected resources.
+   */
   public Set<IResource> getSelectedResources()
   {
     final Set<IResource> selectedResources = new HashSet<IResource>();
-    
+
     final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
     if (window != null)
     {

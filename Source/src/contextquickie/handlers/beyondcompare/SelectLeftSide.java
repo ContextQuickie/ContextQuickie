@@ -16,6 +16,9 @@ import org.eclipse.core.commands.ExecutionException;
  */
 public class SelectLeftSide extends AbstractHandler
 {
+  /**
+   * The name of command parameter which stores the left side for comparison.
+   */
   public static final String PathParameterName = "Path";
   
   @Override
