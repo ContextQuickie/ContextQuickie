@@ -3,7 +3,6 @@ package contextquickie.handlers.tortoise;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Set;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 
@@ -17,24 +16,9 @@ public class TortoiseWorkingCopyDetect
 {
   public final boolean test(final Set<IResource> receiver, final String workingCopyFolderName)
   {
-    boolean result = false;
-    for (IResource resource : receiver)
-    {
-      // Get directory of currently selected item
-      if (((resource.getType() & (IResource.FOLDER) | IResource.PROJECT | IResource.FILE)) != IResource.NONE)
-      {
-        if (this.getWorkingCopyRoot(resource.getLocation(), workingCopyFolderName) != null)
-        {
-          // If a working copy is expected and found, return true
-          // If no working copy is found, return false (default value of
-          // result)
-          result = true;
-          break;
-        }
-      }
-    }
-
-    return result;
+    return receiver.stream()
+        .filter(r -> (r.getType() & (IResource.FOLDER | IResource.PROJECT | IResource.FILE)) != IResource.NONE)
+        .anyMatch(r -> this.getWorkingCopyRoot(r.getLocation(), workingCopyFolderName) != null);
   }
 
   /**
