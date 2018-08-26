@@ -117,7 +117,11 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       {
         entryVisible = false;
       }
-
+      
+      if (entry.isVisible() == false)
+      {
+        entryVisible = false;
+      }
 
       if (entry.getMenuId() == 0)
       {
@@ -178,6 +182,51 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
     return mainMenu;
   }
+  
+  /**
+   * Reads the context menu settings from the registry.
+   */
+  protected long readSettingsFromRegistry(String registryKey, long defaultValue)
+  {
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
+    {
+        final String registryLocation = "HKEY_CURRENT_USER\\Software\\" + this.preferences.getRegistryUserDirectory();
+
+        Registry registry = new Registry();
+        return registry.readIntValue(registryLocation, registryKey, defaultValue);
+    }
+
+    return defaultValue;
+  }
+
+  /**
+   * Checks if the context menu entry is visible in the main menu.
+   * 
+   * @param entry
+   *          The name of the entry.
+   * @return <b>true</b> if the menu entry is visible in the main menu;
+   *         otherwise false.
+   */
+  protected boolean isEntryBitSet(final long entry, final long lowRegistryEntry, long highRegistryEntry)
+  {
+    final long int32BitMaxValue = 0xFFFFFFFFL;
+    final long compareValue;
+    final long entryValue;
+
+    if (entry > int32BitMaxValue)
+    {
+      entryValue = entry >> Integer.SIZE;
+      compareValue = highRegistryEntry;
+    }
+    else
+    {
+      entryValue = entry;
+      compareValue = lowRegistryEntry;
+    }
+
+    return (entryValue & compareValue) != 0;
+  }
 
   /**
    * Checks in which environment the current menu will be used.
@@ -210,11 +259,8 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       if (this.registryReadPerformed == false)
       {
         this.registryReadPerformed = true;
-        final String registryLocation = "HKEY_CURRENT_USER\\Software\\" + this.preferences.getRegistryUserDirectory();
-
-        Registry registry = new Registry();
-        this.registryContextMenuEntries = registry.readIntValue(registryLocation, "ContextMenuEntries", this.entriesConfiguration.getContextMenuEntriesDefault());
-        this.registryContextMenuEntriesHigh = registry.readIntValue(registryLocation, "ContextMenuEntrieshigh", this.entriesConfiguration.getContextMenuEntriesHighDefault());
+        this.registryContextMenuEntries = this.readSettingsFromRegistry("ContextMenuEntries", this.entriesConfiguration.getContextMenuEntriesDefault());
+        this.registryContextMenuEntriesHigh = this.readSettingsFromRegistry("ContextMenuEntrieshigh", this.entriesConfiguration.getContextMenuEntriesHighDefault());
       }
     }
     else
@@ -234,21 +280,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
    */
   private boolean isEntryInMainMenu(final long entry)
   {
-    final long int32BitMaxValue = 0xFFFFFFFFL;
-    final long compareValue;
-    final long entryValue;
-
-    if (entry > int32BitMaxValue)
-    {
-      entryValue = entry >> Integer.SIZE;
-      compareValue = this.registryContextMenuEntriesHigh;
-    }
-    else
-    {
-      entryValue = entry;
-      compareValue = this.registryContextMenuEntries;
-    }
-
-    return (entryValue & compareValue) != 0;
+    return this.isEntryBitSet(entry, this.registryContextMenuEntries, this.registryContextMenuEntriesHigh);
   }
 }

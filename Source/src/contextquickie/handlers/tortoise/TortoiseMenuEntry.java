@@ -1,5 +1,7 @@
 package contextquickie.handlers.tortoise;
 
+import java.util.function.Predicate;
+
 /**
  * @author ContextQuickie
  *
@@ -91,6 +93,11 @@ public class TortoiseMenuEntry
    * A value indicating whether this entry requires parameters or not.
    */
   private boolean requiresParameters = true;
+
+  /**
+   * An interface for an additional visibility check.
+   */
+  private Predicate<TortoiseMenuEntry> visibilityChecker;
 
   /**
    * Gets the label of the instance.
@@ -437,5 +444,29 @@ public class TortoiseMenuEntry
   {
     this.parameter1 = value;
     return this;
+  }
+
+  /**
+   * @param value
+   *          The visibility checker for this instance.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setVisibilityChecker(Predicate<TortoiseMenuEntry> value)
+  {
+    this.visibilityChecker = value;
+    return this;
+  }
+
+  /**
+   * @return True if the entry is visible, otherwise false.
+   */
+  public boolean isVisible()
+  {
+    if (this.visibilityChecker != null)
+    {
+      return this.visibilityChecker.test(this);
+    }
+    
+    return true;
   }
 }

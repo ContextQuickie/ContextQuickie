@@ -7,13 +7,14 @@ import contextquickie.preferences.PreferenceConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author ContextQuickie
  *
  *         Menu configuration for Tortoise Git.
  */
-public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
+public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements Predicate<TortoiseMenuEntry>
 {
   /**
    * Sync menu entry.
@@ -291,6 +292,16 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUABOUT = 0x8000000000000000L;
   
   /**
+   * The value of ContextMenuExtEntriesLow in the registry settings of Tortoise Git.
+   */
+  private long ContextMenuExtEntriesLow;
+  
+  /**
+   * The value of ContextMenuExtEntriesHigh in the registry settings of Tortoise Git.
+   */
+  private long ContextMenuExtEntriesHigh;
+  
+  /**
    * Tortoise SVN menu configuration.
    */
   private static List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
@@ -307,7 +318,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
 
     // Path to the "Delete" icon
     final String menuDeleteIconPath = "Tortoise/menudelete.png";
-
+    
     entries.add(new TortoiseMenuEntry()
         .setLabel("Clone...")
         .setCommandId(defaultCommandId)
@@ -873,5 +884,20 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
     settings.setSubMenuText("TortioseGit");
     settings.setMainMenuPrefix("Git");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
+    
+    this.ContextMenuExtEntriesLow = this.readSettingsFromRegistry("ContextMenuExtEntriesLow", MENUSUBSYNC | MENUSTASHAPPLY);
+    this.ContextMenuExtEntriesHigh = this.readSettingsFromRegistry("ContextMenuExtEntriesHigh", MENUSVNIGNORE);
+    entries.forEach(entry -> entry.setVisibilityChecker(this));
+  }
+
+  @Override
+  public boolean test(TortoiseMenuEntry entry)
+  {
+    if (this.isEntryBitSet(entry.getMenuId(), this.ContextMenuExtEntriesLow, this.ContextMenuExtEntriesHigh))
+    {
+      return false;
+    }
+    
+    return true;
   }
 }
