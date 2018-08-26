@@ -545,7 +545,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Stash Apply")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHAPPLY)
-        .setIconPath("Tortoise/menucommit.png")
+        .setIconPath("TortoiseGit/menurelocate.png")
         .setCommand("stashapply")
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
@@ -554,7 +554,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Stash Pop")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHPOP)
-        .setIconPath("Tortoise/menucommit.png")
+        .setIconPath("TortoiseGit/menurelocate.png")
         .setCommand("stashpop")
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
@@ -563,7 +563,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Stash List")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHLIST)
-        .setIconPath("Tortoise/menucommit.png")
+        .setIconPath("Tortoise/menulog.png")
         .setCommand("reflog")
         .setParameter1("/ref:refs/stash")
         .setMaxFolderCount(1)
@@ -644,7 +644,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Abort Merge")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGE)
-        .setIconPath(menuMergeIconPath)
+        .setIconPath("TortoiseGit/menumergeabort.png")
         .setCommand("merge")
         .setParameter1("/abort"));
     
@@ -766,7 +766,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
-        .setIconPath("TortoiseGit/menuignore.png")
+        .setIconPath("Tortoise/menuignore.png")
         .setCommand(""));
 
     // Separator
@@ -785,14 +785,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Submodule Update...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATEEXT)
-        .setIconPath("Tortoise/menuadd.png")
+        .setIconPath("TortoiseGit/pull1.png")
         .setCommand("subupdate"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Submodule Sync")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSUBSYNC)
-        .setIconPath("Tortoise/menuadd.png")
+        .setIconPath("TortoiseGit/menusync.png")
         .setCommand("subsync"));
 
     // Separator
