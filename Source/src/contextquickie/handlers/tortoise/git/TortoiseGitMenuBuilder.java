@@ -1,20 +1,22 @@
 package contextquickie.handlers.tortoise.git;
 
 import contextquickie.handlers.tortoise.AbstractTortoiseMenuBuilder;
+import contextquickie.handlers.tortoise.TortoiseEnvironment;
 import contextquickie.handlers.tortoise.TortoiseMenuEntry;
 import contextquickie.handlers.tortoise.TortoiseMenuSettings;
 import contextquickie.preferences.PreferenceConstants;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.BiPredicate;
 
 /**
  * @author ContextQuickie
  *
  *         Menu configuration for Tortoise Git.
  */
-public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements Predicate<TortoiseMenuEntry>
+public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>
 {
   /**
    * Sync menu entry.
@@ -586,7 +588,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Bisect good")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath("TortoiseGit/menubisect.png")
+        .setIconPath("TortoiseGit/thumb_up.png")
         .setCommand("bisect")
         .setParameter1("/good")
         .setMaxFolderCount(1)
@@ -596,7 +598,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Bisect bad")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath("TortoiseGit/menubisect.png")
+        .setIconPath("TortoiseGit/thumb_down.png")
         .setCommand("bisect")
         .setParameter1("/bad")
         .setMaxFolderCount(1)
@@ -616,7 +618,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel("Bisect reset")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath("TortoiseGit/menubisect.png")
+        .setIconPath("TortoiseGit/menubisectreset.png")
         .setCommand("bisect")
         .setParameter1("/reset")
         .setMaxFolderCount(1)
@@ -887,11 +889,35 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     
     this.ContextMenuExtEntriesLow = this.readSettingsFromRegistry("ContextMenuExtEntriesLow", MENUSUBSYNC | MENUSTASHAPPLY);
     this.ContextMenuExtEntriesHigh = this.readSettingsFromRegistry("ContextMenuExtEntriesHigh", MENUSVNIGNORE);
-    entries.forEach(entry -> entry.setVisibilityChecker(this));
+    entries.forEach(entry -> entry.addVisibilityChecker(this));
+    
+    entries.stream().filter(e -> ((e.getMenuId() == MENUBISECT) && (e.getParameter1() == "/start"))).forEach(e -> e.addVisibilityChecker(
+        (entry, environment) -> this.bisectActive(environment) == false));
+    entries.stream().filter(e -> ((e.getMenuId() == MENUBISECT) && (e.getParameter1() != "/start"))).forEach(e -> e.addVisibilityChecker(
+        (entry, environment) -> this.bisectActive(environment) == true));
+  }
+
+  private boolean bisectActive(final TortoiseEnvironment environment)
+  {
+    final String workingCopyRoot = environment.getWorkingCopyRoot();
+    if (workingCopyRoot != null)
+    {
+      File gitDirectory = new File(workingCopyRoot);
+      if (gitDirectory.exists() && gitDirectory.isDirectory())
+      {
+        File bisectStartFile = new File(gitDirectory, "BISECT_START");
+        if (bisectStartFile.exists() && bisectStartFile.isFile())
+        {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   @Override
-  public boolean test(TortoiseMenuEntry entry)
+  public boolean test(TortoiseMenuEntry entry, TortoiseEnvironment environment)
   {
     if (this.isEntryBitSet(entry.getMenuId(), this.ContextMenuExtEntriesLow, this.ContextMenuExtEntriesHigh))
     {

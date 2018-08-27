@@ -1,7 +1,6 @@
 package contextquickie.handlers.tortoise;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.Set;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -14,11 +13,21 @@ import org.eclipse.core.runtime.IPath;
  */
 public class TortoiseWorkingCopyDetect
 {
+  private String workingCopyRoot;
+  
   public final boolean test(final Set<IResource> receiver, final String workingCopyFolderName)
   {
     return receiver.stream()
         .filter(r -> (r.getType() & (IResource.FOLDER | IResource.PROJECT | IResource.FILE)) != IResource.NONE)
         .anyMatch(r -> this.getWorkingCopyRoot(r.getLocation(), workingCopyFolderName) != null);
+  }
+
+  /**
+   * @return The working copy root.
+   */
+  public String getWorkingCopyRoot()
+  {
+    return this.workingCopyRoot;
   }
 
   /**
@@ -38,27 +47,17 @@ public class TortoiseWorkingCopyDetect
     {
       currentPath = currentPath.getParentFile();
     }
-    
-    // Filter for retrieving only directories with the expected WC name
-    FileFilter filter = new FileFilter()
-    {
-      @Override
-      public boolean accept(final File dir)
-      {
-        return dir.isDirectory() && workingCopyFolderName.equals(dir.getName());
-      }
-    };
 
-    while ((currentPath != null) && (currentPath.isDirectory()))
+    while ((currentPath != null) && (currentPath.isDirectory()) && (this.workingCopyRoot == null))
     {
-      final File[] childItems = currentPath.listFiles(filter);
+      final File[] childItems = currentPath.listFiles((dir) -> dir.isDirectory() && workingCopyFolderName.equals(dir.getName()));
       if ((childItems != null) && (childItems.length > 0))
       {
-        return childItems[0].getAbsolutePath();
+        this.workingCopyRoot = childItems[0].getAbsolutePath();
       }
       currentPath = currentPath.getParentFile();
     }
 
-    return null;
+    return this.workingCopyRoot;
   }
 }

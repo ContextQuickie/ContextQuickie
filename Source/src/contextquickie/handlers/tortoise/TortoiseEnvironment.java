@@ -30,6 +30,11 @@ public class TortoiseEnvironment
    * A list containing all selected resources.
    */
   private Set<IResource> selectedResources;
+  
+  /**
+   * The root directory of the working copy.
+   */
+  private String workingCopyRoot;
 
   /**
    * @return The number of selected files.
@@ -94,5 +99,21 @@ public class TortoiseEnvironment
   public void setSelectedResources(final Set<IResource> value)
   {
     this.selectedResources = value;
+  }
+
+  /**
+   * @param value The working copy root.
+   */
+  public void setWorkingCopyRoot(String value)
+  {
+    this.workingCopyRoot = value;
+  }
+
+  /**
+   * @return The working copy root.
+   */
+  public String getWorkingCopyRoot()
+  {
+    return workingCopyRoot;
   }
 }

@@ -118,7 +118,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         entryVisible = false;
       }
       
-      if (entry.isVisible() == false)
+      if (entry.isVisible(currentEnvironment) == false)
       {
         entryVisible = false;
       }
@@ -237,9 +237,11 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   {
     final TortoiseEnvironment result = new TortoiseEnvironment();
     result.setSelectedResources(new ContextMenuEnvironment().getSelectedResources());
-    if (new TortoiseWorkingCopyDetect().test(result.getSelectedResources(), this.preferences.getWorkingCopyFolderName()))
+    TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
+    if (workingCopyDetect.test(result.getSelectedResources(), this.preferences.getWorkingCopyFolderName()))
     {
       result.setWorkingCopyFound(true);
+      result.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
     }
 
     result.setSelectedFilesCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FILE).count());

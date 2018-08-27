@@ -1,6 +1,8 @@
 package contextquickie.handlers.tortoise;
 
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiPredicate;
 
 /**
  * @author ContextQuickie
@@ -95,9 +97,9 @@ public class TortoiseMenuEntry
   private boolean requiresParameters = true;
 
   /**
-   * An interface for an additional visibility check.
+   * An interface for an additional visibility checks.
    */
-  private Predicate<TortoiseMenuEntry> visibilityChecker;
+  private List<BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>> visibilityCheckers = new ArrayList<BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>>();
 
   /**
    * Gets the label of the instance.
@@ -451,22 +453,19 @@ public class TortoiseMenuEntry
    *          The visibility checker for this instance.
    * @return The instance with the changed value.
    */
-  public TortoiseMenuEntry setVisibilityChecker(Predicate<TortoiseMenuEntry> value)
+  public TortoiseMenuEntry addVisibilityChecker(BiPredicate<TortoiseMenuEntry, TortoiseEnvironment> value)
   {
-    this.visibilityChecker = value;
+    this.visibilityCheckers.add(value);
     return this;
   }
 
   /**
+   * @param environment 
+   *          The current environment of the context menu.
    * @return True if the entry is visible, otherwise false.
    */
-  public boolean isVisible()
+  public boolean isVisible(TortoiseEnvironment environment)
   {
-    if (this.visibilityChecker != null)
-    {
-      return this.visibilityChecker.test(this);
-    }
-    
-    return true;
+    return ! (this.visibilityCheckers.stream().anyMatch(predicate -> predicate.test(this, environment) == false));
   }
 }
