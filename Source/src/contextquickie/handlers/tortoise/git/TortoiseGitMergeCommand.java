@@ -9,9 +9,11 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseGitMergeCommand extends AbstractTortoiseMergeCommand
 {
-  @Override
-  protected final String getMergeCommandPathName()
+  /**
+   * Default constructor.
+   */
+  public TortoiseGitMergeCommand()
   {
-    return PreferenceConstants.TORTOISE_GIT.getMergePath();
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_GIT);
   }
 }

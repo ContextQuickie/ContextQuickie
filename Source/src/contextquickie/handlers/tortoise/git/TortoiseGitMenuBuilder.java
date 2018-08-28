@@ -435,11 +435,13 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
-        .setCommandId(defaultCommandId)
+        .setCommandId("ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand")
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
-        .setCommand("diff")
-        .setMaxItemsCount(0)); // TODO: Disabled
+        .setRequiresParameters(false)
+        .setEntryRequiresPath(false)
+        .setMaxFileCount(1)
+        .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with previous version")

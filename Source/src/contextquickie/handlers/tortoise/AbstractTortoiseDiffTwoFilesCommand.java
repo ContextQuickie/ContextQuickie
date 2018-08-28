@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
@@ -18,18 +17,13 @@ import org.eclipse.core.resources.IResource;
 /**
  * Base class for execute a Tortoise diff command with two selected files.
  */
-public abstract class AbstractTortoiseDiffTwoFilesCommand extends AbstractHandler
+public abstract class AbstractTortoiseDiffTwoFilesCommand extends AbstractTortoiseHandler
 {
-  /**
-   * @return The preference name of the command path.
-   */
-  protected abstract String getCommandPathName();
-
   @Override
   public final Object execute(final ExecutionEvent event) throws ExecutionException
   {
     final List<String> arguments = new ArrayList<String>();
-    final String command = Activator.getDefault().getPreferenceStore().getString(this.getCommandPathName());
+    final String command = Activator.getDefault().getPreferenceStore().getString(this.getPreferenceConstants().getPath());
 
     arguments.add("/command:diff");
     Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();

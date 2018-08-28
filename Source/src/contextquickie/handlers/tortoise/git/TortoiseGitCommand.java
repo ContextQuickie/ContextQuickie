@@ -16,6 +16,6 @@ public class TortoiseGitCommand extends AbstractTortoiseCommand
    */
   public TortoiseGitCommand()
   {
-    super(PreferenceConstants.TORTOISE_GIT);
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_GIT);
   }
 }

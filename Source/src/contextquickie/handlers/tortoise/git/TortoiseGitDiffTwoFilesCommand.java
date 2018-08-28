@@ -10,9 +10,11 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseGitDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {
-  @Override
-  protected final String getCommandPathName()
+  /**
+   * Default constructor.
+   */
+  public TortoiseGitDiffTwoFilesCommand()
   {
-    return PreferenceConstants.TORTOISE_GIT.getPath();
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_GIT);
   }
 }

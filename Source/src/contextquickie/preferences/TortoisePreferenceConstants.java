@@ -122,6 +122,6 @@ public class TortoisePreferenceConstants
    */
   public String getRegistryUserDirectory()
   {
-    return this.registryUserDirectory;
+    return "HKEY_CURRENT_USER\\Software\\" + this.registryUserDirectory;
   }
 }

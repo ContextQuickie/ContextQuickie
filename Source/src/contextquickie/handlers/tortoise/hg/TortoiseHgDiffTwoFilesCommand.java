@@ -9,9 +9,11 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseHgDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {
-  @Override
-  protected final String getCommandPathName()
+  /**
+   * Default constructor.
+   */
+  public TortoiseHgDiffTwoFilesCommand()
   {
-    return PreferenceConstants.TORTOISE_HG.getPath();
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_HG);
   }
 }

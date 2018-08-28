@@ -1,7 +1,6 @@
 package contextquickie.handlers.tortoise;
 
 import contextquickie.Activator;
-import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
@@ -13,7 +12,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
@@ -27,24 +25,8 @@ import org.eclipse.core.runtime.IPath;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public abstract class AbstractTortoiseCommand extends AbstractHandler
+public abstract class AbstractTortoiseCommand extends AbstractTortoiseHandler
 {
-  /**
-   * The preferences of the current instance.
-   */
-  private TortoisePreferenceConstants preferences;
-  
-  /**
-   * Default constructor.
-   * 
-   * @param tortoisePreferences
-   *          The preferences which will be used for execution.
-   */
-  protected AbstractTortoiseCommand(final TortoisePreferenceConstants tortoisePreferences)
-  {
-    this.preferences = tortoisePreferences;
-  }
-
   /**
    * Gets the working copy root directory of the specific directory.
    * 
@@ -55,7 +37,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
    */
   protected final String getWorkingCopyRoot(final IPath path)
   {
-    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, this.preferences.getWorkingCopyFolderName());
+    return new TortoiseWorkingCopyDetect().getWorkingCopyRoot(path, this.getPreferenceConstants().getWorkingCopyFolderName());
   }
 
   @Override
@@ -65,7 +47,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
     final String command = event.getParameter(TortoiseMenuConstants.COMMAND_ID);
     final String requiresPathString = event.getParameter(TortoiseMenuConstants.REQUIRES_PATH_ID);
     final String supportsLinkedResourcesString = event.getParameter(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID);
-    final String executable = Activator.getDefault().getPreferenceStore().getString(this.preferences.getPath());
+    final String executable = Activator.getDefault().getPreferenceStore().getString(this.getPreferenceConstants().getPath());
     
     boolean supportsLinkedResources = true;
     if ((supportsLinkedResourcesString != null) && (Boolean.parseBoolean(supportsLinkedResourcesString) == false))
@@ -108,7 +90,7 @@ public abstract class AbstractTortoiseCommand extends AbstractHandler
   {
     final Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();
     final Set<IResource> result = new HashSet<IResource>(selectedResources);
-    if (Activator.getDefault().getPreferenceStore().getBoolean(this.preferences.getScanForLinkedResources()))
+    if (Activator.getDefault().getPreferenceStore().getBoolean(this.getPreferenceConstants().getScanForLinkedResources()))
     {
       selectedResources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
       {

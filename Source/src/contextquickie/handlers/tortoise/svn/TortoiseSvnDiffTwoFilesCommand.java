@@ -9,9 +9,11 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public class TortoiseSvnDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {
-  @Override
-  protected final String getCommandPathName()
+  /**
+   * Default constructor.
+   */
+  public TortoiseSvnDiffTwoFilesCommand()
   {
-    return PreferenceConstants.TORTOISE_SVN.getPath();
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);
   }
 }

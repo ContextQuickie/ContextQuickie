@@ -16,6 +16,6 @@ public class TortoiseSvnCommand extends AbstractTortoiseCommand
    */
   public TortoiseSvnCommand()
   {
-    super(PreferenceConstants.TORTOISE_SVN);
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);
   }
 }

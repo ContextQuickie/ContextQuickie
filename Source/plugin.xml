@@ -103,6 +103,11 @@
          </commandParameter>
       </command>
       <command
+            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffLaterCommand"
+            id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand"
+            name="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand">
+      </command>
+      <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
             name="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand">

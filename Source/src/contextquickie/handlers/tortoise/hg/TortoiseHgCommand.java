@@ -16,6 +16,6 @@ public class TortoiseHgCommand extends AbstractTortoiseCommand
    */
   public TortoiseHgCommand()
   {
-    super(PreferenceConstants.TORTOISE_HG);
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_HG);
   }
 }

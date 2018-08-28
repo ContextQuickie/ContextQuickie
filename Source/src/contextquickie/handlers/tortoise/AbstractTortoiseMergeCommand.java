@@ -7,26 +7,19 @@ import contextquickie.tools.ProcessWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IResource;
 
 /**
  * Base class for execute a Tortoise merge command.
  */
-public abstract class AbstractTortoiseMergeCommand extends AbstractHandler
+public abstract class AbstractTortoiseMergeCommand extends AbstractTortoiseHandler
 {
-
-  /**
-   * @return The preference name of the merge command path.
-   */
-  protected abstract String getMergeCommandPathName();
-
   @Override
   public final Object execute(final ExecutionEvent event)
   {
     final List<String> arguments = new ArrayList<String>();
-    final String command = Activator.getDefault().getPreferenceStore().getString(this.getMergeCommandPathName());
+    final String command = Activator.getDefault().getPreferenceStore().getString(this.getPreferenceConstants().getMergePath());
     final IResource resource = new ContextMenuEnvironment().getSelectedResources().stream().findFirst().orElse(null);
     if (resource != null)
     {

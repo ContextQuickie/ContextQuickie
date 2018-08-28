@@ -9,9 +9,11 @@ import contextquickie.preferences.PreferenceConstants;
  */
 public final class TortoiseSvnMergeCommand extends AbstractTortoiseMergeCommand
 {
-  @Override
-  protected String getMergeCommandPathName()
+  /**
+   * Default constructor.
+   */
+  public TortoiseSvnMergeCommand()
   {
-    return PreferenceConstants.TORTOISE_SVN.getMergePath();
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);
   }
 }
