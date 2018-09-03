@@ -2,6 +2,8 @@ package contextquickie.tools;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
@@ -62,6 +64,6 @@ public class ContextMenuEnvironment
       }
     }
 
-    return selectedResources;
+    return selectedResources.stream().filter(r -> r != null).collect(Collectors.toSet());
   }
 }
