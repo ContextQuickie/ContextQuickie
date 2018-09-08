@@ -76,6 +76,16 @@
             defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand"
             name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand">
+         <commandParameter
+               id="LeftSide"
+               name="LeftSide"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="RightSide"
+               name="RightSide"
+               optional="false">
+         </commandParameter>
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
@@ -116,6 +126,16 @@
             defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
             name="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand">
+         <commandParameter
+               id="LeftSide"
+               name="LeftSide"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="RightSide"
+               name="RightSide"
+               optional="false">
+         </commandParameter>
       </command>
       <command
             defaultHandler="contextquickie.handlers.tortoise.hg.TortoiseHgCommand"

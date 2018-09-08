@@ -7,6 +7,7 @@ import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -139,7 +140,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
             CommandContributionItem.STYLE_PUSH);
 
         // Create map of parameters for the command
-        if (entry.getRequiresParameters())
+        if (entry.usesDefaultParameters())
         {
           final Map<String, Object> parameters = new HashMap<String, Object>();
           parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
@@ -150,6 +151,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
             parameters.put(TortoiseMenuConstants.PARAMETER_1_ID, entry.getParameter1());
           }
           commandParameter.parameters = parameters;
+        }
+        else
+        {
+          commandParameter.parameters = entry.getCustomParameters();
         }
 
         if (this.isEntryInMainMenu(entry.getMenuId()))
@@ -226,6 +231,21 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     }
 
     return (entryValue & compareValue) != 0;
+  }
+  
+  protected static boolean diffTwoFilesActive(final TortoiseMenuEntry entry, final TortoiseEnvironment environment)
+  {
+    if ((environment.getSelectedFilesCount() == 2) && (environment.getSelectedFoldersCount() == 0))
+    {
+      Iterator<IResource> iterator = environment.getSelectedResources().iterator();
+      Map<String, Object> parameters = new HashMap<String, Object>();
+      parameters.put(AbstractTortoiseDiffTwoFilesCommand.LeftSideParameterName, iterator.next().getLocation().toOSString());
+      parameters.put(AbstractTortoiseDiffTwoFilesCommand.RightSideParameterName, iterator.next().getLocation().toOSString());
+      entry.setCustomParameters(parameters);
+      return true;
+    }
+    
+    return false;
   }
 
   /**

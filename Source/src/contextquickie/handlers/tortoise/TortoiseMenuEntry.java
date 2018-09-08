@@ -2,6 +2,7 @@ package contextquickie.handlers.tortoise;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiPredicate;
 
 /**
@@ -92,9 +93,14 @@ public class TortoiseMenuEntry
   private boolean isSupportingLinkedResources = true;
   
   /**
-   * A value indicating whether this entry requires parameters or not.
+   * A value indicating whether this entry uses default parameters or not.
    */
-  private boolean requiresParameters = true;
+  private boolean usesDefaultParameters = true;
+  
+  /**
+   * Custom parameters for this entry.
+   */
+  private Map<String, Object> customParameters;
 
   /**
    * An interface for an additional visibility checks.
@@ -410,22 +416,22 @@ public class TortoiseMenuEntry
   }
 
   /**
-   * @return A value indicating whether this entry requires parameters or not.
+   * @return A value indicating whether this entry uses default parameters or not.
    */
-  public Boolean getRequiresParameters()
+  public Boolean usesDefaultParameters()
   {
-    return this.requiresParameters;
+    return this.usesDefaultParameters;
   }
 
   /**
    * @param value
-   *          A value indicating whether this entry requires parameters or not.
+   *          A value indicating whether this entry uses default parameters or not.
    *          copy.
    * @return The instance with the changed value.
    */
-  public TortoiseMenuEntry setRequiresParameters(boolean value)
+  public TortoiseMenuEntry setUsesDefaultParameters(boolean value)
   {
-    this.requiresParameters = value;
+    this.usesDefaultParameters = value;
     return this;
   }
 
@@ -467,5 +473,24 @@ public class TortoiseMenuEntry
   public boolean isVisible(TortoiseEnvironment environment)
   {
     return ! (this.visibilityCheckers.stream().anyMatch(predicate -> predicate.test(this, environment) == false));
+  }
+
+  /**
+   * @return The custom parameters for this entry.
+   */
+  public Map<String, Object> getCustomParameters()
+  {
+    return customParameters;
+  }
+
+  /**
+   * @param value
+   *          The custom parameters for this entry.
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setCustomParameters(Map<String, Object> value)
+  {
+    this.customParameters = value;
+    return this;
   }
 }

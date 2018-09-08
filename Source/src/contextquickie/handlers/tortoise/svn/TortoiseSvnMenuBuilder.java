@@ -307,7 +307,8 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxItemsCount(2)
         .setMinItemsCount(2)
         .setMaxFolderCount(0)
-        .setRequiresParameters(false));
+        .setUsesDefaultParameters(false)
+        .addVisibilityChecker((entry, environment) -> AbstractTortoiseMenuBuilder.diffTwoFilesActive(entry, environment) == true));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
@@ -590,7 +591,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath("Tortoise/menupatch.png")
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
-        .setRequiresParameters(false));
+        .setUsesDefaultParameters(false));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Properties")

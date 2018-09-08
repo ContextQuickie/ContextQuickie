@@ -18,6 +18,8 @@ import java.util.function.BiPredicate;
  */
 public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>
 {
+  private static final String DIFF_TOW_FILES_COMMAND_ID = "ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand";
+
   /**
    * Sync menu entry.
    */
@@ -424,21 +426,20 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     // Diff for two files
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff")
-        .setCommandId("ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand")
+        .setCommandId(DIFF_TOW_FILES_COMMAND_ID)
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
-        .setCommand("diff")
         .setMaxItemsCount(2)
         .setMinItemsCount(2)
         .setMaxFolderCount(0)
-        .setRequiresParameters(false));
+        .setUsesDefaultParameters(false));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff later")
         .setCommandId("ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand")
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
-        .setRequiresParameters(false)
+        .setUsesDefaultParameters(false)
         .setEntryRequiresPath(false)
         .setMaxFileCount(1)
         .setMaxItemsCount(1));
@@ -897,6 +898,8 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         (entry, environment) -> this.bisectActive(environment) == false));
     entries.stream().filter(e -> ((e.getMenuId() == MENUBISECT) && (e.getParameter1() != "/start"))).forEach(e -> e.addVisibilityChecker(
         (entry, environment) -> this.bisectActive(environment) == true));
+    entries.stream().filter(e -> ((e.getMenuId() == MENUDIFF) && (e.getCommandId() == DIFF_TOW_FILES_COMMAND_ID))).forEach(e -> e.addVisibilityChecker(
+        (entry, environment) -> AbstractTortoiseMenuBuilder.diffTwoFilesActive(entry, environment) == true));
   }
 
   private boolean bisectActive(final TortoiseEnvironment environment)
