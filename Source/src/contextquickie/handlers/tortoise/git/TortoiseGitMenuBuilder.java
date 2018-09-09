@@ -1,15 +1,22 @@
 package contextquickie.handlers.tortoise.git;
 
+import contextquickie.handlers.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 import contextquickie.handlers.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.handlers.tortoise.TortoiseEnvironment;
 import contextquickie.handlers.tortoise.TortoiseMenuEntry;
 import contextquickie.handlers.tortoise.TortoiseMenuSettings;
 import contextquickie.preferences.PreferenceConstants;
+import contextquickie.tools.Registry;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiPredicate;
+
+import org.eclipse.core.resources.IResource;
 
 /**
  * @author ContextQuickie
@@ -440,9 +447,35 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
         .setUsesDefaultParameters(false)
-        .setEntryRequiresPath(false)
         .setMaxFileCount(1)
         .setMaxItemsCount(1));
+
+    entries.add(new TortoiseMenuEntry()
+        .setCommandId(DIFF_TOW_FILES_COMMAND_ID)
+        .setMenuId(MENUDIFFLATER)
+        .setIconPath(menuCompareIconPath)
+        .setUsesDefaultParameters(false)
+        .setMaxFileCount(1)
+        .setMaxItemsCount(1)
+        .addVisibilityChecker((entry, environment) -> 
+        {
+          if ((environment.getSelectedFilesCount() == 1) && (environment.getSelectedFoldersCount() == 0))
+          {
+            String leftSide = new Registry().readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
+            if (leftSide != null)
+            {
+              entry.setLabel("Diff with " + new File(leftSide).getName());
+              Map<String, Object> parameters = new HashMap<String, Object>();
+              Iterator<IResource> iterator = environment.getSelectedResources().iterator();
+              parameters.put(AbstractTortoiseDiffTwoFilesCommand.LeftSideParameterName, leftSide);
+              parameters.put(AbstractTortoiseDiffTwoFilesCommand.RightSideParameterName, iterator.next().getLocation().toOSString());
+              entry.setCustomParameters(parameters);
+              return true;
+            }
+          }
+
+          return false;
+        }));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Diff with previous version")
