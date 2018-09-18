@@ -494,7 +494,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMenuId(MENUDIFFTWO)
         .setIconPath(menuCompareIconPath)
         .setCommand("diffcommits")
-        .setMaxItemsCount(0)); // TODO: Disabled
+        .setMaxItemsCount(0)); // Disabled. Didn't find any hint in Tortoise Git source how to handle this entry.
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Show log")
