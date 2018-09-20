@@ -71,5 +71,19 @@ int LoadStringEx(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer, int nBufferMax,
 
 JNIEXPORT jstring JNICALL Java_contextquickie_handlers_tortoise_git_Translation_getTranslatedString(JNIEnv* env, jobject, jstring library, jlong languageId, jlong menuId, jstring defaultValue)
 {
-  return defaultValue;
+  jstring returnValue = defaultValue;
+  const char* nativeLibrary = env->GetStringUTFChars(library, FALSE);
+  HINSTANCE libraryInst = LoadLibrary(CA2W(nativeLibrary));
+  if (libraryInst != NULL)
+  {
+    TCHAR buffer[255];
+    if (LoadStringEx(libraryInst, (UINT)menuId, buffer, _countof(buffer), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT)) != 0)
+    {
+      returnValue = env->NewString((jchar*)buffer, 255);
+    }
+  }
+
+  env->ReleaseStringUTFChars(library, nativeLibrary);
+
+  return returnValue;
 }

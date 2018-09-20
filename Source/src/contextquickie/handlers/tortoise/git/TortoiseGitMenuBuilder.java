@@ -1,5 +1,6 @@
 package contextquickie.handlers.tortoise.git;
 
+import contextquickie.Activator;
 import contextquickie.handlers.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 import contextquickie.handlers.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.handlers.tortoise.TortoiseEnvironment;
@@ -13,9 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.function.BiPredicate;
 
 import org.eclipse.core.resources.IResource;
@@ -334,19 +333,12 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     
     Registry registry = new Registry();
     long languageId = registry.readIntValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "LanguageID", 0x409);
-
-    final Map<Long, Locale> languageMapping = new HashMap<Long, Locale>();
-
-    // Language codes are taken from https://msdn.microsoft.com/en-us/library/cc233982.aspx
-    languageMapping.put(0x409l, Locale.ENGLISH);
-    languageMapping.put(0x404l, Locale.TRADITIONAL_CHINESE);
-    languageMapping.put(0x804l, Locale.SIMPLIFIED_CHINESE);
-
-    Locale currentLocale = languageMapping.containsKey(languageId) ? languageMapping.get(languageId) : Locale.US;
-    ResourceBundle messages = ResourceBundle.getBundle("MenuEntries", currentLocale);
-
+    
+    final File tortoiseGitExePath = new File(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.TORTOISE_GIT.getPath()));
+    final String tortoiseGitLanguagesPath = tortoiseGitExePath.getParentFile().getParentFile().getAbsolutePath() + File.separator + "Languages";
+    Translation translation = new Translation(tortoiseGitLanguagesPath, "TortoiseProc", languageId);
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Clone...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLONE, "Clone"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLONE)
         .setIconPath("Tortoise/menucheckout.png")
@@ -357,7 +349,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxFileCount(0));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Pull...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPULL, "Pull..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPULL)
         .setIconPath("TortoiseGit/pull1.png")
@@ -366,7 +358,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Fetch...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUFETCH, "Fetch..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUFETCH)
         .setIconPath("TortoiseGit/pull1.png")
@@ -375,7 +367,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Push...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPUSH, "Push..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPUSH)
         .setIconPath("TortoiseGit/Push.png")
@@ -384,7 +376,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Sync...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSYNC, "Sync..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSYNC)
         .setIconPath("TortoiseGit/menurelocate.png")
@@ -396,14 +388,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Commit...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCOMMIT, "Commit..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOMMIT)
         .setIconPath("Tortoise/menucommit.png")
         .setCommand("commit"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Git SVN DCommit...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNDCOMMIT, "Git SVN DCommit..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNDCOMMIT)
         .setIconPath("Tortoise/menucommit.png")
@@ -411,7 +403,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("SVN Rebase")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNREBASE, "SVN Rebase"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNREBASE)
         .setIconPath("TortoiseGit/menurebase.png")
@@ -419,7 +411,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("SVN Fetch")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNFETCH, "SVN Fetch"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNFETCH)
         .setIconPath("Tortoise/pull1.png")
@@ -427,7 +419,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Import SVN Ignore")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNIGNORE, "Import SVN Ignore"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNIGNORE)
         .setIconPath("TortoiseSvn/menuignore.png")
@@ -438,7 +430,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
@@ -447,7 +439,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
 
     // Diff for two files
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
         .setCommandId(DIFF_TOW_FILES_COMMAND_ID)
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
@@ -457,7 +449,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setUsesDefaultParameters(false));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff later")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later"))
         .setCommandId("ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand")
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
@@ -479,7 +471,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
             String leftSide = registry.readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
             if (leftSide != null)
             {
-              entry.setLabel("Diff with " + new File(leftSide).getName());
+              entry.setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff with " + new File(leftSide).getName()));
               Map<String, Object> parameters = new HashMap<String, Object>();
               Iterator<IResource> iterator = environment.getSelectedResources().iterator();
               parameters.put(AbstractTortoiseDiffTwoFilesCommand.LeftSideParameterName, leftSide);
@@ -493,7 +485,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         }));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff with previous version")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPREVDIFF, "Diff with previous version"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPREVDIFF)
         .setIconPath(menuCompareIconPath)
@@ -504,7 +496,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Diff two commits")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFTWO, "Diff two commits"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFTWO)
         .setIconPath(menuCompareIconPath)
@@ -512,7 +504,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // Disabled. Didn't find any hint in Tortoise Git source how to handle this entry.
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Show log")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOG, "Show log"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOG)
         .setIconPath("Tortoise/menulog.png")
@@ -520,7 +512,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Show log of this folder")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOGSUBMODULE, "Show log of this folder"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOGSUBMODULE)
         .setIconPath("Tortoise/menulog.png")
@@ -528,7 +520,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setParameter1("/submodule"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Show Reflog")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREFLOG, "Show Reflog"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREFLOG)
         .setIconPath("Tortoise/menulog.png")
@@ -537,7 +529,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Browse References")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREFBROWSE, "Browse References"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREFBROWSE)
         .setIconPath("Tortoise/menurepobrowse.png")
@@ -546,7 +538,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Daemon")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDAEMON, "Daemon"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUDAEMON)
         .setIconPath("TortoiseGit/menudaemon.png")
@@ -554,7 +546,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Revision graph")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVISIONGRAPH, "Revision graph"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVISIONGRAPH)
         .setIconPath("Tortoise/menurevisiongraph.png")
@@ -562,7 +554,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Repo-browser")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREPOBROWSE, "Repo-browser"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREPOBROWSE)
         .setIconPath("Tortoise/menurepobrowse.png")
@@ -571,14 +563,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Check for modifications")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSHOWCHANGED, "Check for modifications"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSHOWCHANGED)
         .setIconPath("Tortoise/menushowchanged.png")
         .setCommand("repostatus"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Rebase")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREBASE, "Rebase"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREBASE)
         .setIconPath("TortoiseGit/menurebase.png")
@@ -587,7 +579,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Stash Save")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSTASHSAVE, "Stash Save"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHSAVE)
         .setIconPath("Tortoise/menucommit.png")
@@ -595,7 +587,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Stash Apply")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSTASHAPPLY, "Stash Apply"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHAPPLY)
         .setIconPath("TortoiseGit/menurelocate.png")
@@ -604,7 +596,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Stash Pop")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSTASHPOP, "Stash Pop"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHPOP)
         .setIconPath("TortoiseGit/menurelocate.png")
@@ -613,7 +605,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Stash List")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSTASHLIST, "Stash List"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSTASHLIST)
         .setIconPath("Tortoise/menulog.png")
@@ -626,7 +618,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Bisect start")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTSTART, "Bisect start"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
         .setIconPath("TortoiseGit/menubisect.png")
@@ -636,7 +628,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Bisect good")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTGOOD, "Bisect good"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
         .setIconPath("TortoiseGit/thumb_up.png")
@@ -646,7 +638,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Bisect bad")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTBAD, "Bisect bad"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
         .setIconPath("TortoiseGit/thumb_down.png")
@@ -656,7 +648,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Bisect skip")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTSKIP, "Bisect skip"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
         .setIconPath("TortoiseGit/menubisect.png")
@@ -666,7 +658,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Bisect reset")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTRESET, "Bisect reset"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
         .setIconPath("TortoiseGit/menubisectreset.png")
@@ -679,7 +671,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Edit conflicts")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCONFLICT, "Edit conflicts"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCONFLICTEDITOR)
         .setIconPath("Tortoise/menuresolve.png")
@@ -687,14 +679,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // TODO: Disabled
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Resolve...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENURESOLVE, "Resolve..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENURESOLVE)
         .setIconPath("Tortoise/menuresolve.png")
         .setCommand("resolve"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Abort Merge")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUMERGE, "Abort Merge"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGE)
         .setIconPath("TortoiseGit/menumergeabort.png")
@@ -702,7 +694,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setParameter1("/abort"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Rename...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENURENAME, "Rename..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENURENAME)
         .setIconPath("Tortoise/menurename.png")
@@ -710,14 +702,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxFolderCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Delete")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREMOVE, "Delete"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove"));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Delete (keep local)")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREMOVEKEEP, "Delete (keep local)"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREMOVEKEEP)
         .setIconPath(menuDeleteIconPath)
@@ -725,14 +717,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setParameter1("/keep"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Revert...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVERT, "Revert..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
         .setIconPath("Tortoise/menurevert.png")
         .setCommand("revert"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Clean up...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLEANUP, "Clean up..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLEANUP)
         .setIconPath("Tortoise/menucleanup.png")
@@ -743,7 +735,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Switch/Checkout...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSWITCH, "Switch/Checkout..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSWITCH)
         .setIconPath("Tortoise/menuswitch.png")
@@ -752,7 +744,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
     
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Merge...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUMERGE, "Merge..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGE)
         .setIconPath(menuMergeIconPath)
@@ -761,7 +753,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Create Branch...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBRANCH, "Create Branch..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPY)
         .setIconPath("Tortoise/menucopy.png")
@@ -770,7 +762,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Create Tag...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUTAG, "Create Tag..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUTAG)
         .setIconPath("TortoiseGit/tag.png")
@@ -779,7 +771,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Export...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUEXPORT, "Export..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUEXPORT)
         .setIconPath("Tortoise/menuexport.png")
@@ -791,7 +783,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Create repository here")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCREATEREPOS, "Create repository here"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
         .setIconPath("Tortoise/menucreaterepos.png")
@@ -800,14 +792,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setIsVisibleInWorkingCopy(false));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Add...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUADD, "Add..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUADD)
         .setIconPath("Tortoise/menuadd.png")
         .setCommand("add"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Blame...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBLAME, "Blame..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBLAME)
         .setIconPath("Tortoise/menublame.png")
@@ -816,7 +808,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxFolderCount(0));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Add to ignore list")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUIGNORE, "Add to ignore list"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
         .setIconPath("Tortoise/menuignore.png")
@@ -826,7 +818,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Submodule Add...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBADD, "Submodule Add..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSUBADD)
         .setIconPath("Tortoise/menuadd.png")
@@ -835,14 +827,14 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Submodule Update...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPDATEEXT, "Submodule Update..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATEEXT)
         .setIconPath("TortoiseGit/pull1.png")
         .setCommand("subupdate"));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Submodule Sync")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBSYNC, "Submodule Sync"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSUBSYNC)
         .setIconPath("TortoiseGit/menusync.png")
@@ -852,7 +844,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Create Patch Serial...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUFORMATPATCH, "Create Patch Serial..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUFORMATPATCH)
         .setIconPath("Tortoise/menudiff.png")
@@ -861,21 +853,21 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(1));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Apply Patch Serial...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUIMPORTPATCH, "Apply Patch Serial..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORTPATCH)
         .setIconPath("Tortoise/menupatch.png")
         .setCommand(""));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Review/apply single patch..")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUAPPLYPATCH, "Review/apply single patch.."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUAPPLYPATCH)
         .setIconPath("Tortoise/menupatch.png")
         .setCommand(""));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Send Mail...")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSENDMAIL, "Send Mail..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSENDMAIL)
         .setIconPath("Tortoise/menusendmail.png")
@@ -883,7 +875,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMaxItemsCount(0)); // TODO: Disabled
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Paste")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLIPPASTE, "Paste"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLIPPASTE)
         .setIconPath("Tortoise/menusendmail.png")
@@ -894,7 +886,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuEntry());
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Settings")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
         .setIconPath("Tortoise/menusettings.png")
@@ -903,7 +895,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setVisibleWithoutWorkingCopy(true));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("Help")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUHELP, "Help"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUHELP)
         .setIconPath("Tortoise/menuhelp.png")
@@ -912,7 +904,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setVisibleWithoutWorkingCopy(true));
 
     entries.add(new TortoiseMenuEntry()
-        .setLabel("About")
+        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUABOUT, "About"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUABOUT)
         .setIconPath("Tortoise/menuabout.png")
