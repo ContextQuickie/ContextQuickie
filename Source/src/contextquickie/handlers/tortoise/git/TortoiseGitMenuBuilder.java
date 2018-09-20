@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.function.BiPredicate;
 
 import org.eclipse.core.resources.IResource;
@@ -330,6 +332,19 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     // Path to the "Delete" icon
     final String menuDeleteIconPath = "Tortoise/menudelete.png";
     
+    Registry registry = new Registry();
+    long languageId = registry.readIntValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "LanguageID", 0x409);
+
+    final Map<Long, Locale> languageMapping = new HashMap<Long, Locale>();
+
+    // Language codes are taken from https://msdn.microsoft.com/en-us/library/cc233982.aspx
+    languageMapping.put(0x409l, Locale.ENGLISH);
+    languageMapping.put(0x404l, Locale.TRADITIONAL_CHINESE);
+    languageMapping.put(0x804l, Locale.SIMPLIFIED_CHINESE);
+
+    Locale currentLocale = languageMapping.containsKey(languageId) ? languageMapping.get(languageId) : Locale.US;
+    ResourceBundle messages = ResourceBundle.getBundle("MenuEntries", currentLocale);
+
     entries.add(new TortoiseMenuEntry()
         .setLabel("Clone...")
         .setCommandId(defaultCommandId)
@@ -461,7 +476,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         {
           if ((environment.getSelectedFilesCount() == 1) && (environment.getSelectedFoldersCount() == 0))
           {
-            String leftSide = new Registry().readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
+            String leftSide = registry.readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
             if (leftSide != null)
             {
               entry.setLabel("Diff with " + new File(leftSide).getName());
