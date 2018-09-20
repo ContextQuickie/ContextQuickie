@@ -32,7 +32,7 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Translationi.cpp">
+    <ClCompile Include="Translation.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
