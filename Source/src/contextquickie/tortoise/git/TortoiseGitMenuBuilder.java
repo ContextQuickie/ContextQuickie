@@ -316,7 +316,12 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   /**
    * Tortoise SVN menu configuration.
    */
-  private static List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+  private static final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+
+  /**
+   * The instance using for translating the menu entries.
+   */
+  private static final Translation translation;
   
   static
   {
@@ -336,7 +341,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     
     final File tortoiseGitExePath = new File(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.TORTOISE_GIT.getPath()));
     final String tortoiseGitLanguagesPath = tortoiseGitExePath.getParentFile().getParentFile().getAbsolutePath() + File.separator + "Languages";
-    Translation translation = new Translation(tortoiseGitLanguagesPath, "TortoiseProc", languageId);
+    translation = new Translation(tortoiseGitLanguagesPath, "TortoiseProc", languageId);
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLONE, "Clone"))
         .setCommandId(defaultCommandId)
@@ -926,7 +931,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     super(PreferenceConstants.TORTOISE_GIT, settings);
     settings.setEntries(entries);
     settings.setSubMenuIconPath("TortoiseGit/tsvnmenufolder.png");
-    settings.setSubMenuText("TortioseGit");
+    settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortioseGit"));
     settings.setMainMenuPrefix("Git");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
     
