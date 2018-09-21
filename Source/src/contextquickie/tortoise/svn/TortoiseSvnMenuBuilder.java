@@ -520,7 +520,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURELOCATE)
-        .setIconPath("TortoiseSvn/menurelocate.png")
+        .setIconPath("TortoiseSvn/menurelocate.ico")
         .setCommand("relocate")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -546,7 +546,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Import...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
-        .setIconPath("TortoiseSvn/menuimport.png")
+        .setIconPath("TortoiseSvn/menuimport.ico")
         .setCommand("import")
         .setMaxItemsCount(0)); // TODO: Disabled
     

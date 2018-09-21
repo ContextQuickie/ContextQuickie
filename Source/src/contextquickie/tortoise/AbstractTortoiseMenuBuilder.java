@@ -71,7 +71,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   @Override
   protected List<IContributionItem> getMenuEntries()
   {
-    final String iconFolder = "icons/";
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     final List<IContributionItem> mainMenu = new ArrayList<IContributionItem>();
 
@@ -82,7 +81,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
 
     // Create sub menu entry
-    final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor(iconFolder + this.entriesConfiguration.getSubMenuIconPath());
+    final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor("icons/" + this.entriesConfiguration.getSubMenuIconPath());
     final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
 
     for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
@@ -166,9 +165,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
           commandParameter.label = entry.getLabel();
         }
 
-        commandParameter.icon = contextquickie.Activator.getImageDescriptor(iconFolder + entry.getIconPath());
+        commandParameter.icon = entry.getIcon();
         final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
-        
+
         if (this.isEntryInMainMenu(entry.getMenuId()))
         {
           mainMenu.add(commandContributionItem);

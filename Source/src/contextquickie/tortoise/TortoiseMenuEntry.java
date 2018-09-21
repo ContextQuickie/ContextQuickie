@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+
 /**
  * @author ContextQuickie
  *
@@ -20,7 +22,7 @@ public class TortoiseMenuEntry
   /**
    * The path to the entry icon.
    */
-  private String iconPath;
+  private ImageDescriptor icon;
 
   /**
    * The command ID.
@@ -135,9 +137,9 @@ public class TortoiseMenuEntry
    * 
    * @return the iconPath
    */
-  public String getIconPath()
+  public ImageDescriptor getIcon()
   {
-    return iconPath;
+    return this.icon;
   }
 
   /**
@@ -149,7 +151,12 @@ public class TortoiseMenuEntry
    */
   public TortoiseMenuEntry setIconPath(final String value)
   {
-    this.iconPath = value;
+    final String iconFolder = "icons/";
+    this.icon = contextquickie.Activator.getImageDescriptor(iconFolder + value);
+    if (this.icon == null)
+    {
+      throw new IllegalArgumentException(value);
+    }
     return this;
   }
 
