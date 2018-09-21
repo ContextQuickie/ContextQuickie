@@ -343,13 +343,20 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     translation = new Translation(tortoiseGitLanguagesPath, "TortoiseProc", languageId);
     
     String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
+    final String alternativeExtension;
     if (usedVersion.equals("2.6"))
     {
       iconPath = "TortoiseGit/2.6/";
+
+      // If using icons from version 2.6, all files have .ico extension
+      alternativeExtension = ".ico";
     }
     else
     {
       iconPath = "TortoiseGit/2.7/";
+
+      // If using icons from version 2.7, some files require .png extension in eclipse
+      alternativeExtension = ".png";
     }
     
     // Path to the "Compare" icon.
@@ -359,7 +366,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     final String menuMergeIconPath = iconPath + "menumerge.ico";
 
     // Path to the "Delete" icon
-    final String menuDeleteIconPath = iconPath + "menudelete.ico";
+    final String menuDeleteIconPath = iconPath + "menudelete" + alternativeExtension;
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLONE, "Clone"))
@@ -645,7 +652,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTSTART, "Bisect start"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath(iconPath + "menubisect.ico")
+        .setIconPath(iconPath + "menubisect" + alternativeExtension)
         .setCommand("bisect")
         .setParameter1("/start")
         .setMaxFolderCount(1)
@@ -655,7 +662,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTGOOD, "Bisect good"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath(iconPath + "thumb_up.ico")
+        .setIconPath(iconPath + "thumb_up" + alternativeExtension)
         .setCommand("bisect")
         .setParameter1("/good")
         .setMaxFolderCount(1)
@@ -665,7 +672,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTBAD, "Bisect bad"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath(iconPath + "thumb_down.ico")
+        .setIconPath(iconPath + "thumb_down" + alternativeExtension)
         .setCommand("bisect")
         .setParameter1("/bad")
         .setMaxFolderCount(1)
@@ -675,7 +682,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTSKIP, "Bisect skip"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath(iconPath + "menubisect.ico")
+        .setIconPath(iconPath + "menubisect"+ alternativeExtension)
         .setCommand("bisect")
         .setParameter1("/skip")
         .setMaxFolderCount(1)
@@ -685,7 +692,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBISECTRESET, "Bisect reset"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBISECT)
-        .setIconPath(iconPath + "menubisectreset.ico")
+        .setIconPath(iconPath + "menubisectreset"+ alternativeExtension)
         .setCommand("bisect")
         .setParameter1("/reset")
         .setMaxFolderCount(1)
@@ -744,7 +751,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVERT, "Revert..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
-        .setIconPath(iconPath + "menurevert.ico")
+        .setIconPath(iconPath + "menurevert" + alternativeExtension)
         .setCommand("revert"));
 
     entries.add(new TortoiseMenuEntry()
@@ -922,7 +929,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUHELP, "Help"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUHELP)
-        .setIconPath(iconPath + "menuhelp.ico")
+        .setIconPath(iconPath + "menuhelp" + alternativeExtension)
         .setCommand("help")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
