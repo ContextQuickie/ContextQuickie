@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.FileFieldEditor;
@@ -229,5 +230,17 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     { mergeExeName });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
+
+    // Editor for selecting the used version
+    String[][] supportedVersions = new String[preferenceConstants.getSupportedVersions().length][2];
+    for (int i = 0; i < preferenceConstants.getSupportedVersions().length; i++)
+    {
+      supportedVersions[i][0] = supportedVersions[i][1] = preferenceConstants.getSupportedVersions()[i];
+    }
+    ComboFieldEditor comboFieldEditor = new ComboFieldEditor(
+        preferenceConstants.getUsedVersion(), 
+        "Select Tortoise " + name + " version", supportedVersions, getFieldEditorParent());
+    addField(comboFieldEditor);
+    dependentFields.add(comboFieldEditor);
   }
 }
