@@ -1,5 +1,6 @@
 package contextquickie.tortoise.svn;
 
+import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
@@ -7,6 +8,8 @@ import contextquickie.tortoise.TortoiseMenuSettings;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * @author ContextQuickie
@@ -229,6 +232,8 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
    * About menu entry.
    */
   private static final long MENUABOUT = 0x8000000000000000L;
+  private static final long MENUSHELVE = 0x0000010000000000L;
+  private static final long MENUUNSHELVE = 0x0000020000000000L;
 
   /**
    * Tortoise SVN menu configuration.
@@ -576,6 +581,25 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     // Separator
     entries.add(new TortoiseMenuEntry());
+
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
+    if (usedVersion.equals("1.10"))
+    {
+      entries.add(new TortoiseMenuEntry()
+          .setLabel("Shelve...")
+          .setCommandId(defaultCommandId)
+          .setMenuId(MENUSHELVE)
+          .setIconPath("TortoiseSvn/1.10/menushelve.ico")
+          .setCommand("shelve"));
+
+      entries.add(new TortoiseMenuEntry()
+          .setLabel("Unshelve...")
+          .setCommandId(defaultCommandId)
+          .setMenuId(MENUUNSHELVE)
+          .setIconPath("TortoiseSvn/1.10/menuunshelve.ico")
+          .setCommand("unshelve"));
+    }
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Create patch...")
