@@ -240,22 +240,22 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
 
     // Path to the "Update" icon
-    final String menuUpdateIconPath = "TortoiseSvn/menuupdate.png";
+    final String menuUpdateIconPath = "TortoiseSvn/1.10/menuupdate.ico";
 
     // Path to the "Compare" icon.
-    final String menuCompareIconPath = "Tortoise/menucompare.png";
+    final String menuCompareIconPath = "TortoiseSvn/1.10/menucompare.ico";
 
     // Path to the "Merge" icon.
-    final String menuMergeIconPath = "Tortoise/menumerge.png";
+    final String menuMergeIconPath = "TortoiseSvn/1.10/menumerge.ico";
 
     // Path to the "Delete" icon
-    final String menuDeleteIconPath = "Tortoise/menudelete.png";
+    final String menuDeleteIconPath = "TortoiseSvn/1.10/menudelete.ico";
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Chekout...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCHECKOUT)
-        .setIconPath("Tortoise/menucheckout.png")
+        .setIconPath("TortoiseSvn/1.10/menucheckout.ico")
         .setCommand("checkout")
         .setIsVisibleInWorkingCopy(false)
         .setVisibleWithoutWorkingCopy(true)
@@ -282,7 +282,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Commit...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOMMIT)
-        .setIconPath("Tortoise/menucommit.png")
+        .setIconPath("TortoiseSvn/1.10/menucommit.ico")
         .setCommand("commit"));
 
     // Separator
@@ -356,7 +356,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Show log")
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOG)
-        .setIconPath("Tortoise/menulog.png")
+        .setIconPath("TortoiseSvn/1.10/menulog.ico")
         .setCommand("log")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
@@ -365,7 +365,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Repo-browser")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREPOBROWSE)
-        .setIconPath("Tortoise/menurepobrowse.png")
+        .setIconPath("TortoiseSvn/1.10/menurepobrowse.ico")
         .setCommand("repobrowser")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
@@ -374,14 +374,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Check for modifications")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSHOWCHANGED)
-        .setIconPath("Tortoise/menushowchanged.png")
+        .setIconPath("TortoiseSvn/1.10/menushowchanged.ico")
         .setCommand("repostatus"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Revision graph")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVISIONGRAPH)
-        .setIconPath("Tortoise/menurevisiongraph.png")
+        .setIconPath("TortoiseSvn/1.10/menurevisiongraph.ico")
         .setCommand("revisiongraph")
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
@@ -401,7 +401,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Resolve...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURESOLVE)
-        .setIconPath("Tortoise/menuresolve.png")
+        .setIconPath("TortoiseSvn/1.10/menuresolve.ico")
         .setCommand("resolve"));
 
     entries.add(new TortoiseMenuEntry()
@@ -416,7 +416,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Rename...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURENAME)
-        .setIconPath("Tortoise/menurename.png")
+        .setIconPath("TortoiseSvn/1.10/menurename.ico")
         .setCommand("rename")
         .setMaxItemsCount(1));
 
@@ -439,7 +439,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Revert...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
-        .setIconPath("Tortoise/menurevert.png")
+        .setIconPath("TortoiseSvn/1.10/menurevert.ico")
         .setCommand("revert"));
     
     entries.add(new TortoiseMenuEntry()
@@ -453,7 +453,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Clean up...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLEANUP)
-        .setIconPath("Tortoise/menucleanup.png")
+        .setIconPath("TortoiseSvn/1.10/menucleanup.ico")
         .setCommand("cleanup")
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
@@ -462,14 +462,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Get lock...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENULOCK)
-        .setIconPath("TortoiseSvn/menulock.png")
+        .setIconPath("TortoiseSvn/1.10/menulock.ico")
         .setCommand("lock"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Release lock...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUUNLOCK)
-        .setIconPath("TortoiseSvn/menuunlock.png")
+        .setIconPath("TortoiseSvn/1.10/menuunlock.ico")
         .setCommand("unlock"));
 
     // Separator
@@ -479,7 +479,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Branch/tag...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPY)
-        .setIconPath("Tortoise/menucopy.png")
+        .setIconPath("TortoiseSvn/1.10/menucopy.ico")
         .setCommand("copy")
         .setMaxItemsCount(1));
 
@@ -487,7 +487,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Switch...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSWITCH)
-        .setIconPath("Tortoise/menuswitch.png")
+        .setIconPath("TortoiseSvn/1.10/menuswitch.ico")
         .setCommand("switch")
         .setMaxItemsCount(1));
 
@@ -510,7 +510,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Export...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUEXPORT)
-        .setIconPath("Tortoise/menuexport.png")
+        .setIconPath("TortoiseSvn/1.10/menuexport.ico")
         .setCommand("export")
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
@@ -520,7 +520,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Relocate...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENURELOCATE)
-        .setIconPath("TortoiseSvn/menurelocate.ico")
+        .setIconPath("TortoiseSvn/1.10/menurelocate.ico")
         .setCommand("relocate")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -531,7 +531,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Create repository here")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
-        .setIconPath("Tortoise/menucreaterepos.png")
+        .setIconPath("TortoiseSvn/1.10/menucreaterepos.ico")
         .setCommand("repocreate")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -539,14 +539,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Add...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUADD)
-        .setIconPath("Tortoise/menuadd.png")
+        .setIconPath("TortoiseSvn/1.10/menuadd.ico")
         .setCommand("add"));
 
      entries.add(new TortoiseMenuEntry()
         .setLabel("Import...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
-        .setIconPath("TortoiseSvn/menuimport.ico")
+        .setIconPath("TortoiseSvn/1.10/menuimport.ico")
         .setCommand("import")
         .setMaxItemsCount(0)); // TODO: Disabled
     
@@ -554,7 +554,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Blame...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUBLAME)
-        .setIconPath("Tortoise/menublame.png")
+        .setIconPath("TortoiseSvn/1.10/menublame.ico")
         .setCommand("blame")
         .setMaxFileCount(1)
         .setMaxFolderCount(0));
@@ -563,14 +563,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Copy URL to clipboard")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPYURL)
-        .setIconPath("TortoiseSvn/copy.png")
+        .setIconPath("TortoiseSvn/1.10/copy.ico")
         .setCommand("copyurls"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Add to ignore list")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
-        .setIconPath("TortoiseSvn/menuignore.png")
+        .setIconPath("TortoiseSvn/1.10/menuignore.ico")
         .setCommand("ignore")
         .setMaxItemsCount(0)); // TODO: Disabled
     
@@ -581,14 +581,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Create patch...")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEPATCH)
-        .setIconPath("Tortoise/menudiff.png")
+        .setIconPath("TortoiseSvn/1.10/menudiff.ico")
         .setCommand("createpatch"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel("Apply patch...")
         .setCommandId("ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand")
         .setMenuId(MENUAPPLYPATCH)
-        .setIconPath("Tortoise/menupatch.png")
+        .setIconPath("TortoiseSvn/1.10/menupatch.ico")
         .setMaxFileCount(0)
         .setMaxFolderCount(1)
         .setUsesDefaultParameters(false));
@@ -597,14 +597,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Properties")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUPROPERTIES)
-        .setIconPath("TortoiseSvn/menuproperties.png")
+        .setIconPath("TortoiseSvn/1.10/menuproperties.ico")
         .setCommand("properties"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel("Paste")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUCLIPPASTE)
-        .setIconPath("TortoiseSvn/menuignore.png")
+        .setIconPath("TortoiseSvn/1.10/menuignore.ico")
         .setCommand("pastecopy")
         .setMaxItemsCount(0)); // TODO: Disabled
 
@@ -615,7 +615,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Settings")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
-        .setIconPath("Tortoise/menusettings.png")
+        .setIconPath("TortoiseSvn/1.10/menusettings.ico")
         .setCommand("settings")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
@@ -624,7 +624,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("Help")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUHELP)
-        .setIconPath("Tortoise/menuhelp.png")
+        .setIconPath("TortoiseSvn/1.10/menuhelp.ico")
         .setCommand("help")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
@@ -633,7 +633,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel("About")
         .setCommandId(defaultCommandId)
         .setMenuId(MENUABOUT)
-        .setIconPath("Tortoise/menuabout.png")
+        .setIconPath("TortoiseSvn/1.10/menuabout.ico")
         .setCommand("about")
         .setVisibleWithoutWorkingCopy(true));
   }
@@ -650,7 +650,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   {
     super(PreferenceConstants.TORTOISE_SVN, settings);
     settings.setEntries(entries);
-    settings.setSubMenuIconPath("TortoiseSvn/tsvnmenumultiple.png");
+    settings.setSubMenuIconPath("TortoiseSvn/1.10/tsvnmenumultiple.ico");
     settings.setSubMenuText("TortioseSVN");
     settings.setMainMenuPrefix("SVN");
     settings.setContextMenuEntriesDefault(MENUCHECKOUT | MENUUPDATE | MENUCOMMIT);

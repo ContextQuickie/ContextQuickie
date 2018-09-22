@@ -453,7 +453,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNIGNORE, "Import SVN Ignore"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSVNIGNORE)
-        .setIconPath("TortoiseSvn/menuignore.ico")
+        .setIconPath(iconPath + "menuignore.ico")
         .setCommand("commit")
         .setMaxItemsCount(0)); // TODO: Disabled
 
