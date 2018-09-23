@@ -8,6 +8,7 @@ import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSettings;
+import contextquickie.tortoise.Translation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -332,15 +333,8 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   static
   {
     final String defaultCommandId = "ContextQuickie.commands.TortoiseGit.TortoiseGitCommand";
-    
-    Registry registry = new Registry();
-    long languageId = registry.readIntValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "LanguageID", 0x409);
-    
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    
-    final File tortoiseGitExePath = new File(preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getPath()));
-    final String tortoiseGitLanguagesPath = tortoiseGitExePath.getParentFile().getParentFile().getAbsolutePath() + File.separator + "Languages";
-    translation = new Translation(tortoiseGitLanguagesPath, "TortoiseProc", languageId);
+    translation = new Translation(PreferenceConstants.TORTOISE_GIT);
     
     String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
     final String alternativeExtension;
@@ -499,7 +493,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         {
           if ((environment.getSelectedFilesCount() == 1) && (environment.getSelectedFoldersCount() == 0))
           {
-            String leftSide = registry.readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
+            String leftSide = new Registry().readStringValue(PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), "DiffLater", null);
             if (leftSide != null)
             {
               entry.setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff with " + new File(leftSide).getName()));
