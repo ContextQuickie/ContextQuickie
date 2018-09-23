@@ -18,7 +18,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #include "stdafx.h"
-#include "contextquickie_tortoise_git_Translation.h"
+#include "contextquickie_tortoise_Translation.h"
 
 #include "Windows.h"
 #include <atlstr.h>
@@ -93,7 +93,7 @@ int LoadStringEx(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer, int nBufferMax,
 }
 // End GPL Software usage
 
-JNIEXPORT jstring JNICALL Java_contextquickie_tortoise_git_Translation_getTranslatedString(JNIEnv* env, jobject, jstring library, jlong languageId, jlong menuId, jstring defaultValue)
+JNIEXPORT jstring JNICALL Java_contextquickie_tortoise_Translation_getTranslatedString(JNIEnv* env, jobject, jstring library, jlong languageId, jlong menuId, jstring defaultValue)
 {
   jstring returnValue = defaultValue;
   const char* nativeLibrary = env->GetStringUTFChars(library, FALSE);
