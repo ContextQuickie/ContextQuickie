@@ -1,12 +1,8 @@
 package contextquickie;
 
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-
-import contextquickie.tortoise.svn.ResourceChangeListener;
 
 /**
  * The activator class controls the plug-in life cycle.
@@ -23,15 +19,11 @@ public class Activator extends AbstractUIPlugin
    */
   private static Activator plugin;
   
-  private ResourceChangeListener svnResourceChangeListener;
-
   @Override
   public final void start(final BundleContext context) throws Exception
   {
     super.start(context);
     plugin = this;
-    this.svnResourceChangeListener = new ResourceChangeListener();
-    ResourcesPlugin.getWorkspace().addResourceChangeListener(this.svnResourceChangeListener, IResourceChangeEvent.POST_CHANGE);
   }
 
   @Override
@@ -39,7 +31,6 @@ public class Activator extends AbstractUIPlugin
   {
     plugin = null;
     super.stop(context);
-    ResourcesPlugin.getWorkspace().removeResourceChangeListener(this.svnResourceChangeListener);
   }
 
   /**

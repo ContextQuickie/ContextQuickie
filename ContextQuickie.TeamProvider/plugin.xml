@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.team.core.repository">
+      <repository
+            class="contextquickie.teamprovider.svn.SvnRepositoryProvider"
+            id="contextquickie.teamprovider.svn.SvnRepositoryProvider"
+            metaFilePaths=".svn/wc.db"
+            typeClass="contextquickie.teamprovider.svn.SvnRepositoryProviderType">	
+	</repository>
+   </extension>
+   <extension
+         point="org.eclipse.team.ui.configurationWizards">
+      <wizard
+            class="contextquickie.teamprovider.svn.ConfigurationWizard"
+            icon="icons/Tortoise.ico"
+            id="ContextQuickie.wizard1"
+            name="Tortoise SVN">
+      </wizard>
+   </extension>
+</plugin>
