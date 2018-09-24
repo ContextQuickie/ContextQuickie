@@ -12,6 +12,11 @@ import org.eclipse.ui.services.IServiceLocator;
 
 import contextquickie.Activator;
 
+/**
+ * @author ContextQuickie
+ *
+ *         Base class for building context menu entries.
+ */
 public abstract class AbstractMenuBuilder extends CompoundContributionItem implements IWorkbenchContribution
 {
   /**

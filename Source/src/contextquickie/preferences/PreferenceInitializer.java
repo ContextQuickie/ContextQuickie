@@ -30,50 +30,59 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
         "HKEY_CURRENT_USER\\SOFTWARE\\Scooter Software\\Beyond Compare 4\\BcShellEx");
     store.setDefault(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "SavedLeft");
 
-    store.setDefault(PreferenceConstants.TORTOISE_SVN.getEnabled(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_SVN.getWorkingCopyDetection(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_SVN.getUseMenuConfigFromRegistry(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_SVN.getScanForLinkedResources(), false);
+    this.initializeTortoiseSettings(
+        store, 
+        PreferenceConstants.TORTOISE_SVN, 
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN",
+        "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
+        "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseMerge.exe");
 
-    final String tortoiseProcPathKey = "ProcPath";
-    final String tortoiseMergePathKey = "TMergePath";
-
-    // Try to retrieve the path to the Tortoise SVN executable.
-    final String tortoiseSvnRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseSVN";
-    this.getStoreConfigurationItemFromRegistry(store, tortoiseSvnRegPath, tortoiseProcPathKey,
-        "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe", PreferenceConstants.TORTOISE_SVN.getPath());
-
-    // Try to retrieve the path to the Tortoise SVN merge executable.
-    this.getStoreConfigurationItemFromRegistry(store, tortoiseSvnRegPath, tortoiseMergePathKey,
-        "C:\\Program Files\\TortoiseSVN\\bin\\TortoiseMerge.exe", PreferenceConstants.TORTOISE_SVN.getMergePath());
-
-    store.setDefault(PreferenceConstants.TORTOISE_GIT.getEnabled(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_GIT.getWorkingCopyDetection(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_GIT.getUseMenuConfigFromRegistry(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_GIT.getScanForLinkedResources(), false);
-
-    // Try to retrieve the path to the Tortoise GIT executable.
-    final String tortoiseGitRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit";
-    this.getStoreConfigurationItemFromRegistry(store, tortoiseGitRegPath, tortoiseProcPathKey,
-        "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe", PreferenceConstants.TORTOISE_GIT.getPath());
-
-    // Try to retrieve the path to the Tortoise GIT merge executable.
-    this.getStoreConfigurationItemFromRegistry(store, tortoiseGitRegPath, tortoiseMergePathKey,
-        "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT.getMergePath());
+    this.initializeTortoiseSettings(
+        store, 
+        PreferenceConstants.TORTOISE_GIT,
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseGit",
+        "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe",
+        "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitMerge.exe");
     
-    store.setDefault(PreferenceConstants.TORTOISE_HG.getEnabled(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_HG.getWorkingCopyDetection(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_HG.getUseMenuConfigFromRegistry(), false);
-    store.setDefault(PreferenceConstants.TORTOISE_HG.getScanForLinkedResources(), false);
-
-    // Try to retrieve the path to the Tortoise GIT executable.
-    final String tortoiseHgRegPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg";
-    this.getStoreConfigurationItemFromRegistry(store, tortoiseHgRegPath, tortoiseProcPathKey,
-        "C:\\Program Files\\TortoiseHg\\thg.exe", PreferenceConstants.TORTOISE_HG.getPath());
+    this.initializeTortoiseSettings(
+        store, 
+        PreferenceConstants.TORTOISE_HG,
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg",
+        "C:\\\\Program Files\\\\TortoiseHg\\\\thg.exe",
+        "C:\\\\Program Files\\\\TortoiseHg\\\\thg.exe");
     
     store.setDefault(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, false);
     
     store.setDefault(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS, false);
+  }
+
+  private void initializeTortoiseSettings(final IPreferenceStore store, final TortoisePreferenceConstants tortoisePreferenceConstants, final String tortioseToolRegistryPath, final String tortoiseProcDefault, final String tortoiseMergeDefault)
+  {
+    store.setDefault(tortoisePreferenceConstants.getEnabled(), false);
+    store.setDefault(tortoisePreferenceConstants.getWorkingCopyDetection(), false);
+    store.setDefault(tortoisePreferenceConstants.getUseMenuConfigFromRegistry(), false);
+    store.setDefault(tortoisePreferenceConstants.getScanForLinkedResources(), false);
+
+    final String tortoiseProcPathKey = "ProcPath";
+    final String tortoiseMergePathKey = "TMergePath";
+    this.getStoreConfigurationItemFromRegistry(store, tortioseToolRegistryPath, tortoiseProcPathKey,
+        tortoiseProcDefault, tortoisePreferenceConstants.getPath());
+    this.getStoreConfigurationItemFromRegistry(store, tortioseToolRegistryPath, tortoiseMergePathKey,
+        tortoiseMergeDefault, tortoisePreferenceConstants.getMergePath());
+
+    // Try to retrieve the current tortoise version
+    String[] supportedVersions = tortoisePreferenceConstants.getSupportedVersions();
+    String tortoiseVersion = new Registry().readStringValue(
+        tortoisePreferenceConstants.getRegistryUserDirectory(), 
+        "CurrentVersion", 
+        supportedVersions[0]);
+    for (int i = 0; i < supportedVersions.length; i++)
+    {
+      if (tortoiseVersion.startsWith(supportedVersions[i]))
+      {
+        store.setDefault(tortoisePreferenceConstants.getUsedVersion(), supportedVersions[i]);
+      }
+    }
   }
 
   /**

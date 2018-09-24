@@ -22,6 +22,8 @@ public class TortoisePreferenceConstants
    */
   private String registryUserDirectory;
 
+  private final String[] supportedVersions;
+
   /**
    * Creates a new instance of the {@link TortoisePreferenceConstants} class.
    * The directory in the registry which contains the user specific settings
@@ -32,10 +34,12 @@ public class TortoisePreferenceConstants
    * 
    * @param wcFolderName
    *          The name of the folder indicating a working copy.
+   * @param supportedVersions
+   *          The supported versions of the component.
    */
-  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName)
+  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String[] supportedVersions)
   {
-    this(settingsPrefix, wcFolderName, settingsPrefix);
+    this(settingsPrefix, wcFolderName, settingsPrefix, supportedVersions);
   }
 
   /**
@@ -50,12 +54,15 @@ public class TortoisePreferenceConstants
    * @param regUserDir
    *          The directory in the registry which contains the user specific
    *          settings.
+   * @param supportedVersions
+   *          The supported versions of the component.
    */
-  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String regUserDir)
+  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String regUserDir, final String[] supportedVersions)
   {
     this.prefix = settingsPrefix;
     this.workingCopyFolderName = wcFolderName;
     this.registryUserDirectory = regUserDir;
+    this.supportedVersions = supportedVersions;
   }
 
   /**
@@ -92,6 +99,14 @@ public class TortoisePreferenceConstants
   }
 
   /**
+   * @return Configuration item for the used version.
+   */
+  public String getUsedVersion()
+  {
+    return this.prefix + "UsedVersion";
+  }
+
+  /**
    * @return Configuration item which indicates if a working copy detection is
    *         performed or not.
    */
@@ -112,7 +127,7 @@ public class TortoisePreferenceConstants
   /**
    * @return The name of the folder indicating a working copy.
    */
-  public String getWokringCopyFolderName()
+  public String getWorkingCopyFolderName()
   {
     return this.workingCopyFolderName;
   }
@@ -122,6 +137,14 @@ public class TortoisePreferenceConstants
    */
   public String getRegistryUserDirectory()
   {
-    return this.registryUserDirectory;
+    return "HKEY_CURRENT_USER\\Software\\" + this.registryUserDirectory;
+  }
+
+  /**
+   * @return The supported versions.
+   */
+  public String[] getSupportedVersions()
+  {
+    return this.supportedVersions;
   }
 }

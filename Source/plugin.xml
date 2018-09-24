@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="contextquickie.handlers.beyondcompare.Compare"
+            defaultHandler="contextquickie.beyondcompare.Compare"
             id="ContextQuickie.commands.BeyondCompare.Compare"
             name="ContextQuickie.commands.BeyondCompare.Compare">
          <commandParameter
@@ -33,7 +33,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.beyondcompare.SelectLeftSide"
+            defaultHandler="contextquickie.beyondcompare.SelectLeftSide"
             id="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
             name="ContextQuickie.commands.BeyondCompare.SelectLeftSide">
          <commandParameter
@@ -43,7 +43,7 @@
          </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnCommand"
+            defaultHandler="contextquickie.tortoise.svn.TortoiseSvnCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
             name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand">
          <commandParameter
@@ -61,19 +61,34 @@
                name="Parameter1"
                optional="true">
          </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
+               optional="true">
+         </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnMergeCommand"
+            defaultHandler="contextquickie.tortoise.svn.TortoiseSvnMergeCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand"
             name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand">
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
+            defaultHandler="contextquickie.tortoise.svn.TortoiseSvnDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand"
             name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand">
+         <commandParameter
+               id="LeftSide"
+               name="LeftSide"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="RightSide"
+               name="RightSide"
+               optional="false">
+         </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitCommand"
+            defaultHandler="contextquickie.tortoise.git.TortoiseGitCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand"
             name="ContextQuickie.commands.TortoiseGit.TortoiseGitCommand">
          <commandParameter
@@ -91,23 +106,43 @@
                name="Parameter1"
                optional="true">
          </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
+               optional="true">
+         </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitMergeCommand"
+            defaultHandler="contextquickie.tortoise.git.TortoiseGitDiffLaterCommand"
+            id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand"
+            name="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffLaterCommand">
+      </command>
+      <command
+            defaultHandler="contextquickie.tortoise.git.TortoiseGitMergeCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand"
             name="ContextQuickie.commands.TortoiseGit.TortoiseGitMergeCommand">
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.git.TortoiseGitDiffTwoFilesCommand"
+            defaultHandler="contextquickie.tortoise.git.TortoiseGitDiffTwoFilesCommand"
             id="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand"
             name="ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand">
+         <commandParameter
+               id="LeftSide"
+               name="LeftSide"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="RightSide"
+               name="RightSide"
+               optional="false">
+         </commandParameter>
       </command>
       <command
-            defaultHandler="contextquickie.handlers.tortoise.hg.TortoiseHgCommand"
+            defaultHandler="contextquickie.tortoise.hg.TortoiseHgCommand"
             id="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"
             name="ContextQuickie.commands.TortoiseHg.TortoiseHgCommand">
          <commandParameter
-               id="CommandID"
+               id="CommandId"
                name="CommandID"
                optional="false">
          </commandParameter>
@@ -121,6 +156,11 @@
                name="Parameter1"
                optional="true">
          </commandParameter>
+         <commandParameter
+               id="SupportsLinkedResources"
+               name="SupportsLinkedResources"
+               optional="true">
+         </commandParameter>
       </command>
    </extension>
    <extension
@@ -132,7 +172,7 @@
                   visible="true">
             </separator>
             <dynamic
-                  class="contextquickie.handlers.beyondcompare.MenuBuilder"
+                  class="contextquickie.beyondcompare.MenuBuilder"
                   id="BeyondCompare">
             </dynamic>
             <separator
@@ -140,7 +180,7 @@
                   visible="true">
             </separator>
             <dynamic
-                  class="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder"
+                  class="contextquickie.tortoise.svn.TortoiseSvnMenuBuilder"
                   id="contextquickie.handlers.tortoise.svn.TortoiseSvnMenuBuilder">
             </dynamic>
             <separator
@@ -148,10 +188,9 @@
                   visible="true">
             </separator>
             <dynamic
-                  class="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder"
+                  class="contextquickie.tortoise.git.TortoiseGitMenuBuilder"
                   id="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder">
             </dynamic>
-            
          </menuContribution>
    </extension>
 </plugin>

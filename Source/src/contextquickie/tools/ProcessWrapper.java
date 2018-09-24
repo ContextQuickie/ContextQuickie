@@ -1,7 +1,6 @@
 package contextquickie.tools;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +12,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.ui.PlatformUI;
-
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 
@@ -24,12 +20,8 @@ import contextquickie.preferences.PreferenceConstants;
  *
  *         Wrapper class for starting processes.
  */
-public final class ProcessWrapper implements IRunnableWithProgress
+public final class ProcessWrapper
 {
-  private Process process;
-  
-  private Set<IResource> resourcesToRefresh;
-  
   /**
    * Executes a command with the passed arguments.
    * 
@@ -48,6 +40,8 @@ public final class ProcessWrapper implements IRunnableWithProgress
    * 
    * @param command
    *          The command to execute.
+   * @param resources
+   *          The selected resources of the command.
    * @param arguments
    *          The arguments of the command.
    */
@@ -69,96 +63,124 @@ public final class ProcessWrapper implements IRunnableWithProgress
     final ProcessBuilder processBuilder = new ProcessBuilder(commandAndArguments);
     try
     {
-      this.process = processBuilder.start();
-      if ((Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION) == true) &&
-          (this.process != null) && (resources != null))
-      {
-        this.resourcesToRefresh = resources;
-        try
-        {
-          PlatformUI.getWorkbench().getProgressService().run(true, false, this);
-        }
-        catch (InterruptedException e)
-        {
-          e.printStackTrace();
-        }
-        catch (InvocationTargetException e)
-        {
-          e.printStackTrace();
-        }
-      }
+      Process process = processBuilder.start();
+      new Thread(() -> this.runMonitorJobs(process, resources)).start();
     }
     catch (IOException e)
     {
       e.printStackTrace();
     }
   }
-  
-  @Override
-  public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException
-  {
-    final Job applicationJob = new Job("ContextQuickie progress") 
-    {
-      protected IStatus run(IProgressMonitor monitor) 
-      {
-        if (Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS) == true)
-        {
-          monitor.setTaskName("Running external application");
 
-          while (process.isAlive())
-          {
-            if (monitor.isCanceled())
-            {
-              ProcessWrapper.this.process.destroy();
-              return Status.CANCEL_STATUS;
-            }
-            try
-            {
-              Thread.sleep(10);
-            }
-            catch (InterruptedException e)
-            {
-              e.printStackTrace();
-            }
-          }
-        }
-        else
+  private void runMonitorJobs(Process process, Set<IResource> resources)
+  {
+    final boolean showProgressForExternalTools = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS);
+    final boolean refreshWorkspaceAfterExecution = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION);
+    final String progresstitle = "ContextQuickie progress";
+    Job job = null;
+
+    if (showProgressForExternalTools && refreshWorkspaceAfterExecution)
+    {
+      job = new Job(progresstitle) 
+      {
+        protected IStatus run(IProgressMonitor monitor)
         {
-          try
+          IStatus status = ProcessWrapper.this.waitForProcessToFinish(process, monitor);
+          
+          if ((status == Status.OK_STATUS) && refreshWorkspaceAfterExecution)
           {
-            ProcessWrapper.this.process.waitFor();
+            status = ProcessWrapper.this.refreshResourcesAfterProcessEnd(resources, monitor);
           }
-          catch (InterruptedException e)
-          {
-            e.printStackTrace();
-          }
+          
+          return status;
         }
-        
-        monitor.setTaskName("Refreshing workspace");
-        for (IResource resource : ProcessWrapper.this.resourcesToRefresh)
+      };
+    }
+    else if (showProgressForExternalTools) // refreshWorkspaceAfterExecution is set to false in this case, otherwise the previous if condition would match
+    {
+      job = new Job(progresstitle) 
+      {
+        protected IStatus run(IProgressMonitor monitor)
         {
-          if (monitor.isCanceled())
-          {
-            return Status.CANCEL_STATUS;
-          }
-          if (resource.getParent() != null)
-          {
-            resource = resource.getParent();
-          }
-          try
-          {
-            resource.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-          }
-          catch (CoreException e)
-          {
-            e.printStackTrace();
-          }  
+          return ProcessWrapper.this.waitForProcessToFinish(process, monitor);
         }
-        
-        return Status.OK_STATUS;
-      }
-    };
+      };
+    }
+    else if (refreshWorkspaceAfterExecution) // showProgressForExternalTools is set to false in this case, otherwise the previous if condition would match
+    {
+      ProcessWrapper.this.waitForProcessToFinish(process, null);
+      job = new Job(progresstitle) 
+      {
+        protected IStatus run(IProgressMonitor monitor)
+        {
+          return ProcessWrapper.this.refreshResourcesAfterProcessEnd(resources, monitor);
+        }
+      };
+    }
     
-    applicationJob.schedule();
+    if (job != null)
+    {
+      job.schedule();
+    }
+  }
+  
+  private IStatus waitForProcessToFinish(Process process, IProgressMonitor monitor)
+  {
+    if (process != null)
+    {
+      if (monitor != null)
+      {
+        monitor.setTaskName("Running external application");
+      }
+      while (process.isAlive())
+      {
+        if ((monitor != null) && (monitor.isCanceled()))
+        {
+          process.destroy();
+          return Status.CANCEL_STATUS;
+        }
+        try
+        {
+          Thread.sleep(10);
+        }
+        catch (InterruptedException e)
+        {
+          e.printStackTrace();
+          return Status.CANCEL_STATUS;
+        }
+      }
+    }
+    
+    return Status.OK_STATUS;
+  }
+
+  private IStatus refreshResourcesAfterProcessEnd(Set<IResource> resources, IProgressMonitor monitor)
+  {
+    if (resources != null)
+    {
+      monitor.setTaskName("Refreshing workspace");
+      for (IResource resource : resources)
+      {
+        if (monitor.isCanceled())
+        {
+          return Status.CANCEL_STATUS;
+        }
+        if (resource.getParent() != null)
+        {
+          resource = resource.getParent();
+        }
+        try
+        {
+          resource.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+        }
+        catch (CoreException e)
+        {
+          e.printStackTrace();
+          return Status.CANCEL_STATUS;
+        }
+      }
+    }
+    
+    return Status.OK_STATUS;
   }
 }

@@ -27,20 +27,26 @@ public final class PreferenceConstants
    */
   public static final String P_BEYOND_COMPARE_SHELL_REG_KEY = "BeyondCompareShellRegistryKey";
 
+  private static final String[] SupportedTortoiseHgVersions = new String[] { "4.5", "4.6", "4.7" };
+
+  private static final String[] SupportedTortoiseGitVersions = new String[] { "2.6", "2.7" };
+
+  private static final String[] SupportedTortoiseSvnVersions = new String[] { "1.8", "1.9", "1.10" };
+
   /**
    * Configuration items for the configuration of Tortoise SVN.
    */
-  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN");
+  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN", SupportedTortoiseSvnVersions);
 
   /**
    * Configuration items for the configuration of Tortoise Git.
    */
-  public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git");
+  public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git", SupportedTortoiseGitVersions);
 
   /**
    * Configuration items for the configuration of Tortoise Hg.
    */
-  public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg");
+  public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg", SupportedTortoiseHgVersions);
 
   /**
    * Configuration item for enabling/disabling showing the progress for external tools.
