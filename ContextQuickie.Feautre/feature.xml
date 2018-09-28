@@ -6,7 +6,7 @@
       provider-name="ContextQuickie"
       plugin="ContextQuickie"
       os="win32"
-      ws="win32">
+      arch="x86,x86_64">
 
    <description url="https://github.com/ContextQuickie/ContextQuickie/">
       An eclipse add-on that extends the context menu for accessing various Windows tools
