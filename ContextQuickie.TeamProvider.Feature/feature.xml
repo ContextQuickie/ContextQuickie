@@ -694,7 +694,7 @@ Public License instead of this License.  But first, please read
    </license>
 
    <url>
-      <update label="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/"/>
+      <update label="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/Releases"/>
       <discovery label="ContextQuickie at GitHub" url="https://github.com/ContextQuickie/ContextQuickie/"/>
    </url>
 
