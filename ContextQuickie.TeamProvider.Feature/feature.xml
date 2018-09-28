@@ -698,6 +698,15 @@ Public License instead of this License.  But first, please read
       <discovery label="ContextQuickie at GitHub" url="https://github.com/ContextQuickie/ContextQuickie/"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.team.core"/>
+      <import plugin="org.eclipse.team.ui"/>
+      <import plugin="org.tmatesoft.svnkit" version="1.8.15" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="ContextQuickie.TeamProvider"
          os="win32"
