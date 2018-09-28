@@ -3,10 +3,16 @@ package contextquickie.teamprovider.svn;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.team.core.RepositoryProvider;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
+
+import contextquickie.teamprovider.Activator;
 
 public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 {
@@ -81,16 +87,29 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 
   private void doVirtualCopy(CopyMoveInformation copyMoveInformation, boolean move)
   {
-    try
+    Job job = new Job("Applying changes to working copy") 
     {
-      SVNClientManager.newInstance().getMoveClient().doVirtualCopy(
-          copyMoveInformation.getSource().getLocation().toFile(), 
-          copyMoveInformation.getDestination().getLocation().toFile(),
-          move);
-    }
-    catch (SVNException e)
-    {
-      e.printStackTrace();
-    }
+      protected IStatus run(IProgressMonitor monitor)
+      {
+        IStatus status = Status.OK_STATUS;
+        try
+        {
+          SVNClientManager.newInstance().getMoveClient().doVirtualCopy(
+              copyMoveInformation.getSource().getLocation().toFile(), 
+              copyMoveInformation.getDestination().getLocation().toFile(),
+              move);
+          
+        }
+        catch (SVNException e)
+        {
+          e.printStackTrace();
+          status = new Status(Status.ERROR, Activator.PLUGIN_ID, "Error during applying changes to working copy", e);
+        }
+        
+        return status;
+      }
+    };
+    
+    job.schedule();
   }
 }
