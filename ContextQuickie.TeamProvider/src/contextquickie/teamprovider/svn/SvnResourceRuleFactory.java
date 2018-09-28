@@ -6,11 +6,17 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
 public class SvnResourceRuleFactory extends ResourceRuleFactory
 {
+  private CopyMoveInformation lastCopyInformation;
+  
+  private CopyMoveInformation lastMoveInformation;
+  
+  private IResource lastCreatedResource;
 
   @Override
   public ISchedulingRule createRule(IResource resource)
   {
-    System.out.println("createRule: " + resource.getLocation().toOSString());
+    this.setLastCreatedResource(resource);
+    // System.out.println("createRule: " + resource.getLocation().toOSString());
     return super.createRule(resource);
   }
 
@@ -24,7 +30,8 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule copyRule(IResource source, IResource destination)
   {
-    System.out.println("copyRule: " + source.getLocation().toOSString() + " to " + destination.getLocation().toOSString());
+    this.setLastCopyInformation(new CopyMoveInformation(source, destination));
+    // System.out.println("copyRule: " + source.getLocation().toOSString() + " to " + destination.getLocation().toOSString());
     return super.copyRule(source, destination);
   }
 
@@ -45,14 +52,15 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule moveRule(IResource source, IResource destination)
   {
-    System.out.println("moveRule: " + source.getLocation().toOSString() + " to " + destination.getLocation().toOSString());
+    this.setLastMoveInformation(new CopyMoveInformation(source, destination));
+    // System.out.println("moveRule: " + source.getLocation().toOSString() + " to " + destination.getLocation().toOSString());
     return super.moveRule(source, destination);
   }
 
   @Override
   public ISchedulingRule refreshRule(IResource resource)
   {
-    System.out.println("refreshRule: " + resource.getLocation().toOSString());
+    // System.out.println("refreshRule: " + resource.getLocation().toOSString());
     return super.refreshRule(resource);
   }
 
@@ -64,6 +72,36 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
       System.out.println("validateEditRule: " + resource.getLocation().toOSString());
     }
     return super.validateEditRule(resources);
+  }
+
+  public CopyMoveInformation getLastCopyInformation()
+  {
+    return lastCopyInformation;
+  }
+
+  public void setLastCopyInformation(CopyMoveInformation value)
+  {
+    this.lastCopyInformation = value;
+  }
+
+  public CopyMoveInformation getLastMoveInformation()
+  {
+    return lastMoveInformation;
+  }
+
+  public void setLastMoveInformation(CopyMoveInformation value)
+  {
+    this.lastMoveInformation = value;
+  }
+
+  public IResource getLastCreatedResource()
+  {
+    return lastCreatedResource;
+  }
+
+  public void setLastCreatedResource(IResource value)
+  {
+    this.lastCreatedResource = value;
   }
 
 }
