@@ -12,6 +12,11 @@ import org.eclipse.team.core.RepositoryProvider;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc2.SvnCopy;
+import org.tmatesoft.svn.core.wc2.SvnCopySource;
+import org.tmatesoft.svn.core.wc2.SvnTarget;
+
 import contextquickie.teamprovider.Activator;
 
 public class ResourceDeltaVisitor implements IResourceDeltaVisitor
@@ -113,7 +118,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
             status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
           }
         }
-        
+
         return status;
       }
     };
@@ -135,14 +140,17 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         try
         {
           SVNClientManager clientManager = SVNClientManager.newInstance();
-          
+
           if ((clientManager.getStatusClient().doStatus(source.getLocation().toFile(), false).isVersioned()) &&
               (clientManager.getStatusClient().doStatus(targetParent.getLocation().toFile(), false).isVersioned()))
           {
-            clientManager.getMoveClient().doVirtualCopy(
-                copyMoveInformation.getSource().getLocation().toFile(), 
-                copyMoveInformation.getDestination().getLocation().toFile(),
-                move);
+            SvnCopy svnCopy = clientManager.getCopyClient().getOperationsFactory().createCopy();
+            svnCopy.addCopySource(SvnCopySource.create(SvnTarget.fromFile(source.getLocation().toFile()), SVNRevision.WORKING));
+            svnCopy.setSingleTarget(SvnTarget.fromFile(target.getLocation().toFile()));
+            svnCopy.setMove(move);
+            svnCopy.setVirtual(false);
+            svnCopy.setMetadataOnly(true);
+            svnCopy.run();
           }
         }
         catch (SVNException e)
@@ -150,11 +158,11 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
           e.printStackTrace();
           status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
         }
-        
+
         return status;
       }
     };
-    
+
     job.schedule();
   }
 }
