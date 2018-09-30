@@ -103,9 +103,19 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
           try
           {
             SVNClientManager clientManager = SVNClientManager.newInstance();
+            boolean parentIsVersioned = false;
+            try
+            {
+              parentIsVersioned = clientManager.getStatusClient().doStatus(parent.getLocation().toFile(), false).isVersioned();
+            }
+            catch (SVNException e)
+            {
+              // Status of parent element cannot be determined. This can happen if the parent element is an ignored folder
+              // => Ignore this exception
+            }
 
             // Add new items only if the parent element is already under version control
-            if (clientManager.getStatusClient().doStatus(parent.getLocation().toFile(), false).isVersioned())
+            if (parentIsVersioned)
             {
               clientManager.getWCClient().doAdd(
                   resource.getLocation().toFile(), 
