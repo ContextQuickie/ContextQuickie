@@ -92,10 +92,10 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       protected IStatus run(IProgressMonitor monitor)
       {
         IStatus status = Status.OK_STATUS;
-        try
+        IResource parent = resource.getParent();
+        if (parent != null) 
         {
-          IResource parent = resource.getParent();
-          if (parent != null) 
+          try
           {
             SVNClientManager clientManager = SVNClientManager.newInstance();
 
@@ -107,11 +107,11 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
                   true, false, true, SVNDepth.IMMEDIATES, true, false);
             }
           }
-        }
-        catch (SVNException e)
-        {
-          e.printStackTrace();
-          status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
+          catch (SVNException e)
+          {
+            e.printStackTrace();
+            status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
+          }
         }
         
         return status;
@@ -128,13 +128,22 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       protected IStatus run(IProgressMonitor monitor)
       {
         IStatus status = Status.OK_STATUS;
+        IResource source = copyMoveInformation.getSource();
+        IResource target = copyMoveInformation.getDestination();
+        IResource targetParent = target.getParent();
+        if (targetParent != null)
         try
         {
-          SVNClientManager.newInstance().getMoveClient().doVirtualCopy(
-              copyMoveInformation.getSource().getLocation().toFile(), 
-              copyMoveInformation.getDestination().getLocation().toFile(),
-              move);
+          SVNClientManager clientManager = SVNClientManager.newInstance();
           
+          if ((clientManager.getStatusClient().doStatus(source.getLocation().toFile(), false).isVersioned()) &&
+              (clientManager.getStatusClient().doStatus(targetParent.getLocation().toFile(), false).isVersioned()))
+          {
+            clientManager.getMoveClient().doVirtualCopy(
+                copyMoveInformation.getSource().getLocation().toFile(), 
+                copyMoveInformation.getDestination().getLocation().toFile(),
+                move);
+          }
         }
         catch (SVNException e)
         {
