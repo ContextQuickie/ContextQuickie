@@ -57,6 +57,9 @@
    <feature url="features/ContextQuickie.TeamProvider_0.1.0.201809281830.jar" id="ContextQuickie.TeamProvider" version="0.1.0.201809281830" os="win32" arch="x86,x86_64">
       <category name="ContextQuickie.TeamProvider"/>
    </feature>
+   <feature url="features/ContextQuickie.TeamProvider_0.1.0.201809301057.jar" id="ContextQuickie.TeamProvider" version="0.1.0.201809301057" os="win32" arch="x86,x86_64">
+      <category name="ContextQuickie.TeamProvider"/>
+   </feature>
    <category-def name="ContextQuickie" label="Context Quickie"/>
    <category-def name="ContextQuickie.TeamProvider" label="ContextQuickie.TeamProvider"/>
 </site>
