@@ -695,7 +695,7 @@ Public License instead of this License.  But first, please read
 
    <url>
       <update label="ContextQuickie" url="http://contextquickie.github.io/ContextQuickie/Releases"/>
-      <discovery label="ContextQuickie at GitHub" url="https://github.com/ContextQuickie/ContextQuickie/"/>
+      <discovery label="TMate Software SVNKit 1.8.x Update Site" url="http://eclipse.svnkit.com/1.8.x/"/>
    </url>
 
    <requires>
