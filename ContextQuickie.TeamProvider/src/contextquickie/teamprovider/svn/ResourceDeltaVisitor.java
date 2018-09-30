@@ -1,5 +1,6 @@
 package contextquickie.teamprovider.svn;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
@@ -11,11 +12,20 @@ import org.eclipse.team.core.RepositoryProvider;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
-
 import contextquickie.teamprovider.Activator;
 
 public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 {
+  /**
+   * The default message which is displayed during execution of a job.
+   */
+  private final static String DEFAULT_JOB_RUN_MESSAGE = "Applying changes to working copy";
+
+  /**
+   * The default message which is displayed for a job error.
+   */
+  private final static String DEFAULT_JOB_ERROR_MESSAGE = "Error during applying changes to working copy";
+
   @Override
   public boolean visit(IResourceDelta delta) throws CoreException
   {
@@ -66,17 +76,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
             {
               System.out.format("resourceChanged: added %s\n", svnResourceRuleFactory.getLastCreatedResource());
               svnResourceRuleFactory.setLastCreatedResource(null);
-
-              try
-              {
-                SVNClientManager.newInstance().getWCClient().doAdd(
-                    delta.getResource().getLocation().toFile(), 
-                    true, false, true, SVNDepth.IMMEDIATES, true, true);
-              }
-              catch (SVNException e)
-              {
-                e.printStackTrace();
-              }
+              this.doAdd(delta.getResource());
             }
           }
         }
@@ -85,9 +85,45 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       return true;
   }
 
+  private void doAdd(IResource resource)
+  {
+    Job job = new Job(DEFAULT_JOB_RUN_MESSAGE)
+    {
+      protected IStatus run(IProgressMonitor monitor)
+      {
+        IStatus status = Status.OK_STATUS;
+        try
+        {
+          IResource parent = resource.getParent();
+          if (parent != null) 
+          {
+            SVNClientManager clientManager = SVNClientManager.newInstance();
+
+            // Add new items only if the parent element is already under version control
+            if (clientManager.getStatusClient().doStatus(parent.getLocation().toFile(), false).isVersioned())
+            {
+              clientManager.getWCClient().doAdd(
+                  resource.getLocation().toFile(), 
+                  true, false, true, SVNDepth.IMMEDIATES, true, false);
+            }
+          }
+        }
+        catch (SVNException e)
+        {
+          e.printStackTrace();
+          status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
+        }
+        
+        return status;
+      }
+    };
+
+    job.schedule();
+  }
+
   private void doVirtualCopy(CopyMoveInformation copyMoveInformation, boolean move)
   {
-    Job job = new Job("Applying changes to working copy") 
+    Job job = new Job(DEFAULT_JOB_RUN_MESSAGE)
     {
       protected IStatus run(IProgressMonitor monitor)
       {
@@ -103,7 +139,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         catch (SVNException e)
         {
           e.printStackTrace();
-          status = new Status(Status.ERROR, Activator.PLUGIN_ID, "Error during applying changes to working copy", e);
+          status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
         }
         
         return status;
