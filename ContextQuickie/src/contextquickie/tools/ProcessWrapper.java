@@ -165,7 +165,7 @@ public final class ProcessWrapper
         {
           return Status.CANCEL_STATUS;
         }
-        if (resource.getParent() != null)
+        if ((resource.getParent() != null) && (resource.getType() != IResource.PROJECT))
         {
           resource = resource.getParent();
         }
