@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.team.core.RepositoryProvider;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
@@ -21,6 +22,11 @@ import contextquickie.teamprovider.Activator;
 
 public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 {
+  /**
+   * This job group avoids concurrent access to the working copy and guarantees the order of execution of the created jobs.
+   */
+  private final JobGroup jobGroup = new JobGroup(Activator.PLUGIN_ID, 1, 1);
+
   /**
    * The default message which is displayed during execution of a job.
    */
@@ -98,29 +104,15 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       {
         IStatus status = Status.OK_STATUS;
         IResource parent = resource.getParent();
-        if (parent != null) 
+
+        // Add new items only if the target parent and the source element is already under version control
+        if ((parent != null) && (ResourceDeltaVisitor.isResourceVersioned(parent)))
         {
           try
           {
-            SVNClientManager clientManager = SVNClientManager.newInstance();
-            boolean parentIsVersioned = false;
-            try
-            {
-              parentIsVersioned = clientManager.getStatusClient().doStatus(parent.getLocation().toFile(), false).isVersioned();
-            }
-            catch (SVNException e)
-            {
-              // Status of parent element cannot be determined. This can happen if the parent element is an ignored folder
-              // => Ignore this exception
-            }
-
-            // Add new items only if the parent element is already under version control
-            if (parentIsVersioned)
-            {
-              clientManager.getWCClient().doAdd(
-                  resource.getLocation().toFile(), 
-                  true, false, true, SVNDepth.IMMEDIATES, true, false);
-            }
+            SVNClientManager.newInstance().getWCClient().doAdd(
+                resource.getLocation().toFile(), 
+                true, false, true, SVNDepth.IMMEDIATES, true, false);
           }
           catch (SVNException e)
           {
@@ -133,6 +125,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       }
     };
 
+    job.setJobGroup(jobGroup);
     job.schedule();
   }
 
@@ -151,8 +144,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         {
           SVNClientManager clientManager = SVNClientManager.newInstance();
 
-          if ((clientManager.getStatusClient().doStatus(source.getLocation().toFile(), false).isVersioned()) &&
-              (clientManager.getStatusClient().doStatus(targetParent.getLocation().toFile(), false).isVersioned()))
+          if (ResourceDeltaVisitor.isResourceVersioned(source))
           {
             SvnCopy svnCopy = clientManager.getCopyClient().getOperationsFactory().createCopy();
             svnCopy.addCopySource(SvnCopySource.create(SvnTarget.fromFile(source.getLocation().toFile()), SVNRevision.WORKING));
@@ -160,6 +152,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
             svnCopy.setMove(move);
             svnCopy.setVirtual(false);
             svnCopy.setMetadataOnly(true);
+            svnCopy.setMakeParents(true);
             svnCopy.run();
           }
         }
@@ -173,6 +166,24 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
       }
     };
 
+    job.setJobGroup(jobGroup);
     job.schedule();
+  }
+
+  private static boolean isResourceVersioned(final IResource resource)
+  {
+    SVNClientManager clientManager = SVNClientManager.newInstance();
+    boolean result = false;
+    try
+    {
+      result = clientManager.getStatusClient().doStatus(resource.getLocation().toFile(), false).isVersioned();
+    }
+    catch (SVNException e)
+    {
+      // Status of parent element cannot be determined. This can happen if the parent element is an ignored folder
+      // => Ignore this exception
+    }
+
+    return result;
   }
 }
