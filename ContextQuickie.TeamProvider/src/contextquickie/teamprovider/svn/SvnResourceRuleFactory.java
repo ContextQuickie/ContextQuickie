@@ -23,7 +23,7 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule charsetRule(IResource resource)
   {
-    System.out.println("charsetRule: " + resource.getLocation().toOSString());
+    // System.out.println("charsetRule: " + resource.getLocation().toOSString());
     return super.charsetRule(resource);
   }
 
@@ -45,7 +45,7 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule modifyRule(IResource resource)
   {
-    System.out.println("modifyRule: " + resource.getLocation().toOSString());
+    // System.out.println("modifyRule: " + resource.getLocation().toOSString());
     return super.modifyRule(resource);
   }
 
@@ -67,10 +67,10 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule validateEditRule(IResource[] resources)
   {
-    for (IResource resource : resources)
-    {
-      System.out.println("validateEditRule: " + resource.getLocation().toOSString());
-    }
+//    for (IResource resource : resources)
+//    {
+//      System.out.println("validateEditRule: " + resource.getLocation().toOSString());
+//    }
     return super.validateEditRule(resources);
   }
 
