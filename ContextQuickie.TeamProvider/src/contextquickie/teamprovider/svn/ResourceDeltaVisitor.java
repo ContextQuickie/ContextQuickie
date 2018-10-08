@@ -98,35 +98,36 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 
   private void doAdd(IResource resource)
   {
-    Job job = new Job(DEFAULT_JOB_RUN_MESSAGE)
+    IResource parent = resource.getParent();
+
+    // Add new items only if the target parent and the source element is already under version control
+    if ((parent != null) && (ResourceDeltaVisitor.isResourceVersioned(parent)))
     {
-      protected IStatus run(IProgressMonitor monitor)
+      Job job = new Job(DEFAULT_JOB_RUN_MESSAGE)
       {
-        IStatus status = Status.OK_STATUS;
-        IResource parent = resource.getParent();
-
-        // Add new items only if the target parent and the source element is already under version control
-        if ((parent != null) && (ResourceDeltaVisitor.isResourceVersioned(parent)))
+        protected IStatus run(IProgressMonitor monitor)
         {
-          try
-          {
-            SVNClientManager.newInstance().getWCClient().doAdd(
-                resource.getLocation().toFile(), 
-                true, false, true, SVNDepth.IMMEDIATES, true, false);
-          }
-          catch (SVNException e)
-          {
-            e.printStackTrace();
-            status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
-          }
+          IStatus status = Status.OK_STATUS;
+          
+            try
+            {
+              SVNClientManager.newInstance().getWCClient().doAdd(
+                  resource.getLocation().toFile(), 
+                  true, false, true, SVNDepth.EMPTY, true, false);
+            }
+            catch (SVNException e)
+            {
+              status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
+            }
+  
+  
+          return status;
         }
-
-        return status;
-      }
-    };
-
-    job.setJobGroup(jobGroup);
-    job.schedule();
+      };
+  
+      job.setJobGroup(jobGroup);
+      job.schedule();
+    }
   }
 
   private void doVirtualCopy(CopyMoveInformation copyMoveInformation, boolean move)
@@ -158,7 +159,6 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         }
         catch (SVNException e)
         {
-          e.printStackTrace();
           status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
         }
 
