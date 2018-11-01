@@ -1,5 +1,13 @@
 package contextquickie.teamprovider.svn;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import org.apache.subversion.javahl.ClientException;
+import org.apache.subversion.javahl.SVNClient;
+import org.apache.subversion.javahl.types.CopySource;
+import org.apache.subversion.javahl.types.Depth;
+import org.apache.subversion.javahl.types.Revision;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
@@ -10,13 +18,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobGroup;
 import org.eclipse.team.core.RepositoryProvider;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc2.SvnCopy;
-import org.tmatesoft.svn.core.wc2.SvnCopySource;
-import org.tmatesoft.svn.core.wc2.SvnTarget;
 
 import contextquickie.teamprovider.Activator;
 
@@ -111,11 +112,10 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
           
             try
             {
-              SVNClientManager.newInstance().getWCClient().doAdd(
-                  resource.getLocation().toFile(), 
-                  true, false, true, SVNDepth.EMPTY, true, false);
+              SVNClient client = new SVNClient();
+              client.add(resource.getLocation().toOSString(),  Depth.empty, true, false, true);
             }
-            catch (SVNException e)
+            catch (ClientException e)
             {
               status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
             }
@@ -143,21 +143,66 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         if (targetParent != null)
         try
         {
-          SVNClientManager clientManager = SVNClientManager.newInstance();
+          SVNClient client = new SVNClient();
 
           if (ResourceDeltaVisitor.isResourceVersioned(source))
           {
-            SvnCopy svnCopy = clientManager.getCopyClient().getOperationsFactory().createCopy();
-            svnCopy.addCopySource(SvnCopySource.create(SvnTarget.fromFile(source.getLocation().toFile()), SVNRevision.WORKING));
-            svnCopy.setSingleTarget(SvnTarget.fromFile(target.getLocation().toFile()));
-            svnCopy.setMove(move);
-            svnCopy.setVirtual(false);
-            svnCopy.setMetadataOnly(true);
-            svnCopy.setMakeParents(true);
-            svnCopy.run();
+            if ((source.getType() == IResource.FOLDER) && (target.getType() == IResource.FOLDER))
+            {
+              if (move)
+              {
+                HashSet<String> sources = new HashSet<String>();
+                sources.add(source.getLocation().toOSString());
+                client.move(
+                    sources,  // srcPaths
+                    target.getLocation().toOSString(), 
+                    false,    // force
+                    false,    // moveAsChild
+                    true,     // makeParents
+                    true,     // metadataOnly
+                    true,     // allowMixRev
+                    null,     // revpropTable
+                    null,     // handler
+                    null);    // callback
+              }
+              else
+              {
+                List<CopySource> sources = new ArrayList<CopySource>();
+                sources.add(new CopySource(source.getLocation().toOSString(), Revision.WORKING, Revision.WORKING));
+                client.copy(sources, target.getLocation().toOSString(), false, true, false, true, false, null, null, null, null);
+              }
+            }
+            else if ((source.getType() == IResource.FILE) && (target.getType() == IResource.FILE))
+            {
+              if (move)
+              {
+                HashSet<String> sources = new HashSet<String>();
+                sources.add(source.getLocation().toOSString());
+                client.move(
+                    sources,  // srcPaths
+                    target.getLocation().toOSString(), 
+                    false,    // force
+                    false,    // moveAsChild
+                    true,     // makeParents
+                    true,     // metadataOnly
+                    true,     // allowMixRev
+                    null,     // revpropTable
+                    null,     // handler
+                    null);    // callback
+              }
+              else
+              {
+                List<CopySource> sources = new ArrayList<CopySource>();
+                sources.add(new CopySource(source.getLocation().toOSString(), Revision.WORKING, Revision.WORKING));
+                client.copy(sources, target.getLocation().toOSString(), false, true, false, true, false, null, null, null, null);
+              }
+            }
+            System.out.format("doVirtualCopy: copied %s to %s\n", 
+                copyMoveInformation.getSource().getLocation().toOSString(),
+                copyMoveInformation.getDestination().getLocation().toOSString());
           }
         }
-        catch (SVNException e)
+        catch (ClientException e)
         {
           status = new Status(Status.ERROR, Activator.PLUGIN_ID, DEFAULT_JOB_ERROR_MESSAGE, e);
         }
@@ -172,18 +217,22 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
 
   private static boolean isResourceVersioned(final IResource resource)
   {
-    SVNClientManager clientManager = SVNClientManager.newInstance();
-    boolean result = false;
+    SvnStatusCallback statusCallback = new SvnStatusCallback();
     try
     {
-      result = clientManager.getStatusClient().doStatus(resource.getLocation().toFile(), false).isVersioned();
+      SVNClient client = new SVNClient();
+      client.status(resource.getLocation().toOSString(), Depth.empty, false, true, true, true, false, true, null, statusCallback);
     }
-    catch (SVNException e)
+    catch (ClientException e)
     {
       // Status of parent element cannot be determined. This can happen if the parent element is an ignored folder
       // => Ignore this exception
     }
 
-    return result;
+    if (statusCallback.getStatus() != null)
+    {
+      return statusCallback.getStatus().isManaged();
+    }
+    return false;
   }
 }

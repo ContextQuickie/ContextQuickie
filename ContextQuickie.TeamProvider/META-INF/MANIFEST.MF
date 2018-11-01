@@ -9,8 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.team.core,
- org.eclipse.team.ui,
- org.tmatesoft.svnkit;bundle-version="1.8.15"
+ org.eclipse.team.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: ContextQuickie.TeamProvider
 Bundle-ActivationPolicy: lazy
