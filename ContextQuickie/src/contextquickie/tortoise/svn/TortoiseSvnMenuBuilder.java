@@ -249,13 +249,32 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   /**
    * The path to the icons based on the used Tortoise SVN version.
    */
-  private static final String iconPath = "TortoiseSvn/1.10/";
+  private static final String iconPath;
 
   static
   {
     final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
 
     translation = new Translation(PreferenceConstants.TORTOISE_SVN);
+    
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
+    final String alternativeExtension;
+    if (usedVersion.equals("1.11"))
+    {
+      iconPath = "TortoiseSvn/1.11/";
+
+      // If using icons from version 1.11, some files require .png extension in eclipse
+      alternativeExtension = ".png";
+    }
+    else
+    {
+      iconPath = "TortoiseSvn/1.10/";
+
+      // If using icons from version 1.10 or before, all files have .ico extension
+      alternativeExtension = ".ico";
+    }
+    
     // Path to the "Update" icon
     final String menuUpdateIconPath = iconPath + "menuupdate.ico";
 
@@ -266,7 +285,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final String menuMergeIconPath = iconPath + "menumerge.ico";
 
     // Path to the "Delete" icon
-    final String menuDeleteIconPath = iconPath + "menudelete.ico";
+    final String menuDeleteIconPath = iconPath + "menudelete" + alternativeExtension;
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCHECKOUT, "Chekout..."))
@@ -456,7 +475,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVERT, "Revert..."))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
-        .setIconPath(iconPath + "menurevert.ico")
+        .setIconPath(iconPath + "menurevert" + alternativeExtension)
         .setCommand("revert"));
     
     entries.add(new TortoiseMenuEntry()
@@ -594,8 +613,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     // Separator
     entries.add(new TortoiseMenuEntry());
 
-    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
     if (usedVersion.equals("1.10"))
     {
       entries.add(new TortoiseMenuEntry()
@@ -651,7 +668,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
-        .setIconPath(iconPath + "menusettings.ico")
+        .setIconPath(iconPath + "menusettings" + alternativeExtension)
         .setCommand("settings")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
@@ -660,7 +677,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUHELP, "Help"))
         .setCommandId(defaultCommandId)
         .setMenuId(MENUHELP)
-        .setIconPath(iconPath + "menuhelp.ico")
+        .setIconPath(iconPath + "menuhelp" + alternativeExtension)
         .setCommand("help")
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
