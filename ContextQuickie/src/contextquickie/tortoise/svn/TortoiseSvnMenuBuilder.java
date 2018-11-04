@@ -6,6 +6,7 @@ import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
+import contextquickie.tortoise.Version;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -258,9 +259,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     translation = new Translation(PreferenceConstants.TORTOISE_SVN);
     
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
+    String usedVersionString = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
+    
+    final Version usedVersion = new Version(usedVersionString);
+    final Version version1_10 = new Version(1, 10);
+    final Version version1_11 = new Version(1, 11);
     final String alternativeExtension;
-    if (usedVersion.equals("1.11"))
+    if (usedVersion.equals(version1_11))
     {
       iconPath = "TortoiseSvn/1.11/";
 
@@ -613,7 +618,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     // Separator
     entries.add(new TortoiseMenuEntry());
 
-    if (usedVersion.equals("1.10"))
+    if (usedVersion.compareTo(version1_10) >= 0)
     {
       entries.add(new TortoiseMenuEntry()
           .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSHELVE, "Shelve..."))
