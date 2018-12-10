@@ -704,7 +704,6 @@ Public License instead of this License.  But first, please read
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.team.core"/>
       <import plugin="org.eclipse.team.ui"/>
-      <import plugin="org.tmatesoft.svnkit" version="1.8.15" match="greaterOrEqual"/>
    </requires>
 
    <plugin
