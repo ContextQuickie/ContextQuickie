@@ -103,11 +103,12 @@ public class NativeResources
         // Try to load the library by its name.  Failing that, try to
         // load it by its old name.
         String[] libraryNames = {"svnjavahl-1", "libsvnjavahl-1", "svnjavahl"};
+        String archDataModel = System.getProperty("sun.arch.data.model");
         for (String libraryName : libraryNames)
         {
             try
             {
-                System.loadLibrary(libraryName);
+                System.loadLibrary(libraryName+ archDataModel);
                 init();
                 return;
             }
