@@ -2,7 +2,7 @@
 <feature
       id="ContextQuickie.TeamProvider"
       label="ContextQuickie.TeamProvider"
-      version="0.1.0.qualifier"
+      version="0.2.0.qualifier"
       provider-name="ContextQuickie"
       plugin="ContextQuickie.TeamProvider"
       os="win32"
@@ -712,7 +712,7 @@ Public License instead of this License.  But first, please read
          arch="x86,x86_64"
          download-size="0"
          install-size="0"
-         version="0.1.0.qualifier"
+         version="0.2.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -721,7 +721,7 @@ Public License instead of this License.  But first, please read
          arch="x86,x86_64"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
 </feature>
