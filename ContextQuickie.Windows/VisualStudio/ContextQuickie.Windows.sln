@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContextQuickie.native", "ContextQuickie.native.vcxproj", "{B3F7B7A0-56B7-4411-A8CA-2B4629585822}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContextQuickie.Windows", "ContextQuickie.Windows.vcxproj", "{B3F7B7A0-56B7-4411-A8CA-2B4629585822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

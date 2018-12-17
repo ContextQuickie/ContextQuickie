@@ -2,13 +2,13 @@ package contextquickie.tortoise.git;
 
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
-import contextquickie.tools.Registry;
 import contextquickie.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
+import contextquickie.windows.Registry;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package contextquickie.tools;
+package contextquickie.windows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import java.util.Map;
  *         Class for accessing the windows registry.
  *
  */
-public final class Registry
+public final class Registry extends BaseLoader
 {
   private static final int HKEY_CLASSES_ROOT = 0x80000000;
   private static final int HKEY_CURRENT_CONFIG = 0x80000005;
@@ -35,11 +35,11 @@ public final class Registry
   static
   {
     String archDataModel = System.getProperty("sun.arch.data.model");
-    System.loadLibrary("ContextQuickie.native" + archDataModel);
+    System.loadLibrary("libraries/ContextQuickie.native" + archDataModel);
     rootMapping.put("HKEY_CURRENT_USER\\", HKEY_CURRENT_USER);
     rootMapping.put("HKEY_LOCAL_MACHINE\\", HKEY_LOCAL_MACHINE);
   }
-  
+
   private RootMapping mapRegistryRoot(String location)
   {
     RootMapping mapping = new RootMapping();
@@ -54,10 +54,11 @@ public final class Registry
     }
     return mapping;
   }
-  
+
   private native long readLongValue(final int hKey, final String location, final String key, final long defaultValue);
+
   private native String readStringValue(final int hKey, final String location, final String key, final String defaultValue);
-  
+
   private native void writeStringValue(final int hKey, final String location, final String key, final String value);
 
   /**

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ContextQuickie.Native
+Bundle-SymbolicName: ContextQuickie.Windows
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: ContextQuickie
+Automatic-Module-Name: ContextQuickie.Native
+Export-Package: contextquickie.windows

@@ -6,7 +6,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.tools.Registry;
+import contextquickie.windows.Registry;
 
 /**
  * @author ContextQuickie
@@ -20,11 +20,6 @@ public final class Translation
   private final String libraryPath;
   
   private final long languageId;
-  
-  static
-  {   
-    System.loadLibrary("ContextQuickie.native" + archDataModel);
-  }
   
   /**
    * Constructor
@@ -69,20 +64,6 @@ public final class Translation
     this.libraryPath = tempTortoiseLanguagesPath;
     this.languageId = languageId;
   }
-
-  /**
-   * @param library
-   *        The path to the library containing the translation data. 
-   * @param languageId
-   *        The ID of the language.
-   * @param menuId
-   *        The ID of the menu entry.
-   * @param defaultValue
-   *        The default value which will be returned if no translation has been found.
-   * @return
-   *        The translated string.
-   */
-  private native String getTranslatedString(final String library, final long languageId, final long menuId, final String defaultValue);
   
   /**
    * @param libraryDirectory
@@ -102,7 +83,7 @@ public final class Translation
   {
     if (this.libraryPath != null)
     {
-      return getTranslatedString(this.libraryPath, this.languageId, menuId, defaultValue);
+      return contextquickie.windows.Translation.getTranslatedString(this.libraryPath, this.languageId, menuId, defaultValue);
     }
     else
     {
