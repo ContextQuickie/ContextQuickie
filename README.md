@@ -9,7 +9,7 @@ The wiki provides further information:
 * [Usage](https://github.com/ContextQuickie/ContextQuickie/wiki/Usage)
 
 # ContextQuickie.TeamProvider
-This plugin provides a Tortiose SVN base team provider to eclise which forwards the following operations to the working copy:
+This plugin provides a Tortiose SVN based team provider to eclise which forwards the following eclipse operations to the working copy:
 * Adding new files
 * Copying files
 * Moving files
