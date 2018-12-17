@@ -29,8 +29,6 @@ import org.apache.subversion.javahl.SubversionException;
 import org.apache.subversion.javahl.NativeResources;
 import org.apache.subversion.javahl.types.ExternalItem;
 import org.apache.subversion.javahl.types.NodeKind;
-import org.apache.subversion.javahl.types.Revision;
-
 import java.util.List;
 import java.io.InputStream;
 

@@ -24,8 +24,6 @@
 package org.apache.subversion.javahl.remote;
 
 import org.apache.subversion.javahl.types.*;
-import org.apache.subversion.javahl.callback.*;
-
 import org.apache.subversion.javahl.JNIObject;
 import org.apache.subversion.javahl.ISVNReporter;
 import org.apache.subversion.javahl.ClientException;

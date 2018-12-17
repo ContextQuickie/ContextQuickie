@@ -28,7 +28,6 @@ import org.apache.subversion.javahl.ClientException;
 import org.apache.subversion.javahl.NativeResources;
 
 import org.apache.subversion.javahl.types.*;
-import org.apache.subversion.javahl.callback.*;
 
 
 /**

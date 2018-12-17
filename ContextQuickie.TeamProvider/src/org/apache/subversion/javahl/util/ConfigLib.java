@@ -23,8 +23,6 @@
 
 package org.apache.subversion.javahl.util;
 
-import org.apache.subversion.javahl.callback.*;
-
 import org.apache.subversion.javahl.SVNUtil;
 import org.apache.subversion.javahl.ClientException;
 import org.apache.subversion.javahl.NativeResources;

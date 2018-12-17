@@ -24,7 +24,6 @@
 package org.apache.subversion.javahl;
 
 import org.apache.subversion.javahl.types.*;
-import org.apache.subversion.javahl.callback.*;
 
 /**
  * The update Reporter.

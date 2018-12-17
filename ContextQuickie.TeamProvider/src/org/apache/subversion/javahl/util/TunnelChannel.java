@@ -24,7 +24,6 @@
 package org.apache.subversion.javahl.util;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import java.util.concurrent.atomic.AtomicLong;
 

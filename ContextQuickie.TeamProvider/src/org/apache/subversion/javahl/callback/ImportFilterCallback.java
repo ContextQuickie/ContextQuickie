@@ -23,7 +23,6 @@
 
 package org.apache.subversion.javahl.callback;
 
-import org.apache.subversion.javahl.ISVNClient;
 import org.apache.subversion.javahl.types.NodeKind;
 
 /**
