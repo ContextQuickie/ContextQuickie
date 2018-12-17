@@ -24,6 +24,7 @@
 package org.apache.subversion.javahl;
 
 import org.apache.subversion.javahl.types.Version;
+import contextquickie.windows.Registry;
 import org.apache.subversion.javahl.types.RuntimeVersion;
 
 /**
@@ -100,15 +101,27 @@ public class NativeResources
             loadException = ex;
         }
 
+        final String archDataModel = System.getProperty("sun.arch.data.model");
+        String tortoiseSvnVersion = new Registry().readStringValue("HKEY_CURRENT_USER\\Software\\TortoiseSVN", "CurrentVersion", "Unknown");
+        String[] supportedVersions = { "1.10.1", "1.10.2", "1.11.0" };
+        for (String supportedVersion : supportedVersions)
+        {
+          if (tortoiseSvnVersion.startsWith(supportedVersion))
+          {
+            tortoiseSvnVersion = supportedVersion;
+            break;
+          }
+        }
+
         // Try to load the library by its name.  Failing that, try to
         // load it by its old name.
-        String[] libraryNames = {"svnjavahl-1", "libsvnjavahl-1", "svnjavahl"};
-        String archDataModel = System.getProperty("sun.arch.data.model");
+        String[] libraryNames = {"svnjavahl-1", "libsvnjavahl-1", "svnjavahl", tortoiseSvnVersion + "svnjavahl" + archDataModel };
+        
         for (String libraryName : libraryNames)
         {
             try
             {
-                System.loadLibrary(libraryName+ archDataModel);
+                System.loadLibrary(libraryName);
                 init();
                 return;
             }

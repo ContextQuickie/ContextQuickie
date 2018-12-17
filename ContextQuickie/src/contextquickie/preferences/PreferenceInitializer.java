@@ -48,8 +48,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
         store, 
         PreferenceConstants.TORTOISE_HG,
         "HKEY_LOCAL_MACHINE\\SOFTWARE\\TortoiseHg",
-        "C:\\\\Program Files\\\\TortoiseHg\\\\thg.exe",
-        "C:\\\\Program Files\\\\TortoiseHg\\\\thg.exe");
+        "C:\\Program Files\\TortoiseHg\\thg.exe",
+        "C:\\Program Files\\TortoiseHg\\thg.exe");
     
     store.setDefault(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION, false);
     

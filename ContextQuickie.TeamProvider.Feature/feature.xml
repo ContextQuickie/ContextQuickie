@@ -715,4 +715,13 @@ Public License instead of this License.  But first, please read
          version="0.1.0.qualifier"
          unpack="false"/>
 
+   <plugin
+         id="ContextQuickie.Windows"
+         os="win32"
+         arch="x86,x86_64"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
