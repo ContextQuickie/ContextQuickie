@@ -34,8 +34,6 @@ public final class Registry extends BaseLoader
 
   static
   {
-    String archDataModel = System.getProperty("sun.arch.data.model");
-    System.loadLibrary("libraries/ContextQuickie.native" + archDataModel);
     rootMapping.put("HKEY_CURRENT_USER\\", HKEY_CURRENT_USER);
     rootMapping.put("HKEY_LOCAL_MACHINE\\", HKEY_LOCAL_MACHINE);
   }

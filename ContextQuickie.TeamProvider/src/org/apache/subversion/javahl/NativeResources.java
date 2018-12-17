@@ -115,7 +115,7 @@ public class NativeResources
 
         // Try to load the library by its name.  Failing that, try to
         // load it by its old name.
-        String[] libraryNames = {"svnjavahl-1", "libsvnjavahl-1", "svnjavahl", tortoiseSvnVersion + "svnjavahl" + archDataModel };
+        String[] libraryNames = {"svnjavahl-1", "libsvnjavahl-1", "svnjavahl", "libraries/" + tortoiseSvnVersion + "/svnjavahl" + archDataModel };
         
         for (String libraryName : libraryNames)
         {

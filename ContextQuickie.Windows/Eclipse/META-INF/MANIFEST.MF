@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: ContextQuickie.Native
+Bundle-Name: ContextQuickie.Windows
 Bundle-SymbolicName: ContextQuickie.Windows
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: ContextQuickie
