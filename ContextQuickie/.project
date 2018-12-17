@@ -30,11 +30,4 @@
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>ThirdPartyLicenses</name>
-			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/ThirdPartyLicenses</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
