@@ -3,6 +3,7 @@ package contextquickie.teamprovider.svn;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
 import org.apache.subversion.javahl.ClientException;
 import org.apache.subversion.javahl.SVNClient;
 import org.apache.subversion.javahl.types.CopySource;
@@ -58,9 +59,6 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
                 (moveInformation.getSource().equals(delta.getResource())) && 
                 (moveInformation.getDestination().getFullPath().equals(delta.getMovedToPath())))
             {
-              System.out.format("resourceChanged: moved %s to %s\n", 
-                  moveInformation.getSource().getLocation().toOSString(),
-                  moveInformation.getDestination().getLocation().toOSString());
               svnResourceRuleFactory.setLastMoveInformation(null);
 
               this.doVirtualCopy(moveInformation, true);
@@ -77,16 +75,12 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
             CopyMoveInformation copyInformation = svnResourceRuleFactory.getLastCopyInformation();
             if ((copyInformation != null) && (copyInformation.getDestination().equals(delta.getResource())))
             {
-              System.out.format("resourceChanged: copied %s to %s\n", 
-                  copyInformation.getSource().getLocation().toOSString(),
-                  copyInformation.getDestination().getLocation().toOSString());
               svnResourceRuleFactory.setLastCopyInformation(null);
               this.doVirtualCopy(copyInformation, false);
 
             }
             else if (delta.getResource().equals(svnResourceRuleFactory.getLastCreatedResource()))
             {
-              System.out.format("resourceChanged: added %s\n", svnResourceRuleFactory.getLastCreatedResource());
               svnResourceRuleFactory.setLastCreatedResource(null);
               this.doAdd(delta.getResource());
             }
@@ -197,9 +191,6 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
                 client.copy(sources, target.getLocation().toOSString(), false, true, false, true, false, null, null, null, null);
               }
             }
-            System.out.format("doVirtualCopy: copied %s to %s\n", 
-                copyMoveInformation.getSource().getLocation().toOSString(),
-                copyMoveInformation.getDestination().getLocation().toOSString());
           }
         }
         catch (ClientException e)
