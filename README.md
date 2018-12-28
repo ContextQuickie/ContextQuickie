@@ -15,8 +15,11 @@ This plugin provides a Tortiose SVN based team provider to eclise which forwards
 * Moving files
 
 To use ContextQuickie.Teamprovider one of the following Tortoise SVN versions must be installed:
+* 1.9.7
 * 1.10.1/1.10.2
 * 1.11.0
+
+Torotise SVN versions 1.8.x and below cannot be used because the JavaHL libraries of this versions don't provide the required APIs.
 
 # Screenshots
 Compare two files selected in a navigator view with Beyond Compare:
