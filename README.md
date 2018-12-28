@@ -19,7 +19,9 @@ To use ContextQuickie.Teamprovider one of the following Tortoise SVN versions mu
 * 1.10.1/1.10.2
 * 1.11.0
 
-Torotise SVN versions 1.8.x and below cannot be used because the JavaHL libraries of this versions don't provide the required APIs.
+Remarks:
+* Torotise SVN versions 1.8.x and below cannot be used because the JavaHL libraries of this versions don't provide the required APIs.
+* If you're using a 64bit version of eclipse you also need the 64bit version of Tortoise SVN. Same for the 32bit version. Mixing architecutres doesn't work.
 
 # Screenshots
 Compare two files selected in a navigator view with Beyond Compare:
