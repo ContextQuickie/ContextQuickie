@@ -103,7 +103,7 @@ public class NativeResources
 
         final String archDataModel = System.getProperty("sun.arch.data.model");
         String tortoiseSvnVersion = new Registry().readStringValue("HKEY_CURRENT_USER\\Software\\TortoiseSVN", "CurrentVersion", "Unknown");
-        String[] supportedVersions = { "1.9.7", "1.10.1", "1.10.2", "1.11.0" };
+        String[] supportedVersions = { "1.9.7", "1.10.1", "1.10.2", "1.11.0", "1.11.1" };
         for (String supportedVersion : supportedVersions)
         {
           if (tortoiseSvnVersion.startsWith(supportedVersion))
