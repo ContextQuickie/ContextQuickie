@@ -8,8 +8,7 @@ public class SvnRepositoryProviderType extends RepositoryProviderType {
   @Override
   public ProjectSetCapability getProjectSetCapability()
   {
-    // TODO Auto-generated method stub
-    return super.getProjectSetCapability();
+    return new SvnProjectSetCapability();
   }
 
 }

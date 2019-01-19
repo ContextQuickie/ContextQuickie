@@ -14,8 +14,6 @@ public class ConfigurationWizard extends Wizard implements IConfigurationWizard
 
   private IProject _project;
   private IWorkbench _workbench;
-  
-  private File workingCopyRoot = null;
 
   @Override
   public boolean performFinish()
@@ -24,18 +22,9 @@ public class ConfigurationWizard extends Wizard implements IConfigurationWizard
     if (this._project != null && this._workbench != null)
     {
       File currentDir = this._project.getLocation().toFile();
-      while (this.workingCopyRoot == null && currentDir != null) 
-      {
-        File svnWorkingCopy = new File(currentDir, ".svn");
-        if (svnWorkingCopy.exists() && svnWorkingCopy.isDirectory())
-        {
-          this.workingCopyRoot = currentDir;
-        }
-        
-        currentDir = currentDir.getParentFile();
-      }
+      File workingCopyRoot = new WorkingCopy(currentDir).getRoot();
       
-      if (this.workingCopyRoot != null)
+      if (workingCopyRoot != null)
       {
         try
         {
