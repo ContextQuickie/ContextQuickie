@@ -17,7 +17,7 @@ This plugin provides a Tortiose SVN based team provider to eclise which forwards
 To use ContextQuickie.Teamprovider one of the following Tortoise SVN versions must be installed:
 * 1.9.7
 * 1.10.1/1.10.2
-* 1.11.0
+* 1.11.0/1.11.1
 
 Remarks:
 * Torotise SVN versions 1.8.x and below cannot be used because the JavaHL libraries of this versions don't provide the required APIs.
