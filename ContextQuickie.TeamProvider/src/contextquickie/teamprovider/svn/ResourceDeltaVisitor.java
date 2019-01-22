@@ -1,5 +1,6 @@
 package contextquickie.teamprovider.svn;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -139,7 +140,7 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
         {
           SVNClient client = new SVNClient();
 
-          if (ResourceDeltaVisitor.isResourceVersioned(source))
+          if (ResourceDeltaVisitor.isResourceVersioned(source) && (ResourceDeltaVisitor.isResourceIgnored(target.getParent()) == false))
           {
             if ((source.getType() == IResource.FOLDER) && (target.getType() == IResource.FOLDER))
             {
@@ -224,6 +225,39 @@ public class ResourceDeltaVisitor implements IResourceDeltaVisitor
     {
       return statusCallback.getStatus().isManaged();
     }
+    return false;
+  }
+  
+  private static boolean isResourceIgnored(final IResource resource)
+  {
+    File workingCopyRoot = new WorkingCopy(resource.getLocation().toFile()).getRoot();
+    if (workingCopyRoot != null)
+    {
+      SVNClient client = new SVNClient();
+      IResource currentResource = resource;
+      SvnStatusCallback statusCallback = new SvnStatusCallback();
+      while ((statusCallback.getStatus() == null) && (currentResource != null) && (currentResource.getLocation().toFile().equals(workingCopyRoot) == false))
+      {
+        try
+        {
+          client.status(currentResource.getLocation().toOSString(), Depth.empty, false, true, true, true, false, true, null, statusCallback);
+        }
+        catch (ClientException e)
+        {
+          System.out.println(e.toString());
+          // Status of parent element cannot be determined. This can happen if the parent element is an ignored folder
+          // => Ignore this exception
+        }
+    
+        if (statusCallback.getStatus() != null)
+        {
+          return statusCallback.getStatus().isIgnored();
+        }
+        
+        currentResource = currentResource.getParent();
+      }
+    }
+    
     return false;
   }
 }
