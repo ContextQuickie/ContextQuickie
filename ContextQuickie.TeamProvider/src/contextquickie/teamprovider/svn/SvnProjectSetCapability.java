@@ -1,7 +1,6 @@
 package contextquickie.teamprovider.svn;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +47,11 @@ public class SvnProjectSetCapability extends ProjectSetCapability
         {
           throw new TeamException("Unable to get status of project " + project.getName(), e);
         }
-        
+
         String projectName = project.getName();
         String checkoutUrl = statusCallback.getStatus().getUrl();
-        String checkoutDir = statusCallback.getStatus().getPath();
-        String projectLocation = project.getLocation().toOSString();
+        String checkoutDir = this.convertToWorkspaceRelativePath(statusCallback.getStatus().getPath());
+        String projectLocation = this.convertToWorkspaceRelativePath(project.getLocation().toString());
         result.add(String.join(";", projectName, checkoutUrl, checkoutDir, projectLocation));
       }
       else
@@ -75,27 +74,24 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       {
         String projectName = entities[0];
         String checkoutUrl = entities[1];
-        String checkoutDir = entities[2];
-        String projectLocation = entities[3];
-        
-        File checkoutDirFile = new File(checkoutDir);
-        File projectLocationFile = new File(projectLocation);
+        File checkoutDirFile = this.convertToAbsolutePath(entities[2]);
+        File projectLocationFile = this.convertToAbsolutePath(entities[3]);
         if ((checkoutDirFile.exists() == false) || (checkoutDirFile.isDirectory() == false))
         {
           SVNClient client = new SVNClient();
           try
           {
-            client.checkout(checkoutUrl, checkoutDir, Revision.HEAD, Revision.HEAD, Depth.infinity, false, true);
+            client.checkout(checkoutUrl, checkoutDirFile.toString(), Revision.HEAD, Revision.HEAD, Depth.infinity, false, true);
           }
           catch (ClientException e)
           {
-            throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " +  checkoutDir, e);
+            throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " +  checkoutDirFile.toString(), e);
           }
         }
         
         if ((projectLocationFile.exists() == false) || (projectLocationFile.isDirectory() == false))
         {
-          throw new TeamException("Unable to find project directory " + projectLocation);
+          throw new TeamException("Unable to find project directory " + projectLocationFile.toString());
         }
         else
         {
@@ -122,25 +118,15 @@ public class SvnProjectSetCapability extends ProjectSetCapability
     return projects.toArray(new IProject[projects.size()]);
   }
 
-  @Override
-  public URI getURI(String referenceString)
-  {
-    // TODO Auto-generated method stub
-    return super.getURI(referenceString);
+  private String convertToWorkspaceRelativePath(String source)
+  {   
+    String workspaceLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getAbsolutePath();
+    return new File(source).getAbsolutePath().replace(workspaceLocation, "${WORKSPACE_LOC}");
   }
-
-  @Override
-  public String getProject(String referenceString)
-  {
-    // TODO Auto-generated method stub
-    return super.getProject(referenceString);
+  
+  private File convertToAbsolutePath(String source)
+  {   
+    String workspaceLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getAbsolutePath();
+    return new File(source.replace("${WORKSPACE_LOC}", workspaceLocation));
   }
-
-  @Override
-  public String asReference(URI uri, String projectName)
-  {
-    // TODO Auto-generated method stub
-    return super.asReference(uri, projectName);
-  }
-
 }
