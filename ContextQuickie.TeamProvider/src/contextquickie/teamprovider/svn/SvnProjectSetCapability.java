@@ -58,6 +58,10 @@ public class SvnProjectSetCapability extends ProjectSetCapability
         {
           result.add(String.join(";", projectName, checkoutUrl));
         }
+        else if (checkoutDir.equals(projectLocation))
+        {
+          result.add(String.join(";", projectName, checkoutUrl, checkoutDir.toString()));
+        }
         else
         {
           result.add(String.join(";", projectName, checkoutUrl, checkoutDir.toString(), projectLocation.toString()));
@@ -82,28 +86,33 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       
       String projectName;
       String checkoutUrl;
-      File projectLocation;
-      File checkoutDirectory;
-
+      IPath projectLocation;
+      IPath checkoutDirectory;
       if (entities.length == 2)
       {
         projectName = entities[0];
         checkoutUrl = entities[1];
-        checkoutDirectory = projectLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().append(projectName).toFile();
+        checkoutDirectory = projectLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().append(projectName);
+      }
+      else if (entities.length == 3)
+      {
+        projectName = entities[0];
+        checkoutUrl = entities[1];
+        checkoutDirectory = projectLocation = new Path(entities[2]);
       }
       else if (entities.length == 4)
       {
         projectName = entities[0];
         checkoutUrl = entities[1];
-        checkoutDirectory = new File(entities[2]);
-        projectLocation = new File(entities[3]);
+        checkoutDirectory = new Path(entities[2]);
+        projectLocation = new Path(entities[3]);
       }
       else
       {
         throw new TeamException("Cannot parse string \"" + referenceString + "\"");
       }
 
-      if ((checkoutDirectory.exists() == false) || (checkoutDirectory.isDirectory() == false))
+      if ((checkoutDirectory.toFile().exists() == false) || (checkoutDirectory.toFile().isDirectory() == false))
       {
         SVNClient client = new SVNClient();
         try
@@ -116,7 +125,7 @@ public class SvnProjectSetCapability extends ProjectSetCapability
         }
       }
       
-      if ((projectLocation.exists() == false) || (projectLocation.isDirectory() == false))
+      if ((projectLocation.toFile().exists() == false) || (projectLocation.toFile().isDirectory() == false))
       {
         throw new TeamException("Unable to find project directory " + projectLocation.toString());
       }
@@ -124,7 +133,7 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       {
         try
         {
-          IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(Path.fromOSString(new File(projectLocation, ".project").getAbsolutePath()));
+          IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(projectLocation.append(".project"));
           IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
           project.create(projectDescription, monitor);
           project.open(monitor);
