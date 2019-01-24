@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.team.core.ProjectSetCapability;
@@ -50,9 +51,17 @@ public class SvnProjectSetCapability extends ProjectSetCapability
 
         String projectName = project.getName();
         String checkoutUrl = statusCallback.getStatus().getUrl();
-        String checkoutDir = this.convertToWorkspaceRelativePath(statusCallback.getStatus().getPath());
-        String projectLocation = this.convertToWorkspaceRelativePath(project.getLocation().toString());
-        result.add(String.join(";", projectName, checkoutUrl, checkoutDir, projectLocation));
+        IPath workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+        IPath checkoutDir = new Path(statusCallback.getStatus().getPath());
+        IPath projectLocation = project.getLocation();
+        if (workspacePath.isPrefixOf(checkoutDir) && workspacePath.isPrefixOf(projectLocation))
+        {
+          result.add(String.join(";", projectName, checkoutUrl));
+        }
+        else
+        {
+          result.add(String.join(";", projectName, checkoutUrl, checkoutDir.toString(), projectLocation.toString()));
+        }
       }
       else
       {
@@ -70,63 +79,65 @@ public class SvnProjectSetCapability extends ProjectSetCapability
     for (String referenceString : referenceStrings)
     {
       String[] entities = referenceString.split(";");
-      if (entities.length == 4)
+      
+      String projectName;
+      String checkoutUrl;
+      File projectLocation;
+      File checkoutDirectory;
+
+      if (entities.length == 2)
       {
-        String projectName = entities[0];
-        String checkoutUrl = entities[1];
-        File checkoutDirFile = this.convertToAbsolutePath(entities[2]);
-        File projectLocationFile = this.convertToAbsolutePath(entities[3]);
-        if ((checkoutDirFile.exists() == false) || (checkoutDirFile.isDirectory() == false))
-        {
-          SVNClient client = new SVNClient();
-          try
-          {
-            client.checkout(checkoutUrl, checkoutDirFile.toString(), Revision.HEAD, Revision.HEAD, Depth.infinity, false, true);
-          }
-          catch (ClientException e)
-          {
-            throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " +  checkoutDirFile.toString(), e);
-          }
-        }
-        
-        if ((projectLocationFile.exists() == false) || (projectLocationFile.isDirectory() == false))
-        {
-          throw new TeamException("Unable to find project directory " + projectLocationFile.toString());
-        }
-        else
-        {
-          try
-          {
-            IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(Path.fromOSString(new File(projectLocationFile, ".project").getAbsolutePath()));
-            IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
-            project.create(projectDescription, monitor);
-            project.open(monitor);
-            RepositoryProvider.map(project, SvnRepositoryProvider.class.getTypeName());
-          }
-          catch (CoreException e)
-          {
-            throw new TeamException("Unable to create project " + projectName, e);
-          }
-        }
+        projectName = entities[0];
+        checkoutUrl = entities[1];
+        checkoutDirectory = projectLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().append(projectName).toFile();
+      }
+      else if (entities.length == 4)
+      {
+        projectName = entities[0];
+        checkoutUrl = entities[1];
+        checkoutDirectory = new File(entities[2]);
+        projectLocation = new File(entities[3]);
       }
       else
       {
         throw new TeamException("Cannot parse string \"" + referenceString + "\"");
       }
+
+      if ((checkoutDirectory.exists() == false) || (checkoutDirectory.isDirectory() == false))
+      {
+        SVNClient client = new SVNClient();
+        try
+        {
+          client.checkout(checkoutUrl, checkoutDirectory.toString(), Revision.HEAD, Revision.HEAD, Depth.infinity, false, true);
+        }
+        catch (ClientException e)
+        {
+          throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " +  checkoutDirectory.toString(), e);
+        }
+      }
+      
+      if ((projectLocation.exists() == false) || (projectLocation.isDirectory() == false))
+      {
+        throw new TeamException("Unable to find project directory " + projectLocation.toString());
+      }
+      else
+      {
+        try
+        {
+          IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(Path.fromOSString(new File(projectLocation, ".project").getAbsolutePath()));
+          IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
+          project.create(projectDescription, monitor);
+          project.open(monitor);
+          RepositoryProvider.map(project, SvnRepositoryProvider.class.getTypeName());
+        }
+        catch (CoreException e)
+        {
+          throw new TeamException("Unable to create project " + projectName, e);
+        }
+      }
+
     }
     
     return projects.toArray(new IProject[projects.size()]);
-  }
-
-  private String convertToWorkspaceRelativePath(String source)
-  {   
-    String workspaceLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getAbsolutePath();
-    return new File(source).getAbsolutePath().replace(workspaceLocation, "${WORKSPACE_LOC}");
-  }
-  
-  private File convertToAbsolutePath(String source)
-  {   
-    String workspaceLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getAbsolutePath();
-    return new File(source.replace("${WORKSPACE_LOC}", workspaceLocation));
   }
 }
