@@ -133,9 +133,20 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       {
         try
         {
-          IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(projectLocation.append(".project"));
-          IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
-          project.create(projectDescription, monitor);
+        	IPath projectFile = projectLocation.append(".project");
+        	IProject project;
+        	if (projectFile.toFile().exists() && projectFile.toFile().isFile())
+        	{
+        	  IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(projectFile);
+        	  project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
+        	  project.create(projectDescription, monitor);
+        	}
+        	else
+        	{
+        	  project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+        	  project.create(monitor);
+        	}
+          
           project.open(monitor);
           RepositoryProvider.map(project, SvnRepositoryProvider.class.getTypeName());
         }
