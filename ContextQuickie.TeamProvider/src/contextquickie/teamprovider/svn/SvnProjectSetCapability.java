@@ -83,7 +83,7 @@ public class SvnProjectSetCapability extends ProjectSetCapability
     for (String referenceString : referenceStrings)
     {
       String[] entities = referenceString.split(";");
-      
+
       String projectName;
       String checkoutUrl;
       IPath projectLocation;
@@ -121,10 +121,10 @@ public class SvnProjectSetCapability extends ProjectSetCapability
         }
         catch (ClientException e)
         {
-          throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " +  checkoutDirectory.toString(), e);
+          throw new TeamException("Unable to checkout project " + projectName + " from " + checkoutUrl + " to " + checkoutDirectory.toString(), e);
         }
       }
-      
+
       if ((projectLocation.toFile().exists() == false) || (projectLocation.toFile().isDirectory() == false))
       {
         throw new TeamException("Unable to find project directory " + projectLocation.toString());
@@ -133,20 +133,20 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       {
         try
         {
-        	IPath projectFile = projectLocation.append(".project");
-        	IProject project;
-        	if (projectFile.toFile().exists() && projectFile.toFile().isFile())
-        	{
-        	  IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(projectFile);
-        	  project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
-        	  project.create(projectDescription, monitor);
-        	}
-        	else
-        	{
-        	  project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-        	  project.create(monitor);
-        	}
-          
+          IPath projectFile = projectLocation.append(".project");
+          IProjectDescription projectDescription;
+          if (projectFile.toFile().exists() && projectFile.toFile().isFile())
+          {
+            projectDescription = ResourcesPlugin.getWorkspace().loadProjectDescription(projectFile);
+          }
+          else
+          {
+            projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(projectName);
+            projectDescription.setLocation(projectLocation);
+          }
+
+          IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectDescription.getName());
+          project.create(projectDescription, monitor);
           project.open(monitor);
           RepositoryProvider.map(project, SvnRepositoryProvider.class.getTypeName());
         }
@@ -157,7 +157,7 @@ public class SvnProjectSetCapability extends ProjectSetCapability
       }
 
     }
-    
+
     return projects.toArray(new IProject[projects.size()]);
   }
 }
