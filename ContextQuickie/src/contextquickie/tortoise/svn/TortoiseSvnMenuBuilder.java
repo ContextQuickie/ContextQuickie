@@ -264,8 +264,9 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     final Version usedVersion = new Version(usedVersionString);
     final Version version1_10 = new Version(1, 10);
     final Version version1_11 = new Version(1, 11);
+
     final String alternativeExtension;
-    if (usedVersion.equals(version1_11))
+    if (usedVersion.compareTo(version1_11) > 0)
     {
       iconPath = "TortoiseSvn/1.11/";
 
