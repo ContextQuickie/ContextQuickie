@@ -29,9 +29,9 @@ public final class PreferenceConstants
 
   private static final String[] SupportedTortoiseHgVersions = new String[] { "4.5", "4.6", "4.7" };
 
-  private static final String[] SupportedTortoiseGitVersions = new String[] { "2.6", "2.7" };
+  private static final String[] SupportedTortoiseGitVersions = new String[] { "2.6", "2.7", "2.8", "2.9" };
 
-  private static final String[] SupportedTortoiseSvnVersions = new String[] { "1.8", "1.9", "1.10", "1.11", "1.12" };
+  private static final String[] SupportedTortoiseSvnVersions = new String[] { "1.8", "1.9", "1.10", "1.11", "1.12", "1.13" };
 
   /**
    * Configuration items for the configuration of Tortoise SVN.
