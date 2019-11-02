@@ -99,6 +99,12 @@
    <feature url="features/ContextQuickie_0.12.0.201905101506.jar" id="ContextQuickie" version="0.12.0.201905101506" os="win32" arch="x86,x86_64">
       <category name="ContextQuickie"/>
    </feature>
+   <feature url="features/ContextQuickie_0.13.0.201911020929.jar" id="ContextQuickie" version="0.13.0.201911020929" os="win32" arch="x86,x86_64">
+      <category name="ContextQuickie"/>
+   </feature>
+   <feature url="features/ContextQuickie.TeamProvider_0.6.0.201911020929.jar" id="ContextQuickie.TeamProvider" version="0.6.0.201911020929" os="win32" arch="x86,x86_64">
+      <category name="ContextQuickie.TeamProvider"/>
+   </feature>
    <category-def name="ContextQuickie" label="Context Quickie"/>
    <category-def name="ContextQuickie.TeamProvider" label="ContextQuickie.TeamProvider"/>
 </site>
