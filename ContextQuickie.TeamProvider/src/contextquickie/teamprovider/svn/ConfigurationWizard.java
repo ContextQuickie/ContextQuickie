@@ -11,34 +11,40 @@ import org.eclipse.ui.IWorkbench;
 
 public class ConfigurationWizard extends Wizard implements IConfigurationWizard
 {
+  private SvnWizardPage wizardPage = new SvnWizardPage("Share Project: ");
+
+  private  File workingCopyRoot;
+  
+  @Override
+  public void addPages()
+  {
+    super.addPages();
+    this.addPage(wizardPage);
+  }
+
+  @Override
+  public boolean canFinish()
+  {
+    return (super.canFinish() && (this.workingCopyRoot != null));
+  }
 
   private IProject _project;
-  private IWorkbench _workbench;
 
   @Override
   public boolean performFinish()
   {
     boolean returnValue = false;
-    if (this._project != null && this._workbench != null)
+    if (workingCopyRoot != null)
     {
-      File currentDir = this._project.getLocation().toFile();
-      File workingCopyRoot = new WorkingCopy(currentDir).getRoot();
-      
-      if (workingCopyRoot != null)
+      try
       {
-        try
-        {
-          RepositoryProvider.map(this._project, SvnRepositoryProvider.class.getTypeName());
-          returnValue = true;
-        }
-        catch (TeamException e)
-        {
-          e.printStackTrace();
-        }
+        RepositoryProvider.map(this._project, SvnRepositoryProvider.class.getTypeName());
+        returnValue = true;
       }
-      else
+      catch (TeamException e)
       {
-        // TODO: display error message
+        e.printStackTrace();
+        wizardPage.setErrorMessage(e.getMessage());
       }
     }
 
@@ -49,7 +55,19 @@ public class ConfigurationWizard extends Wizard implements IConfigurationWizard
   public void init(IWorkbench workbench, IProject project)
   {
     this._project = project;
-    this._workbench = workbench;
+   
+    wizardPage.setProjectName(this._project.getName());
+    wizardPage.setProjectPath(this._project.getLocation().toOSString());
 
+    File currentDir = this._project.getLocation().toFile();
+    this.workingCopyRoot = new WorkingCopy(currentDir).getRoot();
+    if (this.workingCopyRoot != null)
+    {
+      wizardPage.setWorkingCopy(workingCopyRoot.toString());
+    }
+    else
+    {
+      wizardPage.setErrorMessage("Unable to find the working copy root for project " + this._project.getName());
+    }
   }
 }

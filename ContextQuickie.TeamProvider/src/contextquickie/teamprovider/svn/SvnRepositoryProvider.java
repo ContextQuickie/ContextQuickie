@@ -21,6 +21,12 @@ public class SvnRepositoryProvider extends RepositoryProvider implements IResour
   }
 
   @Override
+  public boolean canHandleLinkedResourceURI()
+  {
+    return true;
+  }
+
+  @Override
   public void configureProject() throws CoreException
   {
   }
@@ -42,7 +48,7 @@ public class SvnRepositoryProvider extends RepositoryProvider implements IResour
   {
     return this.resourceRuleFactory;
   }
-  
+
   @Override
   public void resourceChanged(IResourceChangeEvent event)
   {
