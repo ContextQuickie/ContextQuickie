@@ -951,7 +951,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     super(PreferenceConstants.TORTOISE_GIT, settings);
     settings.setEntries(entries);
     settings.setSubMenuIconPath(iconPath + "tsvnmenufolder.ico");
-    settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortioseGit"));
+    settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortoiseGit"));
     settings.setMainMenuPrefix("Git");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
     
