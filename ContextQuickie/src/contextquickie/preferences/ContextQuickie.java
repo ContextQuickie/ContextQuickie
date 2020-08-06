@@ -77,6 +77,9 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT);
     
+    this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
+    this.createTortoiseFieldEditors("Hg", "thg.exe", null, PreferenceConstants.TORTOISE_HG);
+    
     /*final String tortoiseHgExecutable = "thg.exe";
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Hg", tortoiseHgExecutable, tortoiseHgExecutable, PreferenceConstants.TORTOISE_HG);
@@ -222,14 +225,17 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
 
-    /* Parameter for setting the merge executable */
-    fileFieldEditor = new ConditionalFileFieldEditor(
-        preferenceConstants.getMergePath(), pathToDescriptionPrefix + mergeExeName, getFieldEditorParent(),
-        featureEnabledEditor);
-    fileFieldEditor.setFileExtensions(new String[]
-    { mergeExeName });
-    addField(fileFieldEditor);
-    dependentFields.add(fileFieldEditor);
+    if (mergeExeName != null)
+    {
+      /* Parameter for setting the merge executable */
+      fileFieldEditor = new ConditionalFileFieldEditor(
+          preferenceConstants.getMergePath(), pathToDescriptionPrefix + mergeExeName, getFieldEditorParent(),
+          featureEnabledEditor);
+      fileFieldEditor.setFileExtensions(new String[]
+      { mergeExeName });
+      addField(fileFieldEditor);
+      dependentFields.add(fileFieldEditor);
+    }
 
     // Editor for selecting the used version
     String[][] supportedVersions = new String[preferenceConstants.getSupportedVersions().length][2];

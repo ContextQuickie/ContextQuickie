@@ -27,7 +27,7 @@ public final class PreferenceConstants
    */
   public static final String P_BEYOND_COMPARE_SHELL_REG_KEY = "BeyondCompareShellRegistryKey";
 
-  private static final String[] SupportedTortoiseHgVersions = new String[] { "4.5", "4.6", "4.7" };
+  private static final String[] SupportedTortoiseHgVersions = new String[] { "5.5" };
 
   private static final String[] SupportedTortoiseGitVersions = new String[] { "2.6", "2.7", "2.8", "2.9", "2.10" };
 
