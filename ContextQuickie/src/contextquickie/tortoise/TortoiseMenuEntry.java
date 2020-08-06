@@ -18,6 +18,11 @@ public class TortoiseMenuEntry
    * The label of the entry.
    */
   private String label;
+  
+  /**
+   * The help text of the entry.
+   */
+  private String helpText;
 
   /**
    * The path to the entry icon.
@@ -498,6 +503,29 @@ public class TortoiseMenuEntry
   public TortoiseMenuEntry setCustomParameters(Map<String, Object> value)
   {
     this.customParameters = value;
+    return this;
+  }
+
+  /**
+   * Gets the help text of the instance.
+   * 
+   * @return the help text
+   */
+  public String getHelpText()
+  {
+    return helpText;
+  }
+  
+  /**
+   * Sets the help text of the instance.
+   * 
+   * @param value
+   *          the help text to set
+   * @return The instance with the changed value.
+   */
+  public TortoiseMenuEntry setHelpText(String helpText)
+  {
+    this.helpText = helpText;
     return this;
   }
 }
