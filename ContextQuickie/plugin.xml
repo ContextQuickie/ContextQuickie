@@ -191,6 +191,14 @@
                   class="contextquickie.tortoise.git.TortoiseGitMenuBuilder"
                   id="contextquickie.handlers.tortoise.git.TortoiseGitMenuBuilder">
             </dynamic>
+            <separator
+                  name="ContextQuickie.SeparatorBeforeTortoiseHg"
+                  visible="true">
+            </separator>
+            <dynamic
+                  class="contextquickie.tortoise.hg.TortoiseHgMenuBuilder"
+                  id="contextquickie.handlers.tortoise.git.TortoiseHgMenuBuilder">
+            </dynamic>
          </menuContribution>
    </extension>
 </plugin>
