@@ -316,7 +316,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private long ContextMenuExtEntriesHigh;
   
   /**
-   * Tortoise SVN menu configuration.
+   * Tortoise Git menu configuration.
    */
   private static final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
 
