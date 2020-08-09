@@ -14,5 +14,7 @@ public class ExplorerExtensionSettings extends AbstractTortoiseHgEntry
     this.setLabel("Explorer Extension Settings");
     this.setHelpText("Configure Explorer extension");
     this.setIconPath(iconPath + "settings_user.ico");
+    this.setIsVisibleInWorkingCopy(true);
+    this.setVisibleWithoutWorkingCopy(true);
   }
 }
