@@ -156,7 +156,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
           commandParameter.parameters = entry.getCustomParameters();
         }
 
-        if (this.isEntryInMainMenu(entry.getMenuId()))
+        if (this.isEntryInMainMenu(entry))
         {
           commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
         }
@@ -168,7 +168,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         commandParameter.icon = entry.getIcon();
         final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
 
-        if (this.isEntryInMainMenu(entry.getMenuId()))
+        if (this.isEntryInMainMenu(entry))
         {
           mainMenu.add(commandContributionItem);
         }
@@ -272,7 +272,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   /**
    * Reads the context menu settings from the registry.
    */
-  private void readSettingsFromRegistry()
+  protected void readSettingsFromRegistry()
   {
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
@@ -295,12 +295,12 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
    * Checks if the context menu entry is visible in the main menu.
    * 
    * @param entry
-   *          The name of the entry.
+   *          The entry.
    * @return <b>true</b> if the menu entry is visible in the main menu;
    *         otherwise false.
    */
-  private boolean isEntryInMainMenu(final long entry)
+  protected boolean isEntryInMainMenu(final TortoiseMenuEntry entry)
   {
-    return this.isEntryBitSet(entry, this.registryContextMenuEntries, this.registryContextMenuEntriesHigh);
+    return this.isEntryBitSet(entry.getMenuId(), this.registryContextMenuEntries, this.registryContextMenuEntriesHigh);
   }
 }

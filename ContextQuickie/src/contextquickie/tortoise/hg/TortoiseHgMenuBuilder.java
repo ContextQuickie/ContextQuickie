@@ -1,13 +1,20 @@
 package contextquickie.tortoise.hg;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.eclipse.jface.preference.IPreferenceStore;
+
+import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSeperator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.hg.entries.*;
+import contextquickie.windows.Registry;
 
 public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
 {
@@ -25,6 +32,11 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
    * The settings for the menu.
    */
   private static TortoiseMenuSettings settings = new TortoiseMenuSettings();
+  
+  /**
+   * The promoted menu items (shown in the main menu). 
+   */
+  private Set<String> promotedItems;
 
   static
   {
@@ -74,5 +86,50 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
     settings.setSubMenuIconPath(iconPath + "hg.png");
   }
 
-
+  /**
+   * Reads the context menu settings from the registry.
+   */
+  @Override
+  protected void readSettingsFromRegistry()
+  {
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final String defaultPromotedItems = "commit,workbench";
+    String promotedItemsString = null; 
+    if (preferenceStore.getBoolean(PreferenceConstants.TORTOISE_HG.getUseMenuConfigFromRegistry()) == true)
+    {
+      if (this.promotedItems == null)
+      {
+        final String registryLocation = PreferenceConstants.TORTOISE_HG.getRegistryUserDirectory();
+        Registry registry = new Registry();
+        promotedItemsString = registry.readStringValue(registryLocation, "PromotedItems", defaultPromotedItems);
+      }
+    }
+    else
+    {
+      promotedItemsString = defaultPromotedItems;
+    }
+    
+    if (promotedItemsString != null)
+    {
+      this.promotedItems = new HashSet<String>();
+      for (String promotedItem : promotedItemsString.split(","))
+      {
+        this.promotedItems.add(promotedItem);  
+      }
+    }
+  }
+  
+  /**
+   * Checks if the context menu entry is visible in the main menu.
+   * 
+   * @param entry
+   *          The entry.
+   * @return <b>true</b> if the menu entry is visible in the main menu;
+   *         otherwise false.
+   */
+  @Override
+  protected boolean isEntryInMainMenu(final TortoiseMenuEntry entry)
+  {
+    return this.promotedItems.contains(entry.getCommand());
+  }
 }
