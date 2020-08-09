@@ -15,6 +15,8 @@ public abstract class AbstractTortoiseHgEntry extends TortoiseMenuEntry implemen
     this.setMenuId(1); // TODO
     this.setCommandId("ContextQuickie.commands.TortoiseHg.TortoiseHgCommand");
     this.addVisibilityChecker(this);
+    this.setMinItemsCount(1);
+    this.setMaxItemsCount(1);
   }
 
   @Override

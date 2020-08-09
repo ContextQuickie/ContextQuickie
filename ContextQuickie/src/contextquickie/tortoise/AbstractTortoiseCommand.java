@@ -41,7 +41,7 @@ public abstract class AbstractTortoiseCommand extends AbstractTortoiseHandler
   }
 
   @Override
-  public final Object execute(final ExecutionEvent event)
+  public Object execute(final ExecutionEvent event)
   {
     final List<String> arguments = new ArrayList<String>();
     final String command = event.getParameter(TortoiseMenuConstants.COMMAND_ID);
@@ -86,7 +86,7 @@ public abstract class AbstractTortoiseCommand extends AbstractTortoiseHandler
    * 
    * @return A collection containing all selected resources.
    */
-  private Set<IResource> getSelectedResources()
+  protected Set<IResource> getSelectedResources()
   {
     final Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();
     final Set<IResource> result = new HashSet<IResource>(selectedResources);
