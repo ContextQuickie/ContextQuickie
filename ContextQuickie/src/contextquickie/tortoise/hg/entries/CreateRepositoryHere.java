@@ -14,5 +14,7 @@ public class CreateRepositoryHere extends AbstractTortoiseHgEntry
     this.setLabel("Create Repository Here");
     this.setHelpText("Create a new repository");
     this.setIconPath(iconPath + "menucreaterepos.ico");
+    this.setIsVisibleInWorkingCopy(false);
+    this.setVisibleWithoutWorkingCopy(true);
   }
 }

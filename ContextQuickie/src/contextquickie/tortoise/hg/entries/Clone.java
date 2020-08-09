@@ -14,5 +14,7 @@ public class Clone extends AbstractTortoiseHgEntry
     this.setLabel("Clone...");
     this.setHelpText("Create clone here from source");
     this.setIconPath(iconPath + "menuclone.ico");
+    this.setIsVisibleInWorkingCopy(false);
+    this.setVisibleWithoutWorkingCopy(true);
   }
 }

@@ -14,5 +14,7 @@ public class GlobalSettings extends AbstractTortoiseHgEntry
     this.setLabel("Global Settings");
     this.setHelpText("Configure user wide settings");
     this.setIconPath(iconPath + "settings_user.ico");
+    this.setIsVisibleInWorkingCopy(true);
+    this.setVisibleWithoutWorkingCopy(true);
   }
 }
