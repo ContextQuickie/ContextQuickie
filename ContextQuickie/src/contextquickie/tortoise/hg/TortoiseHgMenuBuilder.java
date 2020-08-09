@@ -82,7 +82,7 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder implement
             .setCommand("rename")
             .setLabel("Rename File")
             .setHelpText("Rename file or directory")
-            .setIconPath(iconPath + "general.ico"));
+            .setIconPath(iconPath + "general.png"));
     entries
         .add(new TortoiseMenuEntry()
             .setCommand("workbench")
@@ -124,7 +124,7 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder implement
             .setCommand("thgstatus")
             .setLabel("Update Icons")
             .setHelpText("Update icons for this repository")
-            .setIconPath(iconPath + "refresh_overlays.ico"));
+            .setIconPath(iconPath + "refresh_overlays.png"));
     entries
         .add(new TortoiseMenuEntry()
             .setCommand("userconf")
@@ -154,19 +154,19 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder implement
             .setCommand("vdiff")
             .setLabel("Diff to parent")
             .setHelpText("View changes using GUI diff tool")
-            .setIconPath(iconPath + "TortoiseMerge.ico"));
+            .setIconPath(iconPath + "TortoiseMerge.png"));
     entries
         .add(new TortoiseMenuEntry()
             .setCommand("hgignore")
             .setLabel("Edit Ignore Filter")
             .setHelpText("Edit repository ignore filter")
-            .setIconPath(iconPath + "ignore.ico"));
+            .setIconPath(iconPath + "ignore.png"));
     entries
         .add(new TortoiseMenuEntry()
             .setCommand("guess")
             .setLabel("Guess Renames")
             .setHelpText("Detect renames and copies")
-            .setIconPath(iconPath + "detect_rename.ico"));
+            .setIconPath(iconPath + "detect_rename.png"));
     entries
         .add(new TortoiseMenuEntry()
             .setCommand("grep")
@@ -187,7 +187,7 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder implement
     settings.setEntries(entries);
     settings.setMainMenuPrefix("Hg");
     settings.setSubMenuText("TortoiseHg");
-    settings.setSubMenuIconPath(iconPath + "hg.ico");
+    settings.setSubMenuIconPath(iconPath + "hg.png");
     entries.forEach(entry -> entry.addVisibilityChecker(this));
     entries.forEach(entry -> entry.setMenuId(1));
     entries.forEach(entry -> entry.setCommandId("ContextQuickie.commands.TortoiseHg.TortoiseHgCommand"));
