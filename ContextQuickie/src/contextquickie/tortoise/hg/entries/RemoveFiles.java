@@ -13,6 +13,6 @@ public class RemoveFiles extends AbstractTortoiseHgEntry
     this.setCommand("remove");
     this.setLabel("Remove Files...");
     this.setHelpText("Remove files from version control");
-    this.setIconPath(iconPath + "menudelete.ico");
+    this.setIconPath(iconPath + "menudelete.png");
   }
 }

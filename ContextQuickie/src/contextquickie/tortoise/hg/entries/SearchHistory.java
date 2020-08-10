@@ -13,6 +13,6 @@ public class SearchHistory extends AbstractTortoiseHgEntry
     this.setCommand("grep");
     this.setLabel("Search History");
     this.setHelpText("Search file revisions for patterns");
-    this.setIconPath(iconPath + "menurepobrowse.ico");
+    this.setIconPath(iconPath + "menurepobrowse.png");
   }
 }

@@ -13,6 +13,6 @@ public class AddFiles extends AbstractTortoiseHgEntry
     this.setCommand("add");
     this.setLabel("Add Files...");
     this.setHelpText("Add files to version control");
-    this.setIconPath(iconPath + "menuadd.ico");
+    this.setIconPath(iconPath + "menuadd.png");
   }
 }

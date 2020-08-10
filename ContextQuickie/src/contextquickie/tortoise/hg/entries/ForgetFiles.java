@@ -13,6 +13,6 @@ public class ForgetFiles extends AbstractTortoiseHgEntry
     this.setCommand("forget");
     this.setLabel("Forget Files...");
     this.setHelpText("Remove files from version control");
-    this.setIconPath(iconPath + "menudelete.ico");
+    this.setIconPath(iconPath + "menudelete.png");
   }
 }

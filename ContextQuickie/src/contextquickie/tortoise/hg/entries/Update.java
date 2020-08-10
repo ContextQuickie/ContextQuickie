@@ -13,6 +13,6 @@ public class Update extends AbstractTortoiseHgEntry
     this.setCommand("update");
     this.setLabel("Update...");
     this.setHelpText("Update working directory");
-    this.setIconPath(iconPath + "menucheckout.ico");
+    this.setIconPath(iconPath + "menucheckout.png");
   }
 }

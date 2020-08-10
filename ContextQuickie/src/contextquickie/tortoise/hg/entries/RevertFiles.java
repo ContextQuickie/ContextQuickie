@@ -13,6 +13,6 @@ public class RevertFiles extends AbstractTortoiseHgEntry
     this.setCommand("revert");
     this.setLabel("Revert Files...");
     this.setHelpText("Revert file changes");
-    this.setIconPath(iconPath + "menurevert.ico");
+    this.setIconPath(iconPath + "menurevert.png");
   }
 }

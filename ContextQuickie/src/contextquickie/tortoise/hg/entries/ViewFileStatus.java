@@ -13,6 +13,6 @@ public class ViewFileStatus extends AbstractTortoiseHgEntry
     this.setCommand("status");
     this.setLabel("View File Status");
     this.setHelpText("Repository status & changes");
-    this.setIconPath(iconPath + "menushowchanged.ico");
+    this.setIconPath(iconPath + "menushowchanged.png");
   }
 }

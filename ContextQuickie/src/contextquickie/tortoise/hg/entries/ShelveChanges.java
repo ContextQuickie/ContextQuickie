@@ -13,6 +13,6 @@ public class ShelveChanges extends AbstractTortoiseHgEntry
     this.setCommand("shelve");
     this.setLabel("Shelve Changes");
     this.setHelpText("Move changes between working dir and patch");
-    this.setIconPath(iconPath + "menucommit.ico");
+    this.setIconPath(iconPath + "menucommit.png");
   }
 }

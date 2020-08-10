@@ -13,7 +13,7 @@ public class AboutTortioseHg extends AbstractTortoiseHgEntry
     this.setCommand("about");
     this.setLabel("About TortoiseHg");
     this.setHelpText("Show About Dialog");
-    this.setIconPath(iconPath + "menuabout.ico");
+    this.setIconPath(iconPath + "menuabout.png");
     this.setIsVisibleInWorkingCopy(true);
     this.setVisibleWithoutWorkingCopy(true);
   }

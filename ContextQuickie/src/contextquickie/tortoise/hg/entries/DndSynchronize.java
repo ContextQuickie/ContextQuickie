@@ -13,6 +13,6 @@ public class DndSynchronize extends AbstractTortoiseHgEntry
     this.setCommand("dndsynch");
     this.setLabel("DnD Synchronize");
     this.setHelpText("Synchronize with dragged repository");
-    this.setIconPath(iconPath + "menusynch.ico");
+    this.setIconPath(iconPath + "menusynch.png");
   }
 }

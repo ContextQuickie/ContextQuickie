@@ -13,6 +13,6 @@ public class Commit extends AbstractTortoiseHgEntry
     this.setCommand("commit");
     this.setLabel("Commit...");
     this.setHelpText("Commit changes in repository");
-    this.setIconPath(iconPath + "menucommit.ico");
+    this.setIconPath(iconPath + "menucommit.png");
   }
 }

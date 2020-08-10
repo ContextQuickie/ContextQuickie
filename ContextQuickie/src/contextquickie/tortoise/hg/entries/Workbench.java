@@ -13,6 +13,6 @@ public class Workbench extends AbstractTortoiseHgEntry
     this.setCommand("workbench");
     this.setLabel("Workbench");
     this.setHelpText("View change history in repository");
-    this.setIconPath(iconPath + "menulog.ico");
+    this.setIconPath(iconPath + "menulog.png");
   }
 }

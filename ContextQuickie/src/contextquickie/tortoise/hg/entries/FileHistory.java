@@ -13,6 +13,6 @@ public class FileHistory extends AbstractTortoiseHgEntry
     this.setCommand("log");
     this.setLabel("File History");
     this.setHelpText("View change history of selected files");
-    this.setIconPath(iconPath + "menulog.ico");
+    this.setIconPath(iconPath + "menulog.png");
   }
 }

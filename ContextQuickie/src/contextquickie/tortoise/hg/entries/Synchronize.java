@@ -13,6 +13,6 @@ public class Synchronize extends AbstractTortoiseHgEntry
     this.setCommand("synch");
     this.setLabel("Synchronize");
     this.setHelpText("Synchronize with remote repository");
-    this.setIconPath(iconPath + "menusynch.ico");
+    this.setIconPath(iconPath + "menusynch.png");
   }
 }
