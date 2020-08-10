@@ -2,24 +2,24 @@ package contextquickie.tortoise.git.entries;
 
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
-public class Fetch extends AbstractTortoiseGitEntry
+public class Sync extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000040000000000L;
+  public static final long MenuIdentifier = 0x0000000000000002;
   /**
    * Constructor.
    * 
    * @param iconPath
    * The path containing the icon for this instance.
    */
-  public Fetch(String iconPath)
+  public Sync(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUFETCH, "Fetch...");
+    super(MenuTextIdentifier.IDS_MENUSYNC, "Sync...");
     this.setMenuId(MenuIdentifier);
-    this.setIconPath(iconPath + "pull1.ico");
-    this.setCommand("fetch");
+    this.setIconPath(iconPath + "menurelocate.ico");
+    this.setCommand("sync");
     this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
   }

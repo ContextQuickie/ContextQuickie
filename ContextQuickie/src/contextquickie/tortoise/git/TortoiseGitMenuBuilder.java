@@ -33,16 +33,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private static final String DIFF_TOW_FILES_COMMAND_ID = "ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand";
 
   /**
-   * Sync menu entry.
-   */
-  private static final long MENUSYNC = 0x0000000000000002;
-
-  /**
-   * Commit menu entry.
-   */
-  private static final long MENUCOMMIT = 0x0000000000000004;
-
-  /**
    * Add menu entry.
    */
   private static final long MENUADD = 0x0000000000000008;
@@ -191,11 +181,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
    * "Paste" menu entry.
    */
   private static final long MENUCLIPPASTE = 0x0000000400000000L;
-
-  /**
-   * Push menu entry.
-   */
-  private static final long MENUPUSH = 0x0000001000000000L;
 
   /**
    * Create tag menu entry.
@@ -352,34 +337,10 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new Clone(iconPath));
     entries.add(new Pull(iconPath));
     entries.add(new Fetch(iconPath));
-
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPUSH, "Push..."))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUPUSH)
-        .setIconPath(iconPath + "Push.ico")
-        .setCommand("push")
-        .setMaxFolderCount(1)
-        .setMaxItemsCount(1));
-
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSYNC, "Sync..."))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUSYNC)
-        .setIconPath(iconPath + "menurelocate.ico")
-        .setCommand("sync")
-        .setMaxFolderCount(1)
-        .setMaxItemsCount(1));
-
-    // Separator
+    entries.add(new Push(iconPath));
+    entries.add(new Sync(iconPath));
     entries.add(new TortoiseMenuSeperator());
-
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCOMMIT, "Commit..."))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUCOMMIT)
-        .setIconPath(iconPath + "menucommit.ico")
-        .setCommand("commit"));
+    entries.add(new Commit(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNDCOMMIT, "Git SVN DCommit..."))
@@ -915,7 +876,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     settings.setSubMenuIconPath(iconPath + "tsvnmenufolder.ico");
     settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortoiseGit"));
     settings.setMainMenuPrefix("Git");
-    settings.setContextMenuEntriesDefault(MENUCREATEREPOS | MENUSYNC | MENUCOMMIT);
+    settings.setContextMenuEntriesDefault(MENUCREATEREPOS | Sync.MenuIdentifier | Commit.MenuIdentifier);
     
     this.ContextMenuExtEntriesLow = this.readSettingsFromRegistry("ContextMenuExtEntriesLow", MENUSUBSYNC | MENUSTASHAPPLY);
     this.ContextMenuExtEntriesHigh = this.readSettingsFromRegistry("ContextMenuExtEntriesHigh", MENUSVNIGNORE);

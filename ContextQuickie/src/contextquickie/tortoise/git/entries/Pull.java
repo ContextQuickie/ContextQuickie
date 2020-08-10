@@ -7,7 +7,7 @@ public class Pull extends AbstractTortoiseGitEntry
   /**
    * The menu identifier for this class.
    */
-  private static final long MenuIdentifier = 0x0000000800000000L;
+  public static final long MenuIdentifier = 0x0000000800000000L;
   /**
    * Constructor.
    * 
