@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class RevertFiles extends AbstractTortoiseHgEntry
+public class RevertFiles extends AbstractTortoiseHgEntryForFile
 {
   /**
    * Constructor.

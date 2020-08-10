@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class AddFiles extends AbstractTortoiseHgEntry
+public class AddFiles extends AbstractTortoiseHgEntryForFile
 {
   /**
    * Constructor.

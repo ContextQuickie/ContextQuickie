@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class RemoveFiles extends AbstractTortoiseHgEntry
+public class RemoveFiles extends AbstractTortoiseHgEntryForFile
 {
   /**
    * Constructor.

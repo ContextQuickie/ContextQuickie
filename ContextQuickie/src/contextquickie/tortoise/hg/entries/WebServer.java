@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class WebServer extends AbstractTortoiseHgEntry
+public class WebServer extends AbstractTortoiseHgEntryForFolder
 {
   /**
    * Constructor.

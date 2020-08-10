@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class CreateRepositoryHere extends AbstractTortoiseHgEntry
+public class CreateRepositoryHere extends AbstractTortoiseHgEntryForFolder
 {
   /**
    * Constructor.

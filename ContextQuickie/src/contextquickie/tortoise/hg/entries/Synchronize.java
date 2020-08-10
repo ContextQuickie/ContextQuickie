@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class Synchronize extends AbstractTortoiseHgEntry
+public class Synchronize extends AbstractTortoiseHgEntryForFolder
 {
   /**
    * Constructor.

@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class GuessRenames extends AbstractTortoiseHgEntry
+public class GuessRenames extends AbstractTortoiseHgEntryForFolder
 {
   /**
    * Constructor.

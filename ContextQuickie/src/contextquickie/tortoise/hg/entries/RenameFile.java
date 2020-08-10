@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class RenameFile extends AbstractTortoiseHgEntry
+public class RenameFile extends AbstractTortoiseHgEntryForFile
 {
   /**
    * Constructor.

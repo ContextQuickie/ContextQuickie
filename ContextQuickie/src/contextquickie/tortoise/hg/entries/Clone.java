@@ -1,6 +1,6 @@
 package contextquickie.tortoise.hg.entries;
 
-public class Clone extends AbstractTortoiseHgEntry
+public class Clone extends AbstractTortoiseHgEntryForFolder
 {
   /**
    * Constructor.
