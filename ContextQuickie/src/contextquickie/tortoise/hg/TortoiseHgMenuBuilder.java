@@ -53,6 +53,10 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
     entries.add(new RemoveFiles(iconPath));
     entries.add(new TortoiseMenuSeperator());
     
+    entries.add(new RevisionHistory(iconPath));
+    entries.add(new AnnotateFiles(iconPath));
+    entries.add(new TortoiseMenuSeperator());
+    
     entries.add(new Workbench(iconPath));
     entries.add(new Update(iconPath));
     entries.add(new SearchHistory(iconPath));
