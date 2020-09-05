@@ -14,5 +14,6 @@ public class SearchHistory extends AbstractTortoiseHgEntry
     this.setLabel("Search History");
     this.setHelpText("Search file revisions for patterns");
     this.setIconPath(iconPath + "menurepobrowse.png");
+    this.setMaxFileCount(0);
   }
 }

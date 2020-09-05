@@ -14,5 +14,6 @@ public class EditIgnoreFilter extends AbstractTortoiseHgEntry
     this.setLabel("Edit Ignore Filter");
     this.setHelpText("Edit repository ignore filter");
     this.setIconPath(iconPath + "ignore.png");
+    this.setMaxFileCount(0);
   }
 }
