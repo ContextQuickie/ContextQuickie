@@ -14,5 +14,6 @@ public class RepositorySettings extends AbstractTortoiseHgEntry
     this.setLabel("Repository Settings");
     this.setHelpText("Configure repository settings");
     this.setIconPath(iconPath + "settings_repo.ico");
+    this.setMaxFileCount(0);
   }
 }

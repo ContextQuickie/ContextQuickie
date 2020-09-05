@@ -16,5 +16,6 @@ public class GlobalSettings extends AbstractTortoiseHgEntry
     this.setIconPath(iconPath + "settings_user.ico");
     this.setIsVisibleInWorkingCopy(true);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMaxFileCount(0);
   }
 }
