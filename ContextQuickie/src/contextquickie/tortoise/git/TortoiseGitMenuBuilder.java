@@ -158,11 +158,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private static final long MENUSVNREBASE = 0x0000000008000000;
 
   /**
-   * SVN DCommit menu entry.
-   */
-  private static final long MENUSVNDCOMMIT = 0x0000000010000000;
-
-  /**
    * Import SVN Ignore menu entry.
    */
   private static final long MENUSVNIGNORE = 0x0000000040000000;
@@ -342,13 +337,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     entries.add(new TortoiseMenuSeperator());
     entries.add(new Commit(iconPath));
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNDCOMMIT, "Git SVN DCommit..."))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUSVNDCOMMIT)
-        .setIconPath(iconPath + "menucommit.ico")
-        .setCommand("commit")
-        .setMaxItemsCount(0)); // TODO: Disabled
+    entries.add(new GitSvnDCommit(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSVNREBASE, "SVN Rebase"))
