@@ -5,7 +5,7 @@ import contextquickie.tortoise.AbstractTortoiseMergeCommand;
 
 /**
  * @author ContextQuickie
- *     Class for execute a Tortoise SVN merge command.
+ *     Class for execute a TortoiseSVN merge command.
  */
 public final class TortoiseSvnMergeCommand extends AbstractTortoiseMergeCommand
 {

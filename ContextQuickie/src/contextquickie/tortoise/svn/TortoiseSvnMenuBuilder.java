@@ -16,7 +16,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 /**
  * @author ContextQuickie
  *
- *         Menu configuration for Tortoise SVN.
+ *         Menu configuration for TortoiseSVN.
  */
 public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 {
@@ -238,7 +238,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUUNSHELVE = 0x0000020000000000L;
 
   /**
-   * Tortoise SVN menu configuration.
+   * TortoiseSVN menu configuration.
    */
   private static List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
 
@@ -248,7 +248,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final Translation translation;
 
   /**
-   * The path to the icons based on the used Tortoise SVN version.
+   * The path to the icons based on the used TortoiseSVN version.
    */
   private static final String iconPath;
 

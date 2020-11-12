@@ -1,6 +1,6 @@
 
 /**
- * This package provides all classes used for all Tortoise Hg based plug-ins.
+ * This package provides all classes used for all TortoiseHg based plug-ins.
  */
 /**
  * @author ContextQuickie

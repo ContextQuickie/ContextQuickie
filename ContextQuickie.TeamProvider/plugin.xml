@@ -16,7 +16,7 @@
             class="contextquickie.teamprovider.svn.ConfigurationWizard"
             icon="icons/Tortoise.ico"
             id="contextquickie.teamprovider.svn.ConfigurationWizard"
-            name="ContextQuickie (via Tortoise SVN)">
+            name="ContextQuickie (via TortoiseSVN)">
       </wizard>
    </extension>
 </plugin>

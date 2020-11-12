@@ -6,7 +6,7 @@ import contextquickie.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 /**
  * @author ContextQuickie
  *
- *     Class for execute a Tortoise Git diff command with two selected files.
+ *     Class for execute a TortoiseGit diff command with two selected files.
  */
 public class TortoiseGitDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {

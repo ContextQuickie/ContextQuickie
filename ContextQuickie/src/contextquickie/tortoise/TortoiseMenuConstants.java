@@ -3,7 +3,7 @@ package contextquickie.tortoise;
 /**
  * @author ContextQuickie
  *
- *         Constants which are used in the Tortoise SVN menu.
+ *         Constants which are used in the TortoiseSVN menu.
  */
 public final class TortoiseMenuConstants
 {

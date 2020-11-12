@@ -5,7 +5,7 @@ import contextquickie.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 
 /**
  * @author ContextQuickie
- *     Class for execute a Tortoise Hg diff command with two selected files.
+ *     Class for execute a TortoiseHg diff command with two selected files.
  */
 public class TortoiseHgDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {

@@ -4,7 +4,7 @@ import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseDiffLaterCommand;
 
 /**
- * Handler for the Tortoise Git "diff later" command.
+ * Handler for the TortoiseGit "diff later" command.
  */
 public class TortoiseGitDiffLaterCommand extends AbstractTortoiseDiffLaterCommand
 {

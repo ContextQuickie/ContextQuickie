@@ -34,17 +34,17 @@ public final class PreferenceConstants
   private static final String[] SupportedTortoiseSvnVersions = new String[] { "1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14" };
 
   /**
-   * Configuration items for the configuration of Tortoise SVN.
+   * Configuration items for the configuration of TortoiseSVN.
    */
   public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN", SupportedTortoiseSvnVersions);
 
   /**
-   * Configuration items for the configuration of Tortoise Git.
+   * Configuration items for the configuration of TortoiseGit.
    */
   public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git", SupportedTortoiseGitVersions);
 
   /**
-   * Configuration items for the configuration of Tortoise Hg.
+   * Configuration items for the configuration of TortoiseHg.
    */
   public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg", SupportedTortoiseHgVersions);
 

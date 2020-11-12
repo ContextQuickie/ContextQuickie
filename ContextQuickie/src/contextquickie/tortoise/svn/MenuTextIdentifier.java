@@ -2,7 +2,7 @@ package contextquickie.tortoise.svn;
 /**
  * @author ContextQuickie
  *
- *         Menu text identifiers for Tortoise SVN.
+ *         Menu text identifiers for TortoiseSVN.
  */
 @SuppressWarnings("javadoc")
 public class MenuTextIdentifier

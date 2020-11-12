@@ -5,7 +5,7 @@ import contextquickie.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 
 /**
  * @author ContextQuickie
- *     Class for execute a Tortoise SVN diff command with two selected files.
+ *     Class for execute a TortoiseSVN diff command with two selected files.
  */
 public class TortoiseSvnDiffTwoFilesCommand extends AbstractTortoiseDiffTwoFilesCommand
 {

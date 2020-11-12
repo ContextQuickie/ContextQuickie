@@ -6,7 +6,7 @@ import contextquickie.tortoise.AbstractTortoiseCommand;
 /**
  * @author ContextQuickie
  * 
- *         Class which executes all Tortoise Git commands based on the passed
+ *         Class which executes all TortoiseGit commands based on the passed
  *         parameters.
  */
 public class TortoiseGitCommand extends AbstractTortoiseCommand

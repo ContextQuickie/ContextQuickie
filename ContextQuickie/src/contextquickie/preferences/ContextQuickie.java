@@ -191,10 +191,10 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
       final TortoisePreferenceConstants preferenceConstants)
   {
     FieldEditor dependentFieldEditor;
-    final String showTortoise = "Show Tortoise ";
+    final String showTortoise = "Show Tortoise";
     
     final ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
-    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(preferenceConstants.getEnabled(), "Enable Tortoise " + name,
+    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(preferenceConstants.getEnabled(), "Enable Tortoise" + name,
         getFieldEditorParent());
     addField(featureEnabledEditor);
 
@@ -245,7 +245,7 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     }
     ComboFieldEditor comboFieldEditor = new ComboFieldEditor(
         preferenceConstants.getUsedVersion(), 
-        "Select Tortoise " + name + " version", supportedVersions, getFieldEditorParent());
+        "Select Tortoise" + name + " version", supportedVersions, getFieldEditorParent());
     addField(comboFieldEditor);
     dependentFields.add(comboFieldEditor);
   }
