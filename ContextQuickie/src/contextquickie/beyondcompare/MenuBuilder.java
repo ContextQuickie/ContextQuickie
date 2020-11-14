@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
@@ -86,11 +87,15 @@ public class MenuBuilder extends AbstractMenuBuilder
 
       // Create map of parameters for the command
       final Map<String, Object> parameters = new HashMap<String, Object>();
-      parameters.put(SelectLeftSide.PathParameterName, selectedResource.getLocation().toOSString());
-      commandParameter.parameters = parameters;
-      commandParameter.label = label;
-      commandParameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/SelectLeftFile.png");
-      menuEntries.add(new CommandContributionItem(commandParameter));
+      final IPath location = selectedResource.getLocation();
+      if (location != null)
+      {
+        parameters.put(SelectLeftSide.PathParameterName, location.toOSString());
+        commandParameter.parameters = parameters;
+        commandParameter.label = label;
+        commandParameter.icon = contextquickie.Activator.getImageDescriptor("icons/BeyondCompare/SelectLeftFile.png");
+        menuEntries.add(new CommandContributionItem(commandParameter));
+      }
     }
   }
 
@@ -108,10 +113,11 @@ public class MenuBuilder extends AbstractMenuBuilder
         (requiredResourceTypesForFolders.contains(selectedResource.getType()) && (savedLeftType == BeyondCompareSavedLeft.Directory)))
     {
       final String savedLeft = bc.getSavedLeft();
-      if (savedLeft != null)
+      final IPath location = selectedResource.getLocation();
+      if (savedLeft != null && location != null)
       {
         final String filename = new File(savedLeft).getName();
-        menuEntries.add(this.createCompareCommandMenuEntry(savedLeft, selectedResource.getLocation().toOSString(), "Compare to " + filename));
+        menuEntries.add(this.createCompareCommandMenuEntry(savedLeft, location.toOSString(), "Compare to " + filename));
       }
     }
   }
@@ -121,11 +127,12 @@ public class MenuBuilder extends AbstractMenuBuilder
     if ((requiredResourceTypesForFiles.contains(selectedResources.get(0).getType()) && requiredResourceTypesForFiles.contains(selectedResources.get(1).getType())) ||
         (requiredResourceTypesForFolders.contains(selectedResources.get(0).getType()) && requiredResourceTypesForFolders.contains(selectedResources.get(1).getType())))
     {
-      menuEntries.add(
-          this.createCompareCommandMenuEntry(
-              selectedResources.get(0).getLocation().toOSString(), 
-              selectedResources.get(1).getLocation().toOSString(), 
-              "Compare"));
+      final IPath location1 = selectedResources.get(0).getLocation();
+      final IPath location2 = selectedResources.get(1).getLocation();
+      if (location1 != null && location2 != null)
+      {
+        menuEntries.add(this.createCompareCommandMenuEntry(location1.toOSString(), location2.toOSString(), "Compare"));
+      }
     }
   }
   
