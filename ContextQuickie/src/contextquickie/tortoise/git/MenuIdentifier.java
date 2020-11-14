@@ -3,7 +3,7 @@ package contextquickie.tortoise.git;
 /**
  * @author ContextQuickie
  *
- *         Menu identifiers for Tortoise Git.
+ *         Menu identifiers for TortoiseGit.
  */
 public class MenuIdentifier
 {

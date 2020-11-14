@@ -19,7 +19,7 @@ import contextquickie.tortoise.TortoiseMenuConstants;
 /**
  * @author ContextQuickie
  * 
- *         Class which executes all Tortoise Hg commands based on the passed
+ *         Class which executes all TortoiseHg commands based on the passed
  *         parameters.
  */
 public class TortoiseHgCommand extends AbstractTortoiseCommand

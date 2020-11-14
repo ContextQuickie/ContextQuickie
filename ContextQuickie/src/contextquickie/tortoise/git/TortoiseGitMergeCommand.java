@@ -5,7 +5,7 @@ import contextquickie.tortoise.AbstractTortoiseMergeCommand;
 
 /**
  * @author ContextQuickie
- *     Class for execute a Tortoise Git merge command.
+ *     Class for execute a TortoiseGit merge command.
  */
 public class TortoiseGitMergeCommand extends AbstractTortoiseMergeCommand
 {

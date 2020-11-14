@@ -26,7 +26,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 /**
  * @author ContextQuickie
  *
- *         Menu configuration for Tortoise Git.
+ *         Menu configuration for TortoiseGit.
  */
 public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>
 {
@@ -273,17 +273,17 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private static final long MENUABOUT = 0x8000000000000000L;
   
   /**
-   * The value of ContextMenuExtEntriesLow in the registry settings of Tortoise Git.
+   * The value of ContextMenuExtEntriesLow in the registry settings of TortoiseGit.
    */
   private long ContextMenuExtEntriesLow;
   
   /**
-   * The value of ContextMenuExtEntriesHigh in the registry settings of Tortoise Git.
+   * The value of ContextMenuExtEntriesHigh in the registry settings of TortoiseGit.
    */
   private long ContextMenuExtEntriesHigh;
   
   /**
-   * Tortoise Git menu configuration.
+   * TortoiseGit menu configuration.
    */
   private static final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
 
@@ -293,7 +293,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private static final Translation translation;
   
   /**
-   * The path to the icons based on the used Tortoise Git version.
+   * The path to the icons based on the used TortoiseGit version.
    */
   private static final String iconPath;
   
@@ -438,7 +438,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMenuId(MENUDIFFTWO)
         .setIconPath(menuCompareIconPath)
         .setCommand("diffcommits")
-        .setMaxItemsCount(0)); // Disabled. Didn't find any hint in Tortoise Git source how to handle this entry.
+        .setMaxItemsCount(0)); // Disabled. Didn't find any hint in TortoiseGit source how to handle this entry.
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOG, "Show log"))
@@ -817,7 +817,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setMenuId(MENUCLIPPASTE)
         .setIconPath(iconPath + "menusendmail.ico")
         .setCommand("settings")
-        .setMaxItemsCount(0)); // TODO: Disabled, also not supported by Tortoise Git
+        .setMaxItemsCount(0)); // TODO: Disabled, also not supported by TortoiseGit
 
     // Separator
     entries.add(new TortoiseMenuSeperator());

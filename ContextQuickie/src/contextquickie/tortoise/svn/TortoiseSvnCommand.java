@@ -6,7 +6,7 @@ import contextquickie.tortoise.AbstractTortoiseCommand;
 /**
  * @author ContextQuickie
  * 
- *         Class which executes all Tortoise SVN commands based on the passed
+ *         Class which executes all TortoiseSVN commands based on the passed
  *         parameters.
  */
 public class TortoiseSvnCommand extends AbstractTortoiseCommand

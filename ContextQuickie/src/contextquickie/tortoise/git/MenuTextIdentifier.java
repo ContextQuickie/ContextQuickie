@@ -3,7 +3,7 @@ package contextquickie.tortoise.git;
 /**
  * @author ContextQuickie
  *
- *         Menu text identifiers for Tortoise Git.
+ *         Menu text identifiers for TortoiseGit.
  */
 @SuppressWarnings("javadoc")
 public class MenuTextIdentifier

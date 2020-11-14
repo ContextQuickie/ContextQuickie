@@ -19,12 +19,12 @@ import contextquickie.windows.Registry;
 public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
 {
   /**
-   * Tortoise Hg menu configuration.
+   * TortoiseHg menu configuration.
    */
   private static final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
   
   /**
-   * The path to the icons based on the used Tortoise Hg version.
+   * The path to the icons based on the used TortoiseHg version.
    */
   private static final String iconPath = "TortoiseHg/5.5/";
   

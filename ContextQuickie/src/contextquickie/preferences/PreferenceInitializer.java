@@ -105,7 +105,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
   private void getStoreConfigurationItemFromRegistry(final IPreferenceStore store, final String registryLocation, final String registryKey,
       final String defaultValue, final String configurationItem)
   {
-    // Try to retrieve the path to the Tortoise SVN executable.
+    // Try to retrieve the path to the TortoiseSVN executable.
     String registryValue = new Registry().readStringValue(registryLocation, registryKey, defaultValue);
     store.setDefault(configurationItem, registryValue);
   }
