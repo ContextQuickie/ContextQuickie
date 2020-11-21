@@ -2,10 +2,9 @@ package contextquickie.tools;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdapterManager;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -46,7 +45,7 @@ public class ContextMenuEnvironment
           for (Object selectedItem : ((IStructuredSelection) selection).toList())
           {
             final IResource resource = adapterManager.getAdapter(selectedItem, IResource.class);
-            if (resource != null)
+            if (this.convertIResourceToIPath(resource) != null)
             {
               selectedResources.add(resource);
             }
@@ -58,12 +57,28 @@ public class ContextMenuEnvironment
           IEditorPart editor = window.getActivePage().getActiveEditor();
           if (editor != null)
           {
-            selectedResources.add(adapterManager.getAdapter(editor.getEditorInput(), IResource.class));
+            final IResource resource = adapterManager.getAdapter(editor.getEditorInput(), IResource.class);
+            if (this.convertIResourceToIPath(resource) != null)
+            {
+              selectedResources.add(resource);
+            }
           }
         }
       }
     }
 
-    return selectedResources.stream().filter(r -> r != null).collect(Collectors.toSet());
+    return selectedResources;
+  }
+  
+
+  private IPath convertIResourceToIPath(IResource resource)
+  {
+    IPath location = null;
+    if (resource != null)
+    {
+      location = resource.getLocation();
+    }
+    
+    return location;
   }
 }
