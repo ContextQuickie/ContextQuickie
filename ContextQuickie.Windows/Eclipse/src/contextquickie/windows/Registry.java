@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class for accessing the windows registry.
  * @author ContextQuickie
- * 
- *         Class for accessing the windows registry.
- *
  */
 public final class Registry extends BaseLoader
 {
@@ -55,8 +53,6 @@ public final class Registry extends BaseLoader
 
   private native long readLongValue(final int hKey, final String location, final String key, final long defaultValue);
 
-  private native String readStringValue(final int hKey, final String location, final String key, final String defaultValue);
-
   private native void writeStringValue(final int hKey, final String location, final String key, final String value);
 
   /**
@@ -76,6 +72,8 @@ public final class Registry extends BaseLoader
     RootMapping mapping = this.mapRegistryRoot(location);
     return readStringValue(mapping.root, mapping.location, key, defaultValue);
   }
+  
+  private native String readStringValue(final int hKey, final String location, final String key, final String defaultValue);
 
   /**
    * Reads a value from the registry.
