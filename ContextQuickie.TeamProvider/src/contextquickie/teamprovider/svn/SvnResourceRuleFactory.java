@@ -35,7 +35,7 @@ public class SvnResourceRuleFactory extends ResourceRuleFactory
   @Override
   public ISchedulingRule deleteRule(IResource resource)
   {
-   return super.deleteRule(resource);
+    return super.deleteRule(resource);
   }
 
   @Override
