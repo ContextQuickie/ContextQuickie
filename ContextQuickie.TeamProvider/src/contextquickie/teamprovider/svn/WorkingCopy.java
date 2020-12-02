@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.subversion.javahl.SVNClient;
 
 /**
+ * Class for retrieving working copy information.
  * @author ContextQuickie.
  *
  */
@@ -19,6 +20,11 @@ public class WorkingCopy
     this.currentPath = path;
   }
   
+  /**
+   * Gets the root of the working copy.
+   * @return
+   *      The root of the working copy.
+   */
   public File getRoot()
   {
     if (this.root == null)

@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: CheckStyleConfig
+    Checkstyle-Configuration: ContextQuickie.TeamProvider
     Description: none
 -->
 <module name="Checker">
@@ -165,7 +165,7 @@
     <module name="VariableDeclarationUsageDistance"/>
     <module name="CustomImportOrder">
       <property name="customImportOrderRules" value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE"/>
-      <property name="thirdPartyPackageRegExp" value="org\.(eclipse|osgi)"/>
+      <property name="thirdPartyPackageRegExp" value="org\.(apache|eclipse|osgi)"/>
       <property name="sortImportsInGroupAlphabetically" value="true"/>
     </module>
     <module name="MethodParamPad">
