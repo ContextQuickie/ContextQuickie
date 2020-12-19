@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <bundle id="ContextQuickie.TeamProvider" version="0.1.0.qualifier">
-      <category name="ContextQuickie.TeamProvider"/>
-   </bundle>
-   <category-def name="ContextQuickie.TeamProvider" label="ContextQuickie.TeamProvider"/>
-   <repository-reference location="http://eclipse.svnkit.com/1.8.x/" enabled="true" />
-</site>
