@@ -98,16 +98,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   private static final long MENUUPDATEEXT = 0x0000000000008000;
 
   /**
-   * Diff menu entry.
-   */
-  private static final long MENUDIFF = 0x0000000000010000;
-
-  /**
-   * Show log menu entry.
-   */
-  private static final long MENULOG = 0x0000000000020000;
-
-  /**
    * Edit conflicts menu entry.
    */
   private static final long MENUCONFLICTEDITOR = 0x0000000000040000;
@@ -321,7 +311,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     }
     
     // Path to the "Compare" icon.
-    final String menuCompareIconPath = iconPath+ "menucompare.ico";
+    final String menuCompareIconPath = iconPath + "menucompare.ico";
 
     // Path to the "Merge" icon.
     final String menuMergeIconPath = iconPath + "menumerge.ico";
@@ -366,24 +356,10 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     // Separator
     entries.add(new TortoiseMenuSeperator());
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENUDIFF)
-        .setIconPath(menuCompareIconPath)
-        .setCommand("diff")
-        .setMaxItemsCount(1));
+    entries.add(new Diff(iconPath));
 
     // Diff for two files
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
-        .setCommandId(DIFF_TOW_FILES_COMMAND_ID)
-        .setMenuId(MENUDIFF)
-        .setIconPath(menuCompareIconPath)
-        .setMaxItemsCount(2)
-        .setMinItemsCount(2)
-        .setMaxFolderCount(0)
-        .setUsesDefaultParameters(false));
+    entries.add(new DiffTwoFiles(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later"))
@@ -440,13 +416,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
         .setCommand("diffcommits")
         .setMaxItemsCount(0)); // Disabled. Didn't find any hint in TortoiseGit source how to handle this entry.
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOG, "Show log"))
-        .setCommandId(defaultCommandId)
-        .setMenuId(MENULOG)
-        .setIconPath(iconPath + "menulog.ico")
-        .setCommand("log")
-        .setMaxItemsCount(1));
+    entries.add(new ShowLog(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOGSUBMODULE, "Show log of this folder"))
