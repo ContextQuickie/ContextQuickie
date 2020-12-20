@@ -25,4 +25,9 @@ public abstract class AbstractTortoiseGitEntry extends TortoiseMenuEntry
     this.setCommandId("ContextQuickie.commands.TortoiseGit.TortoiseGitCommand");
     this.setLabel(translation.getTranslatedString(menuTextIdentifier, defaultLabel));
   }
+
+  @Override
+  public void executeCommand()
+  {
+  }
 }

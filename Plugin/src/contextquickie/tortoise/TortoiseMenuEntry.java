@@ -7,12 +7,15 @@ import java.util.function.BiPredicate;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 
+import contextquickie.base.AbstractMenuEntry;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 /**
  * @author ContextQuickie
  *
  *         Menu entry configuration for Tortoise.
  */
-public class TortoiseMenuEntry
+public class TortoiseMenuEntry extends AbstractMenuEntry
 {
   /**
    * The label of the entry.
@@ -135,16 +138,6 @@ public class TortoiseMenuEntry
   {
     this.label = value;
     return this;
-  }
-
-  /**
-   * Gets the icon path.
-   * 
-   * @return the iconPath
-   */
-  public ImageDescriptor getIcon()
-  {
-    return this.icon;
   }
 
   /**
@@ -527,5 +520,18 @@ public class TortoiseMenuEntry
   {
     this.helpText = helpText;
     return this;
+  }
+
+  @Override
+  public ImageDescriptor getImageDescriptor()
+  {
+    return this.icon;
+  }
+
+  @Override
+  public void executeCommand()
+  {
+    // TODO: This class should be abstract in the end so the method is not required anymore.
+    throw new NotImplementedException();
   }
 }

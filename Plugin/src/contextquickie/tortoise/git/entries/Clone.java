@@ -8,6 +8,7 @@ public class Clone extends AbstractTortoiseGitEntry
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000002000000000L;
+
   /**
    * Constructor.
    * 

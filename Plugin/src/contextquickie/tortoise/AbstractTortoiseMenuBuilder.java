@@ -2,6 +2,8 @@ package contextquickie.tortoise;
 
 import contextquickie.Activator;
 import contextquickie.base.AbstractMenuBuilder;
+import contextquickie.base.AbstractMenuEntry;
+import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 import rolandomagico.jniregistry.Registry;
@@ -69,10 +71,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   }
 
   @Override
-  protected List<IContributionItem> getMenuEntries()
+  protected List<AbstractMenuEntry> getMenuEntries()
   {
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    final List<IContributionItem> mainMenu = new ArrayList<IContributionItem>();
+    final List<AbstractMenuEntry> mainMenu = new ArrayList<AbstractMenuEntry>();
 
     // Trigger reading the registry settings every time to detect if using the
     // registry settings has been disabled.
@@ -80,9 +82,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     final TortoiseEnvironment currentEnvironment = this.getCurrentMenuEnvironment();
     final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
 
-    // Create sub menu entry
-    final ImageDescriptor subMenuIcon = contextquickie.Activator.getImageDescriptor("icons/" + this.entriesConfiguration.getSubMenuIconPath());
-    final MenuManager subMenu = new MenuManager(this.entriesConfiguration.getSubMenuText(), subMenuIcon, null);
+    final TortoiseSubMenu subMenu = new TortoiseSubMenu(
+        this.entriesConfiguration.getSubMenuText(),
+        "icons/" + this.entriesConfiguration.getSubMenuIconPath());
 
     for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
     {
@@ -125,9 +127,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
       if (entry.getMenuId() == 0)
       {
-        if (subMenu.isEmpty() == false)
+        if (subMenu.getChildEntries().isEmpty() == false)
         {
-          subMenu.add(new Separator());
+          subMenu.addChildEntry(new MenuSeparator());
         }
       }
       else if (entryVisible == true)
@@ -165,21 +167,20 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
           commandParameter.label = entry.getLabel();
         }
 
-        commandParameter.icon = entry.getIcon();
-        final CommandContributionItem commandContributionItem = new CommandContributionItem(commandParameter);
+        commandParameter.icon = entry.getImageDescriptor();
 
         if (this.isEntryInMainMenu(entry))
         {
-          mainMenu.add(commandContributionItem);
+          mainMenu.add(entry);
         }
         else
         {
-          subMenu.add(commandContributionItem);
+          subMenu.addChildEntry(entry);
         }
       }
     }
 
-    if (subMenu.isEmpty() == false)
+    if (subMenu.getChildEntries().isEmpty() == false)
     {
       mainMenu.add(subMenu);
     }

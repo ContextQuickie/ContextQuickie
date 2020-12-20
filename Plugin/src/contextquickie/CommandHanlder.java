@@ -20,6 +20,8 @@ public class CommandHanlder extends AbstractHandler
         entry.executeCommand();
       }
     }
+
+    ObjectParameterConverter.clearEntries();
     return null;
   }
 }
