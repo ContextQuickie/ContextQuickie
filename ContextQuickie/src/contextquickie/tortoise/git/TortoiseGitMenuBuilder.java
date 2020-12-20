@@ -10,7 +10,7 @@ import contextquickie.tortoise.TortoiseMenuSeperator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.git.entries.*;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,6 +96,11 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
    * Submodule Update menu entry.
    */
   private static final long MENUUPDATEEXT = 0x0000000000008000;
+
+  /**
+   * Diff menu entry.
+   */
+  private static final long MENUDIFF = 0x0000000000010000;
 
   /**
    * Edit conflicts menu entry.

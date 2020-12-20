@@ -1,7 +1,7 @@
 package contextquickie.preferences;
 
 import contextquickie.Activator;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;

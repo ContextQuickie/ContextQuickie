@@ -6,7 +6,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
 import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
+import rolandomagico.jniresourceloader.ResourceLoader;
 
 /**
  * @author ContextQuickie
@@ -66,12 +67,7 @@ public final class Translation
   }
   
   /**
-   * @param libraryDirectory
-   *        The path to the directory containing the translation data.
-   * @param libraryBase
-   *        The base name of the library. It will be extended by <libraryBase><architecture><languageId>.dll  
-   * @param languageId
-   *        The ID of the language.
+   * Gets the translated string for the specific menu entry.
    * @param menuId
    *        The ID of the menu entry.
    * @param defaultValue
@@ -81,13 +77,20 @@ public final class Translation
    */
   public String getTranslatedString(final long menuId, final String defaultValue)
   {
+    String result = defaultValue;
     if (this.libraryPath != null)
     {
-      return contextquickie.windows.Translation.getTranslatedString(this.libraryPath, this.languageId, menuId, defaultValue);
+      String resourceValue = ResourceLoader.getStringResource(this.libraryPath, menuId);
+      if (resourceValue != null)
+      {
+        result = resourceValue;
+      }
     }
     else
     {
       return defaultValue;
     }
+
+    return result;
   }
 }

@@ -4,7 +4,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IResource;
 
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 
 /**
  * Base class for storing the registry value for the "diff later" command.

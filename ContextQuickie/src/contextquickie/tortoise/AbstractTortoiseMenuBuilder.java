@@ -4,7 +4,7 @@ import contextquickie.Activator;
 import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

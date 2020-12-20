@@ -3,7 +3,7 @@ package contextquickie.beyondcompare;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 

@@ -14,7 +14,7 @@ import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSeperator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.hg.entries.*;
-import contextquickie.windows.Registry;
+import rolandomagico.jniregistry.Registry;
 
 public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
 {
