@@ -18,31 +18,6 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="contextquickie.beyondcompare.Compare"
-            id="ContextQuickie.commands.BeyondCompare.Compare"
-            name="ContextQuickie.commands.BeyondCompare.Compare">
-         <commandParameter
-               id="LeftSide"
-               name="LeftSide"
-               optional="false">
-         </commandParameter>
-         <commandParameter
-               id="RightSide"
-               name="RightSide"
-               optional="false">
-         </commandParameter>
-      </command>
-      <command
-            defaultHandler="contextquickie.beyondcompare.SelectLeftSide"
-            id="ContextQuickie.commands.BeyondCompare.SelectLeftSide"
-            name="ContextQuickie.commands.BeyondCompare.SelectLeftSide">
-         <commandParameter
-               id="Path"
-               name="Path"
-               optional="false">
-         </commandParameter>
-      </command>
-      <command
             defaultHandler="contextquickie.tortoise.svn.TortoiseSvnCommand"
             id="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand"
             name="ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand">
@@ -160,6 +135,22 @@
                id="SupportsLinkedResources"
                name="SupportsLinkedResources"
                optional="true">
+         </commandParameter>
+      </command>
+      <commandParameterType
+            converter="contextquickie.ObjectParameterConverter"
+            id="contextquickie.base.AbstractMenuEntry"
+            type="contextquickie.base.AbstractMenuEntry">
+      </commandParameterType>
+      <command
+            defaultHandler="contextquickie.CommandHanlder"
+            id="ContextQuickie.Command"
+            name="ContextQuickie.Command">
+         <commandParameter
+               id="contextquickie.base.AbstractMenuEntry"
+               name="contextquickie.base.AbstractMenuEntry"
+               optional="false"
+               typeId="contextquickie.base.AbstractMenuEntry">
          </commandParameter>
       </command>
    </extension>

@@ -1,5 +1,6 @@
 package contextquickie.tools;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.core.resources.IResource;
@@ -22,15 +23,17 @@ import org.eclipse.ui.PlatformUI;
  */
 public class ContextMenuEnvironment
 {
+  private final Set<IPath> selectedFiles = new HashSet<IPath>();
+  
+  private final Set<IPath> selectedDirectories = new HashSet<IPath>();
+  
+  private final Set<IResource> selectedResources = new HashSet<IResource>();
+  
   /**
-   * Gets the currently selected resources.
-   * 
-   * @return The currently selected resources.
+   * Default constructor which checks the environment for selected resources, files and folders.
    */
-  public Set<IResource> getSelectedResources()
+  public ContextMenuEnvironment()
   {
-    final Set<IResource> selectedResources = new HashSet<IResource>();
-
     final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
     if (window != null)
     {
@@ -66,8 +69,30 @@ public class ContextMenuEnvironment
         }
       }
     }
+    
+    for (IResource resource : selectedResources)
+    {
+      IPath location = resource.getLocation();
+      File locationFile = location.toFile();
+      if (locationFile.isFile())
+      {
+        this.selectedFiles.add(location);
+      }
+      else if (locationFile.isDirectory())
+      {
+        this.selectedDirectories.add(location);
+      }
+    }
+  }
 
-    return selectedResources;
+  /**
+   * Gets the currently selected resources.
+   * 
+   * @return The currently selected resources.
+   */
+  public Set<IResource> getSelectedResources()
+  {
+    return this.selectedResources;
   }
   
 
@@ -80,5 +105,23 @@ public class ContextMenuEnvironment
     }
     
     return location;
+  }
+
+
+  /**
+   * @return the selectedFiles
+   */
+  public Set<IPath> getSelectedFiles()
+  {
+    return this.selectedFiles;
+  }
+
+
+  /**
+   * @return the selectedDirectories
+   */
+  public Set<IPath> getSelectedDirectories()
+  {
+    return this.selectedDirectories;
   }
 }

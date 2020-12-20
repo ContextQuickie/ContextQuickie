@@ -129,7 +129,8 @@ public class BeyondCompare
    */
   public static void compare(final String left, final String right)
   {
-    final String command = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final String command = preferenceStore.getString(PreferenceConstants.P_BEYOND_COMPARE_PATH);
 
     new ProcessWrapper().executeCommand(command, left, right);
   }
