@@ -33,11 +33,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   private ImageDescriptor icon;
 
   /**
-   * The command ID.
-   */
-  private String commandId;
-
-  /**
    * The menu ID.
    */
   private long menuId;
@@ -103,11 +98,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   private boolean isSupportingLinkedResources = true;
   
   /**
-   * A value indicating whether this entry uses default parameters or not.
-   */
-  private boolean usesDefaultParameters = true;
-  
-  /**
    * Custom parameters for this entry.
    */
   private Map<String, Object> customParameters;
@@ -155,29 +145,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     {
       throw new IllegalArgumentException(value);
     }
-    return this;
-  }
-
-  /**
-   * Gets the command ID.
-   * 
-   * @return the commandId
-   */
-  public String getCommandId()
-  {
-    return commandId;
-  }
-
-  /**
-   * Sets the command ID.
-   * 
-   * @param value
-   *          the commandId to set
-   * @return The instance with the changed value.
-   */
-  public TortoiseMenuEntry setCommandId(final String value)
-  {
-    this.commandId = value;
     return this;
   }
 
@@ -417,26 +384,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   public TortoiseMenuEntry setSupportingLinkedResources(boolean value)
   {
     this.isSupportingLinkedResources = value;
-    return this;
-  }
-
-  /**
-   * @return A value indicating whether this entry uses default parameters or not.
-   */
-  public Boolean usesDefaultParameters()
-  {
-    return this.usesDefaultParameters;
-  }
-
-  /**
-   * @param value
-   *          A value indicating whether this entry uses default parameters or not.
-   *          copy.
-   * @return The instance with the changed value.
-   */
-  public TortoiseMenuEntry setUsesDefaultParameters(boolean value)
-  {
-    this.usesDefaultParameters = value;
     return this;
   }
 

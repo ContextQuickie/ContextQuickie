@@ -48,9 +48,7 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     if (preferenceStore.getBoolean(this.componentActiveConfigKey))
     {
-      List<AbstractMenuEntry> abstractMenuEntries = this.getMenuEntries();
-      ContextMenuEnvironment environment = new ContextMenuEnvironment();
-      menuEntries = this.createMenuItems(abstractMenuEntries, environment);
+      menuEntries = this.createMenuItems(this.getMenuEntries(), new ContextMenuEnvironment());
     }
     
     if (menuEntries.isEmpty())

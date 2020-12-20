@@ -20,8 +20,6 @@ public final class Translation
 
   private final String libraryPath;
   
-  private final long languageId;
-  
   /**
    * Constructor.
    * 
@@ -63,7 +61,6 @@ public final class Translation
     }
     
     this.libraryPath = tempTortoiseLanguagesPath;
-    this.languageId = languageId;
   }
   
   /**

@@ -5,9 +5,9 @@ import java.util.Set;
 import org.eclipse.core.resources.IResource;
 
 /**
+ * Class for storing the current Tortoise environment configuration.
+ * 
  * @author ContextQuickie
- *
- *         Class for storing the current environment configuration.
  */
 public class TortoiseEnvironment
 {

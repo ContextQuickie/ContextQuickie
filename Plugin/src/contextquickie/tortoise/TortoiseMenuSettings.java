@@ -2,6 +2,8 @@ package contextquickie.tortoise;
 
 import java.util.List;
 
+import contextquickie.base.AbstractMenuEntry;
+
 /**
  * @author ContextQuickie
  *

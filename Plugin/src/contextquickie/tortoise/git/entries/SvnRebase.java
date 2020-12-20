@@ -2,12 +2,12 @@ package contextquickie.tortoise.git.entries;
 
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
-public class Commit extends AbstractTortoiseGitEntry
+public class SvnRebase extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000000000000004;
+  public static final long MenuIdentifier = 0x0000000008000000;
 
   /**
    * Constructor.
@@ -15,11 +15,12 @@ public class Commit extends AbstractTortoiseGitEntry
    * @param iconPath
    *      The path containing the icon for this instance.
    */
-  public Commit(String iconPath)
+  public SvnRebase(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUCOMMIT, "Commit...");
+    super(MenuTextIdentifier.IDS_MENUSVNREBASE, "SVN Rebase");
     this.setMenuId(MenuIdentifier);
-    this.setIconPath(iconPath + "menucommit.ico");
+    this.setIconPath(iconPath + "menurebase.ico");
     this.setCommand("commit");
+    this.setMaxItemsCount(0); // TODO: Disabled
   }
 }

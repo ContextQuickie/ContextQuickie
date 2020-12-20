@@ -1,12 +1,14 @@
 package contextquickie.tortoise.svn;
 
 import contextquickie.Activator;
+import contextquickie.base.AbstractMenuEntry;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.Version;
+import contextquickie.tortoise.svn.entries.ApplyPatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,11 +148,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUCREATEPATCH = 0x0000000001000000;
 
   /**
-   * Apply Patch menu entry.
-   */
-  private static final long MENUAPPLYPATCH = 0x0000000002000000;
-
-  /**
    * Revision graph menu entry.
    */
   private static final long MENUREVISIONGRAPH = 0x0000000004000000;
@@ -240,7 +237,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   /**
    * TortoiseSVN menu configuration.
    */
-  private static List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+  private static List<AbstractMenuEntry> entries = new ArrayList<AbstractMenuEntry>();
 
   /**
    * The instance using for translating the menu entries.
@@ -295,7 +292,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCHECKOUT, "Chekout..."))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUCHECKOUT)
         .setIconPath(iconPath + "menucheckout.ico")
         .setCommand("checkout")
@@ -307,7 +304,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPGRADE, "Upgrade working copy"))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUUPGRADE)
         .setIconPath(menuUpdateIconPath)
         .setCommand("wcupgrade")
@@ -315,14 +312,14 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPDATE, "Update"))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUUPDATE)
         .setIconPath(menuUpdateIconPath)
         .setCommand("update"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCOMMIT, "Commit..."))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUCOMMIT)
         .setIconPath(iconPath + "menucommit.ico")
         .setCommand("commit"));
@@ -333,7 +330,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     // Diff for one file or folder
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
         .setCommand("diff")
@@ -343,18 +340,15 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     // Diff for two files
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
-        .setCommandId("ContextQuickie.commands.TortoiseSvn.TortoiseSvnDiffTwoFilesCommand")
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
         .setMaxItemsCount(2)
         .setMinItemsCount(2)
         .setMaxFolderCount(0)
-        .setUsesDefaultParameters(false)
         .addVisibilityChecker((entry, environment) -> AbstractTortoiseMenuBuilder.diffTwoFilesActive(entry, environment) == true));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFLATER)
         .setIconPath(menuCompareIconPath)
         .setCommand("diff")
@@ -362,7 +356,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFNOW, "Diff with \"%ls\""))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUDIFFNOW)
         .setIconPath(menuCompareIconPath)
         .setCommand("diff")
@@ -370,7 +363,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPREVDIFF, "Diff with previous version"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUPREVDIFF)
         .setIconPath(menuCompareIconPath)
         .setCommand("prevdiff")
@@ -380,7 +372,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUURLDIFF, "Diff with URL"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUURLDIFF)
         .setIconPath(menuCompareIconPath)
         .setCommand("urldiff")
@@ -388,7 +379,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUNIDIFF, "Unified Diff"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUUNIDIFF)
         .setIconPath(menuCompareIconPath)
         .setCommand("urldiff")
@@ -396,7 +386,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENULOG, "Show log"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENULOG)
         .setIconPath(iconPath + "menulog.ico")
         .setCommand("log")
@@ -405,7 +394,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREPOBROWSE, "Repo-browser"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUREPOBROWSE)
         .setIconPath(iconPath + "menurepobrowse.ico")
         .setCommand("repobrowser")
@@ -414,14 +402,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSHOWCHANGED, "Check for modifications"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUSHOWCHANGED)
         .setIconPath(iconPath + "menushowchanged.ico")
         .setCommand("repostatus"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVISIONGRAPH, "Revision graph"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUREVISIONGRAPH)
         .setIconPath(iconPath + "menurevisiongraph.ico")
         .setCommand("revisiongraph")
@@ -433,7 +419,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCONFLICT, "Edit conflicts"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCONFLICTEDITOR)
         .setIconPath(menuCompareIconPath)
         .setCommand("conflicteditor")
@@ -441,14 +426,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENURESOLVE, "Resolve..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENURESOLVE)
         .setIconPath(iconPath + "menuresolve.ico")
         .setCommand("resolve"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPDATEEXT, "Update to revision..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUUPDATEEXT)
         .setIconPath(menuUpdateIconPath)
         .setCommand("update")
@@ -456,7 +439,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENURENAME, "Rename..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENURENAME)
         .setIconPath(iconPath + "menurename.ico")
         .setCommand("rename")
@@ -464,14 +446,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREMOVE, "Delete"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREMOVEKEEP, "Delete (keep local)"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUREMOVE)
         .setIconPath(menuDeleteIconPath)
         .setCommand("remove")
@@ -479,21 +459,18 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUREVERT, "Revert..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUREVERT)
         .setIconPath(iconPath + "menurevert" + alternativeExtension)
         .setCommand("revert"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDELUNVERSIONED, "Delete unversioned items..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUDELUNVERSIONED)
         .setIconPath(menuDeleteIconPath)
         .setCommand("delunversioned"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLEANUP, "Clean up..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCLEANUP)
         .setIconPath(iconPath + "menucleanup.ico")
         .setCommand("cleanup")
@@ -502,14 +479,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENU_LOCK, "Get lock..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENULOCK)
         .setIconPath(iconPath + "menulock.ico")
         .setCommand("lock"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENU_UNLOCK, "Release lock..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUUNLOCK)
         .setIconPath(iconPath + "menuunlock.ico")
         .setCommand("unlock"));
@@ -519,7 +494,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBRANCH, "Branch/tag..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCOPY)
         .setIconPath(iconPath + "menucopy.ico")
         .setCommand("copy")
@@ -527,7 +501,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSWITCH, "Switch..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUSWITCH)
         .setIconPath(iconPath + "menuswitch.ico")
         .setCommand("switch")
@@ -535,7 +508,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUMERGE, "Merge..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGE)
         .setIconPath(menuMergeIconPath)
         .setCommand("merge")
@@ -543,14 +515,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUMERGEALL, "Merge all.."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUMERGEALL)
         .setIconPath(menuMergeIconPath)
         .setCommand("mergeall"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUEXPORT, "Export..."))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUEXPORT)
         .setIconPath(iconPath + "menuexport.ico")
         .setCommand("export")
@@ -560,7 +531,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENURELOCATE, "Relocate..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENURELOCATE)
         .setIconPath(iconPath + "menurelocate.ico")
         .setCommand("relocate")
@@ -571,7 +541,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCREATEREPOS, "Create repository here"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEREPOS)
         .setIconPath(iconPath + "menucreaterepos.ico")
         .setCommand("repocreate")
@@ -579,14 +548,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUADD, "Add..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUADD)
         .setIconPath(iconPath + "menuadd.ico")
         .setCommand("add"));
 
      entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUIMPORT, "Import..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUIMPORT)
         .setIconPath(iconPath + "menuimport.ico")
         .setCommand("import")
@@ -594,7 +561,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBLAME, "Blame..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUBLAME)
         .setIconPath(iconPath + "menublame.ico")
         .setCommand("blame")
@@ -603,14 +569,13 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCOPYURL, "Copy URL to clipboard"))
-        .setCommandId(defaultCommandId)
+
         .setMenuId(MENUCOPYURL)
         .setIconPath(iconPath + "copy.ico")
         .setCommand("copyurls"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUIGNORE, "Add to ignore list"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUIGNORE)
         .setIconPath(iconPath + "menuignore.ico")
         .setCommand("ignore")
@@ -623,45 +588,33 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     {
       entries.add(new TortoiseMenuEntry()
           .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSHELVE, "Shelve..."))
-          .setCommandId(defaultCommandId)
-          .setMenuId(MENUSHELVE)
+            .setMenuId(MENUSHELVE)
           .setIconPath(iconPath + "menushelve.ico")
           .setCommand("shelve"));
 
       entries.add(new TortoiseMenuEntry()
           .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUNSHELVE, "Unshelve..."))
-          .setCommandId(defaultCommandId)
-          .setMenuId(MENUUNSHELVE)
+            .setMenuId(MENUUNSHELVE)
           .setIconPath(iconPath + "menuunshelve.ico")
           .setCommand("unshelve"));
     }
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCREATEPATCH, "Create patch..."))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCREATEPATCH)
         .setIconPath(iconPath + "menudiff.ico")
         .setCommand("createpatch"));
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUAPPLYPATCH, "Apply patch..."))
-        .setCommandId("ContextQuickie.commands.TortoiseSvn.TortoiseSvnMergeCommand")
-        .setMenuId(MENUAPPLYPATCH)
-        .setIconPath(iconPath + "menupatch.ico")
-        .setMaxFileCount(0)
-        .setMaxFolderCount(1)
-        .setUsesDefaultParameters(false));
+    entries.add(new ApplyPatch(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUPROPERTIES, "Properties"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUPROPERTIES)
         .setIconPath(iconPath + "menuproperties.ico")
         .setCommand("properties"));
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCLIPPASTE, "Paste"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUCLIPPASTE)
         .setIconPath(iconPath + "menuignore.ico")
         .setCommand("pastecopy")
@@ -672,7 +625,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUSETTINGS)
         .setIconPath(iconPath + "menusettings" + alternativeExtension)
         .setCommand("settings")
@@ -681,7 +633,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUHELP, "Help"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUHELP)
         .setIconPath(iconPath + "menuhelp" + alternativeExtension)
         .setCommand("help")
@@ -690,7 +641,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUABOUT, "About"))
-        .setCommandId(defaultCommandId)
         .setMenuId(MENUABOUT)
         .setIconPath(iconPath + "menuabout.ico")
         .setCommand("about")

@@ -134,40 +134,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
       }
       else if (entryVisible == true)
       {
-        final CommandContributionItemParameter commandParameter = new CommandContributionItemParameter(
-            this.getServiceLocator(), 
-            null,
-            entry.getCommandId(),
-            CommandContributionItem.STYLE_PUSH);
-
-        // Create map of parameters for the command
-        if (entry.usesDefaultParameters())
-        {
-          final Map<String, Object> parameters = new HashMap<String, Object>();
-          parameters.put(TortoiseMenuConstants.COMMAND_ID, entry.getCommand());
-          parameters.put(TortoiseMenuConstants.REQUIRES_PATH_ID, entry.getEntryRequiresPath().toString());
-          parameters.put(TortoiseMenuConstants.SUPPORTS_LINKED_RESOURCES_ID, entry.isSupportingLinkedResources().toString());
-          if (entry.getParameter1() != null)
-          {
-            parameters.put(TortoiseMenuConstants.PARAMETER_1_ID, entry.getParameter1());
-          }
-          commandParameter.parameters = parameters;
-        }
-        else
-        {
-          commandParameter.parameters = entry.getCustomParameters();
-        }
-
         if (this.isEntryInMainMenu(entry))
         {
-          commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
+          // TODO: commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
         }
-        else
-        {
-          commandParameter.label = entry.getLabel();
-        }
-
-        commandParameter.icon = entry.getImageDescriptor();
 
         if (this.isEntryInMainMenu(entry))
         {
@@ -231,21 +201,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     }
 
     return (entryValue & compareValue) != 0;
-  }
-  
-  protected static boolean diffTwoFilesActive(final TortoiseMenuEntry entry, final TortoiseEnvironment environment)
-  {
-    if ((environment.getSelectedFilesCount() == 2) && (environment.getSelectedFoldersCount() == 0))
-    {
-      Iterator<IResource> iterator = environment.getSelectedResources().iterator();
-      Map<String, Object> parameters = new HashMap<String, Object>();
-      parameters.put(AbstractTortoiseDiffTwoFilesCommand.LeftSideParameterName, iterator.next().getLocation().toOSString());
-      parameters.put(AbstractTortoiseDiffTwoFilesCommand.RightSideParameterName, iterator.next().getLocation().toOSString());
-      entry.setCustomParameters(parameters);
-      return true;
-    }
-    
-    return false;
   }
 
   /**

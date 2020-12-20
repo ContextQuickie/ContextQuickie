@@ -1,9 +1,5 @@
 package contextquickie.preferences;
 
-import contextquickie.Activator;
-import contextquickie.preferences.controls.ConditionalFileFieldEditor;
-import contextquickie.preferences.controls.EmptyFieldEitor;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +16,10 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+
+import contextquickie.Activator;
+import contextquickie.preferences.controls.ConditionalFileFieldEditor;
+import contextquickie.preferences.controls.EmptyFieldEitor;
 
 /**
  * This class represents a preference page that is contributed to the
