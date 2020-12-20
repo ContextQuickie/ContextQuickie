@@ -32,16 +32,26 @@ public class Version implements Comparable<Version>
   public boolean equals(Object obj)
   {
     if (this == obj)
+    {
       return true;
-    if (obj == null)
+    }
+    else if (obj == null)
+    {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    else if (getClass() != obj.getClass())
+    {
       return false;
-    Version other = (Version) obj;
-    if (majorVersion != other.majorVersion)
-      return false;
-    if (minorVersion != other.minorVersion)
-      return false;
+    }
+    else
+    {
+      Version other = (Version) obj;
+      if ((majorVersion != other.majorVersion) || (minorVersion != other.minorVersion))
+      {
+        return false;
+      }
+    }
+    
     return true;
   }
 

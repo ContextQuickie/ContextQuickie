@@ -2,6 +2,7 @@ package contextquickie.tortoise;
 
 import java.io.File;
 import java.util.Set;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 

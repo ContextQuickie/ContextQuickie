@@ -23,7 +23,7 @@ public final class Translation
   private final long languageId;
   
   /**
-   * Constructor
+   * Constructor.
    * 
    * @param preferenceConstants
    *        The preference constants for this instance.

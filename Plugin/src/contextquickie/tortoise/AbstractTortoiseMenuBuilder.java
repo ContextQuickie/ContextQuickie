@@ -195,10 +195,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
     {
-        final String registryLocation = this.preferences.getRegistryUserDirectory();
+      final String registryLocation = this.preferences.getRegistryUserDirectory();
 
-        Registry registry = new Registry();
-        return registry.readIntValue(registryLocation, registryKey, defaultValue);
+      Registry registry = new Registry();
+      return registry.readIntValue(registryLocation, registryKey, defaultValue);
     }
 
     return defaultValue;
