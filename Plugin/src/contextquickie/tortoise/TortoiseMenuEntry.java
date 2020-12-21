@@ -564,7 +564,7 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   @Override
   public final Boolean isVisible(ContextMenuEnvironment environment)
   {
-    boolean isVisible = false;
+    boolean isVisible = true;
     this.selectedResources = environment.getSelectedResources();
     if (super.isVisible(environment))
     {
@@ -600,15 +600,13 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
       {
         isVisible = false;
       }
-      
-      if ((tortoiseEnvironment.getSelectedResources().size() < this.getMinItemsCount()) ||
-          (tortoiseEnvironment.getSelectedFilesCount() < this.getMinFileCount()) ||
-          (tortoiseEnvironment.getSelectedFoldersCount() < this.getMinFolderCount()))
+      else if ((tortoiseEnvironment.getSelectedResources().size() < this.getMinItemsCount()) ||
+               (tortoiseEnvironment.getSelectedFilesCount() < this.getMinFileCount()) ||
+               (tortoiseEnvironment.getSelectedFoldersCount() < this.getMinFolderCount()))
       {
         isVisible = false;
       }
-      
-      if (this.isVisible(tortoiseEnvironment) == false)
+      else if (this.isVisible(tortoiseEnvironment) == false)
       {
         isVisible = false;
       }
@@ -618,7 +616,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
         isVisible = this.isVisible(tortoiseEnvironment);
       }
     }
-    
     
     return isVisible;
   }

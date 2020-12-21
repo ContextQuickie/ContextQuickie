@@ -4,6 +4,7 @@ import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.Version;
@@ -301,8 +302,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(iconPath + "menucommit.ico")
         .setCommand("commit"));
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
 
     // Diff for one file or folder
     entries.add(new TortoiseMenuEntry()
@@ -384,8 +384,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxItemsCount(1)
         .setSupportingLinkedResources(false));
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCONFLICT, "Edit conflicts"))
@@ -459,8 +458,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(iconPath + "menuunlock.ico")
         .setCommand("unlock"));
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUBRANCH, "Branch/tag..."))
@@ -506,8 +504,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("relocate")
         .setMaxItemsCount(0)); // TODO: Disabled
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCREATEREPOS, "Create repository here"))
@@ -551,8 +548,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("ignore")
         .setMaxItemsCount(0)); // TODO: Disabled
     
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
 
     if (usedVersion.compareTo(version1_10) >= 0)
     {
@@ -590,8 +586,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("pastecopy")
         .setMaxItemsCount(0)); // TODO: Disabled
 
-    // Separator
-    entries.add(new TortoiseMenuEntry());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings"))
@@ -615,6 +610,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(iconPath + "menuabout.ico")
         .setCommand("about")
         .setVisibleWithoutWorkingCopy(true));
+    
     return entries;
   }
 

@@ -36,19 +36,34 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
    */
   private IServiceLocator currentServiceLocator;
   
+  /**
+   * Storage for the entries to avoid multiple creation of the child entries.
+   */
+  private List<AbstractMenuEntry> entries;
+  
+  /**
+   * Constructor.
+   * @param componentActiveConfigKey
+   * The name of the configuration parameter which indicates whether this menu is active or not.
+   */
   protected AbstractMenuBuilder(String componentActiveConfigKey) 
   {
     this.componentActiveConfigKey = componentActiveConfigKey;
   }
   
   @Override
-  protected final IContributionItem[] getContributionItems()
+  protected synchronized final IContributionItem[] getContributionItems()
   {
     List<IContributionItem> menuEntries = new ArrayList<IContributionItem>();
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     if (preferenceStore.getBoolean(this.componentActiveConfigKey))
     {
-      menuEntries = this.createMenuItems(this.getMenuEntries(), new ContextMenuEnvironment());
+      if (this.entries == null)
+      {
+        this.entries = this.getMenuEntries();
+      }
+
+      menuEntries = this.createMenuItems(this.entries, new ContextMenuEnvironment());
     }
     
     if (menuEntries.isEmpty())
