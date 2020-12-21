@@ -14,6 +14,7 @@ public class CommandHanlder extends AbstractHandler
     Object contextMenuObject = event.getObjectParameterForExecution(AbstractMenuEntry.ParameterName);
     if (contextMenuObject != null)
     {
+      ObjectParameterConverter.clearEntries();
       if (AbstractMenuEntry.class.isInstance(contextMenuObject))
       {
         AbstractMenuEntry entry = AbstractMenuEntry.class.cast(contextMenuObject);
@@ -21,7 +22,6 @@ public class CommandHanlder extends AbstractHandler
       }
     }
 
-    ObjectParameterConverter.clearEntries();
     return null;
   }
 }

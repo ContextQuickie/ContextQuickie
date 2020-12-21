@@ -1,10 +1,5 @@
 package contextquickie.tortoise;
 
-import java.util.Set;
-
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IPath;
-
 import contextquickie.tools.ContextMenuEnvironment;
 
 /**
@@ -12,7 +7,7 @@ import contextquickie.tools.ContextMenuEnvironment;
  * 
  * @author ContextQuickie
  */
-public class TortoiseEnvironment
+public class TortoiseEnvironment extends ContextMenuEnvironment
 {
   /**
    * A value indicating whether a working copy has been found or not.
@@ -24,27 +19,14 @@ public class TortoiseEnvironment
    */
   private String workingCopyRoot;
   
-  /**
-   * The context menu environment of this instance.
-   */
-  private final ContextMenuEnvironment contextMenuEnvironment;
-  
-  public TortoiseEnvironment(ContextMenuEnvironment contextMenuEnvironment)
+  public TortoiseEnvironment(String workingCopyFolderName)
   {
-    this.contextMenuEnvironment = contextMenuEnvironment;
-  }
-
-  /**
-   * @return The number of selected files.
-   */
-  public Set<IPath> getSelectedFiles()
-  {
-    return this.contextMenuEnvironment.getSelectedFiles();
-  }
-  
-  public Set<IPath> getSelectedDirectories()
-  {
-    return this.contextMenuEnvironment.getSelectedDirectories();
+    TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
+    if (workingCopyDetect.test(this.getSelectedResources(), workingCopyFolderName))
+    {
+      this.setWorkingCopyFound(true);
+      this.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
+    }
   }
 
   /**
@@ -52,7 +34,7 @@ public class TortoiseEnvironment
    */
   public long getSelectedFilesCount()
   {
-    return this.contextMenuEnvironment.getSelectedFiles().size();
+    return this.getSelectedFiles().size();
   }
 
   /**
@@ -60,7 +42,7 @@ public class TortoiseEnvironment
    */
   public long getSelectedFoldersCount()
   {
-    return this.contextMenuEnvironment.getSelectedDirectories().size();
+    return this.getSelectedDirectories().size();
   }
 
   /**
@@ -77,14 +59,6 @@ public class TortoiseEnvironment
   public void setWorkingCopyFound(final boolean value)
   {
     this.workingCopyFound = value;
-  }
-
-  /**
-   * @return A list containing all selected resources.
-   */
-  public Set<IResource> getSelectedResources()
-  {
-    return this.contextMenuEnvironment.getSelectedResources();
   }
 
   /**

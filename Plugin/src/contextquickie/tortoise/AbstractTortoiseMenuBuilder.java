@@ -8,6 +8,7 @@ import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.base.AbstractMenuEntry;
 import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
 import rolandomagico.jniregistry.Registry;
 
 /**
@@ -16,8 +17,14 @@ import rolandomagico.jniregistry.Registry;
  *         Class which builds Tortoise menu entries based on configuration
  *         structures.
  */
-public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder 
+public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 {
+  @Override
+  protected ContextMenuEnvironment createEnvironment()
+  {
+    return new TortoiseEnvironment(this.preferences.getWorkingCopyFolderName());
+  }
+
   /**
    * Indicates whether the context menu has already been reed or not.
    */

@@ -42,6 +42,12 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   private List<AbstractMenuEntry> entries;
   
   /**
+   * Storage for the environment to avoid multiple creation of the environment.
+   * Multiple creation can delay the menu creation e.g. when searching for the working copy.
+   */
+  private ContextMenuEnvironment contextMenuEnvironment;
+  
+  /**
    * Constructor.
    * @param componentActiveConfigKey
    * The name of the configuration parameter which indicates whether this menu is active or not.
@@ -52,7 +58,7 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   }
   
   @Override
-  protected synchronized final IContributionItem[] getContributionItems()
+  protected final IContributionItem[] getContributionItems()
   {
     List<IContributionItem> menuEntries = new ArrayList<IContributionItem>();
     final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
@@ -62,8 +68,13 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
       {
         this.entries = this.getMenuEntries();
       }
+      
+      if (this.contextMenuEnvironment == null)
+      {
+        this.contextMenuEnvironment = this.createEnvironment();
+      }
 
-      menuEntries = this.createMenuItems(this.entries, new ContextMenuEnvironment());
+      menuEntries = this.createMenuItems(this.entries, this.contextMenuEnvironment);
     }
     
     if (menuEntries.isEmpty())
@@ -86,6 +97,11 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   }
   
   protected abstract List<AbstractMenuEntry> getMenuEntries();
+  
+  protected ContextMenuEnvironment createEnvironment()
+  {
+    return new ContextMenuEnvironment();
+  }
   
   private List<IContributionItem> createMenuItems(List<AbstractMenuEntry> entries, ContextMenuEnvironment environment)
   {

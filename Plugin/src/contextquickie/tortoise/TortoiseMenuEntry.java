@@ -26,8 +26,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class TortoiseMenuEntry extends AbstractMenuEntry
 {
-  private Set<IResource> selectedResources;
-  
   /**
    * The preferences of the current instance.
    */
@@ -565,17 +563,10 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   public final Boolean isVisible(ContextMenuEnvironment environment)
   {
     boolean isVisible = true;
-    this.selectedResources = environment.getSelectedResources();
+    environment.getSelectedResources();
     if (super.isVisible(environment))
     {
-      final TortoiseEnvironment tortoiseEnvironment = new TortoiseEnvironment(environment);
-      TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
-      if (workingCopyDetect.test(environment.getSelectedResources(), getPreferenceConstants().getWorkingCopyFolderName()))
-      {
-        tortoiseEnvironment.setWorkingCopyFound(true);
-        tortoiseEnvironment.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
-      }
-      
+      final TortoiseEnvironment tortoiseEnvironment = TortoiseEnvironment.class.cast(environment);
       final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
       final boolean workingCopyDetection = preferenceStore.getBoolean(getPreferenceConstants().getWorkingCopyDetection());
       if (workingCopyDetection == true)
