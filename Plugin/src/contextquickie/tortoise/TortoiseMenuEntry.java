@@ -1,13 +1,22 @@
 package contextquickie.tortoise;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.function.BiPredicate;
+import java.util.Objects;
+import java.util.Set;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 
+import contextquickie.Activator;
 import contextquickie.base.AbstractMenuEntry;
+import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -17,6 +26,13 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class TortoiseMenuEntry extends AbstractMenuEntry
 {
+  private Set<IResource> selectedResources;
+  
+  /**
+   * The preferences of the current instance.
+   */
+  private static TortoisePreferenceConstants preferenceConstants;
+  
   /**
    * The label of the entry.
    */
@@ -103,10 +119,101 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   private Map<String, Object> customParameters;
 
   /**
-   * An interface for an additional visibility checks.
+   * @return The preference constants.
    */
-  private List<BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>> visibilityCheckers = new ArrayList<BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>>();
+  protected static TortoisePreferenceConstants getPreferenceConstants()
+  {
+    return preferenceConstants;
+  }
 
+  /**
+   * @param value The preference constants.
+   */
+  protected static void setPreferenceConstants(TortoisePreferenceConstants value)
+  {
+    preferenceConstants = value;
+  }
+  
+  /**
+   * Gets the working copy root directory of the specific directory.
+   * 
+   * @param path
+   *          The directory which is used for start of the working copy search.
+   * @return The path to the working copy or null if no working copy has been
+   *         found.
+   */
+  protected final String getWorkingCopyRoot(final IPath path)
+  {
+    TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
+    return workingCopyDetect.getWorkingCopyRoot(path, getPreferenceConstants().getWorkingCopyFolderName());
+  }
+  
+  /**
+   * Gets all selected resources of the specified execution event.
+   * 
+   * @return A collection containing all selected resources.
+   */
+  protected Set<IResource> getSelectedResources()
+  {
+    final Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();
+    final Set<IResource> result = new HashSet<IResource>(selectedResources);
+    if (Activator.getDefault().getPreferenceStore().getBoolean(getPreferenceConstants().getScanForLinkedResources()))
+    {
+      selectedResources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
+      {
+        final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
+        if (workingCopyRoot != null)
+        {
+          result.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
+        }
+      });
+    }
+
+    return result;
+  }
+  
+  /**
+   * Gets all linked resources in the specified container which have the same
+   * working copy root.
+   * 
+   * @param container
+   *          The container which is used for searching for linked resources.
+   * @param workingCopyRoot
+   *          The root path to the working copy folder of the container.
+   * @return A HashSet containing all linked resources of the specified
+   *         container.
+   */
+  private Set<IResource> getLinkedResourcesOfContainer(final IContainer container, final String workingCopyRoot)
+  {
+    final Set<IResource> linkedResources = new HashSet<IResource>();
+    try
+    {
+      for (IResource member : container.members())
+      {
+        final String memberWorkingCopyRoot = this.getWorkingCopyRoot(member.getLocation());
+        if (member.isLinked() && (workingCopyRoot.equals(memberWorkingCopyRoot)))
+        {
+          linkedResources.add(member);
+
+          // Check if there are also linked resourced within the linked resource
+          // container
+          final IAdaptable adaptable = member;
+          final IContainer childContainer = adaptable.getAdapter(IContainer.class);
+          if (childContainer != null)
+          {
+            this.getLinkedResourcesOfContainer(childContainer, workingCopyRoot);
+          }
+        }
+      }
+    }
+    catch (CoreException e)
+    {
+      e.printStackTrace();
+    }
+
+    return linkedResources;
+  }
+  
   /**
    * Gets the label of the instance.
    * 
@@ -407,27 +514,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   }
 
   /**
-   * @param value
-   *          The visibility checker for this instance.
-   * @return The instance with the changed value.
-   */
-  public TortoiseMenuEntry addVisibilityChecker(BiPredicate<TortoiseMenuEntry, TortoiseEnvironment> value)
-  {
-    this.visibilityCheckers.add(value);
-    return this;
-  }
-
-  /**
-   * @param environment 
-   *          The current environment of the context menu.
-   * @return True if the entry is visible, otherwise false.
-   */
-  public boolean isVisible(TortoiseEnvironment environment)
-  {
-    return ! (this.visibilityCheckers.stream().anyMatch(predicate -> predicate.test(this, environment) == false));
-  }
-
-  /**
    * @return The custom parameters for this entry.
    */
   public Map<String, Object> getCustomParameters()
@@ -473,6 +559,73 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   public ImageDescriptor getImageDescriptor()
   {
     return this.icon;
+  }
+  
+  @Override
+  public final Boolean isVisible(ContextMenuEnvironment environment)
+  {
+    boolean isVisible = false;
+    this.selectedResources = environment.getSelectedResources();
+    if (super.isVisible(environment))
+    {
+      final TortoiseEnvironment tortoiseEnvironment = new TortoiseEnvironment(environment);
+      TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
+      if (workingCopyDetect.test(environment.getSelectedResources(), getPreferenceConstants().getWorkingCopyFolderName()))
+      {
+        tortoiseEnvironment.setWorkingCopyFound(true);
+        tortoiseEnvironment.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
+      }
+      
+      final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+      final boolean workingCopyDetection = preferenceStore.getBoolean(getPreferenceConstants().getWorkingCopyDetection());
+      if (workingCopyDetection == true)
+      {
+        if ((this.isVisibleInWorkingCopy() == true) && 
+            (this.isVisibleWithoutWorkingCopy() == false) &&
+            (tortoiseEnvironment.isWorkingCopyFound() == false))
+        {
+          isVisible = false;
+        }
+        if ((this.isVisibleInWorkingCopy() == false) && 
+            (this.isVisibleWithoutWorkingCopy() == true) &&
+            (tortoiseEnvironment.isWorkingCopyFound() == true))
+        {
+          isVisible = false;
+        }
+      }
+      
+      if ((tortoiseEnvironment.getSelectedResources().size() > this.getMaxItemsCount()) ||
+          (tortoiseEnvironment.getSelectedFilesCount() > this.getMaxFileCount()) ||
+          (tortoiseEnvironment.getSelectedFoldersCount() > this.getMaxFolderCount()))
+      {
+        isVisible = false;
+      }
+      
+      if ((tortoiseEnvironment.getSelectedResources().size() < this.getMinItemsCount()) ||
+          (tortoiseEnvironment.getSelectedFilesCount() < this.getMinFileCount()) ||
+          (tortoiseEnvironment.getSelectedFoldersCount() < this.getMinFolderCount()))
+      {
+        isVisible = false;
+      }
+      
+      if (this.isVisible(tortoiseEnvironment) == false)
+      {
+        isVisible = false;
+      }
+      
+      if (isVisible)
+      {
+        isVisible = this.isVisible(tortoiseEnvironment);
+      }
+    }
+    
+    
+    return isVisible;
+  }
+  
+  protected boolean isVisible(TortoiseEnvironment tortoiseEnvironment)
+  {
+    return true;
   }
 
   @Override

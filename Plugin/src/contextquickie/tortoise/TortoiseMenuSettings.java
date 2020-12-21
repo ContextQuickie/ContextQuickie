@@ -24,7 +24,7 @@ public class TortoiseMenuSettings
   /**
    * The entries of the menu.
    */
-  private List<TortoiseMenuEntry> entries;
+  private List<AbstractMenuEntry> entries;
   
   /**
    * The prefix for the main menu.
@@ -60,7 +60,7 @@ public class TortoiseMenuSettings
   /**
    * @return the The entries of the menu.
    */
-  public List<TortoiseMenuEntry> getEntries()
+  public List<AbstractMenuEntry> getEntries()
   {
     return entries;
   }
@@ -68,7 +68,7 @@ public class TortoiseMenuSettings
   /**
    * @param value The entries of the menu.
    */
-  public void setEntries(final List<TortoiseMenuEntry> value)
+  public void setEntries(final List<AbstractMenuEntry> value)
   {
     this.entries = value;
   }

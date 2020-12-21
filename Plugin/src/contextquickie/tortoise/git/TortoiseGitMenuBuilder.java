@@ -1,35 +1,26 @@
 package contextquickie.tortoise.git;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import contextquickie.Activator;
 import contextquickie.base.AbstractMenuEntry;
 import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.PreferenceConstants;
-import contextquickie.tortoise.AbstractTortoiseDiffTwoFilesCommand;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
-import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.git.entries.*;
-import rolandomagico.jniregistry.Registry;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiPredicate;
-
-import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * @author ContextQuickie
  *
  *         Menu configuration for TortoiseGit.
  */
-public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implements BiPredicate<TortoiseMenuEntry, TortoiseEnvironment>
+public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
 {
   private static final String DIFF_TOW_FILES_COMMAND_ID = "ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand";
 
@@ -196,7 +187,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   /**
    * Stash Apply menu entry.
    */
-  private static final long MENUSTASHAPPLY = 0x0000200000000000L;
+  public static final long MENUSTASHAPPLY = 0x0000200000000000L;
 
   /**
    * Stash List menu entry.
@@ -211,7 +202,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
   /**
    * Submodule Sync menu entry.
    */
-  private static final long MENUSUBSYNC = 0x0001000000000000L;
+  public static final long MENUSUBSYNC = 0x0001000000000000L;
 
   /**
    * Stash Pop menu entry.
@@ -257,16 +248,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
    * About menu entry.
    */
   private static final long MENUABOUT = 0x8000000000000000L;
-  
-  /**
-   * The value of ContextMenuExtEntriesLow in the registry settings of TortoiseGit.
-   */
-  private long ContextMenuExtEntriesLow;
-  
-  /**
-   * The value of ContextMenuExtEntriesHigh in the registry settings of TortoiseGit.
-   */
-  private long ContextMenuExtEntriesHigh;
   
   /**
    * TortoiseGit menu configuration.
@@ -677,44 +658,5 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder implemen
     settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortoiseGit"));
     settings.setMainMenuPrefix("Git");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | Sync.MenuIdentifier | Commit.MenuIdentifier);
-    
-    this.ContextMenuExtEntriesLow = this.readSettingsFromRegistry("ContextMenuExtEntriesLow", MENUSUBSYNC | MENUSTASHAPPLY);
-    this.ContextMenuExtEntriesHigh = this.readSettingsFromRegistry("ContextMenuExtEntriesHigh", ImportSvnIgnore.MenuIdentifier);
-    entries.forEach(entry -> entry.addVisibilityChecker(this));
-    
-    entries.stream().filter(e -> ((e.getMenuId() == MENUBISECT) && (e.getParameter1() == "/start"))).forEach(e -> e.addVisibilityChecker(
-        (entry, environment) -> this.bisectActive(environment) == false));
-    entries.stream().filter(e -> ((e.getMenuId() == MENUBISECT) && (e.getParameter1() != "/start"))).forEach(e -> e.addVisibilityChecker(
-        (entry, environment) -> this.bisectActive(environment) == true));
-  }
-
-  private boolean bisectActive(final TortoiseEnvironment environment)
-  {
-    final String workingCopyRoot = environment.getWorkingCopyRoot();
-    if (workingCopyRoot != null)
-    {
-      File gitDirectory = new File(workingCopyRoot);
-      if (gitDirectory.exists() && gitDirectory.isDirectory())
-      {
-        File bisectStartFile = new File(gitDirectory, "BISECT_START");
-        if (bisectStartFile.exists() && bisectStartFile.isFile())
-        {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  @Override
-  public boolean test(TortoiseMenuEntry entry, TortoiseEnvironment environment)
-  {
-    if (this.isEntryBitSet(entry.getMenuId(), this.ContextMenuExtEntriesLow, this.ContextMenuExtEntriesHigh))
-    {
-      return false;
-    }
-    
-    return true;
   }
 }

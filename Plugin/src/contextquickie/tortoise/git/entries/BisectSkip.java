@@ -1,5 +1,6 @@
 package contextquickie.tortoise.git.entries;
 
+import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class BisectSkip extends AbstractTortoiseGitEntry
@@ -24,5 +25,11 @@ public class BisectSkip extends AbstractTortoiseGitEntry
     this.setParameter1("/skip");
     this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
+  }
+  
+  @Override
+  public boolean isVisible(TortoiseEnvironment environment)
+  {
+    return ((super.isVisible(environment) == true) && (this.bisectActive(environment) == true));
   }
 }

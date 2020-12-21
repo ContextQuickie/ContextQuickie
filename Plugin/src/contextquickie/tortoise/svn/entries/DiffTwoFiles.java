@@ -1,4 +1,4 @@
-package contextquickie.tortoise.git.entries;
+package contextquickie.tortoise.svn.entries;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +13,7 @@ import contextquickie.tools.StringUtil;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
-public class DiffTwoFiles extends AbstractTortoiseGitEntry
+public class DiffTwoFiles extends AbstractTortoiseSvnEntry
 {
   private String leftSideForCompare;
   
@@ -43,7 +43,8 @@ public class DiffTwoFiles extends AbstractTortoiseGitEntry
   @Override
   public boolean isVisible(TortoiseEnvironment environment)
   {
-    if (super.isVisible(environment))
+    if ((environment.getSelectedFilesCount() == 2) &&
+        (environment.getSelectedFoldersCount() == 0))
     {
       Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
       this.leftSideForCompare = iterator.next().toOSString();

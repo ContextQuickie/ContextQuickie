@@ -1,11 +1,9 @@
 package contextquickie.beyondcompare;
 
 /**
+ * Enumeration of values indicating the type of the left side of the comparison.
  * @author ContextQuickie
- *
- *         Enumeration of values indicating the type of the left side of the
- *         comparison.
- */
+  */
 public enum BeyondCompareSavedLeft
 {
   /**

@@ -1,5 +1,7 @@
 package contextquickie.tortoise.git.entries;
 
+import contextquickie.tools.ContextMenuEnvironment;
+import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class BisectReset extends AbstractTortoiseGitEntry
@@ -24,5 +26,11 @@ public class BisectReset extends AbstractTortoiseGitEntry
     this.setParameter1("/reset");
     this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
+  }
+  
+  @Override
+  public boolean isVisible(TortoiseEnvironment environment)
+  {
+    return ((super.isVisible(environment) == true) && (this.bisectActive(environment) == true));
   }
 }

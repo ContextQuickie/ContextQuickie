@@ -3,6 +3,9 @@ package contextquickie.tortoise;
 import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
+
+import contextquickie.tools.ContextMenuEnvironment;
 
 /**
  * Class for storing the current Tortoise environment configuration.
@@ -12,45 +15,44 @@ import org.eclipse.core.resources.IResource;
 public class TortoiseEnvironment
 {
   /**
-   * The number of selected files.
-   */
-  private long selectedFilesCount;
-  
-  /**
-   * The number of selected folders.
-   */
-  private long selectedFoldersCount;
-  
-  /**
    * A value indicating whether a working copy has been found or not.
    */
   private boolean workingCopyFound;
-  
-  /**
-   * A list containing all selected resources.
-   */
-  private Set<IResource> selectedResources;
-  
+
   /**
    * The root directory of the working copy.
    */
   private String workingCopyRoot;
+  
+  /**
+   * The context menu environment of this instance.
+   */
+  private final ContextMenuEnvironment contextMenuEnvironment;
+  
+  public TortoiseEnvironment(ContextMenuEnvironment contextMenuEnvironment)
+  {
+    this.contextMenuEnvironment = contextMenuEnvironment;
+  }
+
+  /**
+   * @return The number of selected files.
+   */
+  public Set<IPath> getSelectedFiles()
+  {
+    return this.contextMenuEnvironment.getSelectedFiles();
+  }
+  
+  public Set<IPath> getSelectedDirectories()
+  {
+    return this.contextMenuEnvironment.getSelectedDirectories();
+  }
 
   /**
    * @return The number of selected files.
    */
   public long getSelectedFilesCount()
   {
-    return this.selectedFilesCount;
-  }
-
-  /**
-   * @param value
-   *          The number of selected files.
-   */
-  public void setSelectedFilesCount(final long value)
-  {
-    this.selectedFilesCount = value;
+    return this.contextMenuEnvironment.getSelectedFiles().size();
   }
 
   /**
@@ -58,15 +60,7 @@ public class TortoiseEnvironment
    */
   public long getSelectedFoldersCount()
   {
-    return selectedFoldersCount;
-  }
-
-  /**
-   * @param value The number of selected folders.
-   */
-  public void setSelectedFoldersCount(final long value)
-  {
-    this.selectedFoldersCount = value;
+    return this.contextMenuEnvironment.getSelectedDirectories().size();
   }
 
   /**
@@ -90,15 +84,7 @@ public class TortoiseEnvironment
    */
   public Set<IResource> getSelectedResources()
   {
-    return selectedResources;
-  }
-
-  /**
-   * @param value A list containing all selected resources.
-   */
-  public void setSelectedResources(final Set<IResource> value)
-  {
-    this.selectedResources = value;
+    return this.contextMenuEnvironment.getSelectedResources();
   }
 
   /**

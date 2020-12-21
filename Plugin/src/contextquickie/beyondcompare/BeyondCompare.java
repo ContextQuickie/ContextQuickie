@@ -1,11 +1,11 @@
 package contextquickie.beyondcompare;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ProcessWrapper;
 import rolandomagico.jniregistry.Registry;
-
-import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * Class for accessing Beyond Compare registry settings and executing beyond
@@ -86,6 +86,7 @@ public class BeyondCompare
   }
 
   /**
+   * Gets the current registry value for the saved left side.
    * @return The current registry value for the saved left side.
    */
   public String getSavedLeft()
@@ -94,6 +95,7 @@ public class BeyondCompare
   }
 
   /**
+   * Sets the current registry value for the saved left side.
    * @param value
    *          The current registry value for the saved left side.
    */
@@ -103,6 +105,7 @@ public class BeyondCompare
   }
 
   /**
+   * Gets the current registry value for the type of the saved left side.
    * @return The current registry value for the type of the saved left side.
    */
   public BeyondCompareSavedLeft getSavedLeftType()
@@ -111,6 +114,7 @@ public class BeyondCompare
   }
 
   /**
+   * Sets the current registry value for the type of the saved left side.
    * @param value
    *          The current registry value for the type of the saved left side.
    */

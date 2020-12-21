@@ -13,10 +13,10 @@ import org.eclipse.core.resources.IResource;
 /**
  * Base class for execute a Tortoise merge command.
  */
-public abstract class AbstractTortoiseMergeCommand extends AbstractTortoiseHandler
+public abstract class AbstractTortoiseMergeCommand extends TortoiseMenuEntry
 {
   @Override
-  public final Object execute(final ExecutionEvent event)
+  public void executeCommand()
   {
     final List<String> arguments = new ArrayList<String>();
     final String command = Activator.getDefault().getPreferenceStore().getString(this.getPreferenceConstants().getMergePath());
@@ -26,7 +26,5 @@ public abstract class AbstractTortoiseMergeCommand extends AbstractTortoiseHandl
       arguments.add("/patchpath:" + resource.getLocation().toString());
       new ProcessWrapper().executeCommand(command, null, arguments);
     }
-
-    return null;
   }
 }

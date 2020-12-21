@@ -1,12 +1,5 @@
 package contextquickie.tortoise;
 
-import contextquickie.Activator;
-import contextquickie.base.AbstractMenuBuilder;
-import contextquickie.base.AbstractMenuEntry;
-import contextquickie.base.MenuSeparator;
-import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.tools.ContextMenuEnvironment;
-import rolandomagico.jniregistry.Registry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,6 +14,14 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
+
+import contextquickie.Activator;
+import contextquickie.base.AbstractMenuBuilder;
+import contextquickie.base.AbstractMenuEntry;
+import contextquickie.base.MenuSeparator;
+import contextquickie.preferences.TortoisePreferenceConstants;
+import contextquickie.tools.ContextMenuEnvironment;
+import rolandomagico.jniregistry.Registry;
 
 /**
  * @author ContextQuickie
@@ -73,79 +74,42 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   @Override
   protected List<AbstractMenuEntry> getMenuEntries()
   {
-    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     final List<AbstractMenuEntry> mainMenu = new ArrayList<AbstractMenuEntry>();
 
     // Trigger reading the registry settings every time to detect if using the
     // registry settings has been disabled.
     this.readSettingsFromRegistry();
-    final TortoiseEnvironment currentEnvironment = this.getCurrentMenuEnvironment();
-    final boolean workingCopyDetection = preferenceStore.getBoolean(this.preferences.getWorkingCopyDetection());
 
     final TortoiseSubMenu subMenu = new TortoiseSubMenu(
         this.entriesConfiguration.getSubMenuText(),
         "icons/" + this.entriesConfiguration.getSubMenuIconPath());
 
-    for (TortoiseMenuEntry entry : this.entriesConfiguration.getEntries())
+    for (AbstractMenuEntry entry : this.entriesConfiguration.getEntries())
     {
       boolean entryVisible = true;
-
-      if (workingCopyDetection == true)
-      {
-        if ((entry.isVisibleInWorkingCopy() == true) && 
-            (entry.isVisibleWithoutWorkingCopy() == false) &&
-            (currentEnvironment.isWorkingCopyFound() == false))
-        {
-          entryVisible = false;
-        }
-        if ((entry.isVisibleInWorkingCopy() == false) && 
-            (entry.isVisibleWithoutWorkingCopy() == true) &&
-            (currentEnvironment.isWorkingCopyFound() == true))
-        {
-          entryVisible = false;
-        }
-      }
-      
-      if ((currentEnvironment.getSelectedResources().size() > entry.getMaxItemsCount()) ||
-          (currentEnvironment.getSelectedFilesCount() > entry.getMaxFileCount()) ||
-          (currentEnvironment.getSelectedFoldersCount() > entry.getMaxFolderCount()))
-      {
-        entryVisible = false;
-      }
-      
-      if ((currentEnvironment.getSelectedResources().size() < entry.getMinItemsCount()) ||
-          (currentEnvironment.getSelectedFilesCount() < entry.getMinFileCount()) ||
-          (currentEnvironment.getSelectedFoldersCount() < entry.getMinFolderCount()))
-      {
-        entryVisible = false;
-      }
-      
-      if (entry.isVisible(currentEnvironment) == false)
-      {
-        entryVisible = false;
-      }
-
-      if (entry.getMenuId() == 0)
+       
+      if (MenuSeparator.class.isInstance(entry))
       {
         if (subMenu.getChildEntries().isEmpty() == false)
         {
           subMenu.addChildEntry(new MenuSeparator());
         }
       }
-      else if (entryVisible == true)
+      else if (TortoiseMenuEntry.class.isInstance(entry))
       {
-        if (this.isEntryInMainMenu(entry))
+        TortoiseMenuEntry tortoiseMenuEntry = TortoiseMenuEntry.class.cast(entry);
+        if (this.isEntryInMainMenu(tortoiseMenuEntry))
         {
           // TODO: commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
         }
 
-        if (this.isEntryInMainMenu(entry))
+        if (this.isEntryInMainMenu(tortoiseMenuEntry))
         {
-          mainMenu.add(entry);
+          mainMenu.add(tortoiseMenuEntry);
         }
         else
         {
-          subMenu.addChildEntry(entry);
+          subMenu.addChildEntry(tortoiseMenuEntry);
         }
       }
     }
@@ -201,28 +165,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     }
 
     return (entryValue & compareValue) != 0;
-  }
-
-  /**
-   * Checks in which environment the current menu will be used.
-   * 
-   * @return The current menu environment.
-   */
-  private TortoiseEnvironment getCurrentMenuEnvironment()
-  {
-    final TortoiseEnvironment result = new TortoiseEnvironment();
-    result.setSelectedResources(new ContextMenuEnvironment().getSelectedResources());
-    TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
-    if (workingCopyDetect.test(result.getSelectedResources(), this.preferences.getWorkingCopyFolderName()))
-    {
-      result.setWorkingCopyFound(true);
-      result.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
-    }
-
-    result.setSelectedFilesCount(result.getSelectedResources().stream().filter(r -> r.getType() == IResource.FILE).count());
-    result.setSelectedFoldersCount(result.getSelectedResources().stream().filter(r -> (r.getType() == IResource.FOLDER) || (r.getType() == IResource.PROJECT)).count());
-
-    return result;
   }
 
   /**

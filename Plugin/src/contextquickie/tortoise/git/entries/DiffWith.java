@@ -4,6 +4,7 @@ import java.io.File;
 
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
+import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 import rolandomagico.jniregistry.Registry;
 
@@ -34,7 +35,7 @@ public class DiffWith extends AbstractTortoiseGitEntry
   }
   
   @Override
-  public Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(TortoiseEnvironment environment)
   {
     Boolean isVisible = false;
     if (super.isVisible(environment))

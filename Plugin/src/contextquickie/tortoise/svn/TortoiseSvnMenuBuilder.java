@@ -9,6 +9,7 @@ import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.Version;
 import contextquickie.tortoise.svn.entries.ApplyPatch;
+import contextquickie.tortoise.svn.entries.DiffLater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -198,11 +199,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUUPGRADE = 0x0000000800000000L;
 
   /**
-   * Diff later menu entry.
-   */
-  private static final long MENUDIFFLATER = 0x0000001000000000L;
-
-  /**
    * Diff menu entry.
    */
   private static final long MENUDIFFNOW = 0x0000002000000000L;
@@ -330,7 +326,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     // Diff for one file or folder
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFF, "Diff"))
-
         .setMenuId(MENUDIFF)
         .setIconPath(menuCompareIconPath)
         .setCommand("diff")
@@ -344,15 +339,9 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(menuCompareIconPath)
         .setMaxItemsCount(2)
         .setMinItemsCount(2)
-        .setMaxFolderCount(0)
-        .addVisibilityChecker((entry, environment) -> AbstractTortoiseMenuBuilder.diffTwoFilesActive(entry, environment) == true));
+        .setMaxFolderCount(0));
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later"))
-        .setMenuId(MENUDIFFLATER)
-        .setIconPath(menuCompareIconPath)
-        .setCommand("diff")
-        .setMaxItemsCount(0)); // TODO: Disabled
+    entries.add(new DiffLater(iconPath));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFNOW, "Diff with \"%ls\""))

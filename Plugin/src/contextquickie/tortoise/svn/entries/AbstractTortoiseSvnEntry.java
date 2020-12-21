@@ -11,6 +11,11 @@ public abstract class AbstractTortoiseSvnEntry extends TortoiseMenuEntry
    */
   protected static final Translation translation = new Translation(PreferenceConstants.TORTOISE_GIT);
 
+  static
+  {
+    setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);;
+  }
+  
   /**
    * Constructor.
    * 
