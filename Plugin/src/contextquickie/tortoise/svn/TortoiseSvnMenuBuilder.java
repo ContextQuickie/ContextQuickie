@@ -247,8 +247,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
   static
   {
-    final String defaultCommandId = "ContextQuickie.commands.TortoiseSvn.TortoiseSvnCommand";
-
     translation = new Translation(PreferenceConstants.TORTOISE_SVN);
     
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();

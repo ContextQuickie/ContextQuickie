@@ -266,7 +266,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   
   static
   {
-    final String defaultCommandId = "ContextQuickie.commands.TortoiseGit.TortoiseGitCommand";
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     translation = new Translation(PreferenceConstants.TORTOISE_GIT);
     

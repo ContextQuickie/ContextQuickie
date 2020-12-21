@@ -1,6 +1,5 @@
 package contextquickie.tortoise.git.entries;
 
-import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 

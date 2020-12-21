@@ -3,7 +3,6 @@ package contextquickie.tortoise.svn.entries;
 import org.eclipse.core.resources.IResource;
 
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.svn.MenuTextIdentifier;
 import rolandomagico.jniregistry.Registry;
 

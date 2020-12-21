@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.preference.IPreferenceStore;
-
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
@@ -16,9 +14,7 @@ import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.TortoiseMenuEntry;
-import contextquickie.tortoise.TortoiseWorkingCopyDetect;
 import contextquickie.tortoise.Translation;
-import contextquickie.tortoise.git.TortoiseGitMenuBuilder;
 
 public abstract class AbstractTortoiseGitEntry extends TortoiseMenuEntry
 {

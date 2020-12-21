@@ -1,26 +1,13 @@
 package contextquickie.tortoise;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.action.IContributionItem;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.menus.CommandContributionItem;
-import org.eclipse.ui.menus.CommandContributionItemParameter;
-
 import contextquickie.Activator;
 import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.base.AbstractMenuEntry;
 import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.TortoisePreferenceConstants;
-import contextquickie.tools.ContextMenuEnvironment;
 import rolandomagico.jniregistry.Registry;
 
 /**
@@ -86,8 +73,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 
     for (AbstractMenuEntry entry : this.entriesConfiguration.getEntries())
     {
-      boolean entryVisible = true;
-       
       if (MenuSeparator.class.isInstance(entry))
       {
         if (subMenu.getChildEntries().isEmpty() == false)
