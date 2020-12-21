@@ -10,7 +10,6 @@ import contextquickie.Activator;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class DiffTwoFiles extends AbstractTortoiseSvnEntry
@@ -41,18 +40,12 @@ public class DiffTwoFiles extends AbstractTortoiseSvnEntry
   }
 
   @Override
-  public boolean isVisible(TortoiseEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
-    if ((environment.getSelectedFilesCount() == 2) &&
-        (environment.getSelectedFoldersCount() == 0))
-    {
-      Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
-      this.leftSideForCompare = iterator.next().toOSString();
-      this.rightSideForCompare = iterator.next().toOSString();
-      return true;
-    }
-    
-    return false;
+    Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
+    this.leftSideForCompare = iterator.next().toOSString();
+    this.rightSideForCompare = iterator.next().toOSString();
+    return true;
   }
 
   @Override

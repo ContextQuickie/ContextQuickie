@@ -33,7 +33,7 @@ public class Compare extends AbstractBeyondCompareEntry
   }
 
   @Override
-  public Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     Boolean isVisible = false;
     if ((environment.getSelectedFiles().size() == 2) && environment.getSelectedDirectories().isEmpty())

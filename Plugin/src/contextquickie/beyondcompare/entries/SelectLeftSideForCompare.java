@@ -44,7 +44,7 @@ public class SelectLeftSideForCompare extends AbstractBeyondCompareEntry
   }
   
   @Override
-  public Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     Boolean isVisible = false;
     if ((environment.getSelectedFiles().size() == 1) && environment.getSelectedDirectories().isEmpty())

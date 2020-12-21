@@ -1,5 +1,6 @@
 package contextquickie.tortoise.git.entries;
 
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
@@ -28,8 +29,13 @@ public class BisectBad extends AbstractTortoiseGitEntry
   }
   
   @Override
-  public boolean isVisible(TortoiseEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
-    return ((super.isVisible(environment) == true) && (this.bisectActive(environment) == true));
+    if (super.isVisible(environment))
+    {
+      return this.bisectActive(TortoiseEnvironment.class.cast(environment));
+    }
+    
+    return false;
   }
 }

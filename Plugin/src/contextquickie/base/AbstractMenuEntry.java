@@ -24,7 +24,7 @@ public abstract class AbstractMenuEntry
     return false;
   }
 
-  public Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     return true;
   }

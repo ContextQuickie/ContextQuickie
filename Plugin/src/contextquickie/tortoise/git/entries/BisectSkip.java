@@ -1,5 +1,6 @@
 package contextquickie.tortoise.git.entries;
 
+import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
@@ -28,8 +29,8 @@ public class BisectSkip extends AbstractTortoiseGitEntry
   }
   
   @Override
-  public boolean isVisible(TortoiseEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
-    return ((super.isVisible(environment) == true) && (this.bisectActive(environment) == true));
+    return ((super.isVisible(environment) == true) && (this.bisectActive(TortoiseEnvironment.class.cast(environment)) == true));
   }
 }

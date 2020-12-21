@@ -10,7 +10,6 @@ import contextquickie.Activator;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class DiffTwoFiles extends AbstractTortoiseGitEntry
@@ -41,7 +40,7 @@ public class DiffTwoFiles extends AbstractTortoiseGitEntry
   }
 
   @Override
-  public boolean isVisible(TortoiseEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     if (super.isVisible(environment))
     {

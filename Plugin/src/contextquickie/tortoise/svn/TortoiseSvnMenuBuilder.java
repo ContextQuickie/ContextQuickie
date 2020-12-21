@@ -8,8 +8,7 @@ import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.Version;
-import contextquickie.tortoise.svn.entries.ApplyPatch;
-import contextquickie.tortoise.svn.entries.DiffLater;
+import contextquickie.tortoise.svn.entries.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,10 +225,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
    */
   private static final long MENUHELP = 0x4000000000000000L;
 
-  /**
-   * About menu entry.
-   */
-  private static final long MENUABOUT = 0x8000000000000000L;
   private static final long MENUSHELVE = 0x0000010000000000L;
   private static final long MENUUNSHELVE = 0x0000020000000000L;
 
@@ -270,7 +265,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCHECKOUT, "Chekout..."))
-
         .setMenuId(MENUCHECKOUT)
         .setIconPath(iconPath + "menucheckout.ico")
         .setCommand("checkout")
@@ -282,7 +276,6 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPGRADE, "Upgrade working copy"))
-
         .setMenuId(MENUUPGRADE)
         .setIconPath(menuUpdateIconPath)
         .setCommand("wcupgrade")
@@ -290,14 +283,12 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUUPDATE, "Update"))
-
         .setMenuId(MENUUPDATE)
         .setIconPath(menuUpdateIconPath)
         .setCommand("update"));
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCOMMIT, "Commit..."))
-
         .setMenuId(MENUCOMMIT)
         .setIconPath(iconPath + "menucommit.ico")
         .setCommand("commit"));
@@ -604,12 +595,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setEntryRequiresPath(false)
         .setVisibleWithoutWorkingCopy(true));
     
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUABOUT, "About"))
-        .setMenuId(MENUABOUT)
-        .setIconPath(iconPath + "menuabout.ico")
-        .setCommand("about")
-        .setVisibleWithoutWorkingCopy(true));
+    entries.add(new About(iconPath));
     
     return entries;
   }

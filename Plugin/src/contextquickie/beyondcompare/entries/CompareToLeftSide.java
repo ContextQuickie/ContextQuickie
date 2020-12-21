@@ -17,7 +17,7 @@ public class CompareToLeftSide extends AbstractBeyondCompareEntry
   private IPath selectedPath;
 
   @Override
-  public Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     Boolean isVisible = false;
     

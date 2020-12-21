@@ -560,7 +560,7 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   }
   
   @Override
-  public final Boolean isVisible(ContextMenuEnvironment environment)
+  public boolean isVisible(ContextMenuEnvironment environment)
   {
     boolean isVisible = true;
     environment.getSelectedResources();
@@ -609,11 +609,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     }
     
     return isVisible;
-  }
-  
-  protected boolean isVisible(TortoiseEnvironment tortoiseEnvironment)
-  {
-    return true;
   }
 
   @Override
