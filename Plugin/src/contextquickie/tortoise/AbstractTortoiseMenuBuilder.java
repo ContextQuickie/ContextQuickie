@@ -71,9 +71,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         this.entriesConfiguration.getSubMenuText(),
         "icons/" + this.entriesConfiguration.getSubMenuIconPath());
 
-    for (AbstractMenuEntry entry : this.entriesConfiguration.getEntries())
+    for (TortoiseMenuEntry entry : this.getEntries())
     {
-      if (MenuSeparator.class.isInstance(entry))
+      if (TortoiseMenuSeparator.class.isInstance(entry))
       {
         if (subMenu.getChildEntries().isEmpty() == false)
         {
@@ -85,11 +85,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         TortoiseMenuEntry tortoiseMenuEntry = TortoiseMenuEntry.class.cast(entry);
         if (this.isEntryInMainMenu(tortoiseMenuEntry))
         {
-          // TODO: commandParameter.label = this.entriesConfiguration.getMainMenuPrefix() + " " + entry.getLabel();
-        }
-
-        if (this.isEntryInMainMenu(tortoiseMenuEntry))
-        {
+          tortoiseMenuEntry.setLabel(this.entriesConfiguration.getMainMenuPrefix() + " " + tortoiseMenuEntry.getLabel());
           mainMenu.add(tortoiseMenuEntry);
         }
         else
@@ -186,4 +182,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
   {
     return this.isEntryBitSet(entry.getMenuId(), this.registryContextMenuEntries, this.registryContextMenuEntriesHigh);
   }
+  
+  protected abstract List<TortoiseMenuEntry> getEntries();
 }

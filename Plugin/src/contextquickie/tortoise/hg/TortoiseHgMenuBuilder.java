@@ -8,22 +8,16 @@ import java.util.Set;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
-import contextquickie.base.AbstractMenuEntry;
-import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.hg.entries.*;
 import rolandomagico.jniregistry.Registry;
 
 public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
 {
-  /**
-   * TortoiseHg menu configuration.
-   */
-  private static final List<AbstractMenuEntry> entries = new ArrayList<AbstractMenuEntry>();
-  
   /**
    * The path to the icons based on the used TortoiseHg version.
    */
@@ -38,48 +32,57 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
    * The promoted menu items (shown in the main menu). 
    */
   private Set<String> promotedItems;
-
-  static
+  
+  protected List<TortoiseMenuEntry> getEntries()
   {
+    List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
     entries.add(new Commit(iconPath));
     entries.add(new ViewFileStatus(iconPath));
     entries.add(new ShelveChanges(iconPath));
     entries.add(new VisualDiff(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new AddFiles(iconPath));
     entries.add(new RevertFiles(iconPath));
     entries.add(new RenameFile(iconPath));
     entries.add(new ForgetFiles(iconPath));
     entries.add(new RemoveFiles(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new RevisionHistory(iconPath));
     entries.add(new AnnotateFiles(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new Workbench(iconPath));
     entries.add(new Update(iconPath));
     entries.add(new SearchHistory(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new Synchronize(iconPath));
     entries.add(new WebServer(iconPath));
     entries.add(new Clone(iconPath));
     entries.add(new CreateRepositoryHere(iconPath));
     // Not supported: entries.add(new UpdateIcons(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new EditIgnoreFilter(iconPath));
     entries.add(new GuessRenames(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new ExplorerExtensionSettings(iconPath));
     entries.add(new RepositorySettings(iconPath));
     entries.add(new GlobalSettings(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
     
     entries.add(new AboutTortioseHg(iconPath));
+    return entries;
   }
 
   /**
@@ -88,7 +91,6 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
   public TortoiseHgMenuBuilder()
   {
     super(PreferenceConstants.TORTOISE_HG, settings);
-    settings.setEntries(entries);
     settings.setMainMenuPrefix("Hg");
     settings.setSubMenuText("TortoiseHg");
     settings.setSubMenuIconPath(iconPath + "hg.png");

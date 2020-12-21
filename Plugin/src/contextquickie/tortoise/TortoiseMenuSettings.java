@@ -1,9 +1,5 @@
 package contextquickie.tortoise;
 
-import java.util.List;
-
-import contextquickie.base.AbstractMenuEntry;
-
 /**
  * @author ContextQuickie
  *
@@ -20,11 +16,6 @@ public class TortoiseMenuSettings
    * The path to the icon for the main menu.
    */
   private String subMenuIconPath;
-  
-  /**
-   * The entries of the menu.
-   */
-  private List<AbstractMenuEntry> entries;
   
   /**
    * The prefix for the main menu.
@@ -55,22 +46,6 @@ public class TortoiseMenuSettings
   public void setSubMenuIconPath(final String value)
   {
     this.subMenuIconPath = value;
-  }
-
-  /**
-   * @return the The entries of the menu.
-   */
-  public List<AbstractMenuEntry> getEntries()
-  {
-    return entries;
-  }
-
-  /**
-   * @param value The entries of the menu.
-   */
-  public void setEntries(final List<AbstractMenuEntry> value)
-  {
-    this.entries = value;
   }
 
   /**

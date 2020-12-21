@@ -6,11 +6,10 @@ import java.util.List;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
-import contextquickie.base.AbstractMenuEntry;
-import contextquickie.base.MenuSeparator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.git.entries.*;
@@ -22,8 +21,6 @@ import contextquickie.tortoise.git.entries.*;
  */
 public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
 {
-  private static final String DIFF_TOW_FILES_COMMAND_ID = "ContextQuickie.commands.TortoiseGit.TortoiseGitDiffTwoFilesCommand";
-
   /**
    * Add menu entry.
    */
@@ -90,11 +87,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUUPDATEEXT = 0x0000000000008000;
 
   /**
-   * Diff menu entry.
-   */
-  private static final long MENUDIFF = 0x0000000000010000;
-
-  /**
    * Edit conflicts menu entry.
    */
   private static final long MENUCONFLICTEDITOR = 0x0000000000040000;
@@ -145,11 +137,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENULOGSUBMODULE = 0x0000000100000000L;
 
   /**
-   * Diff with previous version menu entry.
-   */
-  private static final long MENUPREVDIFF = 0x0000000200000000L;
-
-  /**
    * "Paste" menu entry.
    */
   private static final long MENUCLIPPASTE = 0x0000000400000000L;
@@ -168,11 +155,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
    * "Apply Patch Serial..." menu entry.
    */
   private static final long MENUIMPORTPATCH = 0x0000010000000000L;
-
-  /**
-   * "Diff later" menu entry.
-   */
-  private static final long MENUDIFFLATER = 0x0000020000000000L;
 
   /**
    * Rebase menu entry.
@@ -210,21 +192,6 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUSTASHPOP = 0x0002000000000000L;
 
   /**
-   * "Diff Two Commits" menu entry.
-   */
-  private static final long MENUDIFFTWO = 0x0004000000000000L;
-
-  /**
-   * Bisect start menu entry.
-   */
-  private static final long MENUBISECT = 0x0008000000000000L;
-
-  /**
-   * SVN Fetch menu entry.
-   */
-  private static final long MENUSVNFETCH = 0x0080000000000000L;
-
-  /**
    * Revision Graph menu entry.
    */
   private static final long MENUREVISIONGRAPH = 0x0100000000000000L;
@@ -233,44 +200,15 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
    * Daemon menu entry.
    */
   private static final long MENUDAEMON = 0x0200000000000000L;
-
-  /**
-   * Settings menu entry.
-   */
-  private static final long MENUSETTINGS = 0x2000000000000000L;
-
-  /**
-   * Help menu entry.
-   */
-  private static final long MENUHELP = 0x4000000000000000L;
-
-  /**
-   * About menu entry.
-   */
-  private static final long MENUABOUT = 0x8000000000000000L;
   
-  /**
-   * TortoiseGit menu configuration.
-   */
-  private static final List<AbstractMenuEntry> entries = new ArrayList<AbstractMenuEntry>();
-
-  /**
-   * The instance using for translating the menu entries.
-   */
-  private static final Translation translation;
-  
-  /**
-   * The path to the icons based on the used TortoiseGit version.
-   */
-  private static final String iconPath;
-  
-  static
+  protected List<TortoiseMenuEntry> getEntries()
   {
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    translation = new Translation(PreferenceConstants.TORTOISE_GIT);
+    Translation translation = new Translation(PreferenceConstants.TORTOISE_GIT);
     
     String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
     final String alternativeExtension;
+    String iconPath;
     if (usedVersion.equals("2.6"))
     {
       iconPath = "TortoiseGit/2.6/";
@@ -286,29 +224,28 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
       alternativeExtension = ".png";
     }
     
-    // Path to the "Compare" icon.
-    final String menuCompareIconPath = iconPath + "menucompare.ico";
-
     // Path to the "Merge" icon.
     final String menuMergeIconPath = iconPath + "menumerge.ico";
 
     // Path to the "Delete" icon
     final String menuDeleteIconPath = iconPath + "menudelete" + alternativeExtension;
     
+    final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
     entries.add(new Clone(iconPath));
     entries.add(new Pull(iconPath));
     entries.add(new Fetch(iconPath));
     entries.add(new Push(iconPath));
     entries.add(new Sync(iconPath));
-    entries.add(new MenuSeparator());
+    
+    entries.add(new TortoiseMenuSeparator());
+    
     entries.add(new Commit(iconPath));
-
     entries.add(new GitSvnDCommit(iconPath));
     entries.add(new SvnRebase(iconPath));
     entries.add(new SvnFetch(iconPath));
     entries.add(new ImportSvnIgnore(iconPath));
 
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new Diff(iconPath));
     entries.add(new DiffTwoFiles(iconPath));
@@ -316,15 +253,9 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
     entries.add(new DiffWith(iconPath));
     entries.add(new DiffWithPreviousVersion(iconPath));
     
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUDIFFTWO, "Diff two commits"))
-        .setMenuId(MENUDIFFTWO)
-        .setIconPath(menuCompareIconPath)
-        .setCommand("diffcommits")
-        .setMaxItemsCount(0)); // Disabled. Didn't find any hint in TortoiseGit source how to handle this entry.
-
+    entries.add(new DiffTwoCommits(iconPath));
     entries.add(new ShowLog(iconPath));
 
     entries.add(new TortoiseMenuEntry()
@@ -418,13 +349,13 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFolderCount(1)
         .setMaxItemsCount(1));
 
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
     entries.add(new BisectStart(iconPath, alternativeExtension));
     entries.add(new BisectGood(iconPath, alternativeExtension));
     entries.add(new BisectBad(iconPath, alternativeExtension));
     entries.add(new BisectSkip(iconPath, alternativeExtension));
     entries.add(new BisectReset(iconPath, alternativeExtension));
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCONFLICT, "Edit conflicts"))
@@ -480,7 +411,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxFileCount(0));
 
     // Separator
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSWITCH, "Switch/Checkout..."))
@@ -523,7 +454,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setMaxItemsCount(1));
 
     // Separator
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUCREATEREPOS, "Create repository here"))
@@ -554,7 +485,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand(""));
 
     // Separator
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBADD, "Submodule Add..."))
@@ -577,7 +508,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("subsync"));
 
     // Separator
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
     entries.add(new TortoiseMenuEntry()
         .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUFORMATPATCH, "Create Patch Serial..."))
@@ -613,32 +544,13 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
         .setCommand("settings")
         .setMaxItemsCount(0)); // TODO: Disabled, also not supported by TortoiseGit
 
-    // Separator
-    entries.add(new MenuSeparator());
+    entries.add(new TortoiseMenuSeparator());
 
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings"))
-        .setMenuId(MENUSETTINGS)
-        .setIconPath(iconPath + "menusettings.ico")
-        .setCommand("settings")
-        .setEntryRequiresPath(false)
-        .setVisibleWithoutWorkingCopy(true));
-
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUHELP, "Help"))
-        .setMenuId(MENUHELP)
-        .setIconPath(iconPath + "menuhelp" + alternativeExtension)
-        .setCommand("help")
-        .setEntryRequiresPath(false)
-        .setVisibleWithoutWorkingCopy(true));
-
-    entries.add(new TortoiseMenuEntry()
-        .setLabel(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUABOUT, "About"))
-        .setMenuId(MENUABOUT)
-        .setIconPath(iconPath + "menuabout.ico")
-        .setCommand("about")
-        .setEntryRequiresPath(false)
-        .setVisibleWithoutWorkingCopy(true));
+    entries.add(new Settings(iconPath));
+    entries.add(new Help(iconPath, alternativeExtension));
+    entries.add(new About(iconPath));
+    
+    return entries;
   }
 
   /**
@@ -652,10 +564,27 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
   public TortoiseGitMenuBuilder()
   {
     super(PreferenceConstants.TORTOISE_GIT, settings);
-    settings.setEntries(entries);
-    settings.setSubMenuIconPath(iconPath + "tsvnmenufolder.ico");
+    Translation translation = new Translation(PreferenceConstants.TORTOISE_GIT);
+    settings.setSubMenuIconPath(this.getIconPath() + "tsvnmenufolder.ico");
     settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortoiseGit"));
     settings.setMainMenuPrefix("Git");
     settings.setContextMenuEntriesDefault(MENUCREATEREPOS | Sync.MenuIdentifier | Commit.MenuIdentifier);
+  }
+  
+  private String getIconPath()
+  {
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
+    String iconPath;
+    if (usedVersion.equals("2.6"))
+    {
+      iconPath = "TortoiseGit/2.6/";
+    }
+    else
+    {
+      iconPath = "TortoiseGit/2.7/";
+    }
+    
+    return iconPath;
   }
 }

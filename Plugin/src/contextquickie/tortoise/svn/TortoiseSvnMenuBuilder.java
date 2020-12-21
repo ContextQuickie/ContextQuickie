@@ -1,7 +1,6 @@
 package contextquickie.tortoise.svn;
 
 import contextquickie.Activator;
-import contextquickie.base.AbstractMenuEntry;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
 import contextquickie.tortoise.TortoiseMenuEntry;
@@ -23,6 +22,9 @@ import org.eclipse.jface.preference.IPreferenceStore;
  */
 public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 {
+  private static final Version version1_10 = new Version(1, 10);
+  private static final Version version1_11 = new Version(1, 11);
+  
   /**
    * Checkout menu entry.
    */
@@ -230,44 +232,25 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   private static final long MENUSHELVE = 0x0000010000000000L;
   private static final long MENUUNSHELVE = 0x0000020000000000L;
 
-  /**
-   * TortoiseSVN menu configuration.
-   */
-  private static List<AbstractMenuEntry> entries = new ArrayList<AbstractMenuEntry>();
-
-  /**
-   * The instance using for translating the menu entries.
-   */
-  private static final Translation translation;
-
-  /**
-   * The path to the icons based on the used TortoiseSVN version.
-   */
-  private static final String iconPath;
-
-  static
+  protected List<TortoiseMenuEntry> getEntries()
   {
-    translation = new Translation(PreferenceConstants.TORTOISE_SVN);
+    List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+    Translation translation = new Translation(PreferenceConstants.TORTOISE_SVN);
     
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     String usedVersionString = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
     
     final Version usedVersion = new Version(usedVersionString);
-    final Version version1_10 = new Version(1, 10);
-    final Version version1_11 = new Version(1, 11);
 
+    final String iconPath = this.getIconPath();
     final String alternativeExtension;
     if (usedVersion.compareTo(version1_11) > 0)
     {
-      iconPath = "TortoiseSvn/1.11/";
-
       // If using icons from version 1.11, some files require .png extension in eclipse
       alternativeExtension = ".png";
     }
     else
     {
-      iconPath = "TortoiseSvn/1.10/";
-
       // If using icons from version 1.10 or before, all files have .ico extension
       alternativeExtension = ".ico";
     }
@@ -632,6 +615,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
         .setIconPath(iconPath + "menuabout.ico")
         .setCommand("about")
         .setVisibleWithoutWorkingCopy(true));
+    return entries;
   }
 
   /**
@@ -645,10 +629,30 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
   public TortoiseSvnMenuBuilder()
   {
     super(PreferenceConstants.TORTOISE_SVN, settings);
-    settings.setEntries(entries);
-    settings.setSubMenuIconPath(iconPath + "tsvnmenumultiple.ico");
+    Translation translation = new Translation(PreferenceConstants.TORTOISE_SVN);
+    settings.setSubMenuIconPath(this.getIconPath() + "tsvnmenumultiple.ico");
     settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortioseSVN"));
     settings.setMainMenuPrefix("SVN");
     settings.setContextMenuEntriesDefault(MENUCHECKOUT | MENUUPDATE | MENUCOMMIT);
+  }
+  
+  private String getIconPath()
+  {
+    final String iconPath;
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    String usedVersionString = preferenceStore.getString(PreferenceConstants.TORTOISE_SVN.getUsedVersion());
+    
+    final Version usedVersion = new Version(usedVersionString);
+
+    if (usedVersion.compareTo(version1_11) > 0)
+    {
+      iconPath = "TortoiseSvn/1.11/";
+    }
+    else
+    {
+      iconPath = "TortoiseSvn/1.10/";
+    }
+    
+    return iconPath;
   }
 }
