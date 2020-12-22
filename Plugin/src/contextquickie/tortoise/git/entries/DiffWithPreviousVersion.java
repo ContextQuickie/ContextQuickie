@@ -1,13 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-import contextquickie.tortoise.git.MenuTextIdentifier;
-
 public class DiffWithPreviousVersion extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000200000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 214;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class DiffWithPreviousVersion extends AbstractTortoiseGitEntry
    */
   public DiffWithPreviousVersion(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUPREVDIFF, "Diff with previous version");
+    super(MenuTextIdentifier, "Diff with previous version");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setCommand("diff");

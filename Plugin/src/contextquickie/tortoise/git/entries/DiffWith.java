@@ -4,7 +4,6 @@ import java.io.File;
 
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tortoise.git.MenuTextIdentifier;
 import rolandomagico.jniregistry.Registry;
 
 public class DiffWith extends AbstractTortoiseGitEntry
@@ -19,6 +18,11 @@ public class DiffWith extends AbstractTortoiseGitEntry
   public static final long MenuIdentifier = 0x0000020000000000L;
 
   /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 232;
+
+  /**
    * Constructor.
    * 
    * @param iconPath
@@ -26,7 +30,7 @@ public class DiffWith extends AbstractTortoiseGitEntry
    */
   public DiffWith(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later");
+    super(MenuTextIdentifier, "Diff later");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setMaxFileCount(1);
@@ -48,7 +52,7 @@ public class DiffWith extends AbstractTortoiseGitEntry
         if (leftSide != null)
         {
           this.setLabel(translation.getTranslatedString(
-              MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff with " + new File(leftSide).getName()));
+              MenuTextIdentifier, "Diff with " + new File(leftSide).getName()));
           this.leftSideForCompare = leftSide;
           this.rightSideForCompare = environment.getSelectedFiles().iterator().next().toOSString();
           isVisible = true;

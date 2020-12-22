@@ -1,13 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-import contextquickie.tortoise.git.MenuTextIdentifier;
-
 public class Settings extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x2000000000000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 133;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Settings extends AbstractTortoiseGitEntry
    */
   public Settings(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUSETTINGS, "Settings");
+    super(MenuTextIdentifier, "Settings");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menusettings.ico");
     this.setCommand("settings");

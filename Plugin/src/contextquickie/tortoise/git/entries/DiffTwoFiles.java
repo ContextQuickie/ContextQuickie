@@ -10,7 +10,6 @@ import contextquickie.Activator;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class DiffTwoFiles extends AbstractTortoiseGitEntry
 {
@@ -24,6 +23,11 @@ public class DiffTwoFiles extends AbstractTortoiseGitEntry
   public static final long MenuIdentifier = 0x0000000000010000;
 
   /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 176;
+
+  /**
    * Constructor.
    * 
    * @param iconPath
@@ -31,7 +35,7 @@ public class DiffTwoFiles extends AbstractTortoiseGitEntry
    */
   public DiffTwoFiles(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUDIFF, "Diff");
+    super(MenuTextIdentifier, "Diff");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setMaxItemsCount(2);

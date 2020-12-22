@@ -1,16 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-public class Sync extends AbstractTortoiseGitEntry
+public class CreateBranch extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000000000000002;
+  public static final long MenuIdentifier = 0x0000000000000800;
 
   /**
    * The menu text identifier for this class.
    */
-  public static final int MenuTextIdentifier = 339;
+  public static final int MenuTextIdentifier = 130;
 
   /**
    * Constructor.
@@ -18,12 +18,12 @@ public class Sync extends AbstractTortoiseGitEntry
    * @param iconPath
    *      The path containing the icon for this instance.
    */
-  public Sync(String iconPath)
+  public CreateBranch(String iconPath)
   {
-    super(MenuTextIdentifier, "Sync...");
+    super(MenuTextIdentifier, "Create Branch...");
     this.setMenuId(MenuIdentifier);
-    this.setIconPath(iconPath + "menurelocate.ico");
-    this.setCommand("sync");
+    this.setIconPath(iconPath + "menucopy.ico");
+    this.setCommand("branch");
     this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
   }

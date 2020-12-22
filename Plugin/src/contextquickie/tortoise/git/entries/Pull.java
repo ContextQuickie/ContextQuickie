@@ -1,13 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-import contextquickie.tortoise.git.MenuTextIdentifier;
-
 public class Pull extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000800000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 221;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Pull extends AbstractTortoiseGitEntry
    */
   public Pull(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUPULL, "Pull...");
+    super(MenuTextIdentifier, "Pull...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "pull1.ico");
     this.setCommand("pull");

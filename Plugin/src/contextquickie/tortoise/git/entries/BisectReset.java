@@ -2,7 +2,6 @@ package contextquickie.tortoise.git.entries;
 
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tortoise.TortoiseEnvironment;
-import contextquickie.tortoise.git.MenuTextIdentifier;
 
 public class BisectReset extends AbstractTortoiseGitEntry
 {
@@ -12,6 +11,11 @@ public class BisectReset extends AbstractTortoiseGitEntry
   public static final long MenuIdentifier = 0x0008000000000000L;
 
   /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 171;
+
+  /**
    * Constructor.
    * 
    * @param iconPath
@@ -19,7 +23,7 @@ public class BisectReset extends AbstractTortoiseGitEntry
    */
   public BisectReset(String iconPath, String iconExtension)
   {
-    super(MenuTextIdentifier.IDS_MENUBISECTRESET, "Bisect reset");
+    super(MenuTextIdentifier, "Bisect reset");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menubisectreset" + iconExtension);
     this.setCommand("bisect");

@@ -1,16 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-public class ShowLog extends AbstractTortoiseGitEntry
+public class StashList extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000000000020000;
+  public static final long MenuIdentifier = 0x0000400000000000L;
 
   /**
    * The menu text identifier for this class.
    */
-  public static final int MenuTextIdentifier = 180;
+  public static final int MenuTextIdentifier = 319;
 
   /**
    * Constructor.
@@ -18,12 +18,14 @@ public class ShowLog extends AbstractTortoiseGitEntry
    * @param iconPath
    *      The path containing the icon for this instance.
    */
-  public ShowLog(String iconPath)
+  public StashList(String iconPath)
   {
-    super(MenuTextIdentifier, "Show log");
+    super(MenuTextIdentifier, "Stash List");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menulog.ico");
-    this.setCommand("log");
+    this.setCommand("reflog");
+    this.setParameter1("/ref:refs/stash");
+    this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
   }
 }

@@ -1,13 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-import contextquickie.tortoise.git.MenuTextIdentifier;
-
 public class GitSvnDCommit extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000010000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 337;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class GitSvnDCommit extends AbstractTortoiseGitEntry
    */
   public GitSvnDCommit(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUSVNDCOMMIT, "Git SVN DCommit...");
+    super(MenuTextIdentifier, "Git SVN DCommit...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucommit.ico");
     this.setCommand("commit");

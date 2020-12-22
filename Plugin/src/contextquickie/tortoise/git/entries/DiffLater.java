@@ -3,7 +3,6 @@ package contextquickie.tortoise.git.entries;
 import org.eclipse.core.resources.IResource;
 
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tortoise.git.MenuTextIdentifier;
 import rolandomagico.jniregistry.Registry;
 
 public class DiffLater extends AbstractTortoiseGitEntry
@@ -12,6 +11,11 @@ public class DiffLater extends AbstractTortoiseGitEntry
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000020000000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 232;
 
   @Override
   public void executeCommand()
@@ -33,7 +37,7 @@ public class DiffLater extends AbstractTortoiseGitEntry
    */
   public DiffLater(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later");
+    super(MenuTextIdentifier, "Diff later");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setMaxFileCount(1);

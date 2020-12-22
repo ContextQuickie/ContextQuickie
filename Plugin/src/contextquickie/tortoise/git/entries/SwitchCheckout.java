@@ -1,16 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-public class Sync extends AbstractTortoiseGitEntry
+public class SwitchCheckout extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000000000000002;
+  public static final long MenuIdentifier = 0x0000000000000080;
 
   /**
    * The menu text identifier for this class.
    */
-  public static final int MenuTextIdentifier = 339;
+  public static final int MenuTextIdentifier = 128;
 
   /**
    * Constructor.
@@ -18,12 +18,12 @@ public class Sync extends AbstractTortoiseGitEntry
    * @param iconPath
    *      The path containing the icon for this instance.
    */
-  public Sync(String iconPath)
+  public SwitchCheckout(String iconPath)
   {
-    super(MenuTextIdentifier, "Sync...");
+    super(MenuTextIdentifier, "Switch/Checkout...");
     this.setMenuId(MenuIdentifier);
-    this.setIconPath(iconPath + "menurelocate.ico");
-    this.setCommand("sync");
+    this.setIconPath(iconPath + "menuswitch.ico");
+    this.setCommand("switch");
     this.setMaxFolderCount(1);
     this.setMaxItemsCount(1);
   }

@@ -1,16 +1,16 @@
 package contextquickie.tortoise.git.entries;
 
-public class Fetch extends AbstractTortoiseGitEntry
+public class SubmoduleUpdate extends AbstractTortoiseGitEntry
 {
   /**
    * The menu identifier for this class.
    */
-  public static final long MenuIdentifier = 0x0000040000000000L;
+  public static final long MenuIdentifier = 0x0000000000008000;
 
   /**
    * The menu text identifier for this class.
    */
-  public static final int MenuTextIdentifier = 311;
+  public static final int MenuTextIdentifier = 170;
 
   /**
    * Constructor.
@@ -18,13 +18,11 @@ public class Fetch extends AbstractTortoiseGitEntry
    * @param iconPath
    *      The path containing the icon for this instance.
    */
-  public Fetch(String iconPath)
+  public SubmoduleUpdate(String iconPath)
   {
-    super(MenuTextIdentifier, "Fetch...");
+    super(MenuTextIdentifier, "Submodule Update...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "pull1.ico");
-    this.setCommand("fetch");
-    this.setMaxFolderCount(1);
-    this.setMaxItemsCount(1);
+    this.setCommand("subupdate");
   }
 }
