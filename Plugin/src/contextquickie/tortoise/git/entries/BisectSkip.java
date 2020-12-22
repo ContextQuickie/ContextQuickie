@@ -31,6 +31,15 @@ public class BisectSkip extends AbstractTortoiseGitEntry
   @Override
   public boolean isVisible(ContextMenuEnvironment environment)
   {
-    return ((super.isVisible(environment) == true) && (this.bisectActive(TortoiseEnvironment.class.cast(environment)) == true));
+    boolean isVisible = false;
+    if (super.isVisible(environment) == true) 
+    {
+      if (this.bisectActive(TortoiseEnvironment.class.cast(environment)) == true)
+      {
+        isVisible = true;
+      }
+    }
+    
+    return isVisible;
   }
 }

@@ -31,6 +31,15 @@ public class BisectStart extends AbstractTortoiseGitEntry
   @Override
   public boolean isVisible(ContextMenuEnvironment environment)
   {
-    return ((super.isVisible(environment) == true) && (this.bisectActive(TortoiseEnvironment.class.cast(environment)) == false));
+    boolean isVisible = false;
+    if (super.isVisible(environment) == true) 
+    {
+      if (this.bisectActive(TortoiseEnvironment.class.cast(environment)) == false)
+      {
+        isVisible = true;
+      }
+    }
+    
+    return isVisible;
   }
 }
