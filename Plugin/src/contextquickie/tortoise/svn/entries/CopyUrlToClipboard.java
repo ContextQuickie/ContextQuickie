@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class CopyUrlToClipboard extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000008000000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 280;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class CopyUrlToClipboard extends AbstractTortoiseSvnEntry
    */
   public CopyUrlToClipboard(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUCOPYURL, "Copy URL to clipboard");
+    super(MenuTextIdentifier, "Copy URL to clipboard");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "copy.ico");
     this.setCommand("copyurls");

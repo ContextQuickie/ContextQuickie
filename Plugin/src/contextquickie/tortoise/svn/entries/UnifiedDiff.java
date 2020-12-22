@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class UnifiedDiff extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000004000000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 277;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class UnifiedDiff extends AbstractTortoiseSvnEntry
    */
   public UnifiedDiff(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUUNIDIFF, "Unified Diff");
+    super(MenuTextIdentifier, "Unified Diff");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setCommand("urldiff");

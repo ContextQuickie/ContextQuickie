@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class Merge extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000001000;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 129;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Merge extends AbstractTortoiseSvnEntry
    */
   public Merge(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUMERGE, "Merge...");
+    super(MenuTextIdentifier, "Merge...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menumerge.ico");
     this.setCommand("merge");

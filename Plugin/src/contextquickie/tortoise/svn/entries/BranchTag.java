@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class BranchTag extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000000800;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 130;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class BranchTag extends AbstractTortoiseSvnEntry
    */
   public BranchTag(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUBRANCH, "Branch/tag...");
+    super(MenuTextIdentifier, "Branch/tag...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucopy.ico");
     this.setCommand("copy");

@@ -22,6 +22,11 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 {
   private static final Version version1_10 = new Version(1, 10);
   private static final Version version1_11 = new Version(1, 11);
+  
+  /**
+   * The menu identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 135;
 
   protected List<TortoiseMenuEntry> getEntries()
   {
@@ -132,7 +137,7 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
     super(PreferenceConstants.TORTOISE_SVN, settings);
     Translation translation = new Translation(PreferenceConstants.TORTOISE_SVN);
     settings.setSubMenuIconPath(this.getIconPath() + "tsvnmenumultiple.ico");
-    settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier.IDS_MENUSUBMENU, "TortioseSVN"));
+    settings.setSubMenuText(translation.getTranslatedString(MenuTextIdentifier, "TortioseSVN"));
     settings.setMainMenuPrefix("SVN");
     settings.setContextMenuEntriesDefault(Checkout.MenuIdentifier | Update.MenuIdentifier | Commit.MenuIdentifier);
   }

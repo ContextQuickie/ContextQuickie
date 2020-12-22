@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class CheckForModifications extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000100000;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 192;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class CheckForModifications extends AbstractTortoiseSvnEntry
    */
   public CheckForModifications(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUSHOWCHANGED, "Check for modifications");
+    super(MenuTextIdentifier, "Check for modifications");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menushowchanged.ico");
     this.setCommand("repostatus");

@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class AddToIgnoreList extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000200000;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 194;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class AddToIgnoreList extends AbstractTortoiseSvnEntry
    */
   public AddToIgnoreList(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUIGNORE, "Add to ignore list");
+    super(MenuTextIdentifier, "Add to ignore list");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menuignore.ico");
     this.setCommand("ignore");

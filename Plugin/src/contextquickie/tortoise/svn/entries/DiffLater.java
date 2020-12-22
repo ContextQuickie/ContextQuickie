@@ -3,7 +3,6 @@ package contextquickie.tortoise.svn.entries;
 import org.eclipse.core.resources.IResource;
 
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tortoise.svn.MenuTextIdentifier;
 import rolandomagico.jniregistry.Registry;
 
 public class DiffLater extends AbstractTortoiseSvnEntry
@@ -14,6 +13,11 @@ public class DiffLater extends AbstractTortoiseSvnEntry
   public static final long MenuIdentifier = 0x0000001000000000L;
 
   /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 267;
+
+  /**
    * Constructor.
    * 
    * @param iconPath
@@ -21,7 +25,7 @@ public class DiffLater extends AbstractTortoiseSvnEntry
    */
   public DiffLater(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUDIFFLATER, "Diff later");
+    super(MenuTextIdentifier, "Diff later");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setMaxItemsCount(0); // TODO: Disabled

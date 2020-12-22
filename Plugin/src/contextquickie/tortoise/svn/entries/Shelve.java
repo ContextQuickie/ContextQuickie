@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class Shelve extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000010000000000L;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 286;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Shelve extends AbstractTortoiseSvnEntry
    */
   public Shelve(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUSHELVE, "Shelve...");
+    super(MenuTextIdentifier, "Shelve...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menushelve.ico");
     this.setCommand("shelve");

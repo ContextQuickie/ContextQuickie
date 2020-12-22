@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class Blame extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000800000;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 203;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Blame extends AbstractTortoiseSvnEntry
    */
   public Blame(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUBLAME, "Blame...");
+    super(MenuTextIdentifier, "Blame...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menublame.ico");
     this.setCommand("blame");

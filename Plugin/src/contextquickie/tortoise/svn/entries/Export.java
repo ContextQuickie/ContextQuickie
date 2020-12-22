@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class Export extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000000000200;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 132;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class Export extends AbstractTortoiseSvnEntry
    */
   public Export(String iconPath)
   {
-    super(MenuTextIdentifier.IDS_MENUEXPORT, "Export...");
+    super(MenuTextIdentifier, "Export...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menuexport.ico");
     this.setCommand("export");

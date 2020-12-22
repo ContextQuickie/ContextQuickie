@@ -1,13 +1,16 @@
 package contextquickie.tortoise.svn.entries;
 
-import contextquickie.tortoise.svn.MenuTextIdentifier;
-
 public class DeleteUnversionedItems extends AbstractTortoiseSvnEntry
 {
   /**
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000080000000;
+
+  /**
+   * The menu text identifier for this class.
+   */
+  public static final int MenuTextIdentifier = 268;
 
   /**
    * Constructor.
@@ -17,7 +20,7 @@ public class DeleteUnversionedItems extends AbstractTortoiseSvnEntry
    */
   public DeleteUnversionedItems(String iconPath, String iconExtension)
   {
-    super(MenuTextIdentifier.IDS_MENUDELUNVERSIONED, "Delete unversioned items...");
+    super(MenuTextIdentifier, "Delete unversioned items...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menudelete" + iconExtension);
     this.setCommand("delunversioned");
