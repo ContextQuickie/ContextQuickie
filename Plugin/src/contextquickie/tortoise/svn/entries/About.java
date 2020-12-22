@@ -25,5 +25,6 @@ public class About extends AbstractTortoiseSvnEntry
     this.setIconPath(iconPath + "menuabout.ico");
     this.setCommand("about");
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinItemsCount(1);
   }
 }

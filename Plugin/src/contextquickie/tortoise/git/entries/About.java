@@ -26,5 +26,6 @@ public class About extends AbstractTortoiseGitEntry
     this.setCommand("about");
     this.setEntryRequiresPath(false);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinItemsCount(1);
   }
 }

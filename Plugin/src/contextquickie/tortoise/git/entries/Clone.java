@@ -26,6 +26,7 @@ public class Clone extends AbstractTortoiseGitEntry
     this.setCommand("clone");
     this.setIsVisibleInWorkingCopy(false);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinFolderCount(1);
     this.setMaxFolderCount(1);
     this.setMaxFileCount(0);
   }

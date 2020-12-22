@@ -26,5 +26,6 @@ public class Settings extends AbstractTortoiseGitEntry
     this.setCommand("settings");
     this.setEntryRequiresPath(false);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinItemsCount(1);
   }
 }

@@ -26,5 +26,6 @@ public class Settings extends AbstractTortoiseSvnEntry
     this.setCommand("settings");
     this.setEntryRequiresPath(false);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinItemsCount(1);
   }
 }

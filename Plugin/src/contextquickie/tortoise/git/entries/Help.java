@@ -26,5 +26,6 @@ public class Help extends AbstractTortoiseGitEntry
     this.setCommand("help");
     this.setEntryRequiresPath(false);
     this.setVisibleWithoutWorkingCopy(true);
+    this.setMinItemsCount(1);
   }
 }

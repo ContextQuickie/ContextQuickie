@@ -27,6 +27,7 @@ public class Checkout extends AbstractTortoiseSvnEntry
     this.setIsVisibleInWorkingCopy(false);
     this.setVisibleWithoutWorkingCopy(true);
     this.setMaxFolderCount(1);
+    this.setMinFolderCount(1);
     this.setMaxFileCount(0);
     this.setSupportingLinkedResources(false);
   }

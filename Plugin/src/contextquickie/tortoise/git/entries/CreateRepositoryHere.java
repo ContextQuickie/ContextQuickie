@@ -26,5 +26,7 @@ public class CreateRepositoryHere extends AbstractTortoiseGitEntry
     this.setCommand("repocreate");
     this.setVisibleWithoutWorkingCopy(true);
     this.setIsVisibleInWorkingCopy(false);
+    this.setMinFolderCount(1);
+    this.setMaxFolderCount(1);
   }
 }
