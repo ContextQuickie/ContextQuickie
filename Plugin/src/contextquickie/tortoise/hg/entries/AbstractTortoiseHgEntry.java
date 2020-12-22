@@ -17,11 +17,6 @@ import contextquickie.tortoise.TortoiseMenuEntry;
 
 public abstract class AbstractTortoiseHgEntry extends TortoiseMenuEntry
 {
-  static
-  {
-    setPreferenceConstants(PreferenceConstants.TORTOISE_HG);
-  }
-
   /**
    * Constructor.
    */
@@ -30,6 +25,7 @@ public abstract class AbstractTortoiseHgEntry extends TortoiseMenuEntry
     this.setMenuId(1); // TODO
     this.setMinItemsCount(1);
     this.setMaxItemsCount(1);
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_HG);
   }
   
   @Override

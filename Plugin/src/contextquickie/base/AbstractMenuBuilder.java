@@ -50,7 +50,7 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   /**
    * Constructor.
    * @param componentActiveConfigKey
-   * The name of the configuration parameter which indicates whether this menu is active or not.
+   *      The name of the configuration parameter which indicates whether this menu is active or not.
    */
   protected AbstractMenuBuilder(String componentActiveConfigKey) 
   {

@@ -10,11 +10,6 @@ public abstract class AbstractTortoiseSvnEntry extends TortoiseMenuEntry
    * The instance using for translating the menu entries.
    */
   protected static final Translation translation = new Translation(PreferenceConstants.TORTOISE_SVN);
-
-  static
-  {
-    setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);
-  }
   
   /**
    * Constructor.
@@ -28,10 +23,6 @@ public abstract class AbstractTortoiseSvnEntry extends TortoiseMenuEntry
   protected AbstractTortoiseSvnEntry(final int menuTextIdentifier, final String defaultLabel)
   {
     this.setLabel(translation.getTranslatedString(menuTextIdentifier, defaultLabel));
-  }
-
-  @Override
-  public void executeCommand()
-  {
+    this.setPreferenceConstants(PreferenceConstants.TORTOISE_SVN);
   }
 }

@@ -5,7 +5,13 @@ public class Version implements Comparable<Version>
   private int majorVersion = 0;
   
   private int minorVersion = 0;
-   
+  
+  /**
+   * Constructor.
+   * 
+   * @param version
+   *      The string from which the version is created.
+   */
   public Version(String version)
   {
     String[] versionItems = version.split("\\.");

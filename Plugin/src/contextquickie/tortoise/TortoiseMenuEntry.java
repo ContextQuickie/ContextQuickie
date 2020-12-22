@@ -1,8 +1,9 @@
 package contextquickie.tortoise;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
@@ -17,7 +18,8 @@ import contextquickie.Activator;
 import contextquickie.base.AbstractMenuEntry;
 import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import contextquickie.tools.ProcessWrapper;
+import contextquickie.tools.StringUtil;
 
 /**
  * @author ContextQuickie
@@ -29,7 +31,12 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   /**
    * The preferences of the current instance.
    */
-  private static TortoisePreferenceConstants preferenceConstants;
+  private TortoisePreferenceConstants preferenceConstants;
+  
+  /**
+   * The environment for which the entry is created.
+   */
+  private TortoiseEnvironment environment;
   
   /**
    * The label of the entry.
@@ -119,17 +126,17 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   /**
    * @return The preference constants.
    */
-  protected static TortoisePreferenceConstants getPreferenceConstants()
+  protected TortoisePreferenceConstants getPreferenceConstants()
   {
-    return preferenceConstants;
+    return this.preferenceConstants;
   }
 
   /**
    * @param value The preference constants.
    */
-  protected static void setPreferenceConstants(TortoisePreferenceConstants value)
+  protected void setPreferenceConstants(TortoisePreferenceConstants value)
   {
-    preferenceConstants = value;
+    this.preferenceConstants = value;
   }
   
   /**
@@ -151,20 +158,24 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
    * 
    * @return A collection containing all selected resources.
    */
-  protected Set<IResource> getSelectedResources()
+  protected Set<IResource> getSelectedResources(boolean includeLinkedResources)
   {
-    final Set<IResource> selectedResources = new ContextMenuEnvironment().getSelectedResources();
+    final Set<IResource> selectedResources = this.getEnvironment().getSelectedResources();
     final Set<IResource> result = new HashSet<IResource>(selectedResources);
-    if (Activator.getDefault().getPreferenceStore().getBoolean(getPreferenceConstants().getScanForLinkedResources()))
+    if (includeLinkedResources == true)
     {
-      selectedResources.stream().map(resource -> resource.getAdapter(IContainer.class)).filter(Objects::nonNull).forEach(container ->
+      final String workingCopyRoot = this.getEnvironment().getWorkingCopyRoot();
+      if (workingCopyRoot != null)
       {
-        final String workingCopyRoot = this.getWorkingCopyRoot(container.getLocation());
-        if (workingCopyRoot != null)
+        for (IResource resource : selectedResources)
         {
-          result.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
+          IContainer container = resource.getAdapter(IContainer.class);
+          if (container != null)
+          {
+            result.addAll(this.getLinkedResourcesOfContainer(container, workingCopyRoot));
+          }
         }
-      });
+      }
     }
 
     return result;
@@ -566,45 +577,36 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     environment.getSelectedResources();
     if (super.isVisible(environment))
     {
-      final TortoiseEnvironment tortoiseEnvironment = TortoiseEnvironment.class.cast(environment);
+      this.environment = TortoiseEnvironment.class.cast(environment);
       final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
       final boolean workingCopyDetection = preferenceStore.getBoolean(getPreferenceConstants().getWorkingCopyDetection());
       if (workingCopyDetection == true)
       {
         if ((this.isVisibleInWorkingCopy() == true) && 
             (this.isVisibleWithoutWorkingCopy() == false) &&
-            (tortoiseEnvironment.isWorkingCopyFound() == false))
+            (this.environment.isWorkingCopyFound() == false))
         {
           isVisible = false;
         }
         if ((this.isVisibleInWorkingCopy() == false) && 
             (this.isVisibleWithoutWorkingCopy() == true) &&
-            (tortoiseEnvironment.isWorkingCopyFound() == true))
+            (this.environment.isWorkingCopyFound() == true))
         {
           isVisible = false;
         }
       }
       
-      if ((tortoiseEnvironment.getSelectedResources().size() > this.getMaxItemsCount()) ||
-          (tortoiseEnvironment.getSelectedFilesCount() > this.getMaxFileCount()) ||
-          (tortoiseEnvironment.getSelectedFoldersCount() > this.getMaxFolderCount()))
+      if ((this.environment.getSelectedResources().size() > this.getMaxItemsCount()) ||
+          (this.environment.getSelectedFilesCount() > this.getMaxFileCount()) ||
+          (this.environment.getSelectedFoldersCount() > this.getMaxFolderCount()))
       {
         isVisible = false;
       }
-      else if ((tortoiseEnvironment.getSelectedResources().size() < this.getMinItemsCount()) ||
-               (tortoiseEnvironment.getSelectedFilesCount() < this.getMinFileCount()) ||
-               (tortoiseEnvironment.getSelectedFoldersCount() < this.getMinFolderCount()))
+      else if ((this.environment.getSelectedResources().size() < this.getMinItemsCount()) ||
+               (this.environment.getSelectedFilesCount() < this.getMinFileCount()) ||
+               (this.environment.getSelectedFoldersCount() < this.getMinFolderCount()))
       {
         isVisible = false;
-      }
-      else if (this.isVisible(tortoiseEnvironment) == false)
-      {
-        isVisible = false;
-      }
-      
-      if (isVisible)
-      {
-        isVisible = this.isVisible(tortoiseEnvironment);
       }
     }
     
@@ -614,7 +616,46 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   @Override
   public void executeCommand()
   {
-    // TODO: This class should be abstract in the end so the method is not required anymore.
-    throw new NotImplementedException();
+    final List<String> arguments = new ArrayList<String>();
+    final String command = this.getCommand();
+    
+    final String executable = Activator.getDefault().getPreferenceStore().getString(getPreferenceConstants().getPath());
+    
+    final boolean supportsLinkedResources = this.isSupportingLinkedResources();;
+
+    arguments.add("/command:" + command);
+    Set<IResource> currentResources = null;
+    if (this.getEntryRequiresPath())
+    {
+      if (supportsLinkedResources == true)
+      {
+        currentResources = this.getSelectedResources(supportsLinkedResources);
+      }
+      else
+      {
+        currentResources = this.getEnvironment().getSelectedResources();
+      }
+      
+      List<String> pathArguments = new ArrayList<String>();
+      for (IResource resource : currentResources)
+      {
+        pathArguments.add(resource.getLocation().toOSString());
+      }
+      final String pathArgument = String.join("*", pathArguments);
+      arguments.add("/path:" + StringUtil.quoteString(pathArgument));
+    }
+
+    final String parameter1 = this.getParameter1();
+    if (parameter1 != null)
+    {
+      arguments.add(parameter1);
+    }
+    
+    new ProcessWrapper().executeCommand(executable, currentResources, arguments);
+  }
+
+  public TortoiseEnvironment getEnvironment()
+  {
+    return this.environment;
   }
 }

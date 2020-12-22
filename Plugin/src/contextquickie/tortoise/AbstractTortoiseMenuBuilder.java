@@ -2,7 +2,9 @@ package contextquickie.tortoise;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.jface.preference.IPreferenceStore;
+
 import contextquickie.Activator;
 import contextquickie.base.AbstractMenuBuilder;
 import contextquickie.base.AbstractMenuEntry;

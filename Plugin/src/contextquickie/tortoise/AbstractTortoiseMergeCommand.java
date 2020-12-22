@@ -1,13 +1,13 @@
 package contextquickie.tortoise;
 
-import contextquickie.Activator;
-import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tools.ProcessWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
+
+import contextquickie.Activator;
+import contextquickie.tools.ContextMenuEnvironment;
+import contextquickie.tools.ProcessWrapper;
 
 /**
  * Base class for execute a Tortoise merge command.

@@ -42,10 +42,16 @@ public class DiffTwoFiles extends AbstractTortoiseSvnEntry
   @Override
   public boolean isVisible(ContextMenuEnvironment environment)
   {
-    Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
-    this.leftSideForCompare = iterator.next().toOSString();
-    this.rightSideForCompare = iterator.next().toOSString();
-    return true;
+    boolean isVisible = false;
+    if (super.isVisible(environment))
+    {
+      Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
+      this.leftSideForCompare = iterator.next().toOSString();
+      this.rightSideForCompare = iterator.next().toOSString();
+      isVisible = true;
+    }
+    
+    return isVisible;
   }
 
   @Override

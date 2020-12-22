@@ -1,0 +1,27 @@
+package contextquickie.tortoise.svn.entries;
+
+import contextquickie.tortoise.svn.MenuTextIdentifier;
+
+public class Diff extends AbstractTortoiseSvnEntry
+{
+  /**
+   * The menu identifier for this class.
+   */
+  public static final long MenuIdentifier = 0x0000000000010000;
+
+  /**
+   * Constructor.
+   * 
+   * @param iconPath
+   *      The path containing the icon for this instance.
+   */
+  public Diff(String iconPath)
+  {
+    super(MenuTextIdentifier.IDS_MENUDIFF, "Diff");
+    this.setMenuId(MenuIdentifier);
+    this.setIconPath(iconPath + "menucompare.ico");
+    this.setCommand("diff");
+    this.setMaxItemsCount(1);
+    this.setSupportingLinkedResources(false);
+  }
+}

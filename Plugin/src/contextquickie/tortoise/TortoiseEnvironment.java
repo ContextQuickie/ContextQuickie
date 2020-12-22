@@ -19,6 +19,12 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
    */
   private String workingCopyRoot;
   
+  /**
+   * Constructor.
+   * 
+   * @param workingCopyFolderName
+   *      The name of the folder indicating a working copy.
+   */
   public TortoiseEnvironment(String workingCopyFolderName)
   {
     TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
