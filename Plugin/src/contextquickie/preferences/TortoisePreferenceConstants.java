@@ -1,9 +1,7 @@
 package contextquickie.preferences;
 
 /**
- * @author ContextQuickie
- *
- *         Class which collects all settings for Tortoise tools.
+ * Class which collects all settings for Tortoise tools.
  */
 public class TortoisePreferenceConstants
 {
@@ -66,6 +64,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
+   * Gets the configuration item for the enabled/disabled switch.
    * @return Configuration item for the enabled/disabled switch.
    */
   public String getEnabled()
@@ -74,8 +73,8 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item for the enabled/disabled switch for scanning for
-   *         linked resources.
+   * Gets the configuration item for the enabled/disabled switch for scanning for linked resources.
+   * @return Configuration item for the enabled/disabled switch for scanning for linked resources.
    */
   public String getScanForLinkedResources()
   {

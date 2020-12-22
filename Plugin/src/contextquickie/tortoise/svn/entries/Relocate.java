@@ -17,10 +17,10 @@ public class Relocate extends AbstractTortoiseSvnEntry
    */
   public Relocate(String iconPath)
   {
-        super(MenuTextIdentifier.IDS_MENURELOCATE, "Relocate...");
-        this.setMenuId(MenuIdentifier);
-        this.setIconPath(iconPath + "menurelocate.ico");
-        this.setCommand("relocate");
-        this.setMaxItemsCount(0);
+    super(MenuTextIdentifier.IDS_MENURELOCATE, "Relocate...");
+    this.setMenuId(MenuIdentifier);
+    this.setIconPath(iconPath + "menurelocate.ico");
+    this.setCommand("relocate");
+    this.setMaxItemsCount(0);
   }
 } // TODO: Disabled

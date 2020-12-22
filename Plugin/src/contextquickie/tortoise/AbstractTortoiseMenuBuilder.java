@@ -14,10 +14,7 @@ import contextquickie.tools.ContextMenuEnvironment;
 import rolandomagico.jniregistry.Registry;
 
 /**
- * @author ContextQuickie
- *
- *         Class which builds Tortoise menu entries based on configuration
- *         structures.
+ * Class which builds Tortoise menu entries based on configuration structures.
  */
 public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
 {

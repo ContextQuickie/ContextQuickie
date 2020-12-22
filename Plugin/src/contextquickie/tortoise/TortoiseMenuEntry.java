@@ -554,7 +554,7 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   /**
    * Sets the help text of the instance.
    * 
-   * @param value
+   * @param helpText
    *          the help text to set
    * @return The instance with the changed value.
    */
@@ -597,14 +597,14 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
       }
       
       if ((this.environment.getSelectedResources().size() > this.getMaxItemsCount()) ||
-          (this.environment.getSelectedFilesCount() > this.getMaxFileCount()) ||
-          (this.environment.getSelectedFoldersCount() > this.getMaxFolderCount()))
+          (this.environment.getSelectedFiles().size() > this.getMaxFileCount()) ||
+          (this.environment.getSelectedDirectories().size() > this.getMaxFolderCount()))
       {
         isVisible = false;
       }
       else if ((this.environment.getSelectedResources().size() < this.getMinItemsCount()) ||
-               (this.environment.getSelectedFilesCount() < this.getMinFileCount()) ||
-               (this.environment.getSelectedFoldersCount() < this.getMinFolderCount()))
+               (this.environment.getSelectedFiles().size() < this.getMinFileCount()) ||
+               (this.environment.getSelectedDirectories().size() < this.getMinFolderCount()))
       {
         isVisible = false;
       }

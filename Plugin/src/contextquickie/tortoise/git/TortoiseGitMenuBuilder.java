@@ -15,9 +15,7 @@ import contextquickie.tortoise.Translation;
 import contextquickie.tortoise.git.entries.*;
 
 /**
- * @author ContextQuickie
- *
- *         Menu configuration for TortoiseGit.
+ * Menu configuration for TortoiseGit.
  */
 public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
 {

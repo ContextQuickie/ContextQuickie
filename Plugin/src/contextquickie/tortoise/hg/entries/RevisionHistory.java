@@ -6,7 +6,7 @@ public class RevisionHistory extends AbstractTortoiseHgEntry
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public RevisionHistory(String iconPath)
   {

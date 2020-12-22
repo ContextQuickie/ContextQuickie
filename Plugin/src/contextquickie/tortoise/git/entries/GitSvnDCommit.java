@@ -8,11 +8,12 @@ public class GitSvnDCommit extends AbstractTortoiseGitEntry
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000000010000000L;
+
   /**
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public GitSvnDCommit(String iconPath)
   {

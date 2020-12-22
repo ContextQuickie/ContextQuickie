@@ -29,24 +29,29 @@ public final class PreferenceConstants
 
   private static final String[] SupportedTortoiseHgVersions = new String[] { "5.5" };
 
-  private static final String[] SupportedTortoiseGitVersions = new String[] { "2.6", "2.7", "2.8", "2.9", "2.10", "2.11" };
+  private static final String[] SupportedTortoiseGitVersions = 
+      new String[] { "2.6", "2.7", "2.8", "2.9", "2.10", "2.11" };
 
-  private static final String[] SupportedTortoiseSvnVersions = new String[] { "1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14" };
+  private static final String[] SupportedTortoiseSvnVersions = 
+      new String[] { "1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14" };
 
   /**
    * Configuration items for the configuration of TortoiseSVN.
    */
-  public static final TortoisePreferenceConstants TORTOISE_SVN = new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN", SupportedTortoiseSvnVersions);
+  public static final TortoisePreferenceConstants TORTOISE_SVN = 
+      new TortoisePreferenceConstants("TortoiseSvn", ".svn", "TortoiseSVN", SupportedTortoiseSvnVersions);
 
   /**
    * Configuration items for the configuration of TortoiseGit.
    */
-  public static final TortoisePreferenceConstants TORTOISE_GIT = new TortoisePreferenceConstants("TortoiseGit", ".git", SupportedTortoiseGitVersions);
+  public static final TortoisePreferenceConstants TORTOISE_GIT = 
+      new TortoisePreferenceConstants("TortoiseGit", ".git", SupportedTortoiseGitVersions);
 
   /**
    * Configuration items for the configuration of TortoiseHg.
    */
-  public static final TortoisePreferenceConstants TORTOISE_HG = new TortoisePreferenceConstants("TortoiseHg", ".hg", SupportedTortoiseHgVersions);
+  public static final TortoisePreferenceConstants TORTOISE_HG = 
+      new TortoisePreferenceConstants("TortoiseHg", ".hg", SupportedTortoiseHgVersions);
 
   /**
    * Configuration item for enabling/disabling showing the progress for external tools.

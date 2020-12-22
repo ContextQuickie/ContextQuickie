@@ -36,22 +36,6 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   }
 
   /**
-   * @return The number of selected files.
-   */
-  public long getSelectedFilesCount()
-  {
-    return this.getSelectedFiles().size();
-  }
-
-  /**
-   * @return The number of selected folders.
-   */
-  public long getSelectedFoldersCount()
-  {
-    return this.getSelectedDirectories().size();
-  }
-
-  /**
    * @return A value indicating whether a working copy has been found or not.
    */
   public boolean isWorkingCopyFound()

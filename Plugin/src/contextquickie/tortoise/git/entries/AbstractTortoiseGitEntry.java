@@ -1,6 +1,7 @@
 package contextquickie.tortoise.git.entries;
 
 import java.io.File;
+
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.TortoiseMenuEntry;

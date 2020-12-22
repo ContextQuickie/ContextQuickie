@@ -1,9 +1,7 @@
 package contextquickie.tortoise.git;
 
 /**
- * @author ContextQuickie
- *
- *         Menu identifiers for TortoiseGit.
+ * Menu identifiers for TortoiseGit.
  */
 public class MenuIdentifier
 {

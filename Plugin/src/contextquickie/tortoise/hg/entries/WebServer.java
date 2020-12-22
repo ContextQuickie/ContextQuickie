@@ -6,7 +6,7 @@ public class WebServer extends AbstractTortoiseHgEntryForFolder
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public WebServer(String iconPath)
   {

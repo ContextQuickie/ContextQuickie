@@ -6,7 +6,7 @@ public class Clone extends AbstractTortoiseHgEntryForFolder
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public Clone(String iconPath)
   {

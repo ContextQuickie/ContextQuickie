@@ -13,7 +13,7 @@ public class ShowLog extends AbstractTortoiseGitEntry
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public ShowLog(String iconPath)
   {

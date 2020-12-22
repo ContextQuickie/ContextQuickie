@@ -6,7 +6,7 @@ public class UpdateIcons extends AbstractTortoiseHgEntry
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public UpdateIcons(String iconPath)
   {

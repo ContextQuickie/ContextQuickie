@@ -32,7 +32,9 @@ import contextquickie.preferences.controls.EmptyFieldEitor;
  * </p>
  */
 
-public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbenchPreferencePage, IPropertyChangeListener
+public class ContextQuickie 
+  extends FieldEditorPreferencePage 
+  implements IWorkbenchPreferencePage, IPropertyChangeListener
 {
   /**
    * Map which stores the relation between a field editor for enabling/disabling
@@ -40,7 +42,8 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
    * field editor for enabling/disabling the feature. The value is a list of
    * filed editors for setting up the feature.
    */
-  private Map<BooleanFieldEditor, List<FieldEditor>> controlMapping = new HashMap<BooleanFieldEditor, List<FieldEditor>>();
+  private Map<BooleanFieldEditor, List<FieldEditor>> controlMapping = 
+      new HashMap<BooleanFieldEditor, List<FieldEditor>>();
 
   /**
    * Constructor.
@@ -74,7 +77,8 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("SVN", "TortoiseProc.exe", "TortoiseMerge.exe", PreferenceConstants.TORTOISE_SVN);
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
-    this.createTortoiseFieldEditors("Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT);
+    this.createTortoiseFieldEditors(
+        "Git", "TortoiseGitProc.exe", "TortoiseGitMerge.exe", PreferenceConstants.TORTOISE_GIT);
     
     this.addField(new EmptyFieldEitor(this.getFieldEditorParent()));
     this.createTortoiseFieldEditors("Hg", "thg.exe", null, PreferenceConstants.TORTOISE_HG);
@@ -150,26 +154,29 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
   {
     final ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
 
-    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_ENABLED, "Enable Beyond Compare",
-        getFieldEditorParent());
+    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(
+        PreferenceConstants.P_BEYOND_COMPARE_ENABLED, "Enable Beyond Compare", getFieldEditorParent());
     addField(featureEnabledEditor);
 
     this.controlMapping.put(featureEnabledEditor, dependentFields);
 
-    final FileFieldEditor fileFieldEditor = new ConditionalFileFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_PATH, "Path to BCompare.exe",
-        getFieldEditorParent(), featureEnabledEditor);
+    final FileFieldEditor fileFieldEditor = new ConditionalFileFieldEditor(
+        PreferenceConstants.P_BEYOND_COMPARE_PATH, 
+        "Path to BCompare.exe", 
+        getFieldEditorParent(), 
+        featureEnabledEditor);
     fileFieldEditor.setFileExtensions(new String[]
     { "BCompare.exe" });
     addField(fileFieldEditor);
     dependentFields.add(fileFieldEditor);
 
-    final StringFieldEditor shellRegPathEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH, "Left Side Registy Path",
-        getFieldEditorParent());
+    final StringFieldEditor shellRegPathEditor = new StringFieldEditor(
+        PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_PATH, "Left Side Registy Path", getFieldEditorParent());
     addField(shellRegPathEditor);
     dependentFields.add(shellRegPathEditor);
 
-    final StringFieldEditor shellRegKeyEditor = new StringFieldEditor(PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "Left Side Registy Key",
-        getFieldEditorParent());
+    final StringFieldEditor shellRegKeyEditor = new StringFieldEditor(
+        PreferenceConstants.P_BEYOND_COMPARE_SHELL_REG_KEY, "Left Side Registy Key", getFieldEditorParent());
     addField(shellRegKeyEditor);
     dependentFields.add(shellRegKeyEditor);
   }
@@ -193,13 +200,14 @@ public class ContextQuickie extends FieldEditorPreferencePage implements IWorkbe
     final String showTortoise = "Show Tortoise";
     
     final ArrayList<FieldEditor> dependentFields = new ArrayList<FieldEditor>();
-    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(preferenceConstants.getEnabled(), "Enable Tortoise" + name,
-        getFieldEditorParent());
+    final BooleanFieldEditor featureEnabledEditor = new BooleanFieldEditor(
+        preferenceConstants.getEnabled(), "Enable Tortoise" + name, getFieldEditorParent());
     addField(featureEnabledEditor);
 
     this.controlMapping.put(featureEnabledEditor, dependentFields);
 
-    dependentFieldEditor = new BooleanFieldEditor(preferenceConstants.getScanForLinkedResources(), "Include linked files and folders",
+    dependentFieldEditor = new BooleanFieldEditor(
+        preferenceConstants.getScanForLinkedResources(), "Include linked files and folders",
         getFieldEditorParent());
     addField(dependentFieldEditor);
     dependentFields.add(dependentFieldEditor);

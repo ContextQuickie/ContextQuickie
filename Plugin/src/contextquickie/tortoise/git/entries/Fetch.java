@@ -8,11 +8,12 @@ public class Fetch extends AbstractTortoiseGitEntry
    * The menu identifier for this class.
    */
   public static final long MenuIdentifier = 0x0000040000000000L;
+
   /**
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public Fetch(String iconPath)
   {

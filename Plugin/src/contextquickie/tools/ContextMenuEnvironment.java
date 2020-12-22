@@ -16,10 +16,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * @author ContextQuickie
- *
- *         Class which provides information about the current context menu
- *         environment.
+ * Class which provides information about the current context menu environment.
  */
 public class ContextMenuEnvironment
 {
@@ -94,7 +91,6 @@ public class ContextMenuEnvironment
   {
     return this.selectedResources;
   }
-  
 
   private IPath convertIResourceToIPath(IResource resource)
   {
@@ -107,18 +103,16 @@ public class ContextMenuEnvironment
     return location;
   }
 
-
   /**
-   * @return the selectedFiles
+   * Gets a set containing all selected items which are files.
    */
   public Set<IPath> getSelectedFiles()
   {
     return this.selectedFiles;
   }
 
-
   /**
-   * @return the selectedDirectories
+   * Gets a set containing all selected items which are directories.
    */
   public Set<IPath> getSelectedDirectories()
   {

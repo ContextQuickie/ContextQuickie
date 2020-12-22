@@ -1,9 +1,7 @@
 package contextquickie.tortoise.git;
 
 /**
- * @author ContextQuickie
- *
- *         Menu text identifiers for TortoiseGit.
+ * Menu text identifiers for TortoiseGit.
  */
 @SuppressWarnings("javadoc")
 public class MenuTextIdentifier

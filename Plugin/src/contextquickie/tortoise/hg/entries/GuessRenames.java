@@ -6,7 +6,7 @@ public class GuessRenames extends AbstractTortoiseHgEntryForFolder
    * Constructor.
    * 
    * @param iconPath
-   * The path containing the icon for this instance.
+   *      The path containing the icon for this instance.
    */
   public GuessRenames(String iconPath)
   {

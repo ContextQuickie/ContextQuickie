@@ -16,9 +16,7 @@ import contextquickie.tortoise.Version;
 import contextquickie.tortoise.svn.entries.*;
 
 /**
- * @author ContextQuickie
- *
- *         Menu configuration for TortoiseSVN.
+ * Menu configuration for TortoiseSVN.
  */
 public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
 {

@@ -10,9 +10,7 @@ import rolandomagico.jniregistry.Registry;
 import rolandomagico.jniresourceloader.ResourceLoader;
 
 /**
- * @author ContextQuickie
- * 
- *         Class for retrieving translated menu entries from the Tortoise DLLs.
+ * Class for retrieving translated menu entries from the Tortoise DLLs.
  */
 public final class Translation
 {

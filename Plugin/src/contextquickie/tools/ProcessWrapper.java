@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.preference.IPreferenceStore;
 
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
@@ -75,8 +76,9 @@ public final class ProcessWrapper
 
   private void runMonitorJobs(Process process, Set<IResource> resources)
   {
-    final boolean showProgressForExternalTools = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS);
-    final boolean refreshWorkspaceAfterExecution = Activator.getDefault().getPreferenceStore().getBoolean(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION);
+    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    final boolean showProgressForExternalTools = preferenceStore.getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS);
+    final boolean refreshWorkspaceAfterExecution = preferenceStore.getBoolean(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION);
     final String progresstitle = "ContextQuickie progress";
     Job job = null;
 
@@ -97,8 +99,9 @@ public final class ProcessWrapper
         }
       };
     }
-    else if (showProgressForExternalTools) // refreshWorkspaceAfterExecution is set to false in this case, otherwise the previous if condition would match
+    else if (showProgressForExternalTools)
     {
+      // refreshWorkspaceAfterExecution is set to false in this case, otherwise the previous if condition would match
       job = new Job(progresstitle) 
       {
         protected IStatus run(IProgressMonitor monitor)
@@ -107,8 +110,9 @@ public final class ProcessWrapper
         }
       };
     }
-    else if (refreshWorkspaceAfterExecution) // showProgressForExternalTools is set to false in this case, otherwise the previous if condition would match
+    else if (refreshWorkspaceAfterExecution)
     {
+      // showProgressForExternalTools is set to false in this case, otherwise the previous if condition would match
       ProcessWrapper.this.waitForProcessToFinish(process, null);
       job = new Job(progresstitle) 
       {
