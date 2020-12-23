@@ -35,7 +35,8 @@ public class TortoisePreferenceConstants
    * @param supportedVersions
    *          The supported versions of the component.
    */
-  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String[] supportedVersions)
+  public TortoisePreferenceConstants(
+      final String settingsPrefix, final String wcFolderName, final String[] supportedVersions)
   {
     this(settingsPrefix, wcFolderName, settingsPrefix, supportedVersions);
   }
@@ -55,7 +56,8 @@ public class TortoisePreferenceConstants
    * @param supportedVersions
    *          The supported versions of the component.
    */
-  public TortoisePreferenceConstants(final String settingsPrefix, final String wcFolderName, final String regUserDir, final String[] supportedVersions)
+  public TortoisePreferenceConstants(
+      final String settingsPrefix, final String wcFolderName, final String regUserDir, final String[] supportedVersions)
   {
     this.prefix = settingsPrefix;
     this.workingCopyFolderName = wcFolderName;
@@ -82,7 +84,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item for the path to the Tortoise executable.
+   * Gets the configuration item for the path to the Tortoise executable.
    */
   public String getPath()
   {
@@ -90,7 +92,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item for the path to the Tortoise merge executable.
+   * Gets the configuration item for the path to the Tortoise merge executable.
    */
   public String getMergePath()
   {
@@ -98,7 +100,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item for the used version.
+   * Gets the configuration item for the used version.
    */
   public String getUsedVersion()
   {
@@ -106,8 +108,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item which indicates if a working copy detection is
-   *         performed or not.
+   * Gets the configuration item which indicates if a working copy detection is performed or not.
    */
   public String getWorkingCopyDetection()
   {
@@ -115,8 +116,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return Configuration item which indicates if the context menu
-   *         configuration is taken from the registry.
+   * Gets the configuration item which indicates if the context menu configuration is taken from the registry.
    */
   public String getUseMenuConfigFromRegistry()
   {
@@ -124,7 +124,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return The name of the folder indicating a working copy.
+   * Gets the name of the folder indicating a working copy.
    */
   public String getWorkingCopyFolderName()
   {
@@ -132,7 +132,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return The directory in the registry which contains the user specific settings.
+   * Gets the directory in the registry which contains the user specific settings.
    */
   public String getRegistryUserDirectory()
   {
@@ -140,7 +140,7 @@ public class TortoisePreferenceConstants
   }
 
   /**
-   * @return The supported versions.
+   * Gets the supported versions.
    */
   public String[] getSupportedVersions()
   {
