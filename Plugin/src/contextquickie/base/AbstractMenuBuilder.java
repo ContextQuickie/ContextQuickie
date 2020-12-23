@@ -60,21 +60,24 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
   @Override
   protected final IContributionItem[] getContributionItems()
   {
-    List<IContributionItem> menuEntries = new ArrayList<IContributionItem>();
-    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    if (preferenceStore.getBoolean(this.componentActiveConfigKey))
+    if (this.contextMenuEnvironment == null)
     {
-      if (this.entries == null)
-      {
-        this.entries = this.getMenuEntries();
-      }
-      
-      if (this.contextMenuEnvironment == null)
-      {
-        this.contextMenuEnvironment = this.createEnvironment();
-      }
+      this.contextMenuEnvironment = this.createEnvironment();
+    }
 
-      menuEntries = this.createMenuItems(this.entries, this.contextMenuEnvironment);
+    List<IContributionItem> menuEntries = new ArrayList<IContributionItem>();
+    if (this.contextMenuEnvironment.getSelectedResources().isEmpty() == false)
+    {
+      final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+      if (preferenceStore.getBoolean(this.componentActiveConfigKey))
+      {
+        if (this.entries == null)
+        {
+          this.entries = this.getMenuEntries();
+        }
+  
+        menuEntries = this.createMenuItems(this.entries, this.contextMenuEnvironment);
+      }
     }
     
     if (menuEntries.isEmpty())
