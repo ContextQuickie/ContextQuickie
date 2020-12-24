@@ -23,6 +23,6 @@ public class ApplyPatchSerial extends AbstractTortoiseGitEntry
     super(MenuTextIdentifier, "Apply Patch Serial...");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menupatch.ico");
-    this.setCommand("");
+    this.setCommand("importpatch");
   }
 }
