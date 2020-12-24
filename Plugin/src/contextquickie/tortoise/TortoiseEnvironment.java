@@ -28,7 +28,7 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   public TortoiseEnvironment(String workingCopyFolderName)
   {
     TortoiseWorkingCopyDetect workingCopyDetect = new TortoiseWorkingCopyDetect();
-    if (workingCopyDetect.test(this.getSelectedResources(), workingCopyFolderName))
+    if (workingCopyDetect.isAnyResourceInWorkingCopy(this.getSelectedResources(), workingCopyFolderName))
     {
       this.setWorkingCopyFound(true);
       this.setWorkingCopyRoot(workingCopyDetect.getWorkingCopyRoot());
@@ -36,7 +36,7 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   }
 
   /**
-   * @return A value indicating whether a working copy has been found or not.
+   * Gets a value indicating whether a working copy has been found or not.
    */
   public boolean isWorkingCopyFound()
   {
@@ -44,7 +44,7 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   }
 
   /**
-   * @param value A value indicating whether a working copy has been found or not.
+   * Sets a value indicating whether a working copy has been found or not.
    */
   public void setWorkingCopyFound(final boolean value)
   {
@@ -52,7 +52,7 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   }
 
   /**
-   * @param value The working copy root.
+   * Sets the working copy root.
    */
   public void setWorkingCopyRoot(String value)
   {
@@ -60,7 +60,7 @@ public class TortoiseEnvironment extends ContextMenuEnvironment
   }
 
   /**
-   * @return The working copy root.
+   * Gets the working copy root.
    */
   public String getWorkingCopyRoot()
   {

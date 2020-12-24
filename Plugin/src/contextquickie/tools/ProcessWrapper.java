@@ -18,9 +18,7 @@ import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 
 /**
- * @author ContextQuickie
- *
- *         Wrapper class for starting processes.
+ * Wrapper class for starting processes.
  */
 public final class ProcessWrapper
 {
@@ -77,8 +75,10 @@ public final class ProcessWrapper
   private void runMonitorJobs(Process process, Set<IResource> resources)
   {
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    final boolean showProgressForExternalTools = preferenceStore.getBoolean(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS);
-    final boolean refreshWorkspaceAfterExecution = preferenceStore.getBoolean(PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION);
+    final boolean showProgressForExternalTools = preferenceStore.getBoolean(
+        PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS);
+    final boolean refreshWorkspaceAfterExecution = preferenceStore.getBoolean(
+        PreferenceConstants.REFRESH_WORKSPACE_AFTER_EXECUTION);
     final String progresstitle = "ContextQuickie progress";
     Job job = null;
 

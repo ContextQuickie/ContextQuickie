@@ -57,7 +57,8 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
    * @param settings
    *          The menu settings.
    */
-  protected AbstractTortoiseMenuBuilder(final TortoisePreferenceConstants tortoisePreferences, final TortoiseMenuSettings settings)
+  protected AbstractTortoiseMenuBuilder(
+      final TortoisePreferenceConstants tortoisePreferences, final TortoiseMenuSettings settings)
   {
     super(tortoisePreferences.getEnabled());
     this.preferences = tortoisePreferences;
@@ -91,7 +92,8 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         TortoiseMenuEntry tortoiseMenuEntry = TortoiseMenuEntry.class.cast(entry);
         if (this.isEntryInMainMenu(tortoiseMenuEntry))
         {
-          tortoiseMenuEntry.setLabel(this.entriesConfiguration.getMainMenuPrefix() + " " + tortoiseMenuEntry.getLabel());
+          tortoiseMenuEntry.setLabel(
+              this.entriesConfiguration.getMainMenuPrefix() + " " + tortoiseMenuEntry.getLabel());
           mainMenu.add(tortoiseMenuEntry);
         }
         else
@@ -109,6 +111,30 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     return mainMenu;
   }
   
+  /**
+   * Reads the context menu settings from the registry.
+   */
+  protected void readSettingsFromRegistry()
+  {
+    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+    if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
+    {
+      if (this.registryReadPerformed == false)
+      {
+        this.registryReadPerformed = true;
+        this.registryContextMenuEntries = this.readSettingsFromRegistry(
+            "ContextMenuEntries", this.entriesConfiguration.getContextMenuEntriesDefault());
+        this.registryContextMenuEntriesHigh = this.readSettingsFromRegistry(
+            "ContextMenuEntrieshigh", this.entriesConfiguration.getContextMenuEntriesHighDefault());
+      }
+    }
+    else
+    {
+      this.registryContextMenuEntries = this.entriesConfiguration.getContextMenuEntriesDefault();
+      this.registryContextMenuEntriesHigh = this.entriesConfiguration.getContextMenuEntriesHighDefault();
+    }
+  }
+
   /**
    * Reads the context menu settings from the registry.
    */
@@ -152,28 +178,6 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
     }
 
     return (entryValue & compareValue) != 0;
-  }
-
-  /**
-   * Reads the context menu settings from the registry.
-   */
-  protected void readSettingsFromRegistry()
-  {
-    final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-    if (preferenceStore.getBoolean(this.preferences.getUseMenuConfigFromRegistry()) == true)
-    {
-      if (this.registryReadPerformed == false)
-      {
-        this.registryReadPerformed = true;
-        this.registryContextMenuEntries = this.readSettingsFromRegistry("ContextMenuEntries", this.entriesConfiguration.getContextMenuEntriesDefault());
-        this.registryContextMenuEntriesHigh = this.readSettingsFromRegistry("ContextMenuEntrieshigh", this.entriesConfiguration.getContextMenuEntriesHighDefault());
-      }
-    }
-    else
-    {
-      this.registryContextMenuEntries = this.entriesConfiguration.getContextMenuEntriesDefault();
-      this.registryContextMenuEntriesHigh = this.entriesConfiguration.getContextMenuEntriesHighDefault();
-    }
   }
 
   /**

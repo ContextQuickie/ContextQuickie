@@ -1,9 +1,7 @@
 package contextquickie.tortoise;
 
 /**
- * @author ContextQuickie
- *
- *         Class which stores Tortoise menu settings.
+ * Class which stores Tortoise menu settings.
  */
 public class TortoiseMenuSettings
 {
@@ -33,7 +31,7 @@ public class TortoiseMenuSettings
   private long contextMenuEntriesHighDefault;
 
   /**
-   * @return The path to the icon for the sub menu.
+   * Gets the path to the icon for the sub menu.
    */
   public String getSubMenuIconPath()
   {
@@ -41,7 +39,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @param value The path to the icon for the sub menu.
+   * Sets the path to the icon for the sub menu.
    */
   public void setSubMenuIconPath(final String value)
   {
@@ -49,7 +47,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @return The text of the sub menu.
+   * Gets the text of the sub menu.
    */
   public String getSubMenuText()
   {
@@ -57,7 +55,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @param value The text of the sub menu.
+   * Sets the text of the sub menu.
    */
   public void setSubMenuText(final String value)
   {
@@ -65,7 +63,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @return The prefix for the main menu.
+   * Gets the prefix for the main menu.
    */
   public String getMainMenuPrefix()
   {
@@ -73,7 +71,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @param value The prefix for the main menu.
+   * Sets the prefix for the main menu.
    */
   public void setMainMenuPrefix(final String value)
   {
@@ -81,7 +79,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @return The default value of the registry key ContextMenuEntries.
+   * Gets the default value of the registry key ContextMenuEntries.
    */
   public long getContextMenuEntriesDefault()
   {
@@ -89,7 +87,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @param value The default value of the registry key ContextMenuEntries.
+   * Sets the default value of the registry key ContextMenuEntries.
    */
   public void setContextMenuEntriesDefault(final long value)
   {
@@ -97,7 +95,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @return The default value of the registry key ContextMenuEntriesHigh.
+   * Gets the default value of the registry key ContextMenuEntriesHigh.
    */
   public long getContextMenuEntriesHighDefault()
   {
@@ -105,7 +103,7 @@ public class TortoiseMenuSettings
   }
 
   /**
-   * @param value The default value of the registry key ContextMenuEntriesHigh.
+   * Sets the default value of the registry key ContextMenuEntriesHigh.
    */
   public void setContextMenuEntriesHighDefault(final long value)
   {

@@ -1,9 +1,7 @@
 package contextquickie.tools;
 
 /**
- * @author ContextQuickie
- *
- *         Utility class for string manipulation.
+ * Utility class for string manipulation.
  */
 public final class StringUtil
 {

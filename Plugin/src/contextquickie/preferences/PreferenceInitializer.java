@@ -58,7 +58,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
     store.setDefault(PreferenceConstants.SHOW_PROGRESS_FOR_EXTERNAL_TOOLS, false);
   }
 
-  private void initializeTortoiseSettings(final IPreferenceStore store, final TortoisePreferenceConstants tortoisePreferenceConstants, final String tortioseToolRegistryPath, final String tortoiseProcDefault, final String tortoiseMergeDefault)
+  private void initializeTortoiseSettings(
+      final IPreferenceStore store, 
+      final TortoisePreferenceConstants tortoisePreferenceConstants, 
+      final String tortioseToolRegistryPath, 
+      final String tortoiseProcDefault, 
+      final String tortoiseMergeDefault)
   {
     store.setDefault(tortoisePreferenceConstants.getEnabled(), false);
     store.setDefault(tortoisePreferenceConstants.getWorkingCopyDetection(), false);
@@ -104,8 +109,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
    * @param configurationItem
    *          The name of the parameter in the preference store.
    */
-  private void getStoreConfigurationItemFromRegistry(final IPreferenceStore store, final String registryLocation, final String registryKey,
-      final String defaultValue, final String configurationItem)
+  private void getStoreConfigurationItemFromRegistry(
+      final IPreferenceStore store, 
+      final String registryLocation, 
+      final String registryKey,
+      final String defaultValue, 
+      final String configurationItem)
   {
     // Try to retrieve the path to the TortoiseSVN executable.
     String registryValue = new Registry().readStringValue(registryLocation, registryKey, defaultValue);

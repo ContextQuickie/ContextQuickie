@@ -5,8 +5,7 @@ import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * @author ContextQuickie
- *     Implementation of a file field editor where its checks can be enabled or disabled.
+ * Implementation of a file field editor where its checks can be enabled or disabled.
  */
 public class ConditionalFileFieldEditor extends FileFieldEditor
 {
@@ -27,7 +26,8 @@ public class ConditionalFileFieldEditor extends FileFieldEditor
    * @param activationControl
    *          The parent control to enable/disable this feature.
    */
-  public ConditionalFileFieldEditor(final String name, final String labelText, final Composite parent, final BooleanFieldEditor activationControl)
+  public ConditionalFileFieldEditor(
+      final String name, final String labelText, final Composite parent, final BooleanFieldEditor activationControl)
   {
     super(name, labelText, false, parent);
     this.currentActivationControl = activationControl;

@@ -7,24 +7,30 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 
 /**
- * @author ContextQuickie
- *
- *         Property tester which checks if a working copy is present or not. It
- *         is used to show/hide the Tortoise add-in context menu entries.
+ * Property tester which checks if a working copy is present or not. 
+ * It is used to show/hide the Tortoise add-in context menu entries.
  */
 public class TortoiseWorkingCopyDetect
 {
   private String workingCopyRoot;
   
-  public final boolean test(final Set<IResource> receiver, final String workingCopyFolderName)
+  /**
+   * Checks if any of the resources is a file system object within a working copy.
+   * @param resources
+   *      The resources which will be checked.
+   * @param workingCopyFolderName
+   *      The name of the folder indicating a working copy.
+   * @return
+   */
+  public final boolean isAnyResourceInWorkingCopy(final Set<IResource> resources, final String workingCopyFolderName)
   {
-    return receiver.stream()
+    return resources.stream()
         .filter(r -> (r.getType() & (IResource.FOLDER | IResource.PROJECT | IResource.FILE)) != IResource.NONE)
         .anyMatch(r -> this.getWorkingCopyRoot(r.getLocation(), workingCopyFolderName) != null);
   }
 
   /**
-   * @return The working copy root.
+   * Gets the working copy root.
    */
   public String getWorkingCopyRoot()
   {
@@ -51,7 +57,8 @@ public class TortoiseWorkingCopyDetect
 
     while ((currentPath != null) && (currentPath.isDirectory()) && (this.workingCopyRoot == null))
     {
-      final File[] childItems = currentPath.listFiles((dir) -> dir.isDirectory() && workingCopyFolderName.equals(dir.getName()));
+      final File[] childItems = currentPath.listFiles(
+        (dir) -> dir.isDirectory() && workingCopyFolderName.equals(dir.getName()));
       if ((childItems != null) && (childItems.length > 0))
       {
         this.workingCopyRoot = childItems[0].getAbsolutePath();

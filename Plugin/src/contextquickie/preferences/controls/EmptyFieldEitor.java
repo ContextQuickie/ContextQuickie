@@ -4,11 +4,7 @@ import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * @author ContextQuickie
- * 
- *         An empty filed editor which is used to created space between the
- *         settings.
- *
+ * An empty filed editor which is used to created space between the settings.
  */
 public class EmptyFieldEitor extends FieldEditor
 {
