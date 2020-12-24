@@ -8,7 +8,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
-import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
@@ -28,9 +28,9 @@ public class TortoiseSvnMenuBuilder extends AbstractTortoiseMenuBuilder
    */
   public static final int MenuTextIdentifier = 135;
 
-  protected List<TortoiseMenuEntry> getEntries()
+  protected List<AbstractTortoiseMenuEntry> getEntries()
   {
-    List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+    List<AbstractTortoiseMenuEntry> entries = new ArrayList<AbstractTortoiseMenuEntry>();
     new Translation(PreferenceConstants.TORTOISE_SVN);
     
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();

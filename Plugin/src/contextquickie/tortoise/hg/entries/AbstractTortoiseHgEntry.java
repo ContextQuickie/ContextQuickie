@@ -13,9 +13,9 @@ import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
-import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 
-public abstract class AbstractTortoiseHgEntry extends TortoiseMenuEntry
+public abstract class AbstractTortoiseHgEntry extends AbstractTortoiseMenuEntry
 {
   /**
    * Constructor.

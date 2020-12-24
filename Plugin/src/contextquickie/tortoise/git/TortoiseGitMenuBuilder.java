@@ -8,7 +8,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
-import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.Translation;
@@ -24,7 +24,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
    */
   public static final int MenuTextIdentifier = 135;
 
-  protected List<TortoiseMenuEntry> getEntries()
+  protected List<AbstractTortoiseMenuEntry> getEntries()
   {
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
@@ -45,7 +45,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
       alternativeExtension = ".png";
     }
 
-    final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+    final List<AbstractTortoiseMenuEntry> entries = new ArrayList<AbstractTortoiseMenuEntry>();
     entries.add(new Clone(iconPath));
     entries.add(new Pull(iconPath));
     entries.add(new Fetch(iconPath));

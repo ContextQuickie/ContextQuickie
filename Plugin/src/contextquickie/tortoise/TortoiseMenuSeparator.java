@@ -1,5 +1,5 @@
 package contextquickie.tortoise;
 
-public class TortoiseMenuSeparator extends TortoiseMenuEntry
+public class TortoiseMenuSeparator extends AbstractTortoiseMenuEntry
 {
 }

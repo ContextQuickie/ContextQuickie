@@ -3,11 +3,11 @@ package contextquickie.tortoise.git.entries;
 import java.io.File;
 
 import contextquickie.preferences.PreferenceConstants;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseEnvironment;
-import contextquickie.tortoise.TortoiseMenuEntry;
 import contextquickie.tortoise.Translation;
 
-public abstract class AbstractTortoiseGitEntry extends TortoiseMenuEntry
+public abstract class AbstractTortoiseGitEntry extends AbstractTortoiseMenuEntry
 {
   /**
    * The instance using for translating the menu entries.

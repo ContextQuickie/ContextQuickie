@@ -10,7 +10,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import contextquickie.Activator;
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuBuilder;
-import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 import contextquickie.tortoise.TortoiseMenuSeparator;
 import contextquickie.tortoise.TortoiseMenuSettings;
 import contextquickie.tortoise.hg.entries.*;
@@ -33,9 +33,9 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
    */
   private Set<String> promotedItems;
   
-  protected List<TortoiseMenuEntry> getEntries()
+  protected List<AbstractTortoiseMenuEntry> getEntries()
   {
-    List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
+    List<AbstractTortoiseMenuEntry> entries = new ArrayList<AbstractTortoiseMenuEntry>();
     entries.add(new Commit(iconPath));
     entries.add(new ViewFileStatus(iconPath));
     entries.add(new ShelveChanges(iconPath));
@@ -138,7 +138,7 @@ public class TortoiseHgMenuBuilder extends AbstractTortoiseMenuBuilder
    *         otherwise false.
    */
   @Override
-  protected boolean isEntryInMainMenu(final TortoiseMenuEntry entry)
+  protected boolean isEntryInMainMenu(final AbstractTortoiseMenuEntry entry)
   {
     return this.promotedItems.contains(entry.getCommand());
   }

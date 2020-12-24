@@ -1,10 +1,10 @@
 package contextquickie.tortoise.svn.entries;
 
 import contextquickie.preferences.PreferenceConstants;
-import contextquickie.tortoise.TortoiseMenuEntry;
+import contextquickie.tortoise.AbstractTortoiseMenuEntry;
 import contextquickie.tortoise.Translation;
 
-public abstract class AbstractTortoiseSvnEntry extends TortoiseMenuEntry
+public abstract class AbstractTortoiseSvnEntry extends AbstractTortoiseMenuEntry
 {
   /**
    * The instance using for translating the menu entries.

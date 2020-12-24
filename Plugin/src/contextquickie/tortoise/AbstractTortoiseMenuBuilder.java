@@ -78,7 +78,7 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
         this.entriesConfiguration.getSubMenuText(),
         "icons/" + this.entriesConfiguration.getSubMenuIconPath());
 
-    for (TortoiseMenuEntry entry : this.getEntries())
+    for (AbstractTortoiseMenuEntry entry : this.getEntries())
     {
       if (TortoiseMenuSeparator.class.isInstance(entry))
       {
@@ -87,9 +87,9 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
           subMenu.addChildEntry(new MenuSeparator());
         }
       }
-      else if (TortoiseMenuEntry.class.isInstance(entry))
+      else if (AbstractTortoiseMenuEntry.class.isInstance(entry))
       {
-        TortoiseMenuEntry tortoiseMenuEntry = TortoiseMenuEntry.class.cast(entry);
+        AbstractTortoiseMenuEntry tortoiseMenuEntry = AbstractTortoiseMenuEntry.class.cast(entry);
         if (this.isEntryInMainMenu(tortoiseMenuEntry))
         {
           tortoiseMenuEntry.setLabel(
@@ -188,10 +188,10 @@ public abstract class AbstractTortoiseMenuBuilder extends AbstractMenuBuilder
    * @return <b>true</b> if the menu entry is visible in the main menu;
    *         otherwise false.
    */
-  protected boolean isEntryInMainMenu(final TortoiseMenuEntry entry)
+  protected boolean isEntryInMainMenu(final AbstractTortoiseMenuEntry entry)
   {
     return this.isEntryBitSet(entry.getMenuId(), this.registryContextMenuEntries, this.registryContextMenuEntriesHigh);
   }
   
-  protected abstract List<TortoiseMenuEntry> getEntries();
+  protected abstract List<AbstractTortoiseMenuEntry> getEntries();
 }

@@ -24,7 +24,7 @@ import rolandomagico.jniregistry.Registry;
 /**
  * Menu entry configuration for Tortoise.
  */
-public class TortoiseMenuEntry extends AbstractMenuEntry
+public abstract class AbstractTortoiseMenuEntry extends AbstractMenuEntry
 {
   /**
    * The preferences of the current instance.
