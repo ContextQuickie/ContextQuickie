@@ -1,10 +1,5 @@
 package contextquickie.tortoise.svn.entries;
 
-import org.eclipse.core.resources.IResource;
-
-import contextquickie.tools.ContextMenuEnvironment;
-import rolandomagico.jniregistry.Registry;
-
 public class DiffLater extends AbstractTortoiseSvnEntry
 {
   /**
@@ -28,19 +23,13 @@ public class DiffLater extends AbstractTortoiseSvnEntry
     super(MenuTextIdentifier, "Diff later");
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
-    this.setMaxItemsCount(0); // TODO: Disabled
-    this.setCommand("diff");
+    this.setMaxFileCount(1);
+    this.setMaxItemsCount(1);
   }
 
   @Override
   public void executeCommand()
   {
-    final String registryUserDirectory = getPreferenceConstants().getRegistryUserDirectory();
-    final IResource resource = new ContextMenuEnvironment().getSelectedResources().stream().findFirst().orElse(null);
-    if ((resource != null) && (resource.getType() == IResource.FILE))
-    {
-      Registry registry = new Registry();
-      registry.writeKey(registryUserDirectory, "DiffLater", resource.getLocation().toOSString());
-    }
+    this.executeDiffLaterCommand();
   }
 }

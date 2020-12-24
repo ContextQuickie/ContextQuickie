@@ -19,6 +19,7 @@ import contextquickie.preferences.TortoisePreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
 import contextquickie.tools.ProcessWrapper;
 import contextquickie.tools.StringUtil;
+import rolandomagico.jniregistry.Registry;
 
 /**
  * Menu entry configuration for Tortoise.
@@ -590,6 +591,17 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     }
   }
 
+  protected void executeDiffLaterCommand()
+  {
+    final String registryUserDirectory = getPreferenceConstants().getRegistryUserDirectory();
+    final IResource resource = this.getEnvironment().getSelectedResources().stream().findFirst().orElse(null);
+    if ((resource != null) && (resource.getType() == IResource.FILE))
+    {
+      Registry registry = new Registry();
+      registry.writeKey(registryUserDirectory, "DiffLater", resource.getLocation().toOSString());
+    }
+  }
+
   protected void executeDiffTwoFilesCommand(final String leftSide, final String rightSide)
   {
     final List<String> arguments = new ArrayList<String>();
@@ -599,6 +611,18 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     arguments.add("/path:" + StringUtil.quoteString(leftSide));
     arguments.add("/path2:" + StringUtil.quoteString(rightSide));
     new ProcessWrapper().executeCommand(command, new ContextMenuEnvironment().getSelectedResources(), arguments);
+  }
+
+  protected void executeDiffWithLeftSideCommand()
+  {
+    String leftSide = this.getLeftSideForDiff();
+    String rightSide = this.getEnvironment().getSelectedResources().iterator().next().getLocation().toOSString();
+    this.executeDiffTwoFilesCommand(leftSide, rightSide);
+  }
+
+  protected String getLeftSideForDiff()
+  {
+    return new Registry().readStringValue(getPreferenceConstants().getRegistryUserDirectory(), "DiffLater", null);
   }
 
   public TortoiseEnvironment getEnvironment()

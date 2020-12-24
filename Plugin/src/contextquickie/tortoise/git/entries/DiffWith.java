@@ -2,16 +2,12 @@ package contextquickie.tortoise.git.entries;
 
 import java.io.File;
 
-import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tools.ContextMenuEnvironment;
-import rolandomagico.jniregistry.Registry;
 
 public class DiffWith extends AbstractTortoiseGitEntry
 {
-  private String leftSideForCompare;
-  
-  private String rightSideForCompare;
-  
+  private static final String defaultLabel = "Diff with \"%ls\"";
+
   /**
    * The menu identifier for this class.
    */
@@ -20,7 +16,7 @@ public class DiffWith extends AbstractTortoiseGitEntry
   /**
    * The menu text identifier for this class.
    */
-  public static final int MenuTextIdentifier = 232;
+  public static final int MenuTextIdentifier = 234;
 
   /**
    * Constructor.
@@ -30,36 +26,36 @@ public class DiffWith extends AbstractTortoiseGitEntry
    */
   public DiffWith(String iconPath)
   {
-    super(MenuTextIdentifier, "Diff later");
+    super(MenuTextIdentifier, defaultLabel);
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
     this.setMaxFileCount(1);
     this.setMaxItemsCount(1);
   }
-  
+
   @Override
   public boolean isVisible(ContextMenuEnvironment environment)
   {
     Boolean isVisible = false;
     if (super.isVisible(environment))
     {
-      if ((environment.getSelectedFiles().size() == 1) && (environment.getSelectedDirectories().isEmpty()))
+      final String leftSide = this.getLeftSideForDiff();
+      if (leftSide != null)
       {
-        String leftSide = new Registry().readStringValue(
-            PreferenceConstants.TORTOISE_GIT.getRegistryUserDirectory(), 
-            "DiffLater", 
-            null);
-        if (leftSide != null)
-        {
-          this.setLabel(translation.getTranslatedString(
-              MenuTextIdentifier, "Diff with " + new File(leftSide).getName()));
-          this.leftSideForCompare = leftSide;
-          this.rightSideForCompare = environment.getSelectedFiles().iterator().next().toOSString();
-          isVisible = true;
-        }
+        String label = translation.getTranslatedString(MenuTextIdentifier, defaultLabel);
+        label = label.replace("%ls", "%s");
+        label = String.format(label, new File(leftSide).getName());
+        this.setLabel(label);
+        isVisible = true;
       }
     }
-    
+
     return isVisible;
+  }
+
+  @Override
+  public void executeCommand()
+  {
+    this.executeDiffWithLeftSideCommand();
   }
 }

@@ -1,7 +1,13 @@
 package contextquickie.tortoise.svn.entries;
 
+import java.io.File;
+
+import contextquickie.tools.ContextMenuEnvironment;
+
 public class DiffWith extends AbstractTortoiseSvnEntry
 {
+  private static final String defaultLabel = "Diff with \"%ls\"";
+
   /**
    * The menu identifier for this class.
    */
@@ -20,10 +26,36 @@ public class DiffWith extends AbstractTortoiseSvnEntry
    */
   public DiffWith(String iconPath)
   {
-    super(MenuTextIdentifier, "Diff with \"%ls\"");
+    super(MenuTextIdentifier, defaultLabel);
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucompare.ico");
-    this.setCommand("diff");
-    this.setMaxItemsCount(0);
+    this.setMaxFileCount(1);
+    this.setMaxItemsCount(1);
   }
-} // TODO: Disabled
+
+  @Override
+  public boolean isVisible(ContextMenuEnvironment environment)
+  {
+    Boolean isVisible = false;
+    if (super.isVisible(environment))
+    {
+      final String leftSide = this.getLeftSideForDiff();
+      if (leftSide != null)
+      {
+        String label = translation.getTranslatedString(MenuIdentifier, defaultLabel);
+        label = label.replace("%ls", "%s");
+        label = String.format(label, new File(leftSide).getName());
+        this.setLabel(label);
+        isVisible = true;
+      }
+    }
+
+    return isVisible;
+  }
+
+  @Override
+  public void executeCommand()
+  {
+    this.executeDiffWithLeftSideCommand();
+  }
+}
