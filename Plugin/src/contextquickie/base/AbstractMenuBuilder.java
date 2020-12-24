@@ -139,14 +139,19 @@ public abstract class AbstractMenuBuilder extends CompoundContributionItem imple
         }
         else
         {
-          final MenuManager subMenu = new MenuManager(entry.getLabel(), entry.getImageDescriptor(), null);
           List<IContributionItem> childEntries = this.createMenuItems(entry.getChildEntries(), environment);
-          for (IContributionItem contributionItem : childEntries)
+          if ((childEntries.isEmpty() == false) &&
+              (childEntries.stream().anyMatch(e -> e.isSeparator() == false)))
           {
-            subMenu.add(contributionItem);
+            final MenuManager subMenu = new MenuManager(entry.getLabel(), entry.getImageDescriptor(), null);
+
+            for (IContributionItem contributionItem : childEntries)
+            {
+              subMenu.add(contributionItem);
+            }
+
+            menuEntries.add(subMenu);
           }
-          
-          menuEntries.add(subMenu);
         }
       }
     }
