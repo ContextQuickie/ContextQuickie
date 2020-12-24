@@ -578,7 +578,7 @@ public abstract class AbstractTortoiseMenuEntry extends AbstractMenuEntry
     new ProcessWrapper().executeCommand(executable, currentResources, arguments);
   }
 
-  protected void executeMergeCommand()
+  protected void executeApplyPatchCommand()
   {
     if (this.getEnvironment().getSelectedResources().isEmpty() == false)
     {

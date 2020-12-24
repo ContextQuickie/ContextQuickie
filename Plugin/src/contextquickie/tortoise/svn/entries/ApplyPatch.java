@@ -22,7 +22,7 @@ public class ApplyPatch extends AbstractTortoiseSvnEntry
   {
     super(MenuTextIdentifier, "Apply patch...");
     this.setMenuId(MenuIdentifier);
-    this.setIconPath(iconPath + "menucheckout.ico");
+    this.setIconPath(iconPath + "menupatch.ico");
     this.setMaxFileCount(0);
     this.setMaxFolderCount(1);
   }
@@ -30,7 +30,6 @@ public class ApplyPatch extends AbstractTortoiseSvnEntry
   @Override
   public void executeCommand()
   {
-    // TODO Auto-generated method stub
-    super.executeCommand();
+    this.executeApplyPatchCommand();
   }
 }
