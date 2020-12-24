@@ -497,7 +497,6 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
   public boolean isVisible(ContextMenuEnvironment environment)
   {
     boolean isVisible = true;
-    environment.getSelectedResources();
     if (super.isVisible(environment))
     {
       this.environment = TortoiseEnvironment.class.cast(environment);
@@ -576,6 +575,30 @@ public class TortoiseMenuEntry extends AbstractMenuEntry
     }
     
     new ProcessWrapper().executeCommand(executable, currentResources, arguments);
+  }
+
+  protected void executeMergeCommand()
+  {
+    if (this.getEnvironment().getSelectedResources().isEmpty() == false)
+    {
+      IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+      final String command = preferenceStore.getString(getPreferenceConstants().getMergePath());
+      final List<String> arguments = new ArrayList<String>();
+      final IResource resource = this.getEnvironment().getSelectedResources().iterator().next(); 
+      arguments.add("/patchpath:" + resource.getLocation().toString());
+      new ProcessWrapper().executeCommand(command, null, arguments);
+    }
+  }
+
+  protected void executeDiffTwoFilesCommand(final String leftSide, final String rightSide)
+  {
+    final List<String> arguments = new ArrayList<String>();
+    final String command = Activator.getDefault().getPreferenceStore().getString(getPreferenceConstants().getPath());
+
+    arguments.add("/command:diff");
+    arguments.add("/path:" + StringUtil.quoteString(leftSide));
+    arguments.add("/path2:" + StringUtil.quoteString(rightSide));
+    new ProcessWrapper().executeCommand(command, new ContextMenuEnvironment().getSelectedResources(), arguments);
   }
 
   public TortoiseEnvironment getEnvironment()

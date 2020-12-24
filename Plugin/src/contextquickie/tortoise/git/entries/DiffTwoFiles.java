@@ -1,15 +1,10 @@
 package contextquickie.tortoise.git.entries;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IPath;
 
-import contextquickie.Activator;
 import contextquickie.tools.ContextMenuEnvironment;
-import contextquickie.tools.ProcessWrapper;
-import contextquickie.tools.StringUtil;
 
 public class DiffTwoFiles extends AbstractTortoiseGitEntry
 {
@@ -60,12 +55,6 @@ public class DiffTwoFiles extends AbstractTortoiseGitEntry
   @Override
   public void executeCommand()
   {
-    final List<String> arguments = new ArrayList<String>();
-    final String command = Activator.getDefault().getPreferenceStore().getString(getPreferenceConstants().getPath());
-
-    arguments.add("/command:diff");
-    arguments.add("/path:" + StringUtil.quoteString(this.leftSideForCompare));
-    arguments.add("/path2:" + StringUtil.quoteString(this.rightSideForCompare));
-    new ProcessWrapper().executeCommand(command, new ContextMenuEnvironment().getSelectedResources(), arguments);
+    this.executeDiffTwoFilesCommand(this.leftSideForCompare, this.rightSideForCompare);
   }
 }

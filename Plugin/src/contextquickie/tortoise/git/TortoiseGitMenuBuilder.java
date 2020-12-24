@@ -44,7 +44,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
       // If using icons from version 2.7, some files require .png extension in eclipse
       alternativeExtension = ".png";
     }
-    
+
     final List<TortoiseMenuEntry> entries = new ArrayList<TortoiseMenuEntry>();
     entries.add(new Clone(iconPath));
     entries.add(new Pull(iconPath));
