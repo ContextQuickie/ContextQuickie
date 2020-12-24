@@ -24,6 +24,10 @@ public class CreateRepositoryHere extends AbstractTortoiseSvnEntry
     this.setMenuId(MenuIdentifier);
     this.setIconPath(iconPath + "menucreaterepos.ico");
     this.setCommand("repocreate");
-    this.setMaxItemsCount(0);
+    this.setMinFolderCount(1);
+    this.setMaxFolderCount(1);
+    this.setMaxItemsCount(1);
+    this.setIsVisibleInWorkingCopy(false);
+    this.setVisibleWithoutWorkingCopy(true);
   }
-} // TODO: Disabled
+}
