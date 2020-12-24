@@ -22,7 +22,8 @@ public abstract class AbstractTortoiseHgEntry extends AbstractTortoiseMenuEntry
    */
   protected AbstractTortoiseHgEntry()
   {
-    this.setMenuId(1); // TODO
+    // Call to this.setMenuId(value) not required because assignment to main/sub menu 
+    // is handled in TortoiseHgMenuBuilder.isEntryInMainMenu
     this.setMinItemsCount(1);
     this.setMaxItemsCount(1);
     this.setPreferenceConstants(PreferenceConstants.TORTOISE_HG);
