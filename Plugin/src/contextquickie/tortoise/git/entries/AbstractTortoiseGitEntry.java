@@ -1,10 +1,7 @@
 package contextquickie.tortoise.git.entries;
 
-import java.io.File;
-
 import contextquickie.preferences.PreferenceConstants;
 import contextquickie.tortoise.AbstractTortoiseMenuEntry;
-import contextquickie.tortoise.TortoiseEnvironment;
 import contextquickie.tortoise.Translation;
 
 public abstract class AbstractTortoiseGitEntry extends AbstractTortoiseMenuEntry
@@ -27,25 +24,6 @@ public abstract class AbstractTortoiseGitEntry extends AbstractTortoiseMenuEntry
   {
     this.setLabel(translation.getTranslatedString(menuTextIdentifier, defaultLabel));
     this.setPreferenceConstants(PreferenceConstants.TORTOISE_GIT);
-  }
-
-  protected boolean bisectActive(final TortoiseEnvironment environment)
-  {
-    final String workingCopyRoot = environment.getWorkingCopyRoot();
-    if (workingCopyRoot != null)
-    {
-      File gitDirectory = new File(workingCopyRoot);
-      if (gitDirectory.exists() && gitDirectory.isDirectory())
-      {
-        File bisectStartFile = new File(gitDirectory, "BISECT_START");
-        if (bisectStartFile.exists() && bisectStartFile.isFile())
-        {
-          return true;
-        }
-      }
-    }
-
-    return false;
   }
   
   /**
