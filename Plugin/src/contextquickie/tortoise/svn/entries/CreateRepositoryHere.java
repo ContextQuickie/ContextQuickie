@@ -1,5 +1,9 @@
 package contextquickie.tortoise.svn.entries;
 
+import org.eclipse.core.runtime.IPath;
+
+import contextquickie.tools.ContextMenuEnvironment;
+
 public class CreateRepositoryHere extends AbstractTortoiseSvnEntry
 {
   /**
@@ -29,5 +33,21 @@ public class CreateRepositoryHere extends AbstractTortoiseSvnEntry
     this.setMaxItemsCount(1);
     this.setIsVisibleInWorkingCopy(false);
     this.setVisibleWithoutWorkingCopy(true);
+  }
+
+  @Override
+  public boolean isVisible(ContextMenuEnvironment environment)
+  {
+    boolean isVisible = false;
+    if (super.isVisible(environment))
+    {
+      IPath selectedDirectory = this.getEnvironment().getSelectedDirectories().iterator().next();
+      if (selectedDirectory.toFile().list().length == 0)
+      {
+        isVisible = true;
+      }
+    }
+    
+    return isVisible;
   }
 }
