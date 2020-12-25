@@ -29,7 +29,7 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
     IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
     String usedVersion = preferenceStore.getString(PreferenceConstants.TORTOISE_GIT.getUsedVersion());
     final String alternativeExtension;
-    String iconPath;
+    final String iconPath;
     if (usedVersion.equals("2.6"))
     {
       iconPath = "TortoiseGit/2.6/";
@@ -105,6 +105,17 @@ public class TortoiseGitMenuBuilder extends AbstractTortoiseMenuBuilder
     entries.add(new Cleanup(iconPath));
 
     entries.add(new TortoiseMenuSeparator());
+
+    if (usedVersion.equals("2.11"))
+    {
+      final String lfsIconPath = "TortoiseGit/2.11/"; 
+      Lfs lfs = new Lfs(lfsIconPath);
+      lfs.addChildEntry(new LfsShowLockedFiles(iconPath));
+      lfs.addChildEntry(new LfsLock(lfsIconPath));
+      lfs.addChildEntry(new LfsUnlock(lfsIconPath));
+      entries.add(lfs);
+      entries.add(new TortoiseMenuSeparator());
+    }
 
     entries.add(new SwitchCheckout(iconPath));
     entries.add(new Merge(iconPath));
