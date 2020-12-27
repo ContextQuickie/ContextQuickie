@@ -13,8 +13,6 @@ public class AnnotateFiles extends AbstractTortoiseHgEntry
     this.setCommand("annotate");
     this.setLabel("Annotate Files");
     this.setIconPath(iconPath + "menublame.png");
-    this.setMinItemsCount(1);
-    this.setMaxItemsCount(1);
     this.setParameter1(Boolean.TRUE.toString());
   }
 }
