@@ -12,6 +12,9 @@ public class Compare extends AbstractBeyondCompareEntry
 {
   private Set<IPath> selectedPaths;
   
+  /**
+   * Default constructor. 
+   */
   public Compare()
   {
     super("Compare.png");

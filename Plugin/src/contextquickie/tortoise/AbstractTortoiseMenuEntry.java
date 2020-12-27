@@ -625,6 +625,9 @@ public abstract class AbstractTortoiseMenuEntry extends AbstractMenuEntry
     return new Registry().readStringValue(getPreferenceConstants().getRegistryUserDirectory(), "DiffLater", null);
   }
 
+  /**
+   * Gets the current Tortoise environment.
+   */
   public TortoiseEnvironment getEnvironment()
   {
     return this.environment;

@@ -61,27 +61,46 @@ public class Version implements Comparable<Version>
     return true;
   }
 
+  /**
+   * Constructor.
+   * @param major
+   *      The major version.
+   * @param minor
+   *      The minor version.
+   */
   public Version(int major, int minor)
   {
     this.setMajorVersion(major);
     this.setMinorVersion(minor);
   }
 
+  /**
+   * Gets the major version.
+   */
   public int getMajorVersion()
   {
     return this.majorVersion;
   }
 
+  /**
+   * Sets the major version.
+   */
   public void setMajorVersion(int value)
   {
     this.majorVersion = value;
   }
 
+  /**
+   * Gets the minor version.
+   */
   public int getMinorVersion()
   {
     return this.minorVersion;
   }
 
+  /**
+   * Sets the minor version.
+   */
   public void setMinorVersion(int value)
   {
     this.minorVersion = value;

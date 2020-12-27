@@ -27,7 +27,10 @@ public class ObjectParameterConverter extends AbstractParameterValueConverter
     entries.put(hashCode, parameterValue);
     return hashCode;
   }
-
+  
+  /**
+   * Clears all entries which had been created until now.
+   */
   public static void clearEntries()
   {
     entries.clear();

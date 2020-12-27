@@ -24,7 +24,9 @@
       <property name="allowByTailComment" value="true"/>
       <property name="allowNonPrintableEscapes" value="true"/>
     </module>
-    <module name="AvoidStarImport"/>
+    <module name="AvoidStarImport">
+      <property name="excludes" value="contextquickie.tortoise.git.entries, contextquickie.tortoise.hg.entries, contextquickie.tortoise.svn.entries"/>
+    </module>
     <module name="OneTopLevelClass"/>
     <module name="NoLineWrap">
       <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
@@ -210,7 +212,7 @@
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>
     </module>
     <module name="MissingJavadocMethod">
-      <property name="minLineCount" value="2"/>
+      <property name="minLineCount" value="0"/>
       <property name="allowedAnnotations" value="Override, Test"/>
       <property name="scope" value="public"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>

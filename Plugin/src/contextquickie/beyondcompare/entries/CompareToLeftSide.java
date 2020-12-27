@@ -51,6 +51,9 @@ public class CompareToLeftSide extends AbstractBeyondCompareEntry
     return isVisible;
   }
 
+  /**
+   * Default constructor. 
+   */
   public CompareToLeftSide()
   {
     super("Compare.png");

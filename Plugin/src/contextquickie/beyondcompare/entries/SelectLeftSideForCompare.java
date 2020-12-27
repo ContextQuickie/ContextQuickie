@@ -14,6 +14,9 @@ public class SelectLeftSideForCompare extends AbstractBeyondCompareEntry
   
   private IPath selectedPath;
   
+  /**
+   * Default constructor. 
+   */
   public SelectLeftSideForCompare()
   {
     super("SelectLeftFile.png");
