@@ -4,8 +4,6 @@ import java.util.Iterator;
 
 import org.eclipse.core.runtime.IPath;
 
-import contextquickie.tools.ContextMenuEnvironment;
-
 public class DiffTwoFiles extends AbstractTortoiseSvnEntry
 {
   private String leftSideForCompare;
@@ -39,23 +37,11 @@ public class DiffTwoFiles extends AbstractTortoiseSvnEntry
   }
 
   @Override
-  public boolean isVisible(ContextMenuEnvironment environment)
-  {
-    boolean isVisible = false;
-    if (super.isVisible(environment))
-    {
-      Iterator<IPath> iterator = environment.getSelectedFiles().iterator();
-      this.leftSideForCompare = iterator.next().toOSString();
-      this.rightSideForCompare = iterator.next().toOSString();
-      isVisible = true;
-    }
-    
-    return isVisible;
-  }
-
-  @Override
   public void executeCommand()
   {
+    Iterator<IPath> iterator = this.getEnvironment().getSelectedFiles().iterator();
+    this.leftSideForCompare = iterator.next().toOSString();
+    this.rightSideForCompare = iterator.next().toOSString();
     this.executeDiffTwoFilesCommand(this.leftSideForCompare, this.rightSideForCompare);
   }
 }
